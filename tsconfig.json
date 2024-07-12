@@ -1,0 +1,17 @@
+{
+  "extends": "@bassist/tsconfig/base.json",
+  "compilerOptions": {
+    "importHelpers": true,
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "outDir": "./dist",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "types": ["node"],
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "declaration": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
