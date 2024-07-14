@@ -1,5 +1,6 @@
 import React from 'react'
 import { Moon, Sun } from 'lucide-react'
+import { capitalize, isArray } from '@bassist/utils'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -8,6 +9,20 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { useTheme } from './theme-provider'
+import { type Theme } from './types'
+
+export interface ThemeToggleOption {
+  value: Theme
+  label: React.ReactNode
+}
+
+export interface ThemeToggleProps {
+  /**
+   * If you only need light / dark, or i18n support,
+   * you can customize the rendering
+   */
+  options?: ThemeToggleOption[]
+}
 
 /**
  * Provides theme toggle based on dropdown menu
@@ -17,8 +32,20 @@ import { useTheme } from './theme-provider'
  *    please check if the `darkMode` option value is `selector`
  *    in `tailwind.config.ts`
  */
-export const ThemeToggle: React.FC = () => {
+export const ThemeToggle: React.FC<ThemeToggleProps> = ({
+  options: defaultOptions,
+}) => {
   const { setTheme } = useTheme()
+
+  const options = useMemo(() => {
+    if (isArray(defaultOptions)) return defaultOptions
+    return ['light', 'dark', 'system'].map<ThemeToggleOption>((i) => {
+      return {
+        value: i as Theme,
+        label: capitalize(i),
+      }
+    })
+  }, [defaultOptions])
 
   return (
     <DropdownMenu>
@@ -29,16 +56,15 @@ export const ThemeToggle: React.FC = () => {
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
+
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme('light')}>
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('dark')}>
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('system')}>
-          System
-        </DropdownMenuItem>
+        {options.map((i) => {
+          return (
+            <DropdownMenuItem key={i.value} onClick={() => setTheme(i.value)}>
+              {i.label}
+            </DropdownMenuItem>
+          )
+        })}
       </DropdownMenuContent>
     </DropdownMenu>
   )
