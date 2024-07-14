@@ -1,5 +1,6 @@
 import React from 'react'
 import { ThemeProvider, ThemeScript } from '@/components/theme'
+import { cn } from '@/utils'
 
 export interface RootLayoutProps {
   /**
@@ -30,6 +31,8 @@ export interface RootLayoutProps {
  */
 export const RootLayout = memo(
   ({ lang = 'en', className, metadata, children }: RootLayoutProps) => {
+    const cls = cn('flex flex-col w-screen min-h-screen', className)
+
     return (
       <html lang={lang} suppressHydrationWarning>
         <head>
@@ -37,7 +40,7 @@ export const RootLayout = memo(
           {metadata}
         </head>
 
-        <body className={className}>
+        <body className={cls}>
           <ThemeProvider>{children}</ThemeProvider>
         </body>
       </html>
