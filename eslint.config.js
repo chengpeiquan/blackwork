@@ -19,7 +19,15 @@ export default defineFlatConfig([
     rules: {
       'react/prop-types': [
         2,
-        { ignore: ['className', 'sideOffset', 'checked'] },
+        {
+          ignore: [
+            'checked',
+            'className',
+            'decorative',
+            'orientation',
+            'sideOffset',
+          ],
+        },
       ],
       'react-refresh/only-export-components': 'off',
     },
