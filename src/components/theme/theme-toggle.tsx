@@ -1,5 +1,5 @@
 import React from 'react'
-import { Moon, Sun } from 'lucide-react'
+import { Monitor, Moon, Sun } from 'lucide-react'
 import { capitalize, isArray } from '@bassist/utils'
 import { Button } from '@/components/ui/button'
 import {
@@ -14,7 +14,31 @@ import { type Theme } from './types'
 export interface ThemeToggleOption {
   value: Theme
   label: React.ReactNode
+  icon?: React.ReactNode
 }
+
+export const defaultThemeToggleValues: Readonly<Theme[]> = [
+  'light',
+  'dark',
+  'system',
+]
+
+export const defaultThemeToggleIconMap: Readonly<
+  Record<Theme, React.ReactNode>
+> = {
+  light: <Sun className="h-4 w-4" />,
+  dark: <Moon className="h-4 w-4" />,
+  system: <Monitor className="h-4 w-4" />,
+}
+
+export const defaultThemeToggleOptions =
+  defaultThemeToggleValues.map<ThemeToggleOption>((value) => {
+    return {
+      value,
+      label: capitalize(value),
+      icon: defaultThemeToggleIconMap[value],
+    }
+  })
 
 export interface ThemeToggleProps {
   /**
@@ -33,26 +57,21 @@ export interface ThemeToggleProps {
  *    in `tailwind.config.ts`
  */
 export const ThemeToggle: React.FC<ThemeToggleProps> = ({
-  options: defaultOptions,
+  options: customOptions,
 }) => {
   const { setTheme } = useTheme()
 
   const options = useMemo(() => {
-    if (isArray(defaultOptions)) return defaultOptions
-    return ['light', 'dark', 'system'].map<ThemeToggleOption>((i) => {
-      return {
-        value: i as Theme,
-        label: capitalize(i),
-      }
-    })
-  }, [defaultOptions])
+    if (isArray(customOptions)) return customOptions
+    return defaultThemeToggleOptions
+  }, [customOptions])
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon">
-          <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+          <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
@@ -60,7 +79,12 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
       <DropdownMenuContent align="end">
         {options.map((i) => {
           return (
-            <DropdownMenuItem key={i.value} onClick={() => setTheme(i.value)}>
+            <DropdownMenuItem
+              key={i.value}
+              className="gap-2"
+              onClick={() => setTheme(i.value)}
+            >
+              {i.icon}
               {i.label}
             </DropdownMenuItem>
           )
