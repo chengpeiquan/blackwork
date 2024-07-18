@@ -36,6 +36,7 @@ export const RootLayout = memo(
     return (
       <html lang={lang} suppressHydrationWarning>
         <head>
+          <link rel="icon" href="/favicon.ico" />
           <ThemeScript />
           {metadata}
         </head>
