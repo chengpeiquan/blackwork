@@ -18,14 +18,19 @@ export interface LayoutHeaderProps {
   children: React.ReactNode
 
   /**
+   * Passing this array will render a set of social link icon buttons
+   */
+  socialLinks?: SocialLinkProps[]
+
+  /**
+   * If i18n is supported, a button to toggle languages can be passed
+   */
+  languageToggle?: React.ReactNode
+
+  /**
    * Options passed to `<ThemeToggle />`
    */
   themeToggleOptions?: ThemeToggleOption[]
-
-  /**
-   *
-   */
-  socialLinks?: SocialLinkProps[]
 }
 
 export const LayoutHeader: React.FC<LayoutHeaderProps> = ({
@@ -33,8 +38,9 @@ export const LayoutHeader: React.FC<LayoutHeaderProps> = ({
   wrapperClassName,
   contentClassName,
   children,
-  themeToggleOptions,
   socialLinks,
+  languageToggle,
+  themeToggleOptions,
 }) => {
   const cls = cn(
     'sticky top-0 z-10 bg-background/90 blackwork__layout--header',
@@ -57,12 +63,14 @@ export const LayoutHeader: React.FC<LayoutHeaderProps> = ({
       <div className={wrapperCls}>
         <div className={contentCls}>{children}</div>
 
-        <div className="flex flex-shrink-0 items-center">
+        <div className="flex flex-shrink-0 items-center gap-1.5">
           {isArray(socialLinks) && <SocialLinks items={socialLinks} />}
 
-          {!!socialLinks?.length && (
+          {(!!languageToggle || !!socialLinks?.length) && (
             <Separator orientation="vertical" className="h-5 mx-2" />
           )}
+
+          {languageToggle}
 
           <ThemeToggle options={themeToggleOptions} />
         </div>
