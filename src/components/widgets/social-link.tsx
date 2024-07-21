@@ -14,55 +14,57 @@ export type SocialLinkIconType =
 export interface SocialLinkProps {
   type: SocialLinkIconType
   link: string
+  label?: string
   ariaLabel?: string
 }
 
 export const SocialLink: React.FC<SocialLinkProps> = ({
   type,
   link,
-  ariaLabel,
+  label: defaultLabel,
+  ariaLabel: customAriaLabel,
 }) => {
   const { SocialIcon, label } = useMemo(() => {
     switch (type) {
       case 'github': {
         return {
           SocialIcon: Icons.Github,
-          label: ariaLabel ?? 'GitHub',
+          label: defaultLabel ?? 'GitHub',
         }
       }
 
       case 'x': {
         return {
           SocialIcon: Icons.X,
-          label: ariaLabel ?? 'X',
+          label: defaultLabel ?? 'X',
         }
       }
 
       case 'twitter': {
         return {
           SocialIcon: Icons.Twitter,
-          label: ariaLabel ?? 'Twitter',
+          label: defaultLabel ?? 'Twitter',
         }
       }
 
       case 'instagram': {
         return {
           SocialIcon: Icons.Instagram,
-          label: ariaLabel ?? 'Instagram',
+          label: defaultLabel ?? 'Instagram',
         }
       }
 
       case 'zhihu': {
         return {
           SocialIcon: Icons.ZhiHu,
-          label: ariaLabel ?? 'ZhiHu',
+          label: defaultLabel ?? 'ZhiHu',
         }
       }
 
       case 'rss': {
         return {
           SocialIcon: Icons.Rss,
-          label: ariaLabel ?? 'RSS',
+          label: defaultLabel ?? 'RSS',
         }
       }
 
@@ -73,14 +75,21 @@ export const SocialLink: React.FC<SocialLinkProps> = ({
         }
       }
     }
-  }, [ariaLabel, type])
+  }, [defaultLabel, type])
+
+  const ariaLabel = useMemo(() => {
+    if (customAriaLabel) return customAriaLabel
+    return `Visit ${label} in a new tab`
+  }, [customAriaLabel, label])
 
   if (!SocialIcon) return null
   return (
-    <Button variant="ghost" size="icon" title={label} aria-label={label}>
+    <Button variant="ghost" size="icon">
       <ExternalLink
         className="flex items-center justify-center w-full h-full"
         href={link}
+        title={label}
+        aria-label={ariaLabel}
       >
         <SocialIcon className="h-5 w-5" />
       </ExternalLink>
