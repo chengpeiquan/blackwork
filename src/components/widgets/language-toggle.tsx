@@ -9,7 +9,7 @@ import {
 } from '@/components/ui'
 import * as Icons from './icons'
 
-export interface LanguageToggleOptions {
+export interface LanguageToggleOption {
   value: string
   label?: React.ReactNode
   icon?: React.ReactNode
@@ -20,10 +20,10 @@ export interface LanguageToggleProps {
   title?: string
   ariaLabel?: string
   defaultValue?: string
-  options: LanguageToggleOptions[] | LanguageToggleOptions
+  options: LanguageToggleOption[] | LanguageToggleOption
 }
 
-const isSingle = (v: unknown): v is LanguageToggleOptions => isObject(v)
+const isSingle = (v: unknown): v is LanguageToggleOption => isObject(v)
 
 const DefaultIcon: React.FC = () => (
   <Icons.Language className="h-5 w-5 rotate-0 scale-100 transition-all" />
