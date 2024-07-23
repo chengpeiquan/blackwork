@@ -1,6 +1,6 @@
 import { type PrefersColorScheme } from '@bassist/utils'
 
-export type Theme = PrefersColorScheme | 'system'
+export type Theme = PrefersColorScheme
 
 export interface ThemeProviderConfig {
   storageKey?: string

@@ -1,10 +1,5 @@
 import React from 'react'
-import {
-  getPrefersColorScheme,
-  isBrowser,
-  isUndefined,
-  noop,
-} from '@bassist/utils'
+import { isBrowser, isUndefined, noop } from '@bassist/utils'
 import {
   type Theme,
   type ThemeProviderProps,
@@ -18,13 +13,11 @@ type ThemeProviderState = {
 }
 
 const initialState: ThemeProviderState = {
-  theme: 'system',
+  theme: 'dark',
   setTheme: noop,
 }
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
-
-const getSystemThemeValue = () => getPrefersColorScheme() || 'dark'
 
 const getLocalThemeValue = (storageKey: string, defaultTheme: Theme) => {
   if (!isBrowser) return defaultTheme
@@ -48,15 +41,10 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
 
   useEffect(() => {
     const root = window.document.documentElement
-    root.classList.remove('light', 'dark')
-
-    if (theme === 'system') {
-      const systemTheme = getSystemThemeValue()
-      root.classList.add(systemTheme)
-      return
+    if (!root.classList.contains(theme)) {
+      root.classList.remove('light', 'dark')
+      root.classList.add(theme)
     }
-
-    root.classList.add(theme)
   }, [theme])
 
   const setThemeAndStorage = useCallback(

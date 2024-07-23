@@ -1,5 +1,5 @@
 import React from 'react'
-import { Monitor, Moon, Sun } from 'lucide-react'
+import { Moon, Sun } from 'lucide-react'
 import { capitalize, isArray } from '@bassist/utils'
 import { Button } from '@/components/ui/button'
 import {
@@ -17,18 +17,13 @@ export interface ThemeToggleOption {
   icon?: React.ReactNode
 }
 
-export const defaultThemeToggleValues: Readonly<Theme[]> = [
-  'light',
-  'dark',
-  'system',
-]
+export const defaultThemeToggleValues: Readonly<Theme[]> = ['light', 'dark']
 
 export const defaultThemeToggleIconMap: Readonly<
   Record<Theme, React.ReactNode>
 > = {
   light: <Sun className="h-4 w-4" />,
   dark: <Moon className="h-4 w-4" />,
-  system: <Monitor className="h-4 w-4" />,
 }
 
 export const defaultThemeToggleOptions =
