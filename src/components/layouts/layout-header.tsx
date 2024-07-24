@@ -2,7 +2,6 @@ import React from 'react'
 import { isArray } from '@bassist/utils'
 import { cn } from '@/utils'
 import { Separator } from '@/components/ui'
-import { ThemeToggle, type ThemeToggleOption } from '@/components/theme'
 import { type SocialLinkProps, SocialLinks } from '@/components/widgets'
 
 export interface LayoutHeaderProps {
@@ -28,9 +27,9 @@ export interface LayoutHeaderProps {
   languageToggle?: React.ReactNode
 
   /**
-   * Options passed to `<ThemeToggle />`
+   * The configuration passed to `<ThemeToggle />`
    */
-  themeToggleOptions?: ThemeToggleOption[]
+  themeToggle?: React.ReactNode
 }
 
 export const LayoutHeader: React.FC<LayoutHeaderProps> = ({
@@ -40,7 +39,7 @@ export const LayoutHeader: React.FC<LayoutHeaderProps> = ({
   children,
   socialLinks,
   languageToggle,
-  themeToggleOptions,
+  themeToggle,
 }) => {
   const cls = cn(
     'sticky top-0 z-10 bg-background/90 blackwork__layout--header',
@@ -58,6 +57,12 @@ export const LayoutHeader: React.FC<LayoutHeaderProps> = ({
     contentClassName,
   )
 
+  const separatorVisible = useMemo(() => {
+    const hasLeftPart = !!socialLinks?.length
+    const hasRightPart = !!themeToggle || !!languageToggle
+    return hasLeftPart && hasRightPart
+  }, [languageToggle, socialLinks?.length, themeToggle])
+
   return (
     <header className={cls}>
       <div className={wrapperCls}>
@@ -66,13 +71,13 @@ export const LayoutHeader: React.FC<LayoutHeaderProps> = ({
         <div className="flex flex-shrink-0 items-center gap-1.5">
           {isArray(socialLinks) && <SocialLinks items={socialLinks} />}
 
-          {(!!languageToggle || !!socialLinks?.length) && (
+          {separatorVisible && (
             <Separator orientation="vertical" className="h-5 mx-2" />
           )}
 
           {languageToggle}
 
-          <ThemeToggle options={themeToggleOptions} />
+          {themeToggle}
         </div>
       </div>
     </header>
