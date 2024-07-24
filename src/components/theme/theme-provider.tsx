@@ -8,11 +8,13 @@ import {
 } from './types'
 
 type ThemeProviderState = {
+  isDark: boolean
   theme: Theme
   setTheme: (theme: Theme) => void
 }
 
 const initialState: ThemeProviderState = {
+  isDark: true,
   theme: 'dark',
   setTheme: noop,
 }
@@ -39,6 +41,8 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     getLocalThemeValue(storageKey, defaultTheme),
   )
 
+  const isDark = useMemo(() => theme === 'dark', [theme])
+
   useEffect(() => {
     const root = window.document.documentElement
     if (!root.classList.contains(theme)) {
@@ -56,8 +60,8 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   )
 
   const value = useMemo(() => {
-    return { theme, setTheme: setThemeAndStorage }
-  }, [setThemeAndStorage, theme])
+    return { isDark, theme, setTheme: setThemeAndStorage }
+  }, [isDark, setThemeAndStorage, theme])
 
   return (
     <ThemeProviderContext {...props} value={value}>
