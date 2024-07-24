@@ -13,7 +13,7 @@ import { type Theme } from './types'
 
 export interface ThemeToggleOption {
   value: Theme
-  label: React.ReactNode
+  label?: React.ReactNode
   icon?: React.ReactNode
 }
 
@@ -36,11 +36,21 @@ export const defaultThemeToggleOptions =
   })
 
 export interface ThemeToggleProps {
+  title?: string
+  ariaLabel?: string
+
   /**
    * If you only need light / dark, or i18n support,
    * you can customize the rendering
    */
   options?: ThemeToggleOption[]
+
+  /**
+   * Interactive mode for toggle themes
+   *
+   * @default button
+   */
+  mode?: 'button' | 'dropdown'
 }
 
 /**
@@ -52,19 +62,50 @@ export interface ThemeToggleProps {
  *    in `tailwind.config.ts`
  */
 export const ThemeToggle: React.FC<ThemeToggleProps> = ({
+  title,
+  ariaLabel,
   options: customOptions,
+  mode = 'button',
 }) => {
-  const { setTheme } = useTheme()
+  const { isDark, theme, setTheme } = useTheme()
 
   const options = useMemo(() => {
     if (isArray(customOptions)) return customOptions
     return defaultThemeToggleOptions
   }, [customOptions])
 
+  const buttonIcon = useMemo(() => {
+    const Icon = isDark ? Sun : Moon
+    return <Icon className="h-5 w-5" />
+  }, [isDark])
+
+  if (mode === 'button') {
+    return (
+      <Button
+        variant="ghost"
+        size="icon"
+        title={title}
+        aria-label={ariaLabel || title}
+        onClick={() => {
+          const nextTheme = isDark ? 'light' : 'dark'
+          setTheme(nextTheme)
+        }}
+      >
+        {buttonIcon}
+        <span className="sr-only">Toggle Language</span>
+      </Button>
+    )
+  }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon">
+        <Button
+          variant="ghost"
+          size="icon"
+          title={title}
+          aria-label={ariaLabel || title}
+        >
           <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
           <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
           <span className="sr-only">Toggle theme</span>
@@ -77,6 +118,7 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
             <DropdownMenuItem
               key={i.value}
               className="gap-2"
+              defaultChecked={i.value === theme}
               onClick={() => setTheme(i.value)}
             >
               {i.icon}
