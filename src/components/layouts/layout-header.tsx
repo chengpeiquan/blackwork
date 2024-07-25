@@ -42,7 +42,8 @@ export const LayoutHeader: React.FC<LayoutHeaderProps> = ({
   themeToggle,
 }) => {
   const cls = cn(
-    'sticky top-0 z-10 bg-background/90 blackwork__layout--header',
+    'sticky top-0 z-10 bg-background/80 blackwork__layout--header',
+    'shadow-[inset_0_-1px_0_0_#333] backdrop-saturate-150 backdrop-blur',
     'flex flex-shrink-0 justify-center container h-16 box-border px-6 sm:px-8',
     className,
   )
