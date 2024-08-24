@@ -1,5 +1,6 @@
 import React from 'react'
 import { cn } from '@/utils'
+import { layoutCls } from './shared'
 
 export interface LayoutFooterProps {
   className?: string
@@ -11,7 +12,8 @@ export const LayoutFooter: React.FC<LayoutFooterProps> = ({
   children,
 }) => {
   const cls = cn(
-    'flex flex-shrink-0 justify-center items-center container h-32 box-border px-6 sm:px-8 md:text-sm text-xs',
+    'flex flex-shrink-0 justify-center items-center h-32 md:text-sm text-xs',
+    layoutCls.container,
     className,
   )
 
