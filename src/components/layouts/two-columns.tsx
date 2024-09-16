@@ -24,7 +24,7 @@ export const TwoColumnSidebar: React.FC<TwoColumnBaseProps> = ({
   ...props
 }) => {
   const cls = cn(
-    'flex-shrink-0 flex-col gap-12 hidden lg:flex lg:w-64 xl:w-80 2xl:96',
+    'flex-shrink-0 flex-col gap-12 hidden lg:flex lg:w-64 xl:w-80 2xl:w-96',
     className,
   )
 
