@@ -10,7 +10,7 @@ export interface TypographyBaseProps {
 const headingVariants = cva('scroll-m-20 tracking-tight', {
   variants: {
     level: {
-      1: 'text-4xl font-extrabold lg:text-5xl',
+      1: 'text-4xl font-extrabold',
       2: 'border-b pb-2 text-3xl font-semibold first:mt-0',
       3: 'text-2xl font-semibold',
       4: 'text-xl font-semibold',
@@ -21,11 +21,11 @@ const headingVariants = cva('scroll-m-20 tracking-tight', {
 const headingLevels = [1, 2, 3, 4] as const
 
 export interface TypographyTitleProps extends TypographyBaseProps {
-  level: (typeof headingLevels)[number]
+  level?: (typeof headingLevels)[number]
 }
 
 export const Heading: React.FC<TypographyTitleProps> = ({
-  level,
+  level = 1,
   className,
   children,
 }) => {
