@@ -35,7 +35,7 @@ export const ScrollToTop: React.FC<ScrollToTopProps> = ({
       aria-label={ariaLabel}
       onClick={scrollToTop}
     >
-      <ArrowUpFromLine />
+      <ArrowUpFromLine className="w-4 h-4" />
     </Button>
   )
 }
