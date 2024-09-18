@@ -1,6 +1,7 @@
 export * from './aspect-ratio'
 export * from './avatar'
 export * from './button'
+export * from './collapsible'
 export * from './dropdown-menu'
 export * from './pagination'
 export * from './separator'
