@@ -11,7 +11,7 @@ export const TwoColumnContent: React.FC<TwoColumnBaseProps> = ({
   className,
   ...props
 }) => {
-  const cls = cn('flex flex-col flex-1 overflow-hidden', className)
+  const cls = cn('flex flex-col flex-grow', className)
 
   const Comp = asChild ? Slot : 'section'
 
