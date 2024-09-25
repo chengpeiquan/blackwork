@@ -1,21 +1,23 @@
 import React from 'react'
 import { ArrowUpFromLine } from 'lucide-react'
 import { isBrowser } from '@bassist/utils'
-import { Button } from '@/components/ui'
+import { Button, type ButtonProps } from '@/components/ui'
 import { cn } from '@/utils'
 
 export interface ScrollToTopProps {
   className?: string
   title?: string
   ariaLabel?: string
+  variant?: ButtonProps['variant']
 }
 
 export const ScrollToTop: React.FC<ScrollToTopProps> = ({
   className,
   title,
   ariaLabel,
+  variant = 'ghost',
 }) => {
-  const cls = cn('fixed right-4 bottom-4 select-none', className)
+  const cls = cn('fixed right-3 bottom-3 w-10 h-10 z-10 select-none', className)
 
   const scrollToTop = () => {
     if (isBrowser) {
@@ -29,13 +31,13 @@ export const ScrollToTop: React.FC<ScrollToTopProps> = ({
   return (
     <Button
       className={cls}
-      variant="ghost"
+      variant={variant}
       size="icon"
       title={title}
       aria-label={ariaLabel}
       onClick={scrollToTop}
     >
-      <ArrowUpFromLine className="w-4 h-4" />
+      <ArrowUpFromLine className="w-5 h-5" />
     </Button>
   )
 }
