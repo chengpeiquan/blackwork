@@ -11,6 +11,7 @@ export const theme: NonNullable<Config['theme']> = {
   },
   extend: {
     screens: {
+      '2xs': '320px',
       xs: '480px',
     },
     colors: {
