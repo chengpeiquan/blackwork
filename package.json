@@ -1,7 +1,7 @@
 {
   "name": "blackwork",
-  "version": "1.0.0",
-  "description": "Layout components in blackwork tattoo style, based on Shadcn UI.",
+  "version": "0.1.0",
+  "description": "Blackwork Tattoo style React UI layout (provides a unified interface for websites like @chengpeiquan 's blog).",
   "author": "chengpeiquan <chengpeiquan@chengpeiquan.com>",
   "homepage": "https://chengpeiquan.com",
   "type": "module",
@@ -39,6 +39,12 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
+  "keywords": [
+    "react ui",
+    "react component",
+    "shadcn ui",
+    "react layout"
+  ],
   "scripts": {
     "build": "run-s build:*",
     "build:lib": "tsup",
@@ -82,20 +88,20 @@
     "@bassist/node-utils": "^0.4.1",
     "@bassist/tsconfig": "^0.1.1",
     "@bassist/utils": "^0.16.0",
-    "@types/node": "^20.16.5",
-    "@types/react": "npm:types-react@rc",
+    "@types/node": "^20.16.10",
     "clsx": "^2.1.1",
-    "eslint": "^8.57.0",
+    "eslint": "^8.57.1",
     "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.3.3",
     "react": "19.0.0-rc-206df66e-20240912",
     "tailwind-merge": "^2.5.2",
-    "tailwindcss": "^3.4.11",
+    "tailwindcss": "^3.4.13",
     "tailwindcss-animate": "^1.0.7",
-    "tsup": "^8.2.4",
+    "tsup": "^8.3.0",
     "tsx": "^4.19.1",
+    "@types/react": "npm:types-react@rc",
     "typescript": "^5.6.2",
     "unplugin-auto-import": "^0.18.3"
   },
