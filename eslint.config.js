@@ -26,6 +26,7 @@ export default defineFlatConfig([
             'decorative',
             'orientation',
             'sideOffset',
+            'shouldScaleBackground',
           ],
         },
       ],

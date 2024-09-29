@@ -24,3 +24,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Auto import files
+src/types/declaration-files/auto-imports.d.ts
