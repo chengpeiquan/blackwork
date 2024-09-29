@@ -18,6 +18,15 @@ export interface LayoutHeaderProps {
   children: React.ReactNode
 
   /**
+   * In addition to rendering based on the validity of the incoming data,
+   * this option can limit whether social links are rendered
+   * when there is data.
+   *
+   * @default true
+   */
+  socialLinksVisible?: boolean
+
+  /**
    * Passing this array will render a set of social link icon buttons
    */
   socialLinks?: SocialLinkProps[]
@@ -33,7 +42,23 @@ export interface LayoutHeaderProps {
   themeToggle?: React.ReactNode
 }
 
+const SocialLinksRender: React.FC<{
+  socialLinks?: SocialLinkProps[]
+  separatorVisible: boolean
+}> = ({ socialLinks, separatorVisible }) => {
+  return (
+    <>
+      {isArray(socialLinks) && <SocialLinks items={socialLinks} />}
+
+      {separatorVisible && (
+        <Separator orientation="vertical" className="h-5 mx-2" />
+      )}
+    </>
+  )
+}
+
 export const LayoutHeader: React.FC<LayoutHeaderProps> = ({
+  socialLinksVisible = true,
   className,
   wrapperClassName,
   contentClassName,
@@ -44,7 +69,8 @@ export const LayoutHeader: React.FC<LayoutHeaderProps> = ({
 }) => {
   const cls = cn(
     'sticky top-0 z-10 bg-background/80',
-    'shadow-[inset_0_-1px_0_0_#333] backdrop-saturate-150 backdrop-blur',
+    'shadow-[inset_0_-1px_0_0_#f2f2f2] dark:shadow-[inset_0_-1px_0_0_#333]',
+    'backdrop-saturate-150 backdrop-blur',
     'flex flex-shrink-0 justify-center w-screen h-16 box-border',
     className,
   )
@@ -72,10 +98,11 @@ export const LayoutHeader: React.FC<LayoutHeaderProps> = ({
         <div className={contentCls}>{children}</div>
 
         <div className="flex flex-shrink-0 items-center gap-1.5">
-          {isArray(socialLinks) && <SocialLinks items={socialLinks} />}
-
-          {separatorVisible && (
-            <Separator orientation="vertical" className="h-5 mx-2" />
+          {socialLinksVisible && (
+            <SocialLinksRender
+              socialLinks={socialLinks}
+              separatorVisible={separatorVisible}
+            />
           )}
 
           {languageToggle}
