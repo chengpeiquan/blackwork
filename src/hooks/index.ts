@@ -1,2 +1,2 @@
-export * from './isomorphic-layout-effect'
-export * from './media-query'
+export * from './use-isomorphic-layout-effect'
+export * from './use-media-query'

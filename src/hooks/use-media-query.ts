@@ -1,7 +1,7 @@
 // https://usehooks-ts.com/react-hook/use-media-query
 import { useState } from 'react'
 import { isServer } from '@bassist/utils'
-import { useIsomorphicLayoutEffect } from './isomorphic-layout-effect'
+import { useIsomorphicLayoutEffect } from './use-isomorphic-layout-effect'
 
 /** Hook options. */
 export type UseMediaQueryOptions = {
