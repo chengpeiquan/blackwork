@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from '@/components/ui'
+import { Github, Instagram, Rss, Twitter, X, ZhiHu } from '@/icons'
 import { ExternalLink } from './external-link'
-import * as Icons from './icons'
 
 export type SocialLinkIconType =
   | 'github'
@@ -28,42 +28,42 @@ export const SocialLink: React.FC<SocialLinkProps> = ({
     switch (type) {
       case 'github': {
         return {
-          SocialIcon: Icons.Github,
+          SocialIcon: Github,
           label: defaultLabel ?? 'GitHub',
         }
       }
 
       case 'x': {
         return {
-          SocialIcon: Icons.X,
+          SocialIcon: X,
           label: defaultLabel ?? 'X',
         }
       }
 
       case 'twitter': {
         return {
-          SocialIcon: Icons.Twitter,
+          SocialIcon: Twitter,
           label: defaultLabel ?? 'Twitter',
         }
       }
 
       case 'instagram': {
         return {
-          SocialIcon: Icons.Instagram,
+          SocialIcon: Instagram,
           label: defaultLabel ?? 'Instagram',
         }
       }
 
       case 'zhihu': {
         return {
-          SocialIcon: Icons.ZhiHu,
+          SocialIcon: ZhiHu,
           label: defaultLabel ?? 'ZhiHu',
         }
       }
 
       case 'rss': {
         return {
-          SocialIcon: Icons.Rss,
+          SocialIcon: Rss,
           label: defaultLabel ?? 'RSS',
         }
       }

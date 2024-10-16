@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react'
 import { type VariantProps, cva } from 'class-variance-authority'
 
+import { ChevronLeft, ChevronRight, MoreHorizontal } from '@/icons'
 import { cn } from '@/utils'
 import { type ButtonProps, buttonVariants } from '@/components/ui/button'
 

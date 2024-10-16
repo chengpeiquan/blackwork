@@ -7,7 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui'
-import * as Icons from './icons'
+import { Language } from '@/icons'
 
 export interface LanguageToggleOption {
   value: string
@@ -26,7 +26,7 @@ export interface LanguageToggleProps {
 const isSingle = (v: unknown): v is LanguageToggleOption => isObject(v)
 
 const DefaultIcon: React.FC = () => (
-  <Icons.Language className="h-5 w-5 rotate-0 scale-100 transition-all" />
+  <Language className="h-5 w-5 rotate-0 scale-100 transition-all" />
 )
 
 export const LanguageToggle: React.FC<LanguageToggleProps> = ({

@@ -4,7 +4,7 @@ import * as CollapsiblePrimitive from '@radix-ui/react-collapsible'
 import {
   ChevronsDown as CollapsibleClosed,
   ChevronsUp as CollapsibleOpened,
-} from 'lucide-react'
+} from '@/icons'
 
 const Collapsible = CollapsiblePrimitive.Root
 

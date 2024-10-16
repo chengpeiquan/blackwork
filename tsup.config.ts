@@ -8,7 +8,11 @@ import autoImport from 'unplugin-auto-import/esbuild'
 import pkg from './package.json'
 
 export default defineConfig({
-  entry: ['src/index.ts', 'src/tailwind-config.ts'],
+  entry: {
+    index: 'src/index.ts',
+    icons: 'src/icons/index.ts',
+    'tailwind-config': 'src/tailwind-config.ts',
+  },
   target: ['es2020'],
   format: defaultBundleFormatConfig,
   globalName: 'Blackwork',

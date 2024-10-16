@@ -1,6 +1,6 @@
 {
   "name": "blackwork",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Blackwork Tattoo style React UI layout (provides a unified interface for websites like @chengpeiquan 's blog).",
   "author": "chengpeiquan <chengpeiquan@chengpeiquan.com>",
   "homepage": "https://chengpeiquan.com",
@@ -29,6 +29,11 @@
       "types": "./dist/tailwind-config.d.ts",
       "import": "./dist/tailwind-config.mjs",
       "require": "./dist/tailwind-config.cjs"
+    },
+    "./icons": {
+      "types": "./dist/icons.d.ts",
+      "import": "./dist/icons.mjs",
+      "require": "./dist/icons.cjs"
     },
     ".": {
       "types": "./dist/index.d.ts",
@@ -68,21 +73,32 @@
     "@radix-ui/react-collapsible": "^1.1.0",
     "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-dropdown-menu": "^2.1.1",
+    "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-scroll-area": "^1.1.0",
     "@radix-ui/react-separator": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-tabs": "^1.1.0",
     "class-variance-authority": "^0.7.0",
-    "lucide-react": "^0.395.0",
+    "sonner": "^1.5.0",
     "vaul": "^1.0.0"
   },
   "peerDependencies": {
     "@bassist/utils": ">=0.16.0",
+    "@hookform/resolvers": ">=3.0.0",
     "clsx": ">=2.1.1",
     "react": ">=19.0.0",
+    "react-hook-form": ">=7.0.0",
     "tailwind-merge": ">=2.5.2",
     "tailwindcss": ">=3.4.4",
     "tailwindcss-animate": ">=1.0.7"
+  },
+  "peerDependenciesMeta": {
+    "@hookform/resolvers": {
+      "optional": true
+    },
+    "react-hook-form": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@bassist/changelog": "^0.3.0",
@@ -92,6 +108,7 @@
     "@bassist/release": "^0.3.0",
     "@bassist/tsconfig": "^0.1.1",
     "@bassist/utils": "^0.16.0",
+    "@hookform/resolvers": "^3.9.0",
     "@types/node": "^20.16.10",
     "@types/react": "npm:types-react@rc",
     "clsx": "^2.1.1",
@@ -102,6 +119,7 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^3.3.3",
     "react": "19.0.0-rc-206df66e-20240912",
+    "react-hook-form": "^7.53.0",
     "tailwind-merge": "^2.5.2",
     "tailwindcss": "^3.4.13",
     "tailwindcss-animate": "^1.0.7",
