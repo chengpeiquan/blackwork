@@ -3,6 +3,7 @@ import { Slot } from '@radix-ui/react-slot'
 import { type VariantProps, cva } from 'class-variance-authority'
 
 import { cn } from '@/utils'
+import { Loader } from '@/icons'
 
 const buttonVariants = cva(
   'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
@@ -25,6 +26,9 @@ const buttonVariants = cva(
         lg: 'h-11 rounded-md px-8',
         icon: 'h-8 w-8',
       },
+      loading: {
+        true: 'gap-2',
+      },
     },
     defaultVariants: {
       variant: 'default',
@@ -36,18 +40,50 @@ const buttonVariants = cva(
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
+  loading?: boolean
+  loaderClassName?: string
   asChild?: boolean
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  (
+    {
+      className,
+      variant,
+      size,
+      loaderClassName,
+      loading = false,
+      disabled = false,
+      asChild = false,
+      children,
+      ...props
+    },
+    ref,
+  ) => {
     const Comp = asChild ? Slot : 'button'
+
+    const content = useMemo(() => {
+      if (asChild) return children
+      return (
+        <>
+          {loading ? (
+            <Loader className={cn('w-4 h-4', loaderClassName)} />
+          ) : null}
+
+          {children}
+        </>
+      )
+    }, [asChild, children, loaderClassName, loading])
+
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
+        className={cn(buttonVariants({ variant, size, loading, className }))}
+        disabled={loading || disabled}
         ref={ref}
         {...props}
-      />
+      >
+        {content}
+      </Comp>
     )
   },
 )
