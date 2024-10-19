@@ -1,6 +1,7 @@
 export * from './external-link'
 export * from './language-toggle'
 export * from './scroll-top-top'
+export * from './search-input'
 export * from './social-link'
 export * from './social-links'
 export * from './typography'
