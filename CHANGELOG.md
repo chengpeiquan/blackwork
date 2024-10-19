@@ -1,3 +1,25 @@
+# [0.2.0](https://github.com/chengpeiquan/blackwork/compare/0.1.0...0.2.0) (2024-10-19)
+
+
+### Features
+
+* **badge:** add badge ([856fd41](https://github.com/chengpeiquan/blackwork/commit/856fd41be8aa1c24a9c0987f8b8581a72c27647c))
+* **breadcrumb:** add breadcrumb ([1951020](https://github.com/chengpeiquan/blackwork/commit/1951020d179ff412cd5fb39ec84f41b9949b6c62))
+* **button:** add loading icon ([02493c9](https://github.com/chengpeiquan/blackwork/commit/02493c9fb73a40c4e87265d6d44fc0d41223027a))
+* **card:** add card ([3322177](https://github.com/chengpeiquan/blackwork/commit/3322177858b61e1d4d847b684202dc2cb6d37f07))
+* **form:** add form ([27b7df7](https://github.com/chengpeiquan/blackwork/commit/27b7df79f63c39073907eaf4dba5c61a6b148d5c))
+* **hooks:** add useKeyword ([86b9d48](https://github.com/chengpeiquan/blackwork/commit/86b9d485017b44f2dce2fb56c4091b3638393d11))
+* **icons:** add search, empty, fail ([d8c3bea](https://github.com/chengpeiquan/blackwork/commit/d8c3bea40fe577f7a4d2592f6f3308532590dbc3))
+* **icons:** export icons as a sub-module ([9a03438](https://github.com/chengpeiquan/blackwork/commit/9a0343885a7feaf44a2b725f1f5b9342c72b43d7))
+* **input:** add enter press event ([8ee54ca](https://github.com/chengpeiquan/blackwork/commit/8ee54cabd1471e9f55479df4c5f96eea9e31926e))
+* **input:** add input ([07b843f](https://github.com/chengpeiquan/blackwork/commit/07b843f27e09e56fec1d7ca2b0b3e7b612160f40))
+* **pagination:** add disabled status for ellipsis ([696d350](https://github.com/chengpeiquan/blackwork/commit/696d350fb76bc8faa6b1de224a49fd1b91a79e77))
+* **search-input:** add search input ([db94811](https://github.com/chengpeiquan/blackwork/commit/db94811015cbaf884c3ffcd54b74caeae423838d))
+* **table:** add table ([f56786f](https://github.com/chengpeiquan/blackwork/commit/f56786f0c923eb4d44e6e3119d35cb3862b17e3f))
+* **toast:** add toast ([294d376](https://github.com/chengpeiquan/blackwork/commit/294d37654cfec941947e0225521b9b0a0cf36453))
+
+
+
 # 0.1.0 (2024-09-29)
 
 
