@@ -31,7 +31,7 @@ pnpm add @bassist/utils clsx react tailwindcss tailwind-merge tailwindcss-animat
 These are optional and only need to be installed if the corresponding components are used.
 
 ```bash
-# For `form`
+# For `blackwork/form`
 pnpm add @hookform/resolvers react-hook-form
 ```
 
@@ -88,6 +88,9 @@ import {
 
 // Icons
 import { Moon, Sun } from 'blackwork/icons'
+
+// Form
+import { Form } from 'blackwork/form'
 ```
 
 ## Documentation

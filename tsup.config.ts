@@ -11,6 +11,7 @@ export default defineConfig({
   entry: {
     index: 'src/index.ts',
     icons: 'src/icons/index.ts',
+    form: 'src/form/index.ts',
     'tailwind-config': 'src/tailwind-config.ts',
   },
   target: ['es2020'],

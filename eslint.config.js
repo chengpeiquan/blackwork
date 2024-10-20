@@ -15,7 +15,7 @@ export default defineFlatConfig([
   ...react,
   ...typescript,
   {
-    files: ['**/components/ui/*.tsx'],
+    files: ['src/components/ui/*.tsx', 'src/form/*.tsx'],
     rules: {
       'react/prop-types': [
         2,
