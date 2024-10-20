@@ -1,3 +1,12 @@
+## [0.2.1](https://github.com/chengpeiquan/blackwork/compare/0.2.0...0.2.1) (2024-10-20)
+
+
+### Bug Fixes
+
+* **form:** make form to be an independent submodule and fix dependency installation issues ([21aa39a](https://github.com/chengpeiquan/blackwork/commit/21aa39a6a3ca3bfa98ab1a598c832653c6775b9b))
+
+
+
 # [0.2.0](https://github.com/chengpeiquan/blackwork/compare/0.1.0...0.2.0) (2024-10-19)
 
 
