@@ -1,3 +1,12 @@
+# [0.3.0](https://github.com/chengpeiquan/blackwork/compare/v0.2.1...v0.3.0) (2024-10-27)
+
+
+### Features
+
+* **quick-search:** add quick search ([83b2d8e](https://github.com/chengpeiquan/blackwork/commit/83b2d8ee627e8a34a7df2984f229d91cc86519b4))
+
+
+
 ## [0.2.1](https://github.com/chengpeiquan/blackwork/compare/0.2.0...0.2.1) (2024-10-20)
 
 
