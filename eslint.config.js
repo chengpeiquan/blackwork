@@ -21,6 +21,7 @@ export default defineFlatConfig([
         2,
         {
           ignore: [
+            'autoFocus',
             'checked',
             'className',
             'decorative',
