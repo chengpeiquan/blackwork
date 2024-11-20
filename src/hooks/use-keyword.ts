@@ -39,6 +39,7 @@ export const useKeyword = ({
 
   return {
     keyword,
+    setKeyword,
     onKeywordUpdate,
   }
 }
