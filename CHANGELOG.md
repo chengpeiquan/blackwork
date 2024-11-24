@@ -1,3 +1,19 @@
+# [0.4.0](https://github.com/chengpeiquan/blackwork/compare/v0.3.0...v0.4.0) (2024-11-24)
+
+
+### Bug Fixes
+
+* **use-keyword:** export setKeyword method ([2874da6](https://github.com/chengpeiquan/blackwork/commit/2874da6b8ecd3ad646222fd216a28c56e5bdbbd5))
+
+
+### Features
+
+* **icons:** add icons ([1601a23](https://github.com/chengpeiquan/blackwork/commit/1601a235b604eac80d15ac5ac9a4f44da4e5112c))
+* **radio-group:** add radio group ([78d6e7e](https://github.com/chengpeiquan/blackwork/commit/78d6e7e6bd9ac790a9e546d30d555d290d8fd636))
+* **toggle-group:** add toggle and toggle group ([d4f62a4](https://github.com/chengpeiquan/blackwork/commit/d4f62a454a57946b358a824d12214291c8aee90c))
+
+
+
 # [0.3.0](https://github.com/chengpeiquan/blackwork/compare/v0.2.1...v0.3.0) (2024-10-27)
 
 
