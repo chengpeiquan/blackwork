@@ -1,6 +1,6 @@
 {
   "name": "blackwork",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Blackwork Tattoo style React UI layout (provides a unified interface for websites like @chengpeiquan 's blog).",
   "author": "chengpeiquan <chengpeiquan@chengpeiquan.com>",
   "homepage": "https://chengpeiquan.com",
@@ -92,6 +92,7 @@
     "@radix-ui/react-tabs": "^1.1.1",
     "@radix-ui/react-toggle": "^1.1.0",
     "@radix-ui/react-toggle-group": "^1.1.0",
+    "@radix-ui/react-tooltip": "^1.1.4",
     "@radix-ui/react-visually-hidden": "^1.1.0",
     "class-variance-authority": "^0.7.0",
     "sonner": "^1.5.0",
