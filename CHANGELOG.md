@@ -1,3 +1,13 @@
+# [0.6.0](https://github.com/chengpeiquan/blackwork/compare/v0.5.0...v0.6.0) (2024-12-15)
+
+
+### Features
+
+* **hover-card:** add hover card ([ecabd5c](https://github.com/chengpeiquan/blackwork/commit/ecabd5ccbb5eb78dccf18adc2b3d807bc9612726))
+* **icons:** add and adjust icons ([790d56f](https://github.com/chengpeiquan/blackwork/commit/790d56f1fb95f04391e3f73af5a3c855f47ced19))
+
+
+
 # [0.5.0](https://github.com/chengpeiquan/blackwork/compare/v0.4.0...v0.5.0) (2024-12-14)
 
 
