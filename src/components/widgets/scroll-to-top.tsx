@@ -9,6 +9,7 @@ export interface ScrollToTopProps {
   title?: string
   ariaLabel?: string
   variant?: ButtonProps['variant']
+  style?: React.CSSProperties
 }
 
 export const ScrollToTop: React.FC<ScrollToTopProps> = ({
@@ -16,6 +17,7 @@ export const ScrollToTop: React.FC<ScrollToTopProps> = ({
   title,
   ariaLabel,
   variant = 'ghost',
+  style,
 }) => {
   const cls = cn('fixed right-3 bottom-3 w-10 h-10 z-10 select-none', className)
 
@@ -36,6 +38,7 @@ export const ScrollToTop: React.FC<ScrollToTopProps> = ({
       title={title}
       aria-label={ariaLabel}
       onClick={scrollToTop}
+      style={style}
     >
       <ArrowUpFromLine className="w-5 h-5" />
     </Button>
