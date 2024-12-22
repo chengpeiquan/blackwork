@@ -29,6 +29,7 @@ export default defineFlatConfig([
             'orientation',
             'sideOffset',
             'shouldScaleBackground',
+            'value',
           ],
         },
       ],

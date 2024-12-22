@@ -1,3 +1,15 @@
+# [0.7.0](https://github.com/chengpeiquan/blackwork/compare/v0.6.0...v0.7.0) (2024-12-22)
+
+
+### Features
+
+* **icons:** add icons ([63cc032](https://github.com/chengpeiquan/blackwork/commit/63cc03232b8c1ad85ace479d3e120e44a28bbd62))
+* **progress:** add progress ([fc1f5cc](https://github.com/chengpeiquan/blackwork/commit/fc1f5ccf539bccb995dd71c56bf1df842e66eea0))
+* **scroll-to-top:** add style prop ([269f94f](https://github.com/chengpeiquan/blackwork/commit/269f94fc7c09e2d1747efbd80634b28eb55bc13c))
+* **slider:** add slider ([ba7a12a](https://github.com/chengpeiquan/blackwork/commit/ba7a12a24b6f76a5700fee0d41b4a9b1c274bc31))
+
+
+
 # [0.6.0](https://github.com/chengpeiquan/blackwork/compare/v0.5.0...v0.6.0) (2024-12-15)
 
 
