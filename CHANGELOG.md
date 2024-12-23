@@ -1,3 +1,18 @@
+## [0.7.1](https://github.com/chengpeiquan/blackwork/compare/v0.7.0...v0.7.1) (2024-12-23)
+
+
+### Bug Fixes
+
+* **sheet:** using wrong close icon ([3063a91](https://github.com/chengpeiquan/blackwork/commit/3063a9193f112053be9d59778b0cdccca7676960))
+* **ui:** deprecate drawer and use sheet instead ([6f0a0bb](https://github.com/chengpeiquan/blackwork/commit/6f0a0bb2f72f636338fe1f1ed113be6fd04808f1))
+
+
+### Features
+
+* **sheet:** add a prop to hide the close button ([e3761fc](https://github.com/chengpeiquan/blackwork/commit/e3761fccbae5f038cd01de06ae112e3489677fc1))
+
+
+
 # [0.7.0](https://github.com/chengpeiquan/blackwork/compare/v0.6.0...v0.7.0) (2024-12-22)
 
 
