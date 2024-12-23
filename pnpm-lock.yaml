@@ -71,9 +71,6 @@ importers:
       sonner:
         specifier: ^1.7.1
         version: 1.7.1(react-dom@18.3.1(react@19.0.0))(react@19.0.0)
-      vaul:
-        specifier: ^1.1.2
-        version: 1.1.2(@types/react@19.0.2)(react-dom@18.3.1(react@19.0.0))(react@19.0.0)
     devDependencies:
       '@bassist/changelog':
         specifier: ^0.3.0
@@ -3413,12 +3410,6 @@ packages:
 
   validate-npm-package-license@3.0.4:
     resolution: {integrity: sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew==}
-
-  vaul@1.1.2:
-    resolution: {integrity: sha512-ZFkClGpWyI2WUQjdLJ/BaGuV6AVQiJ3uELGk3OYtP+B6yCO7Cmn9vPFXVJkRaGkOJu3m8bQMgtyzNHixULceQA==}
-    peerDependencies:
-      react: ^16.8 || ^17.0 || ^18.0 || ^19.0.0 || ^19.0.0-rc
-      react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0.0 || ^19.0.0-rc
 
   vue-eslint-parser@9.4.3:
     resolution: {integrity: sha512-2rYRLWlIpaiN8xbPiDyXZXRgLGOtWxERV7ND5fFAv5qo1D2N9Fu9MNajBNc6o13lZ+24DAWCkQCvj4klgmcITg==}
@@ -6838,15 +6829,6 @@ snapshots:
     dependencies:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
-
-  vaul@1.1.2(@types/react@19.0.2)(react-dom@18.3.1(react@19.0.0))(react@19.0.0):
-    dependencies:
-      '@radix-ui/react-dialog': 1.1.4(@types/react@19.0.2)(react-dom@18.3.1(react@19.0.0))(react@19.0.0)
-      react: 19.0.0
-      react-dom: 18.3.1(react@19.0.0)
-    transitivePeerDependencies:
-      - '@types/react'
-      - '@types/react-dom'
 
   vue-eslint-parser@9.4.3(eslint@8.57.1):
     dependencies:
