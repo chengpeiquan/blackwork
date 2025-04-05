@@ -12,7 +12,7 @@ export const LayoutFooter: React.FC<LayoutFooterProps> = ({
   children,
 }) => {
   const cls = cn(
-    'flex flex-shrink-0 justify-center items-center h-32 md:text-sm text-xs',
+    'flex h-32 shrink-0 items-center justify-center text-xs md:text-sm',
     layoutCls.container,
     className,
   )

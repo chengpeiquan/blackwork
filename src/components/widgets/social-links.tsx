@@ -1,7 +1,7 @@
-import React from 'react'
 import { isArray } from '@bassist/utils'
-import { SocialLink, type SocialLinkProps } from './social-link'
+import React from 'react'
 import { cn } from '@/utils'
+import { SocialLink, type SocialLinkProps } from './social-link'
 
 export interface SocialLinksProps {
   items: SocialLinkProps[]
@@ -12,7 +12,7 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
   items,
   className,
 }) => {
-  const cls = cn('flex flex-shrink-0 items-center gap-1', className)
+  const cls = cn('flex shrink-0 items-center gap-1', className)
 
   if (!isArray(items) || !items.length) return null
   return (

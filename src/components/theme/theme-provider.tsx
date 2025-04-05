@@ -1,5 +1,5 @@
-import React from 'react'
 import { isBrowser, isUndefined, noop } from '@bassist/utils'
+import React from 'react'
 import {
   type Theme,
   type ThemeProviderProps,

@@ -1,40 +1,44 @@
 // https://usehooks-ts.com/react-hook/use-media-query
-import { useState } from 'react'
 import { isServer } from '@bassist/utils'
+import { useState } from 'react'
 import { useIsomorphicLayoutEffect } from './use-isomorphic-layout-effect'
 
 /** Hook options. */
 export type UseMediaQueryOptions = {
   /**
    * The default value to return if the hook is being run on the server.
+   *
    * @default false
    */
   defaultValue?: boolean
   /**
-   * If `true` (default), the hook will initialize reading the media query. In SSR, you should set it to `false`, returning `options.defaultValue` or `false` initially.
+   * If `true` (default), the hook will initialize reading the media query. In
+   * SSR, you should set it to `false`, returning `options.defaultValue` or
+   * `false` initially.
+   *
    * @default true
    */
   initializeWithValue?: boolean
 }
 
 /**
- * Custom hook that tracks the state of a media query using the [`Match Media API`](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia).
+ * Custom hook that tracks the state of a media query using the [`Match Media
+ * API`](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia).
+ *
+ * @example
+ *   ```tsx
+ *   const isSmallScreen = useMediaQuery('(max-width: 600px)');
+ *   // Use `isSmallScreen` to conditionally apply styles or logic based on the screen size.
+ *   ```
  *
  * @param {string} query - The media query to track.
- *
- * @param {?UseMediaQueryOptions} [options] - The options for customizing the behavior of the hook (optional).
- *
- * @returns {boolean} The current state of the media query (true if the query matches, false otherwise).
- *
+ * @param {UseMediaQueryOptions | null} [options] - The options for customizing
+ *   the behavior of the hook (optional).
+ * @returns {boolean} The current state of the media query (true if the query
+ *   matches, false otherwise).
  * @public
  *
  * @see [Documentation](https://usehooks-ts.com/react-hook/use-media-query)
- *
- * @example
- * ```tsx
- * const isSmallScreen = useMediaQuery('(max-width: 600px)');
- * // Use `isSmallScreen` to conditionally apply styles or logic based on the screen size.
- * ```
  */
 export function useMediaQuery(
   query: string,

@@ -1,5 +1,5 @@
-import React from 'react'
 import { isBrowser } from '@bassist/utils'
+import React from 'react'
 import {
   type ThemeProviderConfig,
   defaultStorageKey,
@@ -8,8 +8,8 @@ import {
 
 export interface ThemeScriptProps extends ThemeProviderConfig {
   /**
-   * Optional nonce passed to the injected script tag,
-   * used to allow-list the next-themes script in your CSP
+   * Optional nonce passed to the injected script tag, used to allow-list the
+   * next-themes script in your CSP
    */
   nonce?: string
 }
@@ -42,46 +42,45 @@ export const themeScript = (storageKey, defaultTheme) => {
     const themeName = localStorage.getItem(storageKey) || defaultTheme
     const theme = themeName === 'system' ? getSystemTheme() : themeName
     updateDOM(theme)
-  } catch (e) {}
+  } catch {}
 }
 
 /**
  * Prevent FOUC from appearing in the page
  *
- * @see https://en.wikipedia.org/wiki/Flash_of_unstyled_content
- *
  * @example
+ *   ```tsx
+ *   // your `layout.tsx`
  *
- * ```tsx
- * // your `layout.tsx`
+ *   import React from 'react'
+ *   import { type Theme, ThemeProvider, ThemeScript } from 'blackwork'
+ *   import 'blackwork/ui-globals.css'
+ *   import '@/styles/globals.css'
  *
- * import React from 'react'
- * import { type Theme, ThemeProvider, ThemeScript } from 'blackwork'
- * import 'blackwork/ui-globals.css'
- * import '@/styles/globals.css'
- *
- * const themeConfig: ThemeProviderConfig = {
+ *   const themeConfig: ThemeProviderConfig = {
  *   storageKey: 'blackwork-theme',
  *   defaultTheme: 'dark',
- * }
+ *   }
  *
- * export default function RootLayout({
+ *   export default function RootLayout({
  *   children,
- * }: Readonly<{ children: React.ReactNode }>) {
+ *   }: Readonly<{ children: React.ReactNode }>) {
  *   return (
- *     <html lang="en" suppressHydrationWarning>
- *       <head>
- *         <ThemeScript {...themeConfig} />
- *       </head>
- *       <body className={inter.className}>
- *         <ThemeProvider {...themeConfig}>
- *           {children}
- *         </ThemeProvider>
- *       </body>
- *     </html>
+ *   <html lang="en" suppressHydrationWarning>
+ *   <head>
+ *   <ThemeScript {...themeConfig} />
+ *   </head>
+ *   <body className={inter.className}>
+ *   <ThemeProvider {...themeConfig}>
+ *   {children}
+ *   </ThemeProvider>
+ *   </body>
+ *   </html>
  *   )
- * }
- * ```
+ *   }
+ *   ```
+ *
+ * @see https://en.wikipedia.org/wiki/Flash_of_unstyled_content
  */
 export const ThemeScript = memo(
   ({

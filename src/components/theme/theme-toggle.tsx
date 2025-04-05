@@ -1,6 +1,5 @@
-import React from 'react'
-import { Moon, Sun } from '@/icons'
 import { capitalize, isArray } from '@bassist/utils'
+import React from 'react'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -8,6 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { Moon, Sun } from '@/icons'
 import { useTheme } from './theme-provider'
 import { type Theme } from './types'
 
@@ -22,8 +22,8 @@ export const defaultThemeToggleValues: Readonly<Theme[]> = ['light', 'dark']
 export const defaultThemeToggleIconMap: Readonly<
   Record<Theme, React.ReactNode>
 > = {
-  light: <Sun className="h-4 w-4" />,
-  dark: <Moon className="h-4 w-4" />,
+  light: <Sun className="size-4" />,
+  dark: <Moon className="size-4" />,
 }
 
 export const defaultThemeToggleOptions =
@@ -40,8 +40,8 @@ export interface ThemeToggleProps {
   ariaLabel?: string
 
   /**
-   * If you only need light / dark, or i18n support,
-   * you can customize the rendering
+   * If you only need light / dark, or i18n support, you can customize the
+   * rendering
    */
   options?: ThemeToggleOption[]
 
@@ -56,10 +56,8 @@ export interface ThemeToggleProps {
 /**
  * Provides theme toggle based on dropdown menu
  *
- * @description
- *    If the icon change does not take effect,
- *    please check if the `darkMode` option value is `selector`
- *    in `tailwind.config.ts`
+ * If the icon change does not take effect, please check if the `darkMode`
+ * option value is `selector` in `tailwind.config.ts`
  */
 export const ThemeToggle: React.FC<ThemeToggleProps> = ({
   title,
@@ -76,7 +74,7 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
 
   const buttonIcon = useMemo(() => {
     const Icon = isDark ? Sun : Moon
-    return <Icon className="h-5 w-5" />
+    return <Icon className="size-5" />
   }, [isDark])
 
   if (mode === 'button') {
@@ -106,8 +104,8 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
           title={title}
           aria-label={ariaLabel || title}
         >
-          <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          <Sun className="size-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+          <Moon className="absolute size-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>

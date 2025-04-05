@@ -10,28 +10,20 @@ export interface RootLayoutProps {
    */
   lang?: string
 
-  /**
-   * Class Name for `<body />`
-   */
+  /** Class Name for `<body />` */
   className?: string
 
-  /**
-   * Rendering to `<head />`
-   */
+  /** Rendering to `<head />` */
   metadata?: React.ReactNode
 
-  /**
-   * Rendering to `<body />`
-   */
+  /** Rendering to `<body />` */
   children: React.ReactNode
 }
 
-/**
- * Base HTML layout component with dark theme support
- */
+/** Base HTML layout component with dark theme support */
 export const RootLayout = memo(
   ({ lang = 'en', className, metadata, children }: RootLayoutProps) => {
-    const cls = cn('flex flex-col w-screen min-h-screen', className)
+    const cls = cn('flex min-h-screen w-screen flex-col', className)
 
     return (
       <html lang={lang} suppressHydrationWarning>

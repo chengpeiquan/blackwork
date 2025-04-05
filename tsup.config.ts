@@ -1,9 +1,9 @@
-import { defineConfig } from 'tsup'
 import {
   defaultBundleFormatConfig,
   getBundleBanner,
   getBundleExtension,
 } from '@bassist/node-utils'
+import { defineConfig } from 'tsup'
 import autoImport from 'unplugin-auto-import/esbuild'
 import pkg from './package.json'
 

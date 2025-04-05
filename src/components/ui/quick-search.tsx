@@ -1,15 +1,14 @@
 'use client'
 
-import * as React from 'react'
+import { isBrowser, isFunction } from '@bassist/utils'
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden'
-
-import { Button } from './button'
-import { Dialog, DialogContent, DialogTitle } from './dialog'
-import { ScrollArea } from './scroll-area'
+import * as React from 'react'
 
 import { Search } from '@/icons'
 import { cn } from '@/utils'
-import { isBrowser, isFunction } from '@bassist/utils'
+import { Button } from './button'
+import { Dialog, DialogContent, DialogTitle } from './dialog'
+import { ScrollArea } from './scroll-area'
 
 const QuickSearch = React.forwardRef<
   HTMLDivElement,
@@ -18,7 +17,7 @@ const QuickSearch = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      'flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground',
+      'flex size-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground',
       className,
     )}
     {...props}
@@ -46,7 +45,7 @@ const QuickSearchTrigger = ({
     <Button
       variant="outline"
       className={cn(
-        'relative h-8 w-full justify-start rounded-[0.5rem] bg-muted/50 text-sm font-normal text-muted-foreground shadow-none sm:pr-12 md:w-40 lg:w-64',
+        'relative h-8 w-full justify-start rounded-lg bg-muted/50 text-sm font-normal text-muted-foreground shadow-none sm:pr-12 md:w-40 lg:w-64',
         className,
       )}
       onClick={onClick}
@@ -56,7 +55,7 @@ const QuickSearchTrigger = ({
 
       <kbd
         className={cn(
-          'pointer-events-none absolute right-[0.3rem] top-[0.3rem] hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium !text-xs opacity-100 sm:flex bg-white dark:bg-black text-black dark:text-white shadow-sm',
+          'pointer-events-none absolute right-[0.3rem] top-[0.3rem] hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-black opacity-100 shadow-sm sm:flex dark:bg-black dark:text-white',
           kbdClassName,
         )}
         style={{ fontFamily: 'inherit' }}
@@ -105,12 +104,12 @@ const QuickSearchInput = React.forwardRef<
   React.InputHTMLAttributes<HTMLInputElement>
 >(({ className, autoFocus = true, ...props }, ref) => (
   <div className="flex items-center border-b px-3">
-    <Search className="mr-2 h-5 w-5 shrink-0 opacity-50" />
+    <Search className="mr-2 size-5 shrink-0 opacity-50" />
 
     <input
       ref={ref}
       className={cn(
-        'flex flex-1 h-12 rounded-md bg-transparent py-3 mr-[32px] text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50 border-0',
+        'mr-[32px] flex h-12 flex-1 rounded-md border-0 bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50',
         className,
       )}
       autoFocus={autoFocus}
@@ -130,12 +129,12 @@ const QuickSearchList = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      'flex flex-col w-full h-[480px] overflow-y-auto overflow-x-hidden',
+      'flex h-[480px] w-full flex-col overflow-y-auto overflow-x-hidden',
       className,
     )}
     {...props}
   >
-    <ScrollArea className={cn('w-full h-full box-border p-3', scrollClassName)}>
+    <ScrollArea className={cn('box-border size-full p-3', scrollClassName)}>
       {children}
     </ScrollArea>
   </div>
@@ -150,7 +149,7 @@ const QuickSearchEmpty = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      'flex items-center justify-center w-full h-full text-center text-sm text-muted-foreground',
+      'flex size-full items-center justify-center text-center text-sm text-muted-foreground',
       className,
     )}
     {...props}
@@ -176,10 +175,7 @@ const QuickSearchItem = React.forwardRef<
 QuickSearchItem.displayName = 'QuickSearchItem'
 
 export interface QuickSearchStateOptions {
-  /**
-   * Shortcut key or shortcut key combination
-   * to activate the search dialog
-   */
+  /** Shortcut key or shortcut key combination to activate the search dialog */
   isActiveHotkey?: (e: KeyboardEvent) => boolean
 }
 

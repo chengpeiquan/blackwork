@@ -1,9 +1,9 @@
-import * as React from 'react'
 import { type VariantProps, cva } from 'class-variance-authority'
+import * as React from 'react'
 
+import { type ButtonProps, buttonVariants } from '@/components/ui/button'
 import { ChevronLeft, ChevronRight, MoreHorizontal } from '@/icons'
 import { cn } from '@/utils'
-import { type ButtonProps, buttonVariants } from '@/components/ui/button'
 
 const Pagination = ({ className, ...props }: React.ComponentProps<'nav'>) => (
   <nav
@@ -85,7 +85,7 @@ const PaginationPrevious = (
   props: React.ComponentProps<typeof PaginationLink>,
 ) => (
   <PaginationLink {...props}>
-    <ChevronLeft className="h-4 w-4" />
+    <ChevronLeft className="size-4" />
     <span className="sr-only">Previous</span>
   </PaginationLink>
 )
@@ -94,7 +94,7 @@ PaginationPrevious.displayName = 'PaginationPrevious'
 const PaginationNext = (props: React.ComponentProps<typeof PaginationLink>) => (
   <PaginationLink {...props}>
     <span className="sr-only">Next</span>
-    <ChevronRight className="h-4 w-4" />
+    <ChevronRight className="size-4" />
   </PaginationLink>
 )
 PaginationNext.displayName = 'PaginationNext'
@@ -108,13 +108,13 @@ const PaginationEllipsis = ({
   <span
     aria-hidden
     className={cn(
-      'flex h-9 w-9 items-center justify-center',
+      'flex size-9 items-center justify-center',
       paginationLinkVariants({ disabled }),
       className,
     )}
     {...props}
   >
-    <MoreHorizontal className="h-4 w-4" />
+    <MoreHorizontal className="size-4" />
     <span className="sr-only">More pages</span>
   </span>
 )

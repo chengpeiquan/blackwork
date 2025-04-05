@@ -3,8 +3,8 @@ export interface GeneratePagesOptions {
   totalPages: number
 
   /**
-   * The page number range to be displayed on the left
-   * and right sides of the current page number
+   * The page number range to be displayed on the left and right sides of the
+   * current page number
    *
    * @default 2
    */

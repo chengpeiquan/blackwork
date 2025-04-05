@@ -1,5 +1,5 @@
-import React from 'react'
 import { Slot } from '@radix-ui/react-slot'
+import React from 'react'
 import { cn } from '@/utils'
 
 export interface HolyGrailBaseProps extends React.HTMLAttributes<HTMLElement> {
@@ -11,7 +11,7 @@ export const HolyGrailContent: React.FC<HolyGrailBaseProps> = ({
   className,
   ...props
 }) => {
-  const cls = cn('flex flex-col flex-1 overflow-hidden', className)
+  const cls = cn('flex flex-1 flex-col overflow-hidden', className)
 
   const Comp = asChild ? Slot : 'section'
 
@@ -28,7 +28,7 @@ export const HolyGrailAside: React.FC<HolyGrailAsideProps> = ({
   className,
   ...props
 }) => {
-  const cls = cn('flex-shrink-0 flex-col gap-12 hidden', className, {
+  const cls = cn('hidden shrink-0 flex-col gap-12', className, {
     'lg:flex lg:w-32 xl:w-48 2xl:w-64': smaller,
     'lg:flex lg:w-64 xl:w-80 2xl:w-96': !smaller,
   })

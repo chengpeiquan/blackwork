@@ -20,12 +20,12 @@ export const SearchInput: React.FC<SearchInputProps> = ({
   const cls = cn('relative', className)
 
   const searchIconCls = cn(
-    'absolute left-2.5 top-2.5 h-5 w-5 text-muted-foreground',
+    'absolute left-2.5 top-2.5 size-5 text-muted-foreground',
     searchIconClassName,
   )
 
   const inputCls = cn(
-    'w-full rounded-lg bg-background box-border pl-9 md:w-[200px] lg:w-[336px]',
+    'box-border w-full rounded-lg bg-background pl-9 md:w-[200px] lg:w-[336px]',
     inputClassName,
   )
 

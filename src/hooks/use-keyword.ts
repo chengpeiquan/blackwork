@@ -1,5 +1,5 @@
-import type React from 'react'
 import { throttle } from '@bassist/utils'
+import type React from 'react'
 
 export type UseKeywordEvent =
   | React.FormEvent<HTMLInputElement>

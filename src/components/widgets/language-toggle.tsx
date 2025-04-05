@@ -1,5 +1,5 @@
-import React from 'react'
 import { isObject, isUndefined } from '@bassist/utils'
+import React from 'react'
 import {
   Button,
   DropdownMenu,
@@ -26,7 +26,7 @@ export interface LanguageToggleProps {
 const isSingle = (v: unknown): v is LanguageToggleOption => isObject(v)
 
 const DefaultIcon: React.FC = () => (
-  <Language className="h-5 w-5 rotate-0 scale-100 transition-all" />
+  <Language className="size-5 rotate-0 scale-100 transition-all" />
 )
 
 export const LanguageToggle: React.FC<LanguageToggleProps> = ({

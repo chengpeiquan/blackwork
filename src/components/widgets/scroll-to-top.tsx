@@ -1,5 +1,5 @@
-import React from 'react'
 import { isBrowser } from '@bassist/utils'
+import React from 'react'
 import { Button, type ButtonProps } from '@/components/ui'
 import { ArrowUpFromLine } from '@/icons'
 import { cn } from '@/utils'
@@ -19,7 +19,7 @@ export const ScrollToTop: React.FC<ScrollToTopProps> = ({
   variant = 'ghost',
   style,
 }) => {
-  const cls = cn('fixed right-3 bottom-3 w-10 h-10 z-10 select-none', className)
+  const cls = cn('fixed bottom-3 right-3 z-10 size-10 select-none', className)
 
   const scrollToTop = () => {
     if (isBrowser) {
@@ -40,7 +40,7 @@ export const ScrollToTop: React.FC<ScrollToTopProps> = ({
       onClick={scrollToTop}
       style={style}
     >
-      <ArrowUpFromLine className="w-5 h-5" />
+      <ArrowUpFromLine className="size-5" />
     </Button>
   )
 }

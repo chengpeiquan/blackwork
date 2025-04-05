@@ -1,5 +1,5 @@
-import React from 'react'
 import { Slot } from '@radix-ui/react-slot'
+import React from 'react'
 import { cn } from '@/utils'
 import { layoutCls } from './shared'
 
@@ -17,7 +17,7 @@ export const LayoutMain: React.FC<LayoutMainProps> = ({
   asChild,
 }) => {
   const cls = cn(
-    'flex flex-col grow flex-shrink-0',
+    'flex shrink-0 grow flex-col',
     fullscreen ? 'w-screen' : layoutCls.container,
     fullscreen ? '' : layoutCls.main,
     className,
