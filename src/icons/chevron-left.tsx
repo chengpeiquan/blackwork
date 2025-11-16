@@ -1,7 +1,7 @@
 import React from 'react'
 import { type IconProps } from './types'
 
-export const ChevronsLeft: React.FC<IconProps> = (props) => {
+export const ChevronLeft: React.FC<IconProps> = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -13,7 +13,7 @@ export const ChevronsLeft: React.FC<IconProps> = (props) => {
       {/* Icon from Material Design Icons by Pictogrammers - https://github.com/Templarian/MaterialDesign/blob/master/LICENSE */}
       <path
         fill="currentColor"
-        d="M18.41 7.41L17 6l-6 6l6 6l1.41-1.41L13.83 12zm-6 0L11 6l-6 6l6 6l1.41-1.41L7.83 12z"
+        d="M15.41 16.58L10.83 12l4.58-4.59L14 6l-6 6l6 6z"
       />
     </svg>
   )

@@ -1,7 +1,7 @@
 import React from 'react'
 import { type IconProps } from './types'
 
-export const ChevronRight: React.FC<IconProps> = (props) => {
+export const ChevronsRight: React.FC<IconProps> = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -10,10 +10,11 @@ export const ChevronRight: React.FC<IconProps> = (props) => {
       viewBox="0 0 24 24"
       {...props}
     >
+      {/* Icon from Material Design Icons by Pictogrammers - https://github.com/Templarian/MaterialDesign/blob/master/LICENSE */}
       <path
         fill="currentColor"
-        d="M9.29 6.71a.996.996 0 0 0 0 1.41L13.17 12l-3.88 3.88a.996.996 0 1 0 1.41 1.41l4.59-4.59a.996.996 0 0 0 0-1.41L10.7 6.7c-.38-.38-1.02-.38-1.41.01"
-      ></path>
+        d="M5.59 7.41L7 6l6 6l-6 6l-1.41-1.41L10.17 12zm6 0L13 6l6 6l-6 6l-1.41-1.41L16.17 12z"
+      />
     </svg>
   )
 }
