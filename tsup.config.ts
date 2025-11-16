@@ -1,31 +1,22 @@
-import {
-  defaultBundleFormatConfig,
-  getBundleBanner,
-  getBundleExtension,
-} from '@bassist/node-utils'
+import { BundleFormat, createBaseConfig } from '@bassist/build-config/tsup'
 import { defineConfig } from 'tsup'
 import autoImport from 'unplugin-auto-import/esbuild'
 import pkg from './package.json'
 
-export default defineConfig({
+const baseConfig = createBaseConfig({
+  pkg,
   entry: {
     index: 'src/index.ts',
     icons: 'src/icons/index.ts',
     form: 'src/form/index.ts',
     'tailwind-config': 'src/tailwind-config.ts',
   },
-  target: ['es2020'],
-  format: defaultBundleFormatConfig,
   globalName: 'Blackwork',
-  outExtension: (ctx) => getBundleExtension(ctx),
-  outDir: 'dist',
-  dts: true,
-  banner: {
-    js: getBundleBanner(pkg),
-  },
-  bundle: true,
-  minify: true,
-  clean: true,
+  format: [BundleFormat.CJS, BundleFormat.ESM, BundleFormat.IIFE],
+})
+
+export default defineConfig({
+  ...baseConfig,
   esbuildPlugins: [
     autoImport({
       imports: ['react', { react: ['createContext'] }, 'react-router-dom'],

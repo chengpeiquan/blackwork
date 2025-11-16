@@ -1,3 +1,15 @@
+# [0.8.0](https://github.com/chengpeiquan/blackwork/compare/v0.7.1...v0.8.0) (2025-11-16)
+
+
+### Features
+
+* **icons:** add chevron icons ([e5dd615](https://github.com/chengpeiquan/blackwork/commit/e5dd6150772a9584f3520b964273fee35e283171))
+* **resizable:** add resizable panel components and grip icon ([74e7aeb](https://github.com/chengpeiquan/blackwork/commit/74e7aeb86fb4169d028f949938c97d39a3525e2c))
+* **select:** implement select component with custom styles and functionality ([0163f6b](https://github.com/chengpeiquan/blackwork/commit/0163f6bf6dbd87badd6d44e71b5a42f01ebc01a2))
+* **switch:** add switch component and integrate into UI exports ([b6122fa](https://github.com/chengpeiquan/blackwork/commit/b6122fa261c26252d74f28e66e545cbdf158f90a))
+
+
+
 ## [0.7.1](https://github.com/chengpeiquan/blackwork/compare/v0.7.0...v0.7.1) (2024-12-23)
 
 
