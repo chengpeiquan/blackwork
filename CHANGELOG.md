@@ -1,3 +1,16 @@
+# [0.9.0](https://github.com/chengpeiquan/blackwork/compare/v0.8.0...v0.9.0) (2026-01-07)
+
+
+### Features
+
+* **accordion:** add accordion component and integrate into UI exports ([7cd01dd](https://github.com/chengpeiquan/blackwork/commit/7cd01dd4080102021d3ca938ef4e995ca1de3151))
+* **alert:** add alert component with title and description subcomponents and integrate into UI exports ([4b970e8](https://github.com/chengpeiquan/blackwork/commit/4b970e8b3311d852575b0a8529368f78e37c4768))
+* **empty:** add empty state component and integrate into UI exports ([a9772f8](https://github.com/chengpeiquan/blackwork/commit/a9772f8b94a6adba41be39a49799cf02e1e0e821))
+* **menubar:** add menubar component and integrate into UI exports ([6dd2001](https://github.com/chengpeiquan/blackwork/commit/6dd20016c0595375bc7837b2bedeeb8d8d5c4ae4))
+* **navigation-menu:** add navigation menu component and integrate into UI exports ([fa9747d](https://github.com/chengpeiquan/blackwork/commit/fa9747dd06597d571417a08e991ce0f7e312a833))
+
+
+
 # [0.8.0](https://github.com/chengpeiquan/blackwork/compare/v0.7.1...v0.8.0) (2025-11-16)
 
 
