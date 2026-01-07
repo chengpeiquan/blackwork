@@ -3,7 +3,7 @@ import { fontFamily } from 'tailwindcss/defaultTheme'
 import animatePlugin from 'tailwindcss-animate'
 
 export default {
-  darkMode: 'selector',
+  darkMode: ['selector', 'class'],
   content: ['src/**/*.{ts,tsx}'],
   theme: {
     container: {
@@ -50,8 +50,8 @@ export default {
         },
       },
       borderRadius: {
-        lg: `var(--radius)`,
-        md: `calc(var(--radius) - 2px)`,
+        lg: '`var(--radius)`',
+        md: '`calc(var(--radius) - 2px)`',
         sm: 'calc(var(--radius) - 4px)',
       },
       fontFamily: {
@@ -59,12 +59,20 @@ export default {
       },
       keyframes: {
         'accordion-down': {
-          from: { height: '0' },
-          to: { height: 'var(--radix-accordion-content-height)' },
+          from: {
+            height: '0',
+          },
+          to: {
+            height: 'var(--radix-accordion-content-height)',
+          },
         },
         'accordion-up': {
-          from: { height: 'var(--radix-accordion-content-height)' },
-          to: { height: '0' },
+          from: {
+            height: 'var(--radix-accordion-content-height)',
+          },
+          to: {
+            height: '0',
+          },
         },
       },
       animation: {
