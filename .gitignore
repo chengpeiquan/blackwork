@@ -2,9 +2,13 @@
 
 # build output
 dist/
+packages/*/dist/
+**/.next/
+**/out/
 
 # generated types
 .astro/
+docs/plans/
 
 # dependencies
 node_modules/
@@ -27,3 +31,4 @@ pnpm-debug.log*
 
 # Auto import files
 src/types/declaration-files/auto-imports.d.ts
+packages/*/src/types/declaration-files/auto-imports.d.ts
