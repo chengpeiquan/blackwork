@@ -1,0 +1,99 @@
+{
+  "name": "@blackwork/machine",
+  "version": "0.1.0",
+  "description": "@blackwork/machine is a tattoo-machine-inspired Markdown and MDX engine designed specifically for the Blackwork React UI ecosystem. It is built to power Blackwork-based blogs and documentation sites, rather than to serve as a fully generic content framework.",
+  "author": "chengpeiquan <chengpeiquan@chengpeiquan.com>",
+  "homepage": "https://chengpeiquan.com",
+  "type": "module",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./runtime": {
+      "types": "./dist/runtime.d.ts",
+      "import": "./dist/runtime.mjs",
+      "require": "./dist/runtime.cjs"
+    },
+    "./server": {
+      "types": "./dist/server.d.ts",
+      "import": "./dist/server.mjs",
+      "require": "./dist/server.cjs"
+    },
+    "./next-adapter": {
+      "types": "./dist/next-adapter.d.ts",
+      "import": "./dist/next-adapter.mjs",
+      "require": "./dist/next-adapter.cjs"
+    }
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "keywords": [
+    "markdown",
+    "mdx",
+    "react",
+    "blackwork"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "lint": "pnpm -C ../.. exec eslint --config eslint.config.js packages/machine/src packages/machine/test",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@mdx-js/mdx": "^3.1.1",
+    "@shikijs/rehype": "^4.0.2",
+    "@stefanprobst/rehype-extract-toc": "^3.0.0",
+    "@types/hast": "^3.0.4",
+    "@types/mdast": "^4.0.4",
+    "@bassist/utils": "^0.17.0",
+    "gray-matter": "^4.0.3",
+    "hast": "^1.0.0",
+    "rehype-autolink-headings": "^7.1.0",
+    "rehype-external-links": "^3.0.0",
+    "rehype-react": "^8.0.0",
+    "rehype-sanitize": "^6.0.0",
+    "rehype-slug": "^6.0.0",
+    "rehype-stringify": "^10.0.1",
+    "rehype-unwrap-images": "^1.0.0",
+    "remark-directive": "^4.0.0",
+    "remark-gfm": "^4.0.1",
+    "remark-mdx": "^3.1.1",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.2",
+    "remark-stringify": "^11.0.0",
+    "unified": "^11.0.5",
+    "unist-util-visit": "^5.1.0"
+  },
+  "peerDependencies": {
+    "blackwork": ">=0.9.0",
+    "react": ">=19.0.0",
+    "react-dom": ">=19.0.0"
+  },
+  "devDependencies": {
+    "@bassist/eslint-config": "^0.4.1",
+    "@bassist/oxc-integration": "^0.1.4",
+    "@bassist/tsconfig": "^0.1.1",
+    "@types/node": "^25.5.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "blackwork": "workspace:*",
+    "eslint": "^9.39.4",
+    "prettier": "^3.8.1",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "tsdown": "^0.21.7",
+    "typescript": "^6.0.2",
+    "vitest": "^4.0.7"
+  }
+}
