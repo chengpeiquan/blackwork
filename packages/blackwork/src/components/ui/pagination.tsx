@@ -38,7 +38,7 @@ PaginationItem.displayName = 'PaginationItem'
 const paginationLinkVariants = cva('', {
   variants: {
     disabled: {
-      true: 'pointer-events-none opacity-50 cursor-not-allowed',
+      true: 'pointer-events-none cursor-not-allowed opacity-50',
       false: '',
     },
   },
