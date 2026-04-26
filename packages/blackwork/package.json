@@ -1,6 +1,6 @@
 {
   "name": "blackwork",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "Blackwork Tattoo style React UI layout for blogs, documentation sites, and other content-driven websites.",
   "author": "chengpeiquan <chengpeiquan@chengpeiquan.com>",
   "homepage": "https://chengpeiquan.com",
@@ -26,6 +26,9 @@
       "form": [
         "./dist/form.d.ts"
       ],
+      "rsc": [
+        "./dist/rsc.d.ts"
+      ],
       "*": [
         "./dist/index.d.ts",
         "./dist/*"
@@ -35,24 +38,54 @@
   "exports": {
     "./ui-globals.css": "./dist/ui-globals.css",
     "./tailwind-config": {
-      "types": "./dist/tailwind-config.d.ts",
-      "import": "./dist/tailwind-config.mjs",
-      "require": "./dist/tailwind-config.cjs"
+      "import": {
+        "types": "./dist/tailwind-config.d.mts",
+        "default": "./dist/tailwind-config.mjs"
+      },
+      "require": {
+        "types": "./dist/tailwind-config.d.cts",
+        "default": "./dist/tailwind-config.cjs"
+      }
     },
     "./icons": {
-      "types": "./dist/icons.d.ts",
-      "import": "./dist/icons.mjs",
-      "require": "./dist/icons.cjs"
+      "import": {
+        "types": "./dist/icons.d.mts",
+        "default": "./dist/icons.mjs"
+      },
+      "require": {
+        "types": "./dist/icons.d.cts",
+        "default": "./dist/icons.cjs"
+      }
     },
     "./form": {
-      "types": "./dist/form.d.ts",
-      "import": "./dist/form.mjs",
-      "require": "./dist/form.cjs"
+      "import": {
+        "types": "./dist/form.d.mts",
+        "default": "./dist/form.mjs"
+      },
+      "require": {
+        "types": "./dist/form.d.cts",
+        "default": "./dist/form.cjs"
+      }
+    },
+    "./rsc": {
+      "import": {
+        "types": "./dist/rsc.d.mts",
+        "default": "./dist/rsc.mjs"
+      },
+      "require": {
+        "types": "./dist/rsc.d.cts",
+        "default": "./dist/rsc.cjs"
+      }
     },
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     }
   },
   "publishConfig": {
@@ -68,18 +101,14 @@
     "build": "run-s build:*",
     "build:lib": "tsdown",
     "build:rename": "tsx ./scripts/rename.ts",
-    "gen:changelog": "pnpm exec changelog",
-    "gen:release": "pnpm exec release",
     "diff": "npx shadcn-ui diff",
     "lint": "pnpm -C ../.. exec eslint --config eslint.config.js packages/blackwork/src",
-    "lint:inspector": "npx @eslint/config-inspector",
-    "format": "prettier --write .",
-    "backup": "git add . && git commit -m \"chore: backup\" && git push",
-    "up": "npx taze minor -r -f -w -i"
+    "prepack": "pnpm build",
+    "format": "oxfmt ."
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/chengpeiquan/blackwork"
+    "url": "git+https://github.com/chengpeiquan/blackwork.git"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",
@@ -144,10 +173,7 @@
     "clsx": "^2.1.1",
     "conventional-changelog-cli": "^5.0.0",
     "eslint": "^9.39.4",
-    "husky": "^9.1.7",
-    "lint-staged": "^16.2.7",
     "npm-run-all2": "^7.0.2",
-    "prettier": "^3.7.4",
     "react": "^19.2.3",
     "react-hook-form": "^7.70.0",
     "tailwind-merge": "^2.6.0",
@@ -155,13 +181,6 @@
     "tailwindcss-animate": "^1.0.7",
     "tsdown": "^0.21.7",
     "tsx": "^4.21.0",
-    "typescript": "^6.0.2",
-    "unplugin-auto-import": "^0.18.6"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx,vue,astro}": [
-      "prettier --write",
-      "eslint --fix"
-    ]
+    "typescript": "^6.0.2"
   }
 }

@@ -21,7 +21,7 @@ export interface RootLayoutProps {
 }
 
 /** Base HTML layout component with dark theme support */
-export const RootLayout = memo(
+export const RootLayout = React.memo(
   ({ lang = 'en', className, metadata, children }: RootLayoutProps) => {
     const cls = cn('flex min-h-screen w-screen flex-col', className)
 

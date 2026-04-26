@@ -24,7 +24,7 @@ export const SocialLink: React.FC<SocialLinkProps> = ({
   label: defaultLabel,
   ariaLabel: customAriaLabel,
 }) => {
-  const { SocialIcon, label } = useMemo(() => {
+  const { SocialIcon, label } = React.useMemo(() => {
     switch (type) {
       case 'github': {
         return {
@@ -77,7 +77,7 @@ export const SocialLink: React.FC<SocialLinkProps> = ({
     }
   }, [defaultLabel, type])
 
-  const ariaLabel = useMemo(() => {
+  const ariaLabel = React.useMemo(() => {
     if (customAriaLabel) return customAriaLabel
     return `Visit ${label} in a new tab`
   }, [customAriaLabel, label])

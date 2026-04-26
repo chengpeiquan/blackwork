@@ -63,7 +63,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     const Comp = asChild ? Slot : 'button'
 
-    const content = useMemo(() => {
+    const content = React.useMemo(() => {
       if (asChild) return children
       return (
         <>

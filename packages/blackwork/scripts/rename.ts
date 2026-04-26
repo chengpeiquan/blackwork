@@ -1,11 +1,11 @@
-import { access, rename } from 'node:fs/promises'
+import { access, copyFile, readdir } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const pickStyleFile = async (outDir: string) => {
-  const candidates = ['style.css', 'index.css']
+  const candidates = ['ui-globals.css', 'style.css', 'index.css']
 
   for (const fileName of candidates) {
     const filePath = resolve(outDir, fileName)
@@ -19,11 +19,42 @@ const pickStyleFile = async (outDir: string) => {
   throw new Error('No CSS entry file found in dist directory.')
 }
 
+const copyCommonJsDeclarationFiles = async (outDir: string) => {
+  const entries = await readdir(outDir, { withFileTypes: true })
+
+  await Promise.all(
+    entries
+      .filter((entry) => entry.isFile() && entry.name.endsWith('.d.ts'))
+      .map((entry) => {
+        const sourceFile = resolve(outDir, entry.name)
+        const outFile = resolve(
+          outDir,
+          entry.name.replace(/\.d\.ts$/, '.d.cts'),
+        )
+
+        return copyFile(sourceFile, outFile)
+      }),
+  )
+}
+
+const ensureStableCssEntry = async (outDir: string) => {
+  const outFile = resolve(outDir, './ui-globals.css')
+  const entryFile = await pickStyleFile(outDir)
+
+  // Parallel top-level builds can reach this step concurrently. Reusing or
+  // copying the generated stylesheet keeps the publish entry stable.
+  if (entryFile !== outFile) {
+    await copyFile(entryFile, outFile)
+  }
+}
+
 const run = async () => {
   const outDir = resolve(__dirname, '../dist')
-  const entryFile = await pickStyleFile(outDir)
-  const outFile = resolve(outDir, './ui-globals.css')
-  await rename(entryFile, outFile)
+
+  await Promise.all([
+    ensureStableCssEntry(outDir),
+    copyCommonJsDeclarationFiles(outDir),
+  ])
 }
 
 run().catch((e) => {
