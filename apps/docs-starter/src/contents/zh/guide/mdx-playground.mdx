@@ -1,0 +1,36 @@
+---
+title: MDX 组件演示
+description: 验证 docs 风格 section 也可以同时承载普通 Markdown 页面和 MDX 页面。
+order: 4
+---
+
+# MDX 组件演示
+
+<Callout title="保持 app 足够薄">
+  这个页面位于 `guide/**` 下，所以它虽然是 MDX 文件，仍然会使用 docs 布局和 手写
+  sidebar。starter 自己不需要再加第二套路由或渲染层。
+</Callout>
+
+## 组件能力
+
+你可以在文档里直接使用受控的 MDX 组件，同时保持统一的渲染链路。
+
+## 滚动渐隐
+
+当文档侧栏内容超过可视区域时，可以用同一套 rail fade 来提示顶部或底部还有隐藏内容。
+
+<FadePreview />
+
+## 代码块
+
+```tsx title="src/lib/docs.ts"
+const source = createDocsSource()
+const doc = await source.load(locale, slug, {
+  components: docsComponents,
+})
+```
+
+## 为什么保留这个页面
+
+普通说明内容优先写成 `.md`，只有在需要组件示例、交互片段或更丰富的排版时，
+再使用 `.mdx`。starter 同时保留两种写法，方便用户从最简单的内容模型开始。

@@ -1,0 +1,36 @@
+---
+title: Guide
+description: 一个用手写 sidebar 组织起来的 docs 风格学习路径。
+order: 1
+---
+
+# Guide
+
+这个 section 配置的是 `layout: 'docs'`，因此 `guide/**` 下的页面都会使用
+完整的文档壳子：
+
+- 左侧 sidebar
+- 正文区域
+- 目录 TOC
+- 上一页 / 下一页 pager
+
+## 为什么要单独做这个 section
+
+适合放需要按顺序阅读的内容，例如：
+
+- 新手引导
+- 教程
+- 产品接入步骤
+- 迁移指南
+
+## 建议按顺序阅读
+
+1. [快速开始](/zh/guide/getting-started)
+2. [配置 Sections](/zh/guide/configuring-sections)
+3. [MDX 组件演示](/zh/guide/mdx-playground)
+
+## 与 reference section 对比
+
+如果你打开 [配置参考](/zh/reference/configuration)，会看到页面仍然保留站点
+公共壳子，但左侧 docs sidebar 不见了。这就是 `layout: 'docs'` 和
+`layout: 'content'` 的主要区别。

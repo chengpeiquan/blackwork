@@ -1,0 +1,36 @@
+{
+  "name": "@blackwork/docs-starter",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --port 3200",
+    "build": "NEXT_DIST_DIR=.next-build next build",
+    "build:static": "NEXT_OUTPUT=export NEXT_DIST_DIR=.next-static next build",
+    "start": "NEXT_DIST_DIR=.next-build next start",
+    "lint": "pnpm -C ../.. exec eslint --config eslint.config.js apps/docs-starter --ignore-pattern 'apps/docs-starter/.next*'",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@bassist/utils": "^0.17.0",
+    "@blackwork/docs": "workspace:*",
+    "blackwork": "workspace:*",
+    "clsx": "^2.1.1",
+    "next": "^16.2.4",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "tailwind-merge": "^2.6.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.18",
+    "@types/node": "^24.10.4",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.19",
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "^6.0.2",
+    "vitest": "^4.0.7"
+  }
+}

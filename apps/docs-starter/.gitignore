@@ -1,0 +1,5 @@
+.next-build/
+.next-static/
+.blackwork/
+out/
+tsconfig.tsbuildinfo

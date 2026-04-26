@@ -1,0 +1,42 @@
+---
+title: 配置参考
+description: 一个 content 风格的参考页，用来说明 content.config.ts 的核心字段。
+order: 1
+---
+
+# 配置参考
+
+这个页面位于 `reference/**` 下，而该 section 配置的是 `layout: 'content'`。
+因此页面会保留站点公共壳子，但移除左侧 docs sidebar，更接近文章或参考文档的
+阅读体验。
+
+## 核心字段
+
+- `root`：Markdown / MDX 内容根目录
+- `defaultLocale`：哪个 locale 使用站点根路径
+- `enableDefaultLocaleRedirect`：是否把 `/en/...` 重定向到默认语言规范路径
+- `locales`：locale 元数据，用于路由和语言切换
+- `sections`：给 `guide`、`reference` 这类顶层目录配置行为
+
+## 最小参考配置
+
+```ts title="content.config.ts"
+export const docsContentConfig = {
+  root: 'src/contents',
+  defaultLocale: 'en',
+  enableDefaultLocaleRedirect: true,
+  locales: {
+    en: { code: 'en', label: 'English' },
+    zh: { code: 'zh', label: '简体中文' },
+  },
+  sections: {
+    guide: { layout: 'docs' },
+    reference: { layout: 'content' },
+  },
+}
+```
+
+## 继续阅读
+
+- [内容目录结构](/zh/reference/content-structure)
+- [配置 Sections](/zh/guide/configuring-sections)
