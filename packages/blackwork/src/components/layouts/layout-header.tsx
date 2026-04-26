@@ -1,11 +1,11 @@
 import { isArray } from '@bassist/utils'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Separator } from '@/components/ui'
 import { type SocialLinkProps, SocialLinks } from '@/components/widgets'
 import { cn } from '@/utils'
 import { layoutCls } from './shared'
 
-export interface LayoutHeaderProps {
+export interface LayoutHeaderProps extends React.HTMLAttributes<HTMLElement> {
   /** Class Name for `<header />` */
   className?: string
 
@@ -57,9 +57,10 @@ export const LayoutHeader: React.FC<LayoutHeaderProps> = ({
   socialLinks,
   languageToggle,
   themeToggle,
+  ...props
 }) => {
   const cls = cn(
-    'bg-background/80 sticky top-0 z-10',
+    'sticky top-0 z-10 bg-background/80',
     'shadow-[inset_0_-1px_0_0_#f2f2f2] dark:shadow-[inset_0_-1px_0_0_#333]',
     'backdrop-blur backdrop-saturate-150',
     'box-border flex h-16 w-screen shrink-0 justify-center',
@@ -84,7 +85,7 @@ export const LayoutHeader: React.FC<LayoutHeaderProps> = ({
   }, [languageToggle, socialLinks?.length, themeToggle])
 
   return (
-    <header className={cls}>
+    <header {...props} className={cls}>
       <div className={wrapperCls}>
         <div className={contentCls}>{children}</div>
 
