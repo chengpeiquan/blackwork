@@ -16,4 +16,11 @@ describe('docs globals css', () => {
       'article :where(p, li):not(:where(.not-prose, .not-prose *))',
     )
   })
+
+  test('lets inline code wrap on narrow screens so docs pages do not overflow horizontally', () => {
+    expect(globalsCss).toContain(
+      'article :where(code:not(pre code)):not(:where(.not-prose, .not-prose *))',
+    )
+    expect(globalsCss).toContain('@apply break-all whitespace-normal')
+  })
 })

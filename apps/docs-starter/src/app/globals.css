@@ -70,7 +70,7 @@
   }
 
   article :where(code:not(pre code)):not(:where(.not-prose, .not-prose *)) {
-    @apply rounded-md bg-muted px-1.5 py-0.5 text-[0.9em];
+    @apply break-all whitespace-normal rounded-md bg-muted px-1.5 py-0.5 text-[0.9em];
   }
 
   .dark article :where(pre.shiki):not(:where(.not-prose, .not-prose *)) {

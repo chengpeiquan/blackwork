@@ -19,7 +19,10 @@ export const DocsCodeBlock = ({
     >
       <pre
         {...props}
-        className={['m-0 bg-transparent p-4 text-[13px] leading-6', className]
+        className={[
+          'm-0 min-w-full w-max bg-transparent p-4 text-[13px] leading-6',
+          className,
+        ]
           .filter(Boolean)
           .join(' ')}
       >
