@@ -1,3 +1,6 @@
+import { existsSync, realpathSync } from 'node:fs'
+import { dirname, join, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { type Config } from 'tailwindcss'
 import { fontFamily } from 'tailwindcss/defaultTheme'
 
@@ -72,4 +75,68 @@ export const theme: NonNullable<Config['theme']> = {
       'accordion-up': 'accordion-up 0.2s ease-out',
     },
   },
+}
+
+const defaultPackageContentGlobs = {
+  distGlob: 'dist/**/*.{js,mjs,cjs}',
+  srcGlob: 'src/**/*.{js,mjs,cjs,ts,jsx,tsx,md,mdx}',
+}
+
+const toDirectoryPath = (rootDir: string) => {
+  const filePath = rootDir.startsWith('file:')
+    ? fileURLToPath(rootDir)
+    : rootDir
+
+  return filePath.endsWith('.ts') ||
+    filePath.endsWith('.js') ||
+    filePath.endsWith('.mjs')
+    ? dirname(filePath)
+    : filePath
+}
+
+const resolvePackageContentGlob = (
+  rootDir: string,
+  packageName: string,
+  options = defaultPackageContentGlobs,
+) => {
+  const packageRoot = realpathSync(
+    resolve(rootDir, 'node_modules', packageName),
+  )
+
+  if (existsSync(join(packageRoot, 'src'))) {
+    return join(packageRoot, options.srcGlob)
+  }
+
+  return join(packageRoot, options.distGlob)
+}
+
+export interface CreateBlackworkTailwindConfigOptions {
+  content: string[]
+  darkMode?: Config['darkMode']
+  packageNames?: string[]
+  plugins?: NonNullable<Config['plugins']>
+  rootDir: string
+}
+
+export const createBlackworkTailwindConfig = ({
+  content,
+  darkMode = 'selector',
+  packageNames = [],
+  plugins = [],
+  rootDir,
+}: CreateBlackworkTailwindConfigOptions): Config => {
+  const resolvedRootDir = toDirectoryPath(rootDir)
+  const resolvedPackageNames = ['blackwork', ...packageNames]
+
+  return {
+    darkMode,
+    content: [
+      ...content.map((pattern) => join(resolvedRootDir, pattern)),
+      ...resolvedPackageNames.map((packageName) =>
+        resolvePackageContentGlob(resolvedRootDir, packageName),
+      ),
+    ],
+    theme,
+    plugins,
+  }
 }
