@@ -52,6 +52,10 @@
     "test:watch": "vitest",
     "format": "oxfmt ."
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chengpeiquan/blackwork.git"
+  },
   "dependencies": {
     "@blackwork/machine": "workspace:*",
     "chokidar": "^4.0.3",
