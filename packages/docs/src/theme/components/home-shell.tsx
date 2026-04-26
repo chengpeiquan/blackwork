@@ -5,6 +5,7 @@ import { buildLocaleLinks } from '../../navigation/build-locale-links'
 import { buildSidebar } from '../../navigation/build-sidebar'
 import { createHomeData } from '../create-home-data'
 import { resolveThemeSlots } from '../slots'
+import { DocsScrollToTop } from './docs-scroll-to-top'
 import { DefaultDocsHeader } from './header'
 import { DefaultDocsLink } from './link'
 import type { DocsConfig, NormalizedDocsConfig } from '../../config/types'
@@ -97,6 +98,8 @@ export const DefaultHomeShell: React.FC<DefaultHomeShellProps> = ({
         siteDescription={normalizedConfig.site.description}
         siteTitle={getSiteTitle(normalizedConfig)}
       />
+
+      <DocsScrollToTop />
 
       <main
         data-docs-region="home-shell"

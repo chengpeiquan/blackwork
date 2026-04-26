@@ -8,7 +8,8 @@ import {
   resolveSidebar,
 } from '../../navigation/resolve-sidebar'
 import { resolveThemeSlots } from '../slots'
-import { DefaultDocsToc } from './docs-toc'
+import { DocsScrollToTop } from './docs-scroll-to-top'
+import { DefaultDocsToc, MobileDocsToc } from './docs-toc'
 import { DefaultDocsFooter } from './footer'
 import { DefaultDocsHeader } from './header'
 import { DefaultDocsLink } from './link'
@@ -87,6 +88,9 @@ export const DefaultContentShell: React.FC<DefaultContentShellProps> = ({
       className="xl:left-8"
     />
   ) : null
+  const mobileToc = showsContentToc ? (
+    <MobileDocsToc headings={tocHeadings} minHeadings={2} />
+  ) : null
 
   return (
     <>
@@ -99,6 +103,9 @@ export const DefaultContentShell: React.FC<DefaultContentShellProps> = ({
         siteTitle={getSiteTitle(normalizedConfig)}
       />
 
+      <DocsScrollToTop />
+
+      {mobileToc}
       {contentToc}
 
       <main
