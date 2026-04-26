@@ -35,7 +35,7 @@ export const LanguageToggle: React.FC<LanguageToggleProps> = ({
   defaultValue,
   options,
 }) => {
-  const icon = useMemo(() => {
+  const icon = React.useMemo(() => {
     if (!isUndefined(defaultValue)) {
       const currentOption = isSingle(options)
         ? options

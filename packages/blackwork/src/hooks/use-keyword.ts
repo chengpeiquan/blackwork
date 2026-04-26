@@ -1,5 +1,5 @@
 import { throttle } from '@bassist/utils'
-import type React from 'react'
+import React from 'react'
 
 export type UseKeywordEvent =
   | React.FormEvent<HTMLInputElement>
@@ -21,15 +21,15 @@ export const useKeyword = ({
   defaultValue = '',
   throttleWait = 10,
 }: UseKeywordOptions = {}) => {
-  const [keyword, setKeyword] = useState(defaultValue)
+  const [keyword, setKeyword] = React.useState(defaultValue)
 
-  const throttledUpdate = useMemo(() => {
+  const throttledUpdate = React.useMemo(() => {
     return throttle((value: string) => {
       setKeyword(value)
     }, throttleWait)
   }, [throttleWait])
 
-  const onKeywordUpdate = useCallback(
+  const onKeywordUpdate = React.useCallback(
     (e: UseKeywordEvent) => {
       const { value } = e.target as HTMLInputElement
       throttledUpdate(value)

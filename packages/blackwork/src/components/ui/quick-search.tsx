@@ -17,7 +17,7 @@ const QuickSearch = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      'bg-popover text-popover-foreground flex size-full flex-col overflow-hidden rounded-md',
+      'flex size-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground',
       className,
     )}
     {...props}
@@ -45,7 +45,7 @@ const QuickSearchTrigger = ({
     <Button
       variant="outline"
       className={cn(
-        'bg-muted/50 text-muted-foreground relative h-8 w-full justify-start rounded-lg text-sm font-normal shadow-none sm:pr-12 md:w-40 lg:w-64',
+        'relative h-8 w-full justify-start rounded-lg bg-muted/50 text-sm font-normal text-muted-foreground shadow-none sm:pr-12 md:w-40 lg:w-64',
         className,
       )}
       onClick={onClick}
@@ -55,7 +55,7 @@ const QuickSearchTrigger = ({
 
       <kbd
         className={cn(
-          'bg-muted pointer-events-none absolute right-[0.3rem] top-[0.3rem] hidden h-5 select-none items-center gap-1 rounded border px-1.5 font-mono text-[10px] font-medium text-black opacity-100 shadow-sm sm:flex dark:bg-black dark:text-white',
+          'pointer-events-none absolute right-[0.3rem] top-[0.3rem] hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-black opacity-100 shadow-sm sm:flex dark:bg-black dark:text-white',
           kbdClassName,
         )}
         style={{ fontFamily: 'inherit' }}
@@ -110,7 +110,7 @@ const QuickSearchInput = React.forwardRef<
     <input
       ref={ref}
       className={cn(
-        'placeholder:text-muted-foreground mr-[32px] flex h-12 flex-1 rounded-md border-0 bg-transparent py-3 text-sm outline-none disabled:cursor-not-allowed disabled:opacity-50',
+        'mr-[32px] flex h-12 flex-1 rounded-md border-0 bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50',
         className,
       )}
       autoFocus={autoFocus}
@@ -150,7 +150,7 @@ const QuickSearchEmpty = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      'text-muted-foreground flex size-full items-center justify-center text-center text-sm',
+      'flex size-full items-center justify-center text-center text-sm text-muted-foreground',
       className,
     )}
     {...props}
@@ -166,7 +166,7 @@ const QuickSearchItem = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      'hover:bg-accent hover:text-accent-foreground relative flex cursor-default select-none items-center rounded-sm p-3 text-sm outline-none',
+      'relative flex cursor-default select-none items-center rounded-sm p-3 text-sm outline-none hover:bg-accent hover:text-accent-foreground',
       className,
     )}
     {...props}
@@ -183,9 +183,9 @@ export interface QuickSearchStateOptions {
 const useQuickSearchState = ({
   isActiveHotkey,
 }: QuickSearchStateOptions = {}) => {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = React.useState(false)
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!isBrowser) return
 
     const down = (e: KeyboardEvent) => {

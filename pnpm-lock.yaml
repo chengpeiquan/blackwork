@@ -255,9 +255,6 @@ importers:
       typescript:
         specifier: ^6.0.2
         version: 6.0.3
-      unplugin-auto-import:
-        specifier: ^0.18.6
-        version: 0.18.6(rollup@4.39.0)
 
   packages/machine:
     dependencies:
@@ -381,12 +378,6 @@ packages:
         integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==,
       }
     engines: { node: '>=10' }
-
-  '@antfu/utils@0.7.10':
-    resolution:
-      {
-        integrity: sha512-+562v9k4aI80m1+VuMHehNJWLOFjBnXn3tdOitzD0il5b7smkSBal4+a3oKiQTbrwMmN/TBUMDvbdoWDehgOww==,
-      }
 
   '@babel/code-frame@7.24.7':
     resolution:
@@ -8781,21 +8772,6 @@ packages:
       }
     engines: { node: '>= 10.0.0' }
 
-  unplugin-auto-import@0.18.6:
-    resolution:
-      {
-        integrity: sha512-LMFzX5DtkTj/3wZuyG5bgKBoJ7WSgzqSGJ8ppDRdlvPh45mx6t6w3OcbExQi53n3xF5MYkNGPNR/HYOL95KL2A==,
-      }
-    engines: { node: '>=14' }
-    peerDependencies:
-      '@nuxt/kit': ^3.2.2
-      '@vueuse/core': '*'
-    peerDependenciesMeta:
-      '@nuxt/kit':
-        optional: true
-      '@vueuse/core':
-        optional: true
-
   unplugin@1.16.0:
     resolution:
       {
@@ -9166,8 +9142,6 @@ packages:
 
 snapshots:
   '@alloc/quick-lru@5.2.0': {}
-
-  '@antfu/utils@0.7.10': {}
 
   '@babel/code-frame@7.24.7':
     dependencies:
@@ -15205,19 +15179,6 @@ snapshots:
       unist-util-visit-parents: 6.0.1
 
   universalify@2.0.1: {}
-
-  unplugin-auto-import@0.18.6(rollup@4.39.0):
-    dependencies:
-      '@antfu/utils': 0.7.10
-      '@rollup/pluginutils': 5.1.3(rollup@4.39.0)
-      fast-glob: 3.3.2
-      local-pkg: 0.5.1
-      magic-string: 0.30.21
-      minimatch: 9.0.5
-      unimport: 3.14.5(rollup@4.39.0)
-      unplugin: 1.16.0
-    transitivePeerDependencies:
-      - rollup
 
   unplugin@1.16.0:
     dependencies:

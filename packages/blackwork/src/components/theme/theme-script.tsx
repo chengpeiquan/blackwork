@@ -82,7 +82,7 @@ export const themeScript = (storageKey, defaultTheme) => {
  *
  * @see https://en.wikipedia.org/wiki/Flash_of_unstyled_content
  */
-export const ThemeScript = memo(
+export const ThemeScript = React.memo(
   ({
     storageKey = defaultStorageKey,
     defaultTheme = defaultThemeValue,

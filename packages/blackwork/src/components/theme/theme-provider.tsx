@@ -19,7 +19,8 @@ const initialState: ThemeProviderState = {
   setTheme: noop,
 }
 
-const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
+const ThemeProviderContext =
+  React.createContext<ThemeProviderState>(initialState)
 
 const getLocalThemeValue = (storageKey: string, defaultTheme: Theme) => {
   if (!isBrowser) return defaultTheme
@@ -37,13 +38,13 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   defaultTheme = defaultThemeValue,
   ...props
 }) => {
-  const [theme, setTheme] = useState<Theme>(
+  const [theme, setTheme] = React.useState<Theme>(
     getLocalThemeValue(storageKey, defaultTheme),
   )
 
-  const isDark = useMemo(() => theme === 'dark', [theme])
+  const isDark = React.useMemo(() => theme === 'dark', [theme])
 
-  useEffect(() => {
+  React.useEffect(() => {
     const root = window.document.documentElement
     if (!root.classList.contains(theme)) {
       root.classList.remove('light', 'dark')
@@ -51,7 +52,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     }
   }, [theme])
 
-  const setThemeAndStorage = useCallback(
+  const setThemeAndStorage = React.useCallback(
     (theme: Theme) => {
       setTheme(theme)
       setLocalThemeValue(storageKey, theme)
@@ -59,7 +60,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     [storageKey],
   )
 
-  const value = useMemo(() => {
+  const value = React.useMemo(() => {
     return { isDark, theme, setTheme: setThemeAndStorage }
   }, [isDark, setThemeAndStorage, theme])
 
@@ -71,7 +72,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
 }
 
 export const useTheme = () => {
-  const context = useContext(ThemeProviderContext)
+  const context = React.useContext(ThemeProviderContext)
 
   if (isUndefined(context)) {
     throw new Error('useTheme must be used within a ThemeProvider')

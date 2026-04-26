@@ -67,12 +67,12 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
 }) => {
   const { isDark, theme, setTheme } = useTheme()
 
-  const options = useMemo(() => {
+  const options = React.useMemo(() => {
     if (isArray(customOptions)) return customOptions
     return defaultThemeToggleOptions
   }, [customOptions])
 
-  const buttonIcon = useMemo(() => {
+  const buttonIcon = React.useMemo(() => {
     const Icon = isDark ? Sun : Moon
     return <Icon className="size-5" />
   }, [isDark])

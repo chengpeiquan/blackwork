@@ -16,19 +16,19 @@ Blackwork Tattoo style React UI layout for blogs, documentation sites, and other
 
 ## Install
 
-With `pnpm` (or `npm` or `yarn` ):
+With `pnpm` (or `npm` or `yarn`):
 
 ```bash
-pnpm add blackwork
+pnpm add blackwork @bassist/utils clsx react tailwindcss tailwind-merge tailwindcss-animate
 ```
 
-This package contains some `peerDependencies` that need to be installed together:
+If you use the Tailwind example below, install the typography plugin as well:
 
 ```bash
-pnpm add @bassist/utils clsx react tailwindcss tailwind-merge tailwindcss-animate
+pnpm add -D @tailwindcss/typography
 ```
 
-These are optional and only need to be installed if the corresponding components are used.
+These are optional and only need to be installed if the corresponding subpath is used:
 
 ```bash
 # For `blackwork/form`
@@ -40,26 +40,22 @@ pnpm add @hookform/resolvers react-hook-form
 In your `tailwind.config.ts`:
 
 ```ts
-import { type Config } from 'tailwindcss'
-import { theme } from 'blackwork/tailwind-config'
+import { createBlackworkTailwindConfig } from 'blackwork/tailwind-config'
 import typography from '@tailwindcss/typography'
 import animate from 'tailwindcss-animate'
 
-export default {
-  darkMode: 'selector',
+export default createBlackworkTailwindConfig({
+  rootDir: import.meta.url,
   content: [
-    // e.g. in Next.js
-    './src/app/**/*.{js,mjs,cjs,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,mjs,cjs,ts,jsx,tsx,mdx}',
-    './src/contents/**/*.{js,mjs,cjs,ts,jsx,tsx,mdx}',
-
-    // This path is required!
-    './node_modules/blackwork/**/*.{js,mjs,cjs,ts,jsx,tsx,mdx}',
+    'src/app/**/*.{js,mjs,cjs,ts,jsx,tsx,mdx}',
+    'src/components/**/*.{js,mjs,cjs,ts,jsx,tsx,mdx}',
+    'content/**/*.{js,mjs,cjs,ts,jsx,tsx,mdx}',
   ],
-  theme,
-  plugins: [typography(), animate],
-} satisfies Config
+  plugins: [typography, animate],
+})
 ```
+
+If you only need the shared theme tokens and want to assemble the rest yourself, `theme` is also exported from `blackwork/tailwind-config`.
 
 In your root layout:
 
@@ -71,18 +67,43 @@ import 'blackwork/ui-globals.css'
 In your layout or other components:
 
 ```tsx
-// e.g. `src/app/page.tsx`
+// e.g. `src/app/page.tsx` or an MDX component
 import {
-  // Components
+  Alert,
+  AlertDescription,
+  AlertTitle,
+  LayoutFooter,
+  LayoutMain,
+} from 'blackwork/rsc'
+
+export default function Page() {
+  return (
+    <LayoutMain>
+      <Alert>
+        <AlertTitle>Blackwork</AlertTitle>
+        <AlertDescription>
+          Use the `blackwork/rsc` entry in server components when you only need
+          server-renderable primitives.
+        </AlertDescription>
+      </Alert>
+
+      <LayoutFooter />
+    </LayoutMain>
+  )
+}
+```
+
+In client components:
+
+```tsx
+'use client'
+
+import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-  ExternalLink,
-  LayoutFooter,
-  LayoutHeader,
   ScrollToTop,
-
-  // Hooks
+  ThemeToggle,
   useKeyword,
 } from 'blackwork'
 
@@ -95,6 +116,6 @@ import { Form } from 'blackwork/form'
 
 ## Documentation
 
-There is no documentation yet, but it base on [Shadcn UI](https://ui.shadcn.com/docs/components) , so the usage of some basic components can refer to it.
+There is no dedicated documentation site yet. Most primitive component usage follows [shadcn/ui](https://ui.shadcn.com/docs/components) patterns.
 
-About other components, please refer to the component props in the [source code](https://github.com/chengpeiquan/blackwork/tree/main/src) for usage.
+For the package-specific APIs, refer to the props and examples in the [source code](https://github.com/chengpeiquan/blackwork/tree/main/packages/blackwork/src).
