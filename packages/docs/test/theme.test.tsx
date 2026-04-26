@@ -211,6 +211,10 @@ test('DefaultDocsShell renders the default header footer and docs scaffolding', 
   expect(html).toContain('data-docs-region="article-body"')
   expect(html).toContain('data-docs-region="footer"')
   expect(html).toContain('max-w-screen-2xl')
+  expect(html).toContain('aria-label="Scroll to top"')
+  expect(html).toContain('aria-label="Open section navigation"')
+  expect(html).toContain('>Sections<')
+  expect(html).toContain('hidden w-full shrink-0 lg:block lg:w-72')
   expect(html).toContain('lg:w-72')
   expect(html).toContain('lg:gap-14')
   expect(html).toContain('xl:gap-20')
@@ -268,6 +272,12 @@ test('DefaultContentShell omits the docs sidebar rail while keeping shared chrom
   expect(html).toContain('data-docs-region="toc"')
   expect(html).toContain('href="#content-overview"')
   expect(html).toContain('href="#content-details"')
+  expect(html).toContain('aria-label="Scroll to top"')
+  expect(html).toContain('data-docs-toc-mobile-trigger="true"')
+  expect(html).toContain('aria-label="Open outline"')
+  expect(html).toContain(
+    'style="bottom:72px;height:40px;position:fixed;right:20px;width:40px;z-index:10"',
+  )
   expect(html).toContain('data-docs-toc-toggle="true"')
   expect(html).toContain('aria-expanded="true"')
   expect(html).not.toContain('data-docs-region="sidebar"')
@@ -310,6 +320,7 @@ test('DefaultContentShell hides the toc rail when headings are too sparse', asyn
 
   expect(html).not.toContain('data-docs-region="toc"')
   expect(html).not.toContain('data-docs-toc-toggle="true"')
+  expect(html).not.toContain('data-docs-toc-mobile-trigger="true"')
   expect(html).not.toContain(
     'aria-hidden="true" class="hidden w-64 shrink-0 xl:block"',
   )
@@ -563,6 +574,7 @@ test('DefaultHomeShell builds an automatic landing page from the docs source', a
   expect(html).toContain('Overview')
   expect(html).toContain('Getting Started')
   expect(html).toContain('data-docs-region="header"')
+  expect(html).toContain('aria-label="Scroll to top"')
   expect(html).not.toContain('data-docs-region="footer"')
   expect(html).not.toContain('data-docs-region="home-highlights"')
 })

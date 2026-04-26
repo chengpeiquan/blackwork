@@ -1,6 +1,14 @@
 'use client'
 
-import { Button, cn } from 'blackwork'
+import {
+  Button,
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+  cn,
+} from 'blackwork'
 import { ChevronsLeft, Toc } from 'blackwork/icons'
 import React, {
   useEffect,
@@ -9,6 +17,9 @@ import React, {
   useRef,
   useState,
   type CSSProperties,
+  type Dispatch,
+  type RefObject,
+  type SetStateAction,
 } from 'react'
 import {
   buildTocTrackGeometry,
@@ -17,6 +28,7 @@ import {
   type DocsTocTrackGeometry,
   type DocsTocTrackPosition,
 } from './docs-toc-geometry'
+import { getDocsFloatingActionStyle } from './floating-actions'
 
 export interface DocsTocHeading {
   depth: number
@@ -29,6 +41,12 @@ export interface DefaultDocsTocProps {
   collapseEnabled?: boolean
   defaultCollapsed?: boolean
   dock?: 'fixed' | 'sticky'
+  headings: DocsTocHeading[]
+  minHeadings?: number
+}
+
+export interface MobileDocsTocProps {
+  className?: string
   headings: DocsTocHeading[]
   minHeadings?: number
 }
@@ -55,6 +73,18 @@ interface TrackState {
   offsetDistance: number
   top: number
 }
+
+interface DocsTocState {
+  activeIdSet: Set<string>
+  listId: string
+  listRef: RefObject<HTMLOListElement | null>
+  measurement: TrackMeasurement | null
+  scrollTop: number
+  setScrollTop: Dispatch<SetStateAction<number>>
+  track: TrackState | null
+}
+
+const TOC_TITLE = 'On This Page'
 
 const getTocLinkClassName = () =>
   [
@@ -247,6 +277,153 @@ const sameTrackState = (left: TrackState | null, right: TrackState | null) => {
     left.top === right.top
   )
 }
+
+const useDocsTocState = (headings: DocsTocHeading[]): DocsTocState => {
+  const activeIds = useActiveHeadingIds(headings)
+  const [listRef, measurement, track] = useTocTrack(activeIds, headings)
+  const activeIdSet = useMemo(() => new Set(activeIds), [activeIds])
+  const listId = useId()
+  const [scrollTop, setScrollTop] = useState(0)
+
+  return {
+    activeIdSet,
+    listId,
+    listRef,
+    measurement,
+    scrollTop,
+    setScrollTop,
+    track,
+  }
+}
+
+interface DocsTocListProps extends DocsTocState {
+  headings: DocsTocHeading[]
+  listClassName?: string
+  onSelect?: () => void
+  wrapperClassName?: string
+}
+
+const DocsTocList: React.FC<DocsTocListProps> = ({
+  activeIdSet,
+  headings,
+  listClassName,
+  listId,
+  listRef,
+  measurement,
+  onSelect,
+  scrollTop,
+  setScrollTop,
+  track,
+  wrapperClassName,
+}) => (
+  <div className={cn('relative', wrapperClassName)}>
+    <div
+      aria-hidden="true"
+      data-docs-toc-track="true"
+      className="pointer-events-none absolute left-0 top-0 transition-transform duration-150 ease-out"
+      style={getTrackContainerStyle(measurement, scrollTop)}
+    >
+      <svg
+        data-docs-toc-track-path="true"
+        height={measurement?.height ?? 1}
+        viewBox={`0 0 ${measurement?.width ?? 1} ${measurement?.height ?? 1}`}
+        width={measurement?.width ?? 1}
+        className="absolute left-0 top-0 transition-[clip-path,opacity] duration-150 ease-out"
+        style={getTrackPathStyle(track)}
+      >
+        <path
+          d={measurement?.path || 'M0 0 L0 0'}
+          stroke="currentColor"
+          strokeWidth="1"
+          fill="none"
+          className="text-primary"
+        />
+      </svg>
+      <span
+        data-docs-toc-thumb="true"
+        className="absolute left-0 top-0 size-1 rounded-full bg-primary transition-[opacity,offset-distance] duration-150 ease-out"
+        style={getTrackThumbStyle(measurement, track)}
+      />
+    </div>
+
+    <ol
+      id={listId}
+      ref={listRef}
+      className={cn(
+        'flex flex-col overflow-auto py-1 [scrollbar-width:none]',
+        listClassName,
+      )}
+      onScroll={(event) => {
+        setScrollTop(event.currentTarget.scrollTop)
+      }}
+    >
+      {headings.map((heading, index) => {
+        const active = activeIdSet.has(heading.id)
+        const offset = getTocGuideOffset(heading.depth)
+        const upperOffset =
+          index > 0 ? getTocGuideOffset(headings[index - 1].depth) : offset
+        const lowerOffset =
+          index + 1 < headings.length
+            ? getTocGuideOffset(headings[index + 1].depth)
+            : offset
+
+        return (
+          <li key={heading.id}>
+            <a
+              href={`#${heading.id}`}
+              data-active={active ? 'true' : 'false'}
+              data-depth={heading.depth}
+              data-heading-id={heading.id}
+              className={getTocLinkClassName()}
+              style={{
+                paddingInlineStart: `${getTocItemPadding(heading.depth)}px`,
+              }}
+              onClick={onSelect}
+            >
+              {offset !== upperOffset ? (
+                <svg
+                  aria-hidden="true"
+                  data-docs-toc-item-curve="true"
+                  viewBox={`${Math.min(offset, upperOffset)} 0 ${Math.abs(
+                    upperOffset - offset,
+                  )} 12`}
+                  className="pointer-events-none absolute"
+                  style={{
+                    height: '12px',
+                    insetInlineStart: `${Math.min(offset, upperOffset)}px`,
+                    top: '-6px',
+                    width: `${Math.abs(upperOffset - offset) + 1}px`,
+                    zIndex: -1,
+                  }}
+                >
+                  <path
+                    d={`M ${upperOffset} 0 C ${upperOffset} 8 ${offset} 4 ${offset} 12`}
+                    stroke="currentColor"
+                    strokeWidth="1"
+                    fill="none"
+                    className="text-border"
+                  />
+                </svg>
+              ) : null}
+              <span
+                aria-hidden="true"
+                data-docs-toc-item-line="true"
+                className="pointer-events-none absolute w-px bg-border"
+                style={{
+                  bottom: offset !== lowerOffset ? '6px' : '0px',
+                  insetInlineStart: `${offset}px`,
+                  top: offset !== upperOffset ? '6px' : '0px',
+                  zIndex: -1,
+                }}
+              />
+              {heading.title}
+            </a>
+          </li>
+        )
+      })}
+    </ol>
+  </div>
+)
 
 const getTrackState = (
   activeIds: string[],
@@ -471,12 +648,8 @@ export const DefaultDocsToc: React.FC<DefaultDocsTocProps> = ({
   headings,
   minHeadings = 1,
 }) => {
-  const activeIds = useActiveHeadingIds(headings)
-  const [listRef, measurement, track] = useTocTrack(activeIds, headings)
-  const activeIdSet = useMemo(() => new Set(activeIds), [activeIds])
-  const listId = useId()
+  const tocState = useDocsTocState(headings)
   const [collapsed, setCollapsed] = useState(defaultCollapsed)
-  const [scrollTop, setScrollTop] = useState(0)
 
   if (headings.length < minHeadings) {
     return null
@@ -503,7 +676,7 @@ export const DefaultDocsToc: React.FC<DefaultDocsTocProps> = ({
               collapseEnabled ? 'justify-between' : undefined,
             )}
           >
-            <p className="font-medium text-foreground">On This Page</p>
+            <p className="font-medium text-foreground">{TOC_TITLE}</p>
 
             {collapseEnabled ? (
               <Button
@@ -511,7 +684,7 @@ export const DefaultDocsToc: React.FC<DefaultDocsTocProps> = ({
                 variant="ghost"
                 size="icon"
                 data-docs-toc-toggle="true"
-                aria-controls={listId}
+                aria-controls={tocState.listId}
                 aria-expanded="true"
                 title="Collapse outline"
                 aria-label="Collapse outline"
@@ -528,111 +701,11 @@ export const DefaultDocsToc: React.FC<DefaultDocsTocProps> = ({
         ) : null}
 
         {!collapsed ? (
-          <div className="relative">
-            <div
-              aria-hidden="true"
-              data-docs-toc-track="true"
-              className="pointer-events-none absolute left-0 top-0 transition-transform duration-150 ease-out"
-              style={getTrackContainerStyle(measurement, scrollTop)}
-            >
-              <svg
-                data-docs-toc-track-path="true"
-                height={measurement?.height ?? 1}
-                viewBox={`0 0 ${measurement?.width ?? 1} ${measurement?.height ?? 1}`}
-                width={measurement?.width ?? 1}
-                className="absolute left-0 top-0 transition-[clip-path,opacity] duration-150 ease-out"
-                style={getTrackPathStyle(track)}
-              >
-                <path
-                  d={measurement?.path || 'M0 0 L0 0'}
-                  stroke="currentColor"
-                  strokeWidth="1"
-                  fill="none"
-                  className="text-primary"
-                />
-              </svg>
-              <span
-                data-docs-toc-thumb="true"
-                className="absolute left-0 top-0 size-1 rounded-full bg-primary transition-[opacity,offset-distance] duration-150 ease-out"
-                style={getTrackThumbStyle(measurement, track)}
-              />
-            </div>
-
-            <ol
-              id={listId}
-              ref={listRef}
-              className="flex max-h-[calc(100dvh-8rem)] flex-col overflow-auto py-1 [scrollbar-width:none]"
-              onScroll={(event) => {
-                setScrollTop(event.currentTarget.scrollTop)
-              }}
-            >
-              {headings.map((heading, index) => {
-                const active = activeIdSet.has(heading.id)
-                const offset = getTocGuideOffset(heading.depth)
-                const upperOffset =
-                  index > 0
-                    ? getTocGuideOffset(headings[index - 1].depth)
-                    : offset
-                const lowerOffset =
-                  index + 1 < headings.length
-                    ? getTocGuideOffset(headings[index + 1].depth)
-                    : offset
-
-                return (
-                  <li key={heading.id}>
-                    <a
-                      href={`#${heading.id}`}
-                      data-active={active ? 'true' : 'false'}
-                      data-depth={heading.depth}
-                      data-heading-id={heading.id}
-                      className={getTocLinkClassName()}
-                      style={{
-                        paddingInlineStart: `${getTocItemPadding(heading.depth)}px`,
-                      }}
-                    >
-                      {offset !== upperOffset ? (
-                        <svg
-                          aria-hidden="true"
-                          data-docs-toc-item-curve="true"
-                          viewBox={`${Math.min(offset, upperOffset)} 0 ${Math.abs(
-                            upperOffset - offset,
-                          )} 12`}
-                          className="pointer-events-none absolute"
-                          style={{
-                            height: '12px',
-                            insetInlineStart: `${Math.min(offset, upperOffset)}px`,
-                            top: '-6px',
-                            width: `${Math.abs(upperOffset - offset) + 1}px`,
-                            zIndex: -1,
-                          }}
-                        >
-                          <path
-                            d={`M ${upperOffset} 0 C ${upperOffset} 8 ${offset} 4 ${offset} 12`}
-                            stroke="currentColor"
-                            strokeWidth="1"
-                            fill="none"
-                            className="text-border"
-                          />
-                        </svg>
-                      ) : null}
-                      <span
-                        aria-hidden="true"
-                        data-docs-toc-item-line="true"
-                        className="pointer-events-none absolute w-px bg-border"
-                        style={{
-                          bottom: offset !== lowerOffset ? '6px' : '0px',
-                          insetInlineStart: `${offset}px`,
-                          top: offset !== upperOffset ? '6px' : '0px',
-                          zIndex: -1,
-                        }}
-                      />
-                      {heading.title}
-                    </a>
-                  </li>
-                )
-              })}
-            </ol>
-          </div>
+          <DocsTocList
+            {...tocState}
+            headings={headings}
+            listClassName="max-h-[calc(100dvh-8rem)]"
+          />
         ) : (
           <Button
             type="button"
@@ -653,5 +726,61 @@ export const DefaultDocsToc: React.FC<DefaultDocsTocProps> = ({
         )}
       </nav>
     </aside>
+  )
+}
+
+export const MobileDocsToc: React.FC<MobileDocsTocProps> = ({
+  className,
+  headings,
+  minHeadings = 1,
+}) => {
+  const tocState = useDocsTocState(headings)
+  const [open, setOpen] = useState(false)
+
+  if (headings.length < minHeadings) {
+    return null
+  }
+
+  return (
+    <div className={cn('xl:hidden', className)}>
+      <Sheet open={open} onOpenChange={setOpen}>
+        <SheetTrigger asChild>
+          <Button
+            type="button"
+            variant="outline"
+            size="icon"
+            title="Open outline"
+            aria-label="Open outline"
+            data-docs-toc-mobile-trigger="true"
+            className="fixed border border-input bg-background shadow-sm"
+            style={getDocsFloatingActionStyle(1)}
+          >
+            <Toc className="size-4" aria-hidden="true" />
+            <span className="sr-only">Open outline</span>
+          </Button>
+        </SheetTrigger>
+
+        <SheetContent
+          side="right"
+          className="flex h-dvh flex-col gap-0 p-0 sm:max-w-sm"
+        >
+          <SheetHeader className="border-b border-border/60 px-6 pb-4 pt-[calc(env(safe-area-inset-top)+1.5rem)] text-left">
+            <SheetTitle>{TOC_TITLE}</SheetTitle>
+          </SheetHeader>
+
+          <div className="flex min-h-0 flex-1 flex-col overflow-hidden px-6 pb-[calc(env(safe-area-inset-bottom)+1.5rem)] pt-4">
+            <DocsTocList
+              {...tocState}
+              headings={headings}
+              listClassName="min-h-0 flex-1"
+              wrapperClassName="min-h-0 flex-1"
+              onSelect={() => {
+                setOpen(false)
+              }}
+            />
+          </div>
+        </SheetContent>
+      </Sheet>
+    </div>
   )
 }
