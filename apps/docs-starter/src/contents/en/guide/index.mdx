@@ -1,0 +1,36 @@
+---
+title: Guide
+description: A docs-style learning path that uses the manual sidebar from content.config.ts.
+order: 1
+---
+
+# Guide
+
+This section is configured as `layout: 'docs'`, so every page under `guide/**`
+uses the full docs shell:
+
+- left sidebar
+- article body
+- table of contents
+- previous and next pager
+
+## Why this section exists
+
+Use a docs-style section for pages people should read in sequence, such as:
+
+- onboarding
+- tutorials
+- product setup
+- migration guides
+
+## Read in order
+
+1. [Getting Started](/guide/getting-started)
+2. [Configuring Sections](/guide/configuring-sections)
+3. [MDX Playground](/guide/mdx-playground)
+
+## Compare with the reference section
+
+If you open [Configuration Reference](/reference/configuration), you will see
+the same docs site chrome without the left docs sidebar. That is the difference
+between `layout: 'docs'` and `layout: 'content'`.

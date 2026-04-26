@@ -1,0 +1,16 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "ignoreDeprecations": "6.0",
+    "baseUrl": "..",
+    "rootDir": "..",
+    "paths": {
+      "@blackwork/docs": ["./src/index.ts"],
+      "@blackwork/docs/theme": ["./src/theme/index.ts"]
+    }
+  },
+  "include": [
+    "./theme-types.check.ts",
+    "../src/private-blackwork-docs-manifest.d.ts"
+  ]
+}

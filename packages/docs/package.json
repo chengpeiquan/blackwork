@@ -1,0 +1,78 @@
+{
+  "name": "@blackwork/docs",
+  "version": "0.1.0",
+  "description": "Next-first documentation framework for Blackwork projects.",
+  "author": "chengpeiquan <chengpeiquan@chengpeiquan.com>",
+  "homepage": "https://chengpeiquan.com",
+  "type": "module",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./next": {
+      "types": "./dist/next.d.ts",
+      "import": "./dist/next.mjs",
+      "require": "./dist/next.cjs"
+    },
+    "./theme": {
+      "types": "./dist/theme.d.ts",
+      "import": "./dist/theme.mjs",
+      "require": "./dist/theme.cjs"
+    },
+    "./runtime": {
+      "types": "./dist/runtime.d.ts",
+      "import": "./dist/runtime.mjs",
+      "require": "./dist/runtime.cjs"
+    }
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "keywords": [
+    "docs",
+    "nextjs",
+    "react",
+    "blackwork"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "lint": "pnpm -C ../.. exec eslint --config eslint.config.js packages/docs/src packages/docs/test",
+    "prepack": "pnpm build",
+    "test": "vitest run",
+    "test:types": "tsc -p test/tsconfig.theme-types.json --noEmit",
+    "test:watch": "vitest",
+    "format": "oxfmt ."
+  },
+  "dependencies": {
+    "@blackwork/machine": "workspace:*",
+    "chokidar": "^4.0.3",
+    "jiti": "^1.21.7"
+  },
+  "peerDependencies": {
+    "blackwork": ">=0.10.0",
+    "next": ">=16.0.0",
+    "react": ">=19.0.0",
+    "react-dom": ">=19.0.0"
+  },
+  "devDependencies": {
+    "@bassist/build-config": "^0.2.0",
+    "@bassist/eslint-config": "^0.4.1",
+    "@bassist/oxc-integration": "^0.1.4",
+    "@bassist/tsconfig": "^0.1.1",
+    "@types/node": "^25.5.2",
+    "blackwork": "workspace:*",
+    "eslint": "^9.39.4",
+    "tsdown": "^0.21.7",
+    "typescript": "^6.0.2",
+    "vitest": "^4.0.7"
+  }
+}

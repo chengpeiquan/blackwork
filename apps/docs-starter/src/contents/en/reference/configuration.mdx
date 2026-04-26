@@ -1,0 +1,44 @@
+---
+title: Configuration Reference
+description: A content-style reference page that explains the main content.config.ts fields.
+order: 1
+---
+
+# Configuration Reference
+
+This page lives under `reference/**`, which is configured with
+`layout: 'content'`. It keeps the shared docs chrome, but removes the left docs
+sidebar so the page reads more like an article or reference note.
+
+## Core fields
+
+- `root`: where Markdown and MDX files live
+- `defaultLocale`: which locale owns the canonical root URL
+- `enableDefaultLocaleRedirect`: whether `/en/...` redirects to the canonical
+  default-locale route
+- `locales`: the locale metadata used for routing and language labels
+- `sections`: rules for top-level content directories such as `guide` and
+  `reference`
+
+## Minimal reference example
+
+```ts title="content.config.ts"
+export const docsContentConfig = {
+  root: 'src/contents',
+  defaultLocale: 'en',
+  enableDefaultLocaleRedirect: true,
+  locales: {
+    en: { code: 'en', label: 'English' },
+    zh: { code: 'zh', label: '简体中文' },
+  },
+  sections: {
+    guide: { layout: 'docs' },
+    reference: { layout: 'content' },
+  },
+}
+```
+
+## Continue reading
+
+- [Content Structure](/reference/content-structure)
+- [Configuring Sections](/guide/configuring-sections)

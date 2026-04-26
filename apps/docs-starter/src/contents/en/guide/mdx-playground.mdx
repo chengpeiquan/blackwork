@@ -1,0 +1,47 @@
+---
+title: MDX Playground
+description: Confirm that docs-style sections can mix Markdown pages with MDX components and code blocks.
+order: 4
+---
+
+# MDX Playground
+
+<Callout title="Thin integration">
+  The app stays intentionally thin. This page lives under `guide/**`, so it
+  still uses the docs layout and manual sidebar even though it is authored as
+  MDX.
+</Callout>
+
+## Components
+
+You can mix regular prose with MDX components without introducing a second
+runtime layer in the app.
+
+## Scroll fade
+
+Use the same rail fade treatment when a docs sidebar needs to hint at hidden
+content above or below the visible viewport.
+
+<FadePreview />
+
+## Code blocks
+
+```tsx title="src/lib/docs-components.tsx"
+export const docsComponents = mergeComponents(
+  createNextComponents({
+    CodeBlock,
+    ExternalLink,
+    Image: DocsImage,
+    Link: DocsLink,
+  }),
+  {
+    Callout,
+  },
+)
+```
+
+## Why this page matters
+
+Use `.mdx` when a page needs richer examples, but keep ordinary prose in `.md`
+files when plain Markdown is enough. The starter includes both so users can
+copy the simpler option first and only reach for MDX when needed.
