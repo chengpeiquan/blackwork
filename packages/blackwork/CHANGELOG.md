@@ -1,3 +1,14 @@
+# [0.10.0](https://github.com/chengpeiquan/blackwork/compare/v0.9.0...v0.10.0) (2026-04-26)
+
+
+### Features
+
+* **layouts:** forward native header and footer props ([adab6c2](https://github.com/chengpeiquan/blackwork/commit/adab6c2893440dfba0f4c44cdcf753f642bed6de))
+* **rsc:** add server-renderable entrypoint and align package output ([0d9bc69](https://github.com/chengpeiquan/blackwork/commit/0d9bc69b95b6aa820be8736e0eb55bd68f8e7ebb))
+* **tailwind-config:** add package-aware content resolver ([2e57c59](https://github.com/chengpeiquan/blackwork/commit/2e57c596365f2c4cf345c486dc4c94e77c470b6e))
+
+
+
 # [0.9.0](https://github.com/chengpeiquan/blackwork/compare/v0.8.0...v0.9.0) (2026-01-07)
 
 
@@ -188,6 +199,5 @@
 * **theme:** use dark mode instead of system theme option ([0b80d18](https://github.com/chengpeiquan/blackwork/commit/0b80d18490d5a190122e6a965e890d2984b7d7b9))
 * **typography:** add Heading and Paragraph ([7c90463](https://github.com/chengpeiquan/blackwork/commit/7c90463035039c37b34a9ee0be0b3319ded6cfe3))
 * **utils:** add generate pages helper for pagination ([87a8313](https://github.com/chengpeiquan/blackwork/commit/87a8313eb49998304a5a39e557cfc4dcb7e8b104))
-
 
 
