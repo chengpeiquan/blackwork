@@ -7,6 +7,9 @@ settings:
 importers:
   .:
     devDependencies:
+      '@bassist/changelog':
+        specifier: ^0.3.0
+        version: 0.3.0(conventional-changelog-cli@5.0.0(conventional-commits-filter@5.0.0))
       '@bassist/build-config':
         specifier: ^0.2.0
         version: 0.2.0(tsdown@0.21.9)(tsup@8.5.1(jiti@1.21.7)(postcss@8.5.10)(tsx@4.21.0)(typescript@6.0.3)(yaml@2.8.1))
