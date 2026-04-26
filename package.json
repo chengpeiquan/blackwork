@@ -4,17 +4,24 @@
   "packageManager": "pnpm@10.15.1",
   "type": "module",
   "scripts": {
-    "build": "pnpm -r --filter './packages/*' --filter './apps/*' --if-present build",
+    "dev:docs-starter": "turbo run dev --filter @blackwork/docs-starter",
+    "build": "turbo run build",
+    "build:docs-starter": "turbo run build --filter @blackwork/docs-starter",
+    "build:static:docs-starter": "turbo run build:static --filter @blackwork/docs-starter",
+    "gen:changelog": "node ./scripts/changelog.mjs",
     "lint": "run-s lint:*",
     "lint:oxlint": "oxlint .",
-    "lint:eslint": "pnpm -r --filter './packages/*' --filter './apps/*' --if-present lint",
-    "test": "pnpm -r --filter './packages/*' --filter './apps/*' --if-present test",
-    "format": "run-s format:*",
-    "format:oxfmt": "oxfmt .",
-    "format:prettier": "prettier --write .",
+    "lint:eslint": "turbo run lint",
+    "publish:pkg": "node ./scripts/publish.mjs",
+    "start:docs-starter": "turbo run start --filter @blackwork/docs-starter",
+    "test": "turbo run test",
+    "test:docs-starter": "turbo run test --filter @blackwork/docs-starter",
+    "test:scripts": "node --test scripts/*.test.mjs",
+    "format": "oxfmt .",
     "prepare": "husky"
   },
   "devDependencies": {
+    "@bassist/changelog": "^0.3.0",
     "@bassist/build-config": "^0.2.0",
     "@bassist/commit": "^0.1.1",
     "@bassist/oxc-integration": "^0.1.4",
@@ -25,11 +32,14 @@
     "npm-run-all2": "^8.0.4",
     "oxfmt": "^0.46.0",
     "oxlint": "^1.61.0",
-    "prettier": "^3.7.4"
+    "turbo": "^2.9.6"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,md,json,yml,yaml}": [
-      "prettier --write"
+    "*": [
+      "oxfmt --no-error-on-unmatched-pattern"
+    ],
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix --config eslint.config.js"
     ]
   }
 }

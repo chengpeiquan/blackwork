@@ -5,6 +5,8 @@ dist/
 packages/*/dist/
 **/.next/
 **/out/
+**/.turbo/
+.turbo/
 
 # generated types
 .astro/
