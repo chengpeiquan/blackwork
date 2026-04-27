@@ -66,10 +66,12 @@ vi.mock('@blackwork/docs', () => ({
       locales: {
         en: {
           code: 'en',
+          lang: 'en-US',
           label: 'English',
         },
         zh: {
           code: 'zh',
+          lang: 'zh-CN',
           label: '简体中文',
         },
       },
@@ -149,6 +151,7 @@ describe('docs starter integration', () => {
     const { docsConfig } = await import('../../../docs.config')
     const { Callout } = await import('@/mdx/components/callout')
     const { DocsFadePreview } = await import('@/mdx/components/fade-preview')
+    const { DocsHeaderSearchAction } = await import('@/search/docs-search')
 
     expect(docsConfig).toMatchObject({
       site: {
@@ -163,10 +166,12 @@ describe('docs starter integration', () => {
         locales: {
           en: {
             code: 'en',
+            lang: 'en-US',
             label: 'English',
           },
           zh: {
             code: 'zh',
+            lang: 'zh-CN',
             label: '简体中文',
           },
         },
@@ -192,6 +197,7 @@ describe('docs starter integration', () => {
       Callout,
       FadePreview: DocsFadePreview,
     })
+    expect(docsConfig.slots?.headerActions).toBe(DocsHeaderSearchAction)
   })
 
   test('ships starter content config that teaches section layouts and manual sidebars', async () => {
@@ -199,6 +205,17 @@ describe('docs starter integration', () => {
     const guideSidebarHrefs = getGuideSidebarHrefs(
       docsContentConfig.sections.guide.sidebar,
     )
+
+    expect(docsContentConfig.locales).toMatchObject({
+      en: {
+        code: 'en',
+        lang: 'en-US',
+      },
+      zh: {
+        code: 'zh',
+        lang: 'zh-CN',
+      },
+    })
 
     expect(docsContentConfig.sections).toMatchObject({
       guide: {

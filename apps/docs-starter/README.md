@@ -17,10 +17,14 @@ pnpm --filter @blackwork/docs-starter dev
 pnpm --filter @blackwork/docs-starter build
 pnpm --filter @blackwork/docs-starter build:static
 pnpm --filter @blackwork/docs-starter start
+pnpm --filter @blackwork/docs-starter start:static
 pnpm --filter @blackwork/docs-starter test
 ```
 
 The starter prebuilds `@blackwork/docs` before `dev`, `build`, `build:static`, and `test`, so local package changes are picked up automatically.
+
+Use `start` to preview the regular Next.js server build in `.next-build`.
+Use `start:static` after `build:static` to preview the static export in `.next-static` (including `pagefind` assets).
 
 ## Required Files
 
