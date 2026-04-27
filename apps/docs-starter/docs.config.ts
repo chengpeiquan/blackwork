@@ -2,6 +2,7 @@ import { defineDocsConfig } from '@blackwork/docs'
 import { Callout } from './src/mdx/components/callout'
 import { DocsCodeBlock } from './src/mdx/components/code-block'
 import { DocsFadePreview } from './src/mdx/components/fade-preview'
+import { DocsHeaderSearchAction } from './src/search/docs-search'
 
 export const docsConfig = defineDocsConfig({
   site: {
@@ -31,5 +32,8 @@ export const docsConfig = defineDocsConfig({
       FadePreview: DocsFadePreview,
       pre: DocsCodeBlock,
     },
+  },
+  slots: {
+    headerActions: DocsHeaderSearchAction,
   },
 })
