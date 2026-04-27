@@ -85,6 +85,7 @@
     "react-dom": ">=19.0.0"
   },
   "devDependencies": {
+    "@bassist/build-config": "^0.2.0",
     "@bassist/eslint-config": "^0.4.1",
     "@bassist/oxc-integration": "^0.1.4",
     "@bassist/tsconfig": "^0.1.1",
