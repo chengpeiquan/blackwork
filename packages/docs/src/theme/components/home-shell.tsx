@@ -8,6 +8,7 @@ import { resolveThemeSlots } from '../slots'
 import { DocsScrollToTop } from './docs-scroll-to-top'
 import { DefaultDocsHeader } from './header'
 import { DefaultDocsLink } from './link'
+import { getPagefindFilterEntries, getPagefindFilters } from './shell-shared'
 import type { DocsConfig, NormalizedDocsConfig } from '../../config/types'
 import type { DocEntry, DocsSource } from '../../source/types'
 import type { DocsThemeLocaleLink, DocsThemeNavItem } from '../types'
@@ -86,11 +87,27 @@ export const DefaultHomeShell: React.FC<DefaultHomeShellProps> = ({
   )
   const localeLinks = getLocaleLinks(normalizedConfig, locale, source)
   const slots = resolveThemeSlots(normalizedConfig.slots)
+  const HeaderActions = slots.headerActions
   const LinkComponent = slots.link ?? DefaultDocsLink
+  const pagefindFilters = getPagefindFilters({
+    locale,
+  })
+  const pagefindFilterEntries = getPagefindFilterEntries(pagefindFilters)
 
   return (
     <>
       <DefaultDocsHeader
+        headerActions={
+          HeaderActions ? (
+            <HeaderActions
+              homeHref={home.homeHref}
+              localeLinks={localeLinks}
+              navigation={navigation}
+              siteDescription={normalizedConfig.site.description}
+              siteTitle={getSiteTitle(normalizedConfig)}
+            />
+          ) : undefined
+        }
         homeHref={home.homeHref}
         LinkComponent={LinkComponent}
         localeLinks={localeLinks}
@@ -108,8 +125,15 @@ export const DefaultHomeShell: React.FC<DefaultHomeShellProps> = ({
         <section
           data-docs-region="home-hero"
           data-home-mode={home.mode}
+          data-pagefind-body=""
           className="mx-auto flex w-full max-w-6xl flex-1 flex-col items-center justify-center gap-8 text-center"
         >
+          <div hidden>
+            {pagefindFilterEntries.map((filter) => (
+              <span key={filter} data-pagefind-filter={filter} />
+            ))}
+          </div>
+
           {home.badge || home.eyebrow ? (
             <Badge
               variant="secondary"

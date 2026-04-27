@@ -210,6 +210,12 @@ test('DefaultDocsShell renders the default header footer and docs scaffolding', 
   expect(html).toContain('data-docs-region="sidebar"')
   expect(html).toContain('data-docs-region="article-body"')
   expect(html).toContain('data-docs-region="footer"')
+  expect(html).toContain('data-pagefind-body=""')
+  expect(html).toContain('data-pagefind-filter="kind:docs"')
+  expect(html).toContain('data-pagefind-filter="locale:en"')
+  expect(html).toContain('data-pagefind-filter="language:en"')
+  expect(html).toContain('data-pagefind-filter="section:guide"')
+  expect(html).toContain('data-pagefind-filter="layout:docs"')
   expect(html).toContain('max-w-screen-2xl')
   expect(html).toContain('aria-label="Scroll to top"')
   expect(html).toContain('aria-label="Open section navigation"')
@@ -270,6 +276,12 @@ test('DefaultContentShell omits the docs sidebar rail while keeping shared chrom
   expect(html).toContain('data-docs-region="article-body"')
   expect(html).toContain('data-docs-region="pager"')
   expect(html).toContain('data-docs-region="toc"')
+  expect(html).toContain('data-pagefind-body=""')
+  expect(html).toContain('data-pagefind-filter="kind:docs"')
+  expect(html).toContain('data-pagefind-filter="locale:en"')
+  expect(html).toContain('data-pagefind-filter="language:en"')
+  expect(html).toContain('data-pagefind-filter="section:article"')
+  expect(html).toContain('data-pagefind-filter="layout:content"')
   expect(html).toContain('href="#content-overview"')
   expect(html).toContain('href="#content-details"')
   expect(html).toContain('aria-label="Scroll to top"')
@@ -442,6 +454,37 @@ test('DefaultDocsShell lets a footer slot replace the default footer', async () 
   expect(html).not.toContain('data-docs-region="footer"')
 })
 
+test('DefaultDocsShell renders configured header actions inside the default header', async () => {
+  const { DefaultDocsShell } = await import('@blackwork/docs/theme')
+  const HeaderActionsSlot: React.FC<{ siteTitle: string }> = ({ siteTitle }) =>
+    React.createElement(
+      'div',
+      {
+        'data-slot': 'custom-header-actions',
+      },
+      `Search ${siteTitle}`,
+    )
+  const { config, source, entry } = createThemeContext({
+    slots: {
+      headerActions: HeaderActionsSlot,
+    },
+  })
+  const html = renderToStaticMarkup(
+    React.createElement(
+      DefaultDocsShell,
+      {
+        config,
+        source,
+        entry,
+      },
+      React.createElement('p', null, 'Rendered body'),
+    ),
+  )
+
+  expect(html).toContain('data-slot="custom-header-actions"')
+  expect(html).toContain('Search Project Docs')
+})
+
 test('DefaultDocsShell uses the configured link slot across theme links', async () => {
   const { DefaultDocsShell } = await import('@blackwork/docs/theme')
   const LinkSlot: React.FC<
@@ -575,6 +618,10 @@ test('DefaultHomeShell builds an automatic landing page from the docs source', a
   expect(html).toContain('Getting Started')
   expect(html).toContain('data-docs-region="header"')
   expect(html).toContain('aria-label="Scroll to top"')
+  expect(html).toContain('data-pagefind-body=""')
+  expect(html).toContain('data-pagefind-filter="kind:docs"')
+  expect(html).toContain('data-pagefind-filter="locale:en"')
+  expect(html).toContain('data-pagefind-filter="language:en"')
   expect(html).not.toContain('data-docs-region="footer"')
   expect(html).not.toContain('data-docs-region="home-highlights"')
 })

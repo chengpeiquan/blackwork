@@ -21,6 +21,7 @@ export type { DefaultHomeShellProps } from './components/home-shell'
 export type {
   DocsHomeConfig,
   DocsThemeFooterSlotProps,
+  DocsThemeHeaderActionsProps,
   DocsThemeLinkComponent,
   DocsThemeLinkProps,
   DocsThemeLocaleLink,

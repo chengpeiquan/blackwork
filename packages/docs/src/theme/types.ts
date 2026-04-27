@@ -29,8 +29,17 @@ export interface DocsThemeFooterSlotProps {
   LinkComponent?: DocsThemeLinkComponent
 }
 
+export interface DocsThemeHeaderActionsProps {
+  homeHref: string
+  localeLinks?: DocsThemeLocaleLink[]
+  navigation: DocsThemeNavItem[]
+  siteDescription?: string
+  siteTitle: string
+}
+
 export interface DocsThemeSlots {
   footer?: ComponentType<DocsThemeFooterSlotProps>
+  headerActions?: ComponentType<DocsThemeHeaderActionsProps>
   link?: DocsThemeLinkComponent
 }
 

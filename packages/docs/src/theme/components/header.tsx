@@ -17,6 +17,7 @@ import type {
 } from '../types'
 
 export interface DefaultDocsHeaderProps {
+  headerActions?: React.ReactNode
   homeHref: string
   LinkComponent?: DocsThemeLinkComponent
   localeLinks?: DocsThemeLocaleLink[]
@@ -95,6 +96,7 @@ const DefaultLocaleToggle: React.FC<DefaultLocaleToggleProps> = ({
 }
 
 export const DefaultDocsHeader: React.FC<DefaultDocsHeaderProps> = ({
+  headerActions,
   homeHref,
   LinkComponent = DefaultDocsLink,
   localeLinks = [],
@@ -124,6 +126,15 @@ export const DefaultDocsHeader: React.FC<DefaultDocsHeaderProps> = ({
       >
         {siteTitle}
       </LinkComponent>
+
+      {headerActions ? (
+        <div
+          data-docs-region="header-actions"
+          className="ml-auto hidden items-center pl-4 md:flex"
+        >
+          {headerActions}
+        </div>
+      ) : null}
     </LayoutHeader>
   )
 }
