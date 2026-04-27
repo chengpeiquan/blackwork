@@ -43,7 +43,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chengpeiquan/blackwork.git"
+    "url": "https://github.com/chengpeiquan/blackwork",
+    "directory": "packages/search"
   },
   "devDependencies": {
     "@bassist/build-config": "^0.2.0",

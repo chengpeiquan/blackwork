@@ -108,7 +108,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chengpeiquan/blackwork.git"
+    "url": "https://github.com/chengpeiquan/blackwork",
+    "directory": "packages/blackwork"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",
