@@ -1,0 +1,60 @@
+{
+  "name": "@blackwork/search",
+  "version": "0.1.0",
+  "description": "Search package for Blackwork projects.",
+  "author": "chengpeiquan <chengpeiquan@chengpeiquan.com>",
+  "homepage": "https://chengpeiquan.com",
+  "type": "module",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./browser": {
+      "types": "./dist/browser.d.ts",
+      "import": "./dist/browser.mjs",
+      "require": "./dist/browser.cjs"
+    },
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "keywords": [
+    "search",
+    "react",
+    "blackwork"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "lint": "pnpm -C ../.. exec eslint --config eslint.config.js packages/search/src",
+    "test": "pnpm run test:unit && pnpm run test:declarations",
+    "test:unit": "vitest run --passWithNoTests",
+    "test:declarations": "pnpm build && node ./test/declarations.check.mjs",
+    "test:watch": "vitest --passWithNoTests",
+    "format": "oxfmt ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chengpeiquan/blackwork.git"
+  },
+  "devDependencies": {
+    "@bassist/build-config": "^0.2.0",
+    "@bassist/tsconfig": "^0.1.1",
+    "@types/node": "^25.5.2",
+    "eslint": "^9.39.4",
+    "tsdown": "^0.21.7",
+    "typescript": "^6.0.2",
+    "vitest": "^4.0.7"
+  },
+  "dependencies": {
+    "pagefind": "1.5.2"
+  }
+}
