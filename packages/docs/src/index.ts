@@ -1,5 +1,6 @@
 export { defineConfig } from './config/define-config'
 export { defineDocsConfig } from './config/define-docs-config'
+export { processExportedDocs } from './export/process-exported-docs'
 export { createDocMetadata } from './metadata/create-doc-metadata'
 export { buildLocaleLinks } from './navigation/build-locale-links'
 export { buildPager } from './navigation/build-pager'
@@ -45,6 +46,7 @@ export type {
   ResolvedDocsRedirectRoute,
 } from './routing/resolve-docs-route'
 export type { DefineDocsConfigOptions } from './config/define-docs-config'
+export type { ProcessExportedDocsOptions } from './export/process-exported-docs'
 export type {
   DocsConfig,
   DocsContentConfig,

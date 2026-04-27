@@ -1,6 +1,7 @@
 import { ThemeProvider, ThemeScript, type ThemeProviderConfig } from 'blackwork'
 import { defineConfig } from '../config/define-config'
 import { DocsScrollReset } from '../theme/components/docs-scroll-reset'
+import { DocsDocumentLangSync } from './document-lang-sync'
 import { resolveDocumentLang } from './resolve-document-lang'
 import type { DocsConfig, NormalizedDocsConfig } from '../config/types'
 import type { DocsRouteParams } from '../routing/resolve-docs-route'
@@ -62,6 +63,7 @@ export const DocsRootLayout = async ({
       </head>
       <body className="flex min-h-screen w-screen flex-col">
         <ThemeProvider {...themeConfig}>
+          <DocsDocumentLangSync content={normalizedConfig.content} />
           <DocsScrollReset />
           {children}
         </ThemeProvider>

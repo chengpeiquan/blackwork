@@ -69,12 +69,11 @@
   },
   "devDependencies": {
     "@bassist/build-config": "^0.2.0",
-    "@bassist/eslint-config": "^0.4.1",
-    "@bassist/oxc-integration": "^0.1.4",
     "@bassist/tsconfig": "^0.1.1",
     "@types/node": "^25.5.2",
     "blackwork": "workspace:*",
     "eslint": "^9.39.4",
+    "jsdom": "^26.1.0",
     "tsdown": "^0.21.7",
     "typescript": "^6.0.2",
     "vitest": "^4.0.7"
