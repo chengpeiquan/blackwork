@@ -29,6 +29,8 @@ import {
   getFooterDescription,
   getEntrySectionConfig,
   getEntrySectionKey,
+  getPagefindFilterEntries,
+  getPagefindFilters,
   getSectionEntries,
   getSiteTitle,
   getTocHeadings,
@@ -58,8 +60,10 @@ const getSidebarLinkClassName = (isActive: boolean) =>
 const isRenderableSidebarItem = (item: DocsResolvedSidebarItem) =>
   item.isExternal || item.slugSegments.length > 0
 
-const getRenderableSidebarNodes = (nodes: DocsResolvedSidebarNode[]) =>
-  nodes.flatMap((node) => {
+const getRenderableSidebarNodes = (
+  nodes: DocsResolvedSidebarNode[],
+): DocsResolvedSidebarNode[] =>
+  nodes.flatMap<DocsResolvedSidebarNode>((node) => {
     if (node.type === 'group') {
       const items = node.items.filter(isRenderableSidebarItem)
 
@@ -220,12 +224,30 @@ export const DefaultDocsShell: React.FC<DefaultDocsShellProps> = ({
   const tocHeadings = getTocHeadings(headings)
   const homeHref = source.getCanonicalHref(entry.locale, [])
   const slots = resolveThemeSlots(normalizedConfig.slots)
+  const HeaderActions = slots.headerActions
   const LinkComponent = slots.link ?? DefaultDocsLink
   const Footer = slots.footer ?? DefaultDocsFooter
+  const pagefindFilters = getPagefindFilters({
+    layout: sectionConfig.layout,
+    locale: entry.locale,
+    section: sectionKey,
+  })
+  const pagefindFilterEntries = getPagefindFilterEntries(pagefindFilters)
 
   return (
     <>
       <DefaultDocsHeader
+        headerActions={
+          HeaderActions ? (
+            <HeaderActions
+              homeHref={homeHref}
+              localeLinks={localeLinks}
+              navigation={navigation}
+              siteDescription={normalizedConfig.site.description}
+              siteTitle={getSiteTitle(normalizedConfig)}
+            />
+          ) : undefined
+        }
         homeHref={homeHref}
         LinkComponent={LinkComponent}
         localeLinks={localeLinks}
@@ -261,27 +283,39 @@ export const DefaultDocsShell: React.FC<DefaultDocsShellProps> = ({
         </aside>
 
         <div className="flex min-w-0 flex-1 flex-col gap-10">
-          <header
-            data-docs-region="article-header"
-            className="flex flex-col gap-3 border-b border-border/60 pb-6"
+          <div
+            data-docs-region="article-content"
+            data-pagefind-body=""
+            className="flex flex-col gap-10"
           >
-            <h1 className="text-balance text-3xl font-semibold tracking-tight text-foreground">
-              {entry.title}
-            </h1>
+            <div hidden>
+              {pagefindFilterEntries.map((filter) => (
+                <span key={filter} data-pagefind-filter={filter} />
+              ))}
+            </div>
 
-            {entry.description ? (
-              <p className="max-w-3xl text-pretty text-muted-foreground">
-                {entry.description}
-              </p>
-            ) : null}
-          </header>
+            <header
+              data-docs-region="article-header"
+              className="flex flex-col gap-3 border-b border-border/60 pb-6"
+            >
+              <h1 className="text-balance text-3xl font-semibold tracking-tight text-foreground">
+                {entry.title}
+              </h1>
 
-          <article
-            data-docs-region="article-body"
-            className="prose prose-neutral max-w-none dark:prose-invert"
-          >
-            {children}
-          </article>
+              {entry.description ? (
+                <p className="max-w-3xl text-pretty text-muted-foreground">
+                  {entry.description}
+                </p>
+              ) : null}
+            </header>
+
+            <article
+              data-docs-region="article-body"
+              className="prose prose-neutral max-w-none dark:prose-invert"
+            >
+              {children}
+            </article>
+          </div>
 
           <nav
             data-docs-region="pager"

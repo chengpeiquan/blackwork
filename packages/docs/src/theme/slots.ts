@@ -1,5 +1,6 @@
 import type {
   DocsThemeFooterSlotProps,
+  DocsThemeHeaderActionsProps,
   DocsThemeLinkComponent,
   DocsThemeSlots,
 } from './types'
@@ -13,6 +14,11 @@ const isFooterSlot = (
 ): value is ComponentType<DocsThemeFooterSlotProps> =>
   typeof value === 'function'
 
+const isHeaderActionsSlot = (
+  value: unknown,
+): value is ComponentType<DocsThemeHeaderActionsProps> =>
+  typeof value === 'function'
+
 const isLinkComponent = (value: unknown): value is DocsThemeLinkComponent =>
   typeof value === 'function'
 
@@ -23,6 +29,9 @@ export function resolveThemeSlots(value: unknown): DocsThemeSlots {
 
   return {
     ...(isFooterSlot(value.footer) ? { footer: value.footer } : {}),
+    ...(isHeaderActionsSlot(value.headerActions)
+      ? { headerActions: value.headerActions }
+      : {}),
     ...(isLinkComponent(value.link) ? { link: value.link } : {}),
   }
 }

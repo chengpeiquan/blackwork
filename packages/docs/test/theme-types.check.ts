@@ -5,10 +5,12 @@ import type {
   DefaultDocsShellProps,
   DefaultHomeShellProps,
   DocsThemeFooterSlotProps,
+  DocsThemeHeaderActionsProps,
   DocsThemeLinkProps,
 } from '@blackwork/docs/theme'
 
 const footer = (_props: DocsThemeFooterSlotProps) => null
+const headerActions = (_props: DocsThemeHeaderActionsProps) => null
 const link = (_props: DocsThemeLinkProps) => null
 
 const validConfig = {
@@ -21,6 +23,7 @@ const validConfig = {
   },
   slots: {
     footer,
+    headerActions,
     link,
   },
 } satisfies DocsConfig

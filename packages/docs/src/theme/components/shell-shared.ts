@@ -1,3 +1,4 @@
+import type { DocsTocHeading } from './docs-toc'
 import type {
   DocsConfig,
   NormalizedDocsConfig,
@@ -105,3 +106,48 @@ export const getEntrySectionConfig = (
       (layout === 'content' ? false : DEFAULT_SECTION_CONFIG.sidebar),
   }
 }
+
+const normalizeLocalePart = (value: string | undefined) => value?.trim()
+
+export const deriveLocaleFamily = (locale: string) => {
+  const parts = locale
+    .split(/[-_]/u)
+    .map((part) => normalizeLocalePart(part))
+    .filter((part): part is string => Boolean(part))
+  const language = parts[0]?.toLowerCase()
+  const region = parts
+    .slice(1)
+    .find((part) => /^(?:[A-Za-z]{2}|\d{3})$/u.test(part))
+    ?.toUpperCase()
+
+  return {
+    language,
+    region,
+  }
+}
+
+export const getPagefindFilters = ({
+  kind = 'docs',
+  layout,
+  locale,
+  section,
+}: {
+  kind?: string
+  layout?: string
+  locale: string
+  section?: string
+}) => {
+  const { language, region } = deriveLocaleFamily(locale)
+
+  return {
+    kind,
+    locale,
+    ...(language ? { language } : {}),
+    ...(region ? { region } : {}),
+    ...(section ? { section } : {}),
+    ...(layout ? { layout } : {}),
+  }
+}
+
+export const getPagefindFilterEntries = (filters: Record<string, string>) =>
+  Object.entries(filters).map(([key, value]) => `${key}:${value}`)
