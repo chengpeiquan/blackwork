@@ -24,6 +24,13 @@ test('resolves package aliases and package names', async () => {
     packageName: '@blackwork/docs',
     packageDir: 'packages/docs',
   })
+
+  assert.deepEqual(resolvePackageTarget('@blackwork/search'), {
+    alias: 'search',
+    dir: 'search',
+    packageName: '@blackwork/search',
+    packageDir: 'packages/search',
+  })
 })
 
 test('throws with a helpful error for unknown packages', async () => {

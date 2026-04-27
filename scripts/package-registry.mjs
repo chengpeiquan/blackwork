@@ -14,6 +14,11 @@ const packageRegistry = {
     dir: 'docs',
     packageName: '@blackwork/docs',
   },
+  search: {
+    alias: 'search',
+    dir: 'search',
+    packageName: '@blackwork/search',
+  },
 }
 
 const registryEntries = Object.values(packageRegistry).map((target) => ({
