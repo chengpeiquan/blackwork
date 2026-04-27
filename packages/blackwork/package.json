@@ -161,8 +161,6 @@
     "@bassist/build-config": "^0.2.0",
     "@bassist/changelog": "^0.3.0",
     "@bassist/commit": "^0.1.1",
-    "@bassist/eslint-config": "^0.4.1",
-    "@bassist/oxc-integration": "^0.1.4",
     "@bassist/node-utils": "^0.5.0",
     "@bassist/release": "^0.3.1",
     "@bassist/tsconfig": "^0.1.1",
