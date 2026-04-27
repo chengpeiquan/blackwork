@@ -83,6 +83,9 @@ vi.mock('@blackwork/docs', () => ({
   generateStaticParams: docsExports.generateStaticParams,
 }))
 
+vi.mock('blackwork/ui-globals.css', () => ({}))
+vi.mock('../globals.css', () => ({}))
+
 afterEach(() => {
   docsExports.DocsPage.mockReset()
   docsExports.DocsRootLayout.mockReset()
