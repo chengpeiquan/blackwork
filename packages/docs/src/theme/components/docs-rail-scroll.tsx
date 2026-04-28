@@ -8,8 +8,8 @@ export interface DocsRailScrollProps {
 }
 
 const initialFadeState = {
-  showTop: false,
-  showBottom: false,
+  bottomVisible: false,
+  topVisible: false,
 }
 
 const getFadeClassName = (visible: boolean) =>
@@ -33,8 +33,8 @@ export const DocsRailScroll = ({ children }: DocsRailScrollProps) => {
 
       setFadeState((currentState) => {
         if (
-          currentState.showTop === nextState.showTop &&
-          currentState.showBottom === nextState.showBottom
+          currentState.bottomVisible === nextState.bottomVisible &&
+          currentState.topVisible === nextState.topVisible
         ) {
           return currentState
         }
@@ -78,7 +78,7 @@ export const DocsRailScroll = ({ children }: DocsRailScrollProps) => {
         data-docs-sidebar-fade="top"
         className={[
           'pointer-events-none absolute inset-x-0 top-0 z-10 hidden h-8 bg-gradient-to-b from-background via-background/80 to-transparent transition-opacity lg:block',
-          getFadeClassName(fadeState.showTop),
+          getFadeClassName(fadeState.topVisible),
         ].join(' ')}
       />
 
@@ -95,7 +95,7 @@ export const DocsRailScroll = ({ children }: DocsRailScrollProps) => {
         data-docs-sidebar-fade="bottom"
         className={[
           'pointer-events-none absolute inset-x-0 bottom-0 z-10 hidden h-12 bg-gradient-to-t from-background via-background/80 to-transparent transition-opacity lg:block',
-          getFadeClassName(fadeState.showBottom),
+          getFadeClassName(fadeState.bottomVisible),
         ].join(' ')}
       />
     </div>

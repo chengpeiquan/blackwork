@@ -5,8 +5,8 @@ export interface DocsRailScrollMetrics {
 }
 
 export interface DocsRailFadeState {
-  showTop: boolean
-  showBottom: boolean
+  bottomVisible: boolean
+  topVisible: boolean
 }
 
 const SCROLL_EPSILON = 1
@@ -20,13 +20,13 @@ export const getDocsRailFadeState = ({
 
   if (maxScrollTop <= SCROLL_EPSILON) {
     return {
-      showTop: false,
-      showBottom: false,
+      bottomVisible: false,
+      topVisible: false,
     }
   }
 
   return {
-    showTop: scrollTop > SCROLL_EPSILON,
-    showBottom: maxScrollTop - scrollTop > SCROLL_EPSILON,
+    bottomVisible: maxScrollTop - scrollTop > SCROLL_EPSILON,
+    topVisible: scrollTop > SCROLL_EPSILON,
   }
 }
