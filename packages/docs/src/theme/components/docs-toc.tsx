@@ -81,6 +81,7 @@ interface TrackState {
 }
 
 interface DocsTocState {
+  activeIds: string[]
   activeIdSet: Set<string>
   listId: string
   listRef: RefObject<HTMLOListElement | null>
@@ -153,6 +154,36 @@ const getNearestHeadingId = (items: HeadingState[], viewTop: number) => {
 const getNumberStyleValue = (value: string) => {
   const parsed = Number.parseFloat(value)
   return Number.isFinite(parsed) ? parsed : 0
+}
+
+export const getTocAutoScrollTop = ({
+  itemBottom,
+  itemTop,
+  margin,
+  scrollHeight,
+  scrollTop,
+  viewportHeight,
+}: {
+  itemBottom: number
+  itemTop: number
+  margin: number
+  scrollHeight: number
+  scrollTop: number
+  viewportHeight: number
+}) => {
+  const visibleTop = scrollTop + margin
+  const visibleBottom = scrollTop + viewportHeight - margin
+  const maxScrollTop = Math.max(0, scrollHeight - viewportHeight)
+
+  if (itemTop < visibleTop) {
+    return Math.max(0, itemTop - margin)
+  }
+
+  if (itemBottom > visibleBottom) {
+    return Math.min(maxScrollTop, itemBottom - viewportHeight + margin)
+  }
+
+  return scrollTop
 }
 
 const measureTrackMetrics = (
@@ -292,6 +323,7 @@ const useDocsTocState = (headings: DocsTocHeading[]): DocsTocState => {
   const [scrollTop, setScrollTop] = useState(0)
 
   return {
+    activeIds,
     activeIdSet,
     listId,
     listRef,
@@ -310,6 +342,7 @@ interface DocsTocListProps extends DocsTocState {
 }
 
 const DocsTocList: React.FC<DocsTocListProps> = ({
+  activeIds,
   activeIdSet,
   headings,
   listClassName,
@@ -321,115 +354,141 @@ const DocsTocList: React.FC<DocsTocListProps> = ({
   setScrollTop,
   track,
   wrapperClassName,
-}) => (
-  <div className={cn('relative', wrapperClassName)}>
-    <div
-      aria-hidden="true"
-      data-docs-toc-track="true"
-      className="pointer-events-none absolute left-0 top-0 transition-transform duration-150 ease-out"
-      style={getTrackContainerStyle(measurement, scrollTop)}
-    >
-      <svg
-        data-docs-toc-track-path="true"
-        height={measurement?.height ?? 1}
-        viewBox={`0 0 ${measurement?.width ?? 1} ${measurement?.height ?? 1}`}
-        width={measurement?.width ?? 1}
-        className="absolute left-0 top-0 transition-[clip-path,opacity] duration-150 ease-out"
-        style={getTrackPathStyle(track)}
+}) => {
+  useEffect(() => {
+    const list = listRef.current
+    const activeId = activeIds[0]
+    if (!list || !activeId) return
+
+    const activeLink = Array.from(
+      list.querySelectorAll<HTMLAnchorElement>('a[data-heading-id]'),
+    ).find((link) => link.dataset.headingId === activeId)
+    if (!activeLink) return
+
+    const nextScrollTop = getTocAutoScrollTop({
+      itemBottom: activeLink.offsetTop + activeLink.offsetHeight,
+      itemTop: activeLink.offsetTop,
+      margin: 16,
+      scrollHeight: list.scrollHeight,
+      scrollTop: list.scrollTop,
+      viewportHeight: list.clientHeight,
+    })
+
+    if (nextScrollTop !== list.scrollTop) {
+      list.scrollTo({ top: nextScrollTop })
+    }
+  }, [activeIds, listRef])
+
+  return (
+    <div className={cn('relative', wrapperClassName)}>
+      <div
+        aria-hidden="true"
+        data-docs-toc-track="true"
+        className="pointer-events-none absolute left-0 top-0 transition-transform duration-150 ease-out"
+        style={getTrackContainerStyle(measurement, scrollTop)}
       >
-        <path
-          d={measurement?.path || 'M0 0 L0 0'}
-          stroke="currentColor"
-          strokeWidth="1"
-          fill="none"
-          className="text-primary"
+        <svg
+          data-docs-toc-track-path="true"
+          height={measurement?.height ?? 1}
+          viewBox={`0 0 ${measurement?.width ?? 1} ${measurement?.height ?? 1}`}
+          width={measurement?.width ?? 1}
+          className="absolute left-0 top-0 transition-[clip-path,opacity] duration-150 ease-out"
+          style={getTrackPathStyle(track)}
+        >
+          <path
+            d={measurement?.path || 'M0 0 L0 0'}
+            stroke="currentColor"
+            strokeWidth="1"
+            fill="none"
+            className="text-primary"
+          />
+        </svg>
+        <span
+          data-docs-toc-thumb="true"
+          className="absolute left-0 top-0 size-1 rounded-full bg-primary transition-[opacity,offset-distance] duration-150 ease-out"
+          style={getTrackThumbStyle(measurement, track)}
         />
-      </svg>
-      <span
-        data-docs-toc-thumb="true"
-        className="absolute left-0 top-0 size-1 rounded-full bg-primary transition-[opacity,offset-distance] duration-150 ease-out"
-        style={getTrackThumbStyle(measurement, track)}
-      />
-    </div>
+      </div>
 
-    <ol
-      id={listId}
-      ref={listRef}
-      className={cn(
-        'flex flex-col overflow-auto py-1 [scrollbar-width:none]',
-        listClassName,
-      )}
-      onScroll={(event) => {
-        setScrollTop(event.currentTarget.scrollTop)
-      }}
-    >
-      {headings.map((heading, index) => {
-        const active = activeIdSet.has(heading.id)
-        const offset = getTocGuideOffset(heading.depth)
-        const upperOffset =
-          index > 0 ? getTocGuideOffset(headings[index - 1].depth) : offset
-        const lowerOffset =
-          index + 1 < headings.length
-            ? getTocGuideOffset(headings[index + 1].depth)
-            : offset
+      <ol
+        id={listId}
+        ref={listRef}
+        className={cn(
+          'flex flex-col overflow-auto py-1 [scrollbar-width:none]',
+          listClassName,
+        )}
+        onScroll={(event) => {
+          setScrollTop(event.currentTarget.scrollTop)
+        }}
+      >
+        {headings.map((heading, index) => {
+          const active = activeIdSet.has(heading.id)
+          const offset = getTocGuideOffset(heading.depth)
+          const upperOffset =
+            index > 0 ? getTocGuideOffset(headings[index - 1].depth) : offset
+          const lowerOffset =
+            index + 1 < headings.length
+              ? getTocGuideOffset(headings[index + 1].depth)
+              : offset
 
-        return (
-          <li key={heading.id}>
-            <a
-              href={`#${heading.id}`}
-              data-active={active ? 'true' : 'false'}
-              data-depth={heading.depth}
-              data-heading-id={heading.id}
-              className={getTocLinkClassName()}
-              style={{
-                paddingInlineStart: `${getTocItemPadding(heading.depth)}px`,
-              }}
-              onClick={onSelect}
-            >
-              {offset !== upperOffset ? (
-                <svg
+          return (
+            <li key={heading.id}>
+              <a
+                href={`#${heading.id}`}
+                data-active={active ? 'true' : 'false'}
+                data-depth={heading.depth}
+                data-heading-id={heading.id}
+                className={getTocLinkClassName()}
+                style={{
+                  paddingInlineStart: `${getTocItemPadding(heading.depth)}px`,
+                }}
+                onClick={onSelect}
+              >
+                {offset !== upperOffset ? (
+                  <svg
+                    aria-hidden="true"
+                    data-docs-toc-item-curve="true"
+                    viewBox={`${Math.min(offset, upperOffset)} 0 ${Math.abs(
+                      upperOffset - offset,
+                    )} 12`}
+                    className="pointer-events-none absolute"
+                    style={{
+                      height: '12px',
+                      insetInlineStart: `${Math.min(offset, upperOffset)}px`,
+                      top: '-6px',
+                      width: `${Math.abs(upperOffset - offset) + 1}px`,
+                      zIndex: -1,
+                    }}
+                  >
+                    <path
+                      d={`M ${upperOffset} 0 C ${upperOffset} 8 ${offset} 4 ${offset} 12`}
+                      stroke="currentColor"
+                      strokeWidth="1"
+                      fill="none"
+                      className="text-border"
+                    />
+                  </svg>
+                ) : null}
+                <span
                   aria-hidden="true"
-                  data-docs-toc-item-curve="true"
-                  viewBox={`${Math.min(offset, upperOffset)} 0 ${Math.abs(
-                    upperOffset - offset,
-                  )} 12`}
-                  className="pointer-events-none absolute"
+                  data-docs-toc-item-line="true"
+                  className="pointer-events-none absolute w-px bg-border"
                   style={{
-                    height: '12px',
-                    insetInlineStart: `${Math.min(offset, upperOffset)}px`,
-                    top: '-6px',
-                    width: `${Math.abs(upperOffset - offset) + 1}px`,
+                    bottom: offset !== lowerOffset ? '6px' : '0px',
+                    insetInlineStart: `${offset}px`,
+                    top: offset !== upperOffset ? '6px' : '0px',
                     zIndex: -1,
                   }}
-                >
-                  <path
-                    d={`M ${upperOffset} 0 C ${upperOffset} 8 ${offset} 4 ${offset} 12`}
-                    stroke="currentColor"
-                    strokeWidth="1"
-                    fill="none"
-                    className="text-border"
-                  />
-                </svg>
-              ) : null}
-              <span
-                aria-hidden="true"
-                data-docs-toc-item-line="true"
-                className="pointer-events-none absolute w-px bg-border"
-                style={{
-                  bottom: offset !== lowerOffset ? '6px' : '0px',
-                  insetInlineStart: `${offset}px`,
-                  top: offset !== upperOffset ? '6px' : '0px',
-                  zIndex: -1,
-                }}
-              />
-              {heading.title}
-            </a>
-          </li>
-        )
-      })}
-    </ol>
-  </div>
-)
+                />
+                {heading.title}
+              </a>
+            </li>
+          )
+        })}
+      </ol>
+    </div>
+  )
+}
 
 const getTrackState = (
   activeIds: string[],
