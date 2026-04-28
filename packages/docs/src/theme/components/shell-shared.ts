@@ -1,6 +1,7 @@
 import type { DocsTocHeading } from './docs-toc'
 import type {
   DocsConfig,
+  DocsThemeLocalizedLabel,
   NormalizedDocsConfig,
   NormalizedDocsContentSectionConfig,
 } from '../../config/types'
@@ -24,6 +25,37 @@ export const getFooterDescription = (
   config.site.description ||
   entry.description ||
   'Browse the available documentation.'
+
+export const getLocalizedLabel = (
+  value: DocsThemeLocalizedLabel | undefined,
+  locale: string,
+  fallback: string,
+) => {
+  if (typeof value === 'string') {
+    return value
+  }
+
+  return value?.[locale] ?? fallback
+}
+
+export const getTocLabels = (config: NormalizedDocsConfig, locale: string) => ({
+  collapseLabel: getLocalizedLabel(
+    config.theme.toc?.collapseLabel,
+    locale,
+    'Collapse outline',
+  ),
+  expandLabel: getLocalizedLabel(
+    config.theme.toc?.expandLabel,
+    locale,
+    'Expand outline',
+  ),
+  openLabel: getLocalizedLabel(
+    config.theme.toc?.openLabel,
+    locale,
+    'Open outline',
+  ),
+  title: getLocalizedLabel(config.theme.toc?.title, locale, 'On This Page'),
+})
 
 const matchesNavigation = (
   entry: DocEntry,

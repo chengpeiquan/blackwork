@@ -4,11 +4,13 @@ import type {
   DefaultDocsHeaderProps,
   DefaultDocsShellProps,
   DefaultHomeShellProps,
+  DocsThemeContentHeaderMetaProps,
   DocsThemeFooterSlotProps,
   DocsThemeHeaderActionsProps,
   DocsThemeLinkProps,
 } from '@blackwork/docs/theme'
 
+const contentHeaderMeta = (_props: DocsThemeContentHeaderMetaProps) => null
 const footer = (_props: DocsThemeFooterSlotProps) => null
 const headerActions = (_props: DocsThemeHeaderActionsProps) => null
 const link = (_props: DocsThemeLinkProps) => null
@@ -22,6 +24,7 @@ const validConfig = {
     },
   },
   slots: {
+    contentHeaderMeta,
     footer,
     headerActions,
     link,

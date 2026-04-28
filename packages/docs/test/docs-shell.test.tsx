@@ -103,6 +103,8 @@ describe('default docs shell', () => {
     expect(html).toContain('h-16')
     expect(html).toContain('data-docs-region="toc"')
     expect(html).toContain('hidden w-64 xl:block')
+    expect(html).not.toContain('pl-10')
+    expect(html).not.toContain('pr-10')
     expect(html).toContain('shrink-0')
     expect(html).toContain('top-24')
     expect(html).toContain('data-docs-toc-track="true"')

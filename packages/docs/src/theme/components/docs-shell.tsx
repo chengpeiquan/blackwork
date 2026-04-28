@@ -34,6 +34,7 @@ import {
   getSectionEntries,
   getSiteTitle,
   getTocHeadings,
+  getTocLabels,
   toNavigation,
 } from './shell-shared'
 import type { DocsConfig, NormalizedDocsConfig } from '../../config/types'
@@ -222,6 +223,7 @@ export const DefaultDocsShell: React.FC<DefaultDocsShellProps> = ({
     source,
   })
   const tocHeadings = getTocHeadings(headings)
+  const tocLabels = getTocLabels(normalizedConfig, entry.locale)
   const homeHref = source.getCanonicalHref(entry.locale, [])
   const slots = resolveThemeSlots(normalizedConfig.slots)
   const HeaderActions = slots.headerActions
@@ -258,7 +260,7 @@ export const DefaultDocsShell: React.FC<DefaultDocsShellProps> = ({
 
       <DocsScrollToTop />
 
-      <MobileDocsToc headings={tocHeadings} />
+      <MobileDocsToc headings={tocHeadings} {...tocLabels} />
 
       <main
         data-docs-region="docs-shell"
@@ -344,7 +346,7 @@ export const DefaultDocsShell: React.FC<DefaultDocsShellProps> = ({
           </nav>
         </div>
 
-        <DefaultDocsToc headings={tocHeadings} />
+        <DefaultDocsToc headings={tocHeadings} {...tocLabels} />
       </main>
 
       <Footer

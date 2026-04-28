@@ -51,7 +51,19 @@ export interface DocsContentConfig {
   sections?: Record<string, DocsContentSectionConfig>
 }
 
-export type DocsThemeConfig = Record<string, unknown>
+export type DocsThemeLocalizedLabel = string | Record<string, string>
+
+export interface DocsThemeTocConfig {
+  collapseLabel?: DocsThemeLocalizedLabel
+  expandLabel?: DocsThemeLocalizedLabel
+  openLabel?: DocsThemeLocalizedLabel
+  title?: DocsThemeLocalizedLabel
+}
+
+export interface DocsThemeConfig {
+  [key: string]: unknown
+  toc?: DocsThemeTocConfig
+}
 
 export type DocsSectionConfig = Record<string, unknown>
 
