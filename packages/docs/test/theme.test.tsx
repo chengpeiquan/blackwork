@@ -238,7 +238,18 @@ test('DefaultDocsShell renders the default header footer and docs scaffolding', 
 
 test('DefaultContentShell omits the docs sidebar rail while keeping shared chrome', async () => {
   const { DefaultContentShell } = await import('@blackwork/docs/theme')
-  const { config, source, articleEntry } = createThemeContext()
+  const { config, source, articleEntry } = createThemeContext({
+    theme: {
+      toc: {
+        title: {
+          en: 'Article outline',
+        },
+        collapseLabel: 'Collapse article outline',
+        expandLabel: 'Expand article outline',
+        openLabel: 'Open article outline',
+      },
+    },
+  })
   const html = renderToStaticMarkup(
     React.createElement(
       DefaultContentShell,
@@ -286,26 +297,67 @@ test('DefaultContentShell omits the docs sidebar rail while keeping shared chrom
   expect(html).toContain('href="#content-details"')
   expect(html).toContain('aria-label="Scroll to top"')
   expect(html).toContain('data-docs-toc-mobile-trigger="true"')
-  expect(html).toContain('aria-label="Open outline"')
+  expect(html).toContain('aria-label="Open article outline"')
   expect(html).toContain(
     'style="bottom:72px;height:40px;position:fixed;right:20px;width:40px;z-index:10"',
   )
   expect(html).toContain('data-docs-toc-toggle="true"')
+  expect(html).toContain('Article outline')
+  expect(html).toContain('aria-label="Collapse article outline"')
   expect(html).toContain('aria-expanded="true"')
   expect(html).not.toContain('data-docs-region="sidebar"')
   expect(html).toContain('Rendered content body')
   expect(tocMarkup).toContain('xl:fixed')
-  expect(tocMarkup).toContain('xl:left-8')
+  expect(tocMarkup).toContain('xl:right-8')
   expect(tocMarkup).toContain('xl:top-24')
+  expect(tocMarkup).toContain('M16 12H3m13 6H3M16 6H3')
   expect(contentShellMarkup).toContain('max-w-screen-2xl')
   expect(contentShellMarkup).not.toContain('data-docs-region="toc"')
+  expect(contentShellMarkup).toContain('flex flex-col gap-5')
+  expect(contentShellMarkup).not.toContain('pb-8')
+  expect(contentShellMarkup).not.toContain('border-b border-border/60')
+  expect(contentShellMarkup).not.toContain('Notes from the content lane.')
+  expect(contentShellMarkup).not.toContain('max-w-3xl text-muted-foreground')
   expect(
     contentShellMarkup.match(
       /aria-hidden="true" class="hidden w-64 shrink-0 xl:block"/g,
     )?.length,
   ).toBe(2)
   expect(contentShellMarkup).toContain('flex min-w-0 flex-1 justify-center')
-  expect(contentShellMarkup).toContain('flex w-full max-w-4xl flex-col gap-10')
+  expect(contentShellMarkup).toContain('flex w-full max-w-4xl flex-col gap-8')
+  expect(contentShellMarkup).toContain(
+    'data-pagefind-body="" class="flex flex-col gap-8"',
+  )
+})
+
+test('DefaultContentShell renders the content header metadata slot', async () => {
+  const { DefaultContentShell } = await import('@blackwork/docs/theme')
+  const HeaderMeta: React.FC<{ entry: { title: string } }> = ({ entry }) =>
+    React.createElement(
+      'div',
+      { 'data-testid': 'content-header-meta' },
+      `Meta for ${entry.title}`,
+    )
+  const { config, source, articleEntry } = createThemeContext({
+    slots: {
+      contentHeaderMeta: HeaderMeta,
+    },
+  })
+  const html = renderToStaticMarkup(
+    React.createElement(
+      DefaultContentShell,
+      {
+        config,
+        source,
+        entry: articleEntry,
+      },
+      React.createElement('p', null, 'Rendered content body'),
+    ),
+  )
+
+  expect(html).toContain('data-docs-region="article-header-meta"')
+  expect(html).toContain('data-testid="content-header-meta"')
+  expect(html).toContain(`Meta for ${articleEntry.title}`)
 })
 
 test('DefaultContentShell hides the toc rail when headings are too sparse', async () => {
@@ -340,41 +392,58 @@ test('DefaultContentShell hides the toc rail when headings are too sparse', asyn
 
 test('DefaultDocsToc keeps a single entry control when collapsed', async () => {
   const { DefaultDocsToc } = await import('../src/theme/components/docs-toc')
-  const html = renderToStaticMarkup(
+  const headings = [
+    {
+      depth: 2,
+      id: 'content-overview',
+      title: 'Content Overview',
+    },
+    {
+      depth: 2,
+      id: 'content-details',
+      title: 'Content Details',
+    },
+  ]
+  const leftHtml = renderToStaticMarkup(
     React.createElement(DefaultDocsToc, {
       collapseEnabled: true,
       defaultCollapsed: true,
-      headings: [
-        {
-          depth: 2,
-          id: 'content-overview',
-          title: 'Content Overview',
-        },
-        {
-          depth: 2,
-          id: 'content-details',
-          title: 'Content Details',
-        },
-      ],
+      headings,
+    }),
+  )
+  const rightHtml = renderToStaticMarkup(
+    React.createElement(DefaultDocsToc, {
+      collapseDirection: 'right',
+      collapseEnabled: true,
+      defaultCollapsed: true,
+      headings,
     }),
   )
   const tocMarkup = extractMarkup(
-    html,
+    leftHtml,
     /<aside data-docs-region="toc"[\s\S]*?<\/aside>/,
   )
-  const collapsedPanelMarkup = extractMarkup(
+  const toggleMarkup = extractMarkup(
     tocMarkup,
-    /<button[\s\S]*?data-docs-toc-panel="collapsed"[\s\S]*?<\/button>/,
+    /<button[\s\S]*?data-docs-toc-toggle="true"[\s\S]*?<\/button>/,
   )
 
   expect(tocMarkup).toContain('data-docs-toc-collapsed="true"')
-  expect(tocMarkup).not.toContain('data-docs-toc-toggle="true"')
-  expect(collapsedPanelMarkup).toContain('data-docs-toc-panel="collapsed"')
-  expect(collapsedPanelMarkup).toContain('aria-label="Expand outline"')
-  expect(collapsedPanelMarkup).toContain('type="button"')
-  expect(collapsedPanelMarkup).toContain('self-start')
-  expect(collapsedPanelMarkup).not.toContain('h-auto w-auto')
-  expect(collapsedPanelMarkup).not.toContain('border-border/60')
+  expect(tocMarkup).toContain('data-docs-toc-toggle="true"')
+  expect(tocMarkup).not.toContain('transition-[width]')
+  expect(tocMarkup).toContain('aria-hidden="true"')
+  expect(tocMarkup).toContain('transition-opacity')
+  expect(tocMarkup).toContain('pointer-events-none opacity-0')
+  expect(tocMarkup).not.toContain('transition-[opacity,transform]')
+  expect(tocMarkup).not.toContain('translate-x-2')
+  expect(toggleMarkup).toContain('aria-label="Expand outline"')
+  expect(toggleMarkup).toContain('aria-expanded="false"')
+  expect(toggleMarkup).toContain('type="button"')
+  expect(toggleMarkup).toContain('left-0')
+  expect(toggleMarkup).toContain('opacity-100')
+  expect(toggleMarkup).not.toContain('h-auto w-auto')
+  expect(toggleMarkup).not.toContain('border-border/60')
+  expect(rightHtml).toContain('right-0')
 })
 
 test('DefaultDocsHeader keeps the top navigation compact', async () => {

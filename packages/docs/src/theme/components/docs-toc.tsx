@@ -9,7 +9,7 @@ import {
   SheetTrigger,
   cn,
 } from 'blackwork'
-import { ChevronsLeft, Toc } from 'blackwork/icons'
+import { Toc } from 'blackwork/icons'
 import React, {
   useEffect,
   useId,
@@ -38,17 +38,23 @@ export interface DocsTocHeading {
 
 export interface DefaultDocsTocProps {
   className?: string
+  collapseDirection?: 'left' | 'right'
+  collapseLabel?: string
   collapseEnabled?: boolean
   defaultCollapsed?: boolean
   dock?: 'fixed' | 'sticky'
+  expandLabel?: string
   headings: DocsTocHeading[]
   minHeadings?: number
+  title?: string
 }
 
 export interface MobileDocsTocProps {
   className?: string
   headings: DocsTocHeading[]
   minHeadings?: number
+  openLabel?: string
+  title?: string
 }
 
 interface HeadingState {
@@ -642,14 +648,26 @@ function useTocTrack(activeIds: string[], headings: DocsTocHeading[]) {
 
 export const DefaultDocsToc: React.FC<DefaultDocsTocProps> = ({
   className,
+  collapseDirection = 'left',
+  collapseLabel = 'Collapse outline',
   collapseEnabled = false,
   defaultCollapsed = false,
   dock = 'sticky',
+  expandLabel = 'Expand outline',
   headings,
   minHeadings = 1,
+  title = TOC_TITLE,
 }) => {
   const tocState = useDocsTocState(headings)
   const [collapsed, setCollapsed] = useState(defaultCollapsed)
+  const toggleLabel = collapsed ? expandLabel : collapseLabel
+  const togglePositionClassName =
+    collapseDirection === 'right' ? 'right-0' : 'left-0'
+  const titlePaddingClassName = collapseEnabled
+    ? collapseDirection === 'right'
+      ? 'pr-10'
+      : 'pl-10'
+    : undefined
 
   if (headings.length < minHeadings) {
     return null
@@ -668,62 +686,59 @@ export const DefaultDocsToc: React.FC<DefaultDocsTocProps> = ({
         className,
       )}
     >
-      <nav aria-label="On This Page" className="flex flex-col gap-3 text-sm">
-        {!collapsed ? (
-          <div
-            className={cn(
-              'flex items-center gap-2',
-              collapseEnabled ? 'justify-between' : undefined,
-            )}
+      <nav
+        aria-label={title}
+        className={cn(
+          'relative flex w-64 flex-col text-sm',
+          collapseDirection === 'right' ? 'ml-auto' : undefined,
+        )}
+      >
+        <div
+          inert={collapseEnabled && collapsed ? true : undefined}
+          aria-hidden={collapseEnabled && collapsed ? true : undefined}
+          className={cn(
+            'flex w-64 flex-col gap-3 overflow-hidden transition-opacity duration-200 ease-out motion-reduce:transition-none',
+            collapseEnabled && collapsed
+              ? 'pointer-events-none opacity-0'
+              : 'opacity-100',
+          )}
+        >
+          <p
+            className={cn('font-medium text-foreground', titlePaddingClassName)}
           >
-            <p className="font-medium text-foreground">{TOC_TITLE}</p>
+            {title}
+          </p>
 
-            {collapseEnabled ? (
-              <Button
-                type="button"
-                variant="ghost"
-                size="icon"
-                data-docs-toc-toggle="true"
-                aria-controls={tocState.listId}
-                aria-expanded="true"
-                title="Collapse outline"
-                aria-label="Collapse outline"
-                className="size-8 shrink-0 text-muted-foreground hover:text-foreground"
-                onClick={() => {
-                  setCollapsed((current) => !current)
-                }}
-              >
-                <ChevronsLeft className="size-4" aria-hidden="true" />
-                <span className="sr-only">Collapse outline</span>
-              </Button>
-            ) : null}
-          </div>
-        ) : null}
-
-        {!collapsed ? (
           <DocsTocList
             {...tocState}
             headings={headings}
             listClassName="max-h-[calc(100dvh-8rem)]"
           />
-        ) : (
+        </div>
+
+        {collapseEnabled ? (
           <Button
             type="button"
-            data-docs-toc-panel="collapsed"
             variant="ghost"
             size="icon"
-            aria-label="Expand outline"
-            aria-expanded="false"
-            title="Expand outline"
-            className="self-start shrink-0 text-muted-foreground hover:text-foreground"
+            data-docs-toc-toggle="true"
+            aria-controls={tocState.listId}
+            aria-label={toggleLabel}
+            aria-expanded={!collapsed}
+            title={toggleLabel}
+            className={cn(
+              togglePositionClassName,
+              'absolute top-0 z-10 shrink-0 text-muted-foreground transition-opacity duration-200 ease-out hover:text-foreground hover:opacity-100 motion-reduce:transition-none',
+              collapsed ? 'opacity-100' : 'opacity-60',
+            )}
             onClick={() => {
-              setCollapsed(false)
+              setCollapsed((current) => !current)
             }}
           >
             <Toc className="size-4" aria-hidden="true" />
-            <span className="sr-only">Expand outline</span>
+            <span className="sr-only">{toggleLabel}</span>
           </Button>
-        )}
+        ) : null}
       </nav>
     </aside>
   )
@@ -733,6 +748,8 @@ export const MobileDocsToc: React.FC<MobileDocsTocProps> = ({
   className,
   headings,
   minHeadings = 1,
+  openLabel = 'Open outline',
+  title = TOC_TITLE,
 }) => {
   const tocState = useDocsTocState(headings)
   const [open, setOpen] = useState(false)
@@ -749,14 +766,14 @@ export const MobileDocsToc: React.FC<MobileDocsTocProps> = ({
             type="button"
             variant="outline"
             size="icon"
-            title="Open outline"
-            aria-label="Open outline"
+            title={openLabel}
+            aria-label={openLabel}
             data-docs-toc-mobile-trigger="true"
             className="fixed border border-input bg-background shadow-sm"
             style={getDocsFloatingActionStyle(1)}
           >
             <Toc className="size-4" aria-hidden="true" />
-            <span className="sr-only">Open outline</span>
+            <span className="sr-only">{openLabel}</span>
           </Button>
         </SheetTrigger>
 
@@ -765,7 +782,7 @@ export const MobileDocsToc: React.FC<MobileDocsTocProps> = ({
           className="flex h-dvh flex-col gap-0 p-0 sm:max-w-sm"
         >
           <SheetHeader className="border-b border-border/60 px-6 pb-4 pt-[calc(env(safe-area-inset-top)+1.5rem)] text-left">
-            <SheetTitle>{TOC_TITLE}</SheetTitle>
+            <SheetTitle>{title}</SheetTitle>
           </SheetHeader>
 
           <div className="flex min-h-0 flex-1 flex-col overflow-hidden px-6 pb-[calc(env(safe-area-inset-bottom)+1.5rem)] pt-4">

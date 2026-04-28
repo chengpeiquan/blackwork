@@ -1,3 +1,4 @@
+import type { DocEntry } from '../source/types'
 import type { AnchorHTMLAttributes, ComponentType, ReactNode } from 'react'
 
 export interface DocsThemeNavItem {
@@ -37,7 +38,12 @@ export interface DocsThemeHeaderActionsProps {
   siteTitle: string
 }
 
+export interface DocsThemeContentHeaderMetaProps {
+  entry: DocEntry
+}
+
 export interface DocsThemeSlots {
+  contentHeaderMeta?: ComponentType<DocsThemeContentHeaderMetaProps>
   footer?: ComponentType<DocsThemeFooterSlotProps>
   headerActions?: ComponentType<DocsThemeHeaderActionsProps>
   link?: DocsThemeLinkComponent
