@@ -10,8 +10,8 @@ describe('getDocsRailFadeState', () => {
         scrollHeight: 320,
       }),
     ).toEqual({
-      showTop: false,
-      showBottom: false,
+      bottomVisible: false,
+      topVisible: false,
     })
   })
 
@@ -23,8 +23,8 @@ describe('getDocsRailFadeState', () => {
         scrollHeight: 520,
       }),
     ).toEqual({
-      showTop: false,
-      showBottom: true,
+      bottomVisible: true,
+      topVisible: false,
     })
   })
 
@@ -36,8 +36,8 @@ describe('getDocsRailFadeState', () => {
         scrollHeight: 520,
       }),
     ).toEqual({
-      showTop: true,
-      showBottom: true,
+      bottomVisible: true,
+      topVisible: true,
     })
   })
 
@@ -49,8 +49,8 @@ describe('getDocsRailFadeState', () => {
         scrollHeight: 520,
       }),
     ).toEqual({
-      showTop: true,
-      showBottom: false,
+      bottomVisible: false,
+      topVisible: true,
     })
   })
 })
