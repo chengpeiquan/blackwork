@@ -18,6 +18,11 @@ test('mergeComponents preserves defaults and lets later layers override earlier 
   expect(components.pre).toBe(defaultComponents.pre)
   expect(components.a).toBe(CustomLink)
 
+  // oxlint-disable-next-line jest/no-conditional-in-test
+  if (!components.a) {
+    throw new Error('Expected merged link component to be defined')
+  }
+
   const html = renderToStaticMarkup(
     React.createElement(components.a, { href: '/docs' }, 'Docs'),
   )

@@ -10,6 +10,7 @@ import {
   extractHeadings,
 } from './create-processor'
 import type { CompileOptions, CompileResult } from '../types'
+import type { MDXComponents } from 'mdx/types'
 
 const createExcerpt = (body: string) => {
   const [excerpt = ''] = body
@@ -42,7 +43,10 @@ export const compileMdxSource = async (
 
   const Content = module.default
   const contentProps = {
-    components: mergeComponents(defaultComponents, options.components),
+    components: mergeComponents(
+      defaultComponents,
+      options.components,
+    ) as MDXComponents,
   }
   const element = React.createElement(Content, contentProps)
   const jsxElement = React.isValidElement(element) ? element : null
