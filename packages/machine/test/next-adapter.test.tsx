@@ -87,6 +87,9 @@ test('createNextComponents uses injected Next-style components and preserves pre
   expect(renderToStaticMarkup(image as React.ReactElement)).toContain(
     'data-next-image="/cover.png"',
   )
+  expect(renderToStaticMarkup(image as React.ReactElement)).toContain(
+    'relative mx-auto block w-full',
+  )
   expect(renderToStaticMarkup(pre as React.ReactElement)).toContain(
     'data-file-name="src/demo.ts"',
   )

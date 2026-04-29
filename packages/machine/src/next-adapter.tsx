@@ -12,7 +12,7 @@ interface FigureProps extends React.PropsWithChildren {
 
 const Figure: React.FC<FigureProps> = ({ title, children }) => {
   return (
-    <figure className="3xl:max-w-screen-lg relative mx-auto inline-block w-full max-w-screen-sm text-center md:max-w-screen-md">
+    <figure className="3xl:max-w-screen-lg relative mx-auto block w-full max-w-screen-sm text-center md:max-w-screen-md">
       {children}
 
       {title && (
