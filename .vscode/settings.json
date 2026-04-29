@@ -11,6 +11,7 @@
     "iife",
     "lucide",
     "nocheck",
+    "oxlint",
     "Shadcn",
     "sonner",
     "tailwindcss",

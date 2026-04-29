@@ -2,6 +2,11 @@ import React from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { expect, test } from 'vitest'
 import { createNextComponents } from '../src/next-adapter'
+import type { Element } from 'hast'
+
+type ComponentOverride<Props> = (
+  props: Props,
+) => React.ReactNode | Promise<React.ReactNode>
 
 const Link: React.FC<React.PropsWithChildren<{ href: string }>> = ({
   children,
@@ -21,8 +26,12 @@ const ExternalLink: React.FC<React.PropsWithChildren<{ href: string }>> = ({
   </a>
 )
 
-const Image: React.FC<{ src: string; alt?: string }> = ({ src, alt }) => (
-  <img data-next-image={src} alt={alt} />
+const Image: React.FC<Record<string, unknown>> = ({ src, alt, className }) => (
+  <img
+    className={typeof className === 'string' ? className : undefined}
+    data-next-image={typeof src === 'string' ? src : undefined}
+    alt={typeof alt === 'string' ? alt : undefined}
+  />
 )
 
 const CodeBlock: React.FC<
@@ -49,19 +58,31 @@ test('createNextComponents uses injected Next-style components and preserves pre
     CodeBlock,
   })
 
-  const internalLink = await components.a?.({
+  const anchor = components.a as ComponentOverride<
+    React.AnchorHTMLAttributes<HTMLAnchorElement>
+  >
+  const img = components.img as ComponentOverride<
+    React.ImgHTMLAttributes<HTMLImageElement>
+  >
+  const pre = components.pre as ComponentOverride<
+    React.HTMLAttributes<HTMLPreElement> & {
+      node?: Element
+    }
+  >
+
+  const internalLink = await anchor({
     href: '/docs',
     children: 'Docs',
   })
-  const externalLink = await components.a?.({
+  const externalLink = await anchor({
     href: 'https://example.com',
     children: 'External',
   })
-  const image = await components.img?.({
+  const image = await img({
     src: '/cover.png',
     alt: 'Cover',
   })
-  const pre = await components.pre?.({
+  const codeBlock = await pre({
     node: {
       type: 'element',
       tagName: 'pre',
@@ -74,7 +95,7 @@ test('createNextComponents uses injected Next-style components and preserves pre
           children: [{ type: 'text', value: 'const foo = 1' }],
         },
       ],
-    } as any,
+    },
     children: React.createElement('code', null, 'const foo = 1'),
   })
 
@@ -90,13 +111,13 @@ test('createNextComponents uses injected Next-style components and preserves pre
   expect(renderToStaticMarkup(image as React.ReactElement)).toContain(
     'relative mx-auto block w-full',
   )
-  expect(renderToStaticMarkup(pre as React.ReactElement)).toContain(
+  expect(renderToStaticMarkup(codeBlock as React.ReactElement)).toContain(
     'data-file-name="src/demo.ts"',
   )
-  expect(renderToStaticMarkup(pre as React.ReactElement)).toContain(
+  expect(renderToStaticMarkup(codeBlock as React.ReactElement)).toContain(
     'data-language="ts"',
   )
-  expect(renderToStaticMarkup(pre as React.ReactElement)).toContain(
+  expect(renderToStaticMarkup(codeBlock as React.ReactElement)).toContain(
     'data-raw-code="const foo = 1"',
   )
 })
