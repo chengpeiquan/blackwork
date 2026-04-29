@@ -24,6 +24,7 @@ test('creates a publish plan with public access for scoped packages', async () =
       otp: '123456',
       access: 'public',
       dryRun: true,
+      gitChecks: false,
       skipBuild: false,
     },
   )
@@ -43,6 +44,18 @@ test('creates a publish plan without forcing access for unscoped packages', asyn
     otp: undefined,
     access: undefined,
     dryRun: false,
+    gitChecks: false,
     skipBuild: false,
   })
+})
+
+test('creates publish args that skip pnpm git checks', async () => {
+  const { createPublishArgs, createPublishPlan } = await import('./publish.mjs')
+
+  assert.deepEqual(createPublishArgs(createPublishPlan(['docs'])), [
+    'publish',
+    '--access',
+    'public',
+    '--no-git-checks',
+  ])
 })

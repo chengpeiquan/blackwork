@@ -77,17 +77,12 @@ const createPublishPlan = (args) => {
     access:
       access ?? (target.packageName.startsWith('@') ? 'public' : undefined),
     dryRun,
+    gitChecks: false,
     skipBuild,
   }
 }
 
-const run = (args = process.argv.slice(2)) => {
-  const plan = createPublishPlan(args)
-
-  if (!plan.skipBuild) {
-    runPnpmCommand(['--filter', plan.target.packageName, 'build'])
-  }
-
+const createPublishArgs = (plan) => {
   const publishArgs = ['publish']
 
   if (plan.access) {
@@ -106,7 +101,21 @@ const run = (args = process.argv.slice(2)) => {
     publishArgs.push('--dry-run')
   }
 
-  runPnpmCommand(publishArgs, {
+  if (plan.gitChecks === false) {
+    publishArgs.push('--no-git-checks')
+  }
+
+  return publishArgs
+}
+
+const run = (args = process.argv.slice(2)) => {
+  const plan = createPublishPlan(args)
+
+  if (!plan.skipBuild) {
+    runPnpmCommand(['--filter', plan.target.packageName, 'build'])
+  }
+
+  runPnpmCommand(createPublishArgs(plan), {
     cwd: resolve(workspaceDir, plan.target.packageDir),
   })
 }
@@ -120,4 +129,4 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   }
 }
 
-export { createPublishPlan, run }
+export { createPublishArgs, createPublishPlan, run }
