@@ -28,6 +28,20 @@ const createChangelogPlan = (args) => {
   }
 }
 
+const createChangelogArgs = (plan) => {
+  if (plan.listOnly) {
+    return []
+  }
+
+  return [
+    'exec',
+    'changelog',
+    '--lerna-package',
+    plan.target.alias,
+    ...plan.extraArgs,
+  ]
+}
+
 const run = (args = process.argv.slice(2)) => {
   const plan = createChangelogPlan(args)
 
@@ -36,7 +50,7 @@ const run = (args = process.argv.slice(2)) => {
     return
   }
 
-  runPnpmCommand(['exec', 'changelog', ...plan.extraArgs], {
+  runPnpmCommand(createChangelogArgs(plan), {
     cwd: resolve(workspaceDir, plan.target.packageDir),
   })
 }
@@ -50,4 +64,4 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   }
 }
 
-export { createChangelogPlan, run }
+export { createChangelogArgs, createChangelogPlan, run }
