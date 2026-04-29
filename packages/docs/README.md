@@ -1,5 +1,17 @@
 # @blackwork/docs
 
+<p>
+  <a href='https://www.npmjs.com/package/@blackwork/docs'>
+    <img src="https://img.shields.io/npm/v/@blackwork/docs?color=333&label=npm" />
+  </a>
+  <a href="https://www.npmjs.com/package/@blackwork/docs" target="__blank">
+    <img src="https://img.shields.io/npm/dt/@blackwork/docs?color=333&label=downloads" />
+  </a>
+  <a href="https://github.com/chengpeiquan/blackwork" target="__blank">
+    <img alt="GitHub stars" src="https://img.shields.io/github/stars/chengpeiquan/blackwork?style=social" />
+  </a>
+</p>
+
 `@blackwork/docs` is a Next.js-first documentation framework for the Blackwork ecosystem.
 
 It sits one layer above `blackwork` and `@blackwork/machine`:

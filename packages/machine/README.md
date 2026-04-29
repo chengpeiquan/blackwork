@@ -1,5 +1,17 @@
 # @blackwork/machine
 
+<p>
+  <a href='https://www.npmjs.com/package/@blackwork/machine'>
+    <img src="https://img.shields.io/npm/v/@blackwork/machine?color=333&label=npm" />
+  </a>
+  <a href="https://www.npmjs.com/package/@blackwork/machine" target="__blank">
+    <img src="https://img.shields.io/npm/dt/@blackwork/machine?color=333&label=downloads" />
+  </a>
+  <a href="https://github.com/chengpeiquan/blackwork" target="__blank">
+    <img alt="GitHub stars" src="https://img.shields.io/github/stars/chengpeiquan/blackwork?style=social" />
+  </a>
+</p>
+
 `@blackwork/machine` is a tattoo-machine-inspired Markdown and MDX engine designed specifically for the Blackwork React UI ecosystem. It is built to power Blackwork-based blogs and documentation sites, rather than to serve as a fully generic content framework.
 
 ## Usage
