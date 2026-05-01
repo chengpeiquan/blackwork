@@ -1,4 +1,5 @@
 // @ts-check
+import { fixupConfigRules } from '@eslint/compat'
 import { createGetConfigNameFactory } from '@bassist/eslint-config'
 import { defineEslintConfig, eslintPresets } from '@bassist/oxc-integration'
 
@@ -22,14 +23,16 @@ const workspaceFiles = [
 const blackworkFiles = ['packages/blackwork/src/**/*.{js,jsx,ts,tsx}']
 const machineTestFiles = ['packages/machine/test/**/*.{js,jsx,ts,tsx}']
 const docsStarterFiles = ['apps/docs-starter/**/*.{js,jsx,ts,tsx}']
+const reactConfigs = eslintPresets
+  .react()
+  .filter((config) => config.name !== 'bassist/imports')
 
 export default defineEslintConfig(
   ...scopeConfigs(eslintPresets.imports(), workspaceFiles),
-  ...scopeConfigs(eslintPresets.react(), workspaceFiles),
+  ...scopeConfigs(fixupConfigRules(reactConfigs), workspaceFiles),
   ...scopeConfigs(
     eslintPresets.tailwindcss({
-      config: 'packages/blackwork/tailwind.config.ts',
-      whitelist: ['toaster'],
+      entryPoint: 'packages/blackwork/src/styles/tailwind.css',
     }),
     blackworkFiles,
   ),
@@ -78,12 +81,9 @@ export default defineEslintConfig(
     name: getConfigName('blackwork-tailwind'),
     files: blackworkFiles,
     rules: {
-      'tailwindcss/no-custom-classname': [
-        'warn',
-        {
-          whitelist: ['toaster'],
-        },
-      ],
+      'better-tailwindcss/enforce-consistent-class-order': 'off',
+      'better-tailwindcss/enforce-consistent-line-wrapping': 'off',
+      'better-tailwindcss/no-unknown-classes': 'off',
     },
   },
 
@@ -91,9 +91,9 @@ export default defineEslintConfig(
     name: getConfigName('docs-starter-tailwind'),
     files: docsStarterFiles,
     rules: {
-      'tailwindcss/classnames-order': 'off',
-      'tailwindcss/enforces-shorthand': 'off',
-      'tailwindcss/no-custom-classname': 'off',
+      'better-tailwindcss/enforce-consistent-class-order': 'off',
+      'better-tailwindcss/enforce-shorthand-classes': 'off',
+      'better-tailwindcss/no-unknown-classes': 'off',
     },
   },
 
