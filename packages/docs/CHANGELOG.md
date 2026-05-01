@@ -1,3 +1,9 @@
+# [0.4.0](https://github.com/chengpeiquan/blackwork/compare/docs@0.3.0...docs@0.4.0) (2026-05-01)
+
+### Features
+
+- **tailwind-entry:** expose docs source styles ([e317236](https://github.com/chengpeiquan/blackwork/commit/e31723612ba9ae3d101257641afe5a2d3d89eab1))
+
 # [0.3.0](https://github.com/chengpeiquan/blackwork/compare/docs@0.2.0...docs@0.3.0) (2026-04-29)
 
 ### Bug Fixes
