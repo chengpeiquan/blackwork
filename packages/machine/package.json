@@ -1,6 +1,6 @@
 {
   "name": "@blackwork/machine",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "@blackwork/machine is a tattoo-machine-inspired Markdown and MDX engine designed specifically for the Blackwork React UI ecosystem. It is built to power Blackwork-based blogs and documentation sites, rather than to serve as a fully generic content framework.",
   "author": "chengpeiquan <chengpeiquan@chengpeiquan.com>",
   "homepage": "https://chengpeiquan.com",
@@ -32,7 +32,8 @@
       "types": "./dist/next-adapter.d.ts",
       "import": "./dist/next-adapter.mjs",
       "require": "./dist/next-adapter.cjs"
-    }
+    },
+    "./tailwind.css": "./dist/tailwind.css"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
@@ -44,7 +45,7 @@
     "blackwork"
   ],
   "scripts": {
-    "build": "tsdown",
+    "build": "tsdown && node ./scripts/copy-css.mjs",
     "lint": "pnpm -C ../.. exec eslint --config eslint.config.js packages/machine/src packages/machine/test",
     "test": "vitest run",
     "test:watch": "vitest",

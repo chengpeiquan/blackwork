@@ -69,14 +69,30 @@ await Markdown({
 })
 ```
 
+## Tailwind Setup
+
+### Tailwind CSS v3
+
 If your app uses Tailwind CSS and consumes runtime components from this package,
-remember to include the package files in your `content` globs:
+include both `blackwork` and `@blackwork/machine` build output in the content
+scan:
 
 ```ts
 export default {
   content: [
     './src/**/*.{js,mjs,cjs,ts,jsx,tsx,mdx}',
-    './node_modules/@blackwork/machine/**/*.{js,mjs,cjs,ts,jsx,tsx,mdx}',
+    './node_modules/blackwork/dist/**/*.{js,mjs,cjs}',
+    './node_modules/@blackwork/machine/dist/**/*.{js,mjs,cjs}',
   ],
 }
+```
+
+### Tailwind CSS v4
+
+Import the Blackwork and machine package Tailwind entries explicitly:
+
+```css
+@import 'tailwindcss';
+@import 'blackwork/tailwind.css';
+@import '@blackwork/machine/tailwind.css';
 ```
