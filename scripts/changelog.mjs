@@ -42,7 +42,15 @@ const createChangelogArgs = (plan) => {
   ]
 }
 
-const run = (args = process.argv.slice(2)) => {
+const createFormatChangelogArgs = (plan) => {
+  if (plan.listOnly) {
+    return []
+  }
+
+  return ['exec', 'prettier', '--write', 'CHANGELOG.md']
+}
+
+const run = (args = process.argv.slice(2), runCommand = runPnpmCommand) => {
   const plan = createChangelogPlan(args)
 
   if (plan.listOnly) {
@@ -50,9 +58,10 @@ const run = (args = process.argv.slice(2)) => {
     return
   }
 
-  runPnpmCommand(createChangelogArgs(plan), {
-    cwd: resolve(workspaceDir, plan.target.packageDir),
-  })
+  const cwd = resolve(workspaceDir, plan.target.packageDir)
+
+  runCommand(createChangelogArgs(plan), { cwd })
+  runCommand(createFormatChangelogArgs(plan), { cwd })
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
@@ -64,4 +73,9 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   }
 }
 
-export { createChangelogArgs, createChangelogPlan, run }
+export {
+  createChangelogArgs,
+  createChangelogPlan,
+  createFormatChangelogArgs,
+  run,
+}

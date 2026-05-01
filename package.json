@@ -20,6 +20,7 @@
     "test": "turbo run test",
     "test:scripts": "node --test scripts/*.test.mjs",
     "format": "oxfmt .",
+    "format:changelog": "pnpm exec prettier --write \"packages/*/CHANGELOG.md\"",
     "prepare": "husky"
   },
   "devDependencies": {
@@ -35,6 +36,7 @@
     "npm-run-all2": "^8.0.4",
     "oxfmt": "^0.46.0",
     "oxlint": "^1.62.0",
+    "prettier": "^3.8.3",
     "tailwindcss": "^4.2.4",
     "turbo": "^2.9.6"
   },

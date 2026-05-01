@@ -24,3 +24,22 @@ test('preserves explicit changelog args after the package tag prefix', async () 
     ['exec', 'changelog', '--lerna-package', 'machine', '--release-count', '0'],
   )
 })
+
+test('formats the generated changelog file after changelog generation', async () => {
+  const calls = []
+  const { run } = await import('./changelog.mjs')
+
+  run(['docs'], (args, options) => {
+    calls.push({ args, cwd: options.cwd })
+  })
+
+  assert.deepEqual(
+    calls.map(({ args }) => args),
+    [
+      ['exec', 'changelog', '--lerna-package', 'docs'],
+      ['exec', 'prettier', '--write', 'CHANGELOG.md'],
+    ],
+  )
+  assert.equal(calls[0].cwd, calls[1].cwd)
+  assert.match(calls[1].cwd, /packages\/docs$/)
+})
