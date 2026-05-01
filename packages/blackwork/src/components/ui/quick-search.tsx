@@ -86,7 +86,11 @@ const QuickSearchDialog = ({
   return (
     <Dialog {...props}>
       <DialogContent
-        className={cn('max-w-xl overflow-hidden p-0 shadow-lg', className)}
+        className={cn(
+          'max-w-xl overflow-hidden p-0 shadow-lg',
+          'data-[state=closed]:!animate-none data-[state=open]:!animate-none',
+          className,
+        )}
         {...rest}
       >
         <VisuallyHidden.Root>
