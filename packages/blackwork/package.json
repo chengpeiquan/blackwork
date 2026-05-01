@@ -1,6 +1,6 @@
 {
   "name": "blackwork",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "description": "Blackwork Tattoo style React UI layout for blogs, documentation sites, and other content-driven websites.",
   "author": "chengpeiquan <chengpeiquan@chengpeiquan.com>",
   "homepage": "https://chengpeiquan.com",
@@ -36,7 +36,9 @@
     }
   },
   "exports": {
+    "./theme.css": "./dist/theme.css",
     "./ui-globals.css": "./dist/ui-globals.css",
+    "./tailwind.css": "./dist/tailwind.css",
     "./tailwind-config": {
       "import": {
         "types": "./dist/tailwind-config.d.mts",
@@ -104,6 +106,7 @@
     "diff": "npx shadcn-ui diff",
     "lint": "pnpm -C ../.. exec eslint --config eslint.config.js packages/blackwork/src",
     "prepack": "pnpm build",
+    "test": "node --test test/*.test.mjs",
     "format": "oxfmt ."
   },
   "repository": {
