@@ -1,6 +1,6 @@
 {
   "name": "@blackwork/docs",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Next-first documentation framework for Blackwork projects.",
   "author": "chengpeiquan <chengpeiquan@chengpeiquan.com>",
   "homepage": "https://chengpeiquan.com",
@@ -32,7 +32,8 @@
       "types": "./dist/runtime.d.ts",
       "import": "./dist/runtime.mjs",
       "require": "./dist/runtime.cjs"
-    }
+    },
+    "./tailwind.css": "./dist/tailwind.css"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
@@ -44,7 +45,7 @@
     "blackwork"
   ],
   "scripts": {
-    "build": "tsdown",
+    "build": "tsdown && node ./scripts/copy-css.mjs",
     "lint": "pnpm -C ../.. exec eslint --config eslint.config.js packages/docs/src packages/docs/test",
     "prepack": "pnpm build",
     "test": "vitest run",
@@ -63,7 +64,7 @@
     "jiti": "^1.21.7"
   },
   "peerDependencies": {
-    "blackwork": ">=0.10.0",
+    "blackwork": ">=0.11.0",
     "next": ">=16.0.0",
     "react": ">=19.0.0",
     "react-dom": ">=19.0.0"
