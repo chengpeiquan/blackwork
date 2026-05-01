@@ -235,7 +235,6 @@ overrides should stay in `docs.config.ts`.
 ```tsx
 import { DocsRootLayout } from '@blackwork/docs'
 import { docsConfig } from '../../docs.config'
-import 'blackwork/ui-globals.css'
 import './globals.css'
 
 export default function RootLayout({
@@ -304,6 +303,8 @@ export default function DocsRoutePage({
 
 ## Tailwind Setup
 
+### Tailwind CSS v3
+
 If your app uses Tailwind CSS, include both `blackwork` and `@blackwork/docs` build output in the content scan:
 
 ```ts
@@ -323,6 +324,16 @@ export default {
   theme,
   plugins: [typography, animate],
 } satisfies Config
+```
+
+### Tailwind CSS v4
+
+Import the Blackwork and docs package Tailwind entries explicitly:
+
+```css
+@import 'tailwindcss';
+@import 'blackwork/tailwind.css';
+@import '@blackwork/docs/tailwind.css';
 ```
 
 ## Difference From `@blackwork/machine`
