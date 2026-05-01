@@ -23,15 +23,6 @@ export default defineConfig(
           },
         },
       },
-      {
-        files: ['apps/docs-starter/**/*.{js,jsx,ts,tsx,mdx}'],
-        options: {
-          sortTailwindcss: {
-            config: 'apps/docs-starter/tailwind.config.ts',
-            functions: ['cn', 'clsx', 'cva'],
-          },
-        },
-      },
     ],
     sortPackageJson: false,
   }),

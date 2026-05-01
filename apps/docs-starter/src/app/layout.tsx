@@ -1,6 +1,5 @@
 import { DocsRootLayout } from '@blackwork/docs'
 import { docsConfig } from '../../docs.config'
-import 'blackwork/ui-globals.css'
 import './globals.css'
 
 export default function RootLayout({

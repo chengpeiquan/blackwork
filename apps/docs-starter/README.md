@@ -163,12 +163,12 @@ an error that names the section, locale, and bad `href`.
 
 ## Tailwind
 
-The starter scans both package build outputs so runtime classes from the docs package are included:
+The starter uses Tailwind CSS v4 and imports Blackwork's v4 theme tokens from the app stylesheet:
 
-```ts
-content: [
-  './src/**/*.{js,mjs,cjs,ts,jsx,tsx,md,mdx}',
-  './node_modules/blackwork/dist/**/*.{js,mjs,cjs}',
-  './node_modules/@blackwork/docs/dist/**/*.{js,mjs,cjs}',
-]
+```css
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'blackwork/tailwind.css';
+@import '@blackwork/docs/tailwind.css';
+@plugin '@tailwindcss/typography';
 ```

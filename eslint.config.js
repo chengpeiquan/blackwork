@@ -34,13 +34,6 @@ export default defineEslintConfig(
     blackworkFiles,
   ),
   ...scopeConfigs(eslintPresets.vitest(), machineTestFiles),
-  ...scopeConfigs(
-    eslintPresets.tailwindcss({
-      config: 'apps/docs-starter/tailwind.config.ts',
-      whitelist: ['prose', 'prose-invert'],
-    }),
-    docsStarterFiles,
-  ),
   ...scopeConfigs(eslintPresets.vitest(), [
     'apps/docs-starter/src/**/*.test.ts',
   ]),

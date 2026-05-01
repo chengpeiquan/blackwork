@@ -8,6 +8,15 @@ const globalsCss = readFileSync(
 )
 
 describe('docs globals css', () => {
+  test('uses Tailwind CSS v4 imports and Blackwork theme tokens', () => {
+    expect(globalsCss).toContain("@import 'tailwindcss';")
+    expect(globalsCss).toContain("@import 'tw-animate-css';")
+    expect(globalsCss).toContain("@import 'blackwork/tailwind.css';")
+    expect(globalsCss).toContain("@import '@blackwork/docs/tailwind.css';")
+    expect(globalsCss).toContain("@plugin '@tailwindcss/typography';")
+    expect(globalsCss).not.toContain('node_modules')
+  })
+
   test('excludes not-prose islands from article typography overrides', () => {
     expect(globalsCss).toContain(
       'article :where(h2, h3, h4):not(:where(.not-prose, .not-prose *))',
