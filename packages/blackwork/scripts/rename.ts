@@ -3,6 +3,7 @@ import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
+const packageRoot = resolve(__dirname, '..')
 
 const pickStyleFile = async (outDir: string) => {
   const candidates = ['ui-globals.css', 'style.css', 'index.css']
@@ -48,13 +49,31 @@ const ensureStableCssEntry = async (outDir: string) => {
   }
 }
 
-const run = async () => {
-  const outDir = resolve(__dirname, '../dist')
+const copyThemeCssEntry = async (outDir: string) => {
+  await copyFile(
+    resolve(packageRoot, 'src/styles/theme.css'),
+    resolve(outDir, 'theme.css'),
+  )
+}
 
+const copyTailwindCssEntry = async (outDir: string) => {
+  await copyFile(
+    resolve(packageRoot, 'src/styles/tailwind.css'),
+    resolve(outDir, 'tailwind.css'),
+  )
+}
+
+export const normalizeBuildOutput = async (outDir: string) => {
   await Promise.all([
     ensureStableCssEntry(outDir),
+    copyThemeCssEntry(outDir),
+    copyTailwindCssEntry(outDir),
     copyCommonJsDeclarationFiles(outDir),
   ])
+}
+
+const run = async () => {
+  await normalizeBuildOutput(resolve(__dirname, '../dist'))
 }
 
 run().catch((e) => {

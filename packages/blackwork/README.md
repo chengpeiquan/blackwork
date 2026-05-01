@@ -37,6 +37,8 @@ pnpm add @hookform/resolvers react-hook-form
 
 ## Usage
 
+### Tailwind CSS v3
+
 In your `tailwind.config.ts`:
 
 ```ts
@@ -62,6 +64,24 @@ In your root layout:
 ```tsx
 // e.g. `src/app/layout.tsx`
 import 'blackwork/ui-globals.css'
+```
+
+### Tailwind CSS v4
+
+Tailwind CSS v4 users do not need `blackwork/tailwind-config`. Import Tailwind and the Blackwork v4 CSS entry from your app stylesheet:
+
+```css
+@import 'tailwindcss';
+@import 'blackwork/tailwind.css';
+```
+
+Set `--blackwork-font-sans` in your app stylesheet if you want to override Tailwind v4's `font-sans` token.
+
+If you only need the shared theme tokens and globals without scanning Blackwork components, import the lower-level CSS entries directly:
+
+```css
+@import 'blackwork/theme.css';
+@import 'blackwork/ui-globals.css';
 ```
 
 In your layout or other components:
