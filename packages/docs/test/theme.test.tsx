@@ -446,6 +446,31 @@ test('DefaultDocsToc keeps a single entry control when collapsed', async () => {
   expect(rightHtml).toContain('right-0')
 })
 
+test('DefaultDocsToc gives the scroll list a flex parent', async () => {
+  const { DefaultDocsToc } = await import('../src/theme/components/docs-toc')
+  const html = renderToStaticMarkup(
+    React.createElement(DefaultDocsToc, {
+      headings: [
+        {
+          depth: 2,
+          id: 'content-overview',
+          title: 'Content Overview',
+        },
+        {
+          depth: 2,
+          id: 'content-details',
+          title: 'Content Details',
+        },
+      ],
+    }),
+  )
+
+  expect(html).toContain('relative flex min-h-0 flex-col')
+  expect(html).toContain(
+    'flex flex-col overflow-auto py-1 [scrollbar-width:none] max-h-[calc(100dvh-8rem)]',
+  )
+})
+
 test('DefaultDocsHeader keeps the top navigation compact', async () => {
   const { DefaultDocsHeader } = await import('@blackwork/docs/theme')
   const html = renderToStaticMarkup(
