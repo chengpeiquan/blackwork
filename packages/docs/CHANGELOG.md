@@ -1,3 +1,9 @@
+## [0.4.1](https://github.com/chengpeiquan/blackwork/compare/docs@0.4.0...docs@0.4.1) (2026-05-03)
+
+### Bug Fixes
+
+- **toc:** restore mobile outline scrolling ([a3276e5](https://github.com/chengpeiquan/blackwork/commit/a3276e5f4ab24d48d85617fb152429f734e7b8e2))
+
 # [0.4.0](https://github.com/chengpeiquan/blackwork/compare/docs@0.3.0...docs@0.4.0) (2026-05-01)
 
 ### Features

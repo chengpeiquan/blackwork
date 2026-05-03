@@ -34,3 +34,4 @@ pnpm-debug.log*
 # Auto import files
 src/types/declaration-files/auto-imports.d.ts
 packages/*/src/types/declaration-files/auto-imports.d.ts
+next-env.d.ts
