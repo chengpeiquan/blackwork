@@ -380,7 +380,7 @@ const DocsTocList: React.FC<DocsTocListProps> = ({
   }, [activeIds, listRef])
 
   return (
-    <div className={cn('relative', wrapperClassName)}>
+    <div className={cn('relative flex min-h-0 flex-col', wrapperClassName)}>
       <div
         aria-hidden="true"
         data-docs-toc-track="true"
