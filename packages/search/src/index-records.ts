@@ -25,7 +25,7 @@ const normalizeRequiredPath = (value: string, label: string): string => {
 }
 
 const normalizeOutputPath = (outputPath: string | undefined): string => {
-  if (outputPath == null) {
+  if (outputPath === undefined) {
     return resolve('pagefind')
   }
 
@@ -44,7 +44,7 @@ const getMissingIndexError = (errors: string[]): Error => {
 }
 
 const normalizeText = (value: string | undefined): string | undefined => {
-  if (value == null) {
+  if (value === undefined) {
     return undefined
   }
 
@@ -174,7 +174,7 @@ const toStringRecord = (
 
   const serialized = Object.entries(values).reduce<Record<string, string>>(
     (result, [key, value]) => {
-      if (value == null) {
+      if (value === null) {
         return result
       }
 

@@ -22,7 +22,7 @@ import { defaultComponents } from '../runtime/default-components'
 import { mergeComponents } from '../runtime/merge-components'
 import type { ComponentMap, HeadingItem } from '../types'
 
-const CODE_BLOCK_TITLE_PATTERN = /(?:^|\s)title=(?:"([^"]+)"|'([^']+)')/
+const CODE_BLOCK_TITLE_PATTERN = /(?:^|\s)title=(?:"([^"]+)"|'([^']+)')/u
 const CODE_BLOCK_THEMES = {
   light: 'one-light',
   dark: 'dark-plus',

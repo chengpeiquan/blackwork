@@ -19,7 +19,7 @@ const normalizeOutputPath = (
   sitePath: string,
   outputPath: string | undefined,
 ): string => {
-  if (outputPath == null) {
+  if (outputPath === undefined) {
     return join(sitePath, 'pagefind')
   }
 

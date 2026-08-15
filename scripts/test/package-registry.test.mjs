@@ -37,6 +37,6 @@ test('throws with a helpful error for unknown packages', async () => {
   const { resolvePackageTarget } = await import('../package-registry.mjs')
 
   assert.throws(() => resolvePackageTarget('unknown'), {
-    message: /Unknown package target/,
+    message: /Unknown package target/u,
   })
 })

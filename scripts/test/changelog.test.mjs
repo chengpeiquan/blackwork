@@ -41,5 +41,5 @@ test('formats the generated changelog file after changelog generation', async ()
     ],
   )
   assert.equal(calls[0].cwd, calls[1].cwd)
-  assert.match(calls[1].cwd, /packages\/docs$/)
+  assert.match(calls[1].cwd, /packages\/docs$/u)
 })

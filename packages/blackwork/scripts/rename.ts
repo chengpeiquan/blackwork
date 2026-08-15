@@ -30,7 +30,7 @@ const copyCommonJsDeclarationFiles = async (outDir: string) => {
         const sourceFile = resolve(outDir, entry.name)
         const outFile = resolve(
           outDir,
-          entry.name.replace(/\.d\.ts$/, '.d.cts'),
+          entry.name.replace(/\.d\.ts$/u, '.d.cts'),
         )
 
         return copyFile(sourceFile, outFile)

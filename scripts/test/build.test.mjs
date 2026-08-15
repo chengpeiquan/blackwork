@@ -54,5 +54,5 @@ test('lists known package targets', async () => {
     console.log = originalLog
   }
 
-  assert.match(logs.join('\n'), /machine -> @blackwork\/machine/)
+  assert.match(logs.join('\n'), /machine -> @blackwork\/machine/u)
 })
