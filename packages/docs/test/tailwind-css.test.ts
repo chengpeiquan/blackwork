@@ -14,4 +14,6 @@ test('docs Tailwind CSS entry exposes package sources and fixed video letterbox 
   expect(source).toContain('background-color: #000')
   expect(source).toContain('object-fit: contain')
   expect(source).not.toContain('object-fit: fill')
+  expect(source).toContain('.dark :where(.shiki)')
+  expect(source).toContain('var(--shiki-dark)')
 })
