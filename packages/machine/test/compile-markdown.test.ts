@@ -19,3 +19,17 @@ const foo = 1
   expect(result.html).toContain('data-title="src/demo.ts"')
   expect(result.html).toContain('class="language-ts"')
 })
+
+test('compile applies a fixed black letterbox class to markdown videos', async () => {
+  const result = await compile(`:::video
+https://example.com/demo.mp4
+https://example.com/poster.jpg
+Demo title
+:::`)
+
+  expect(result.html).toContain('src="https://example.com/demo.mp4"')
+  expect(result.html).toContain('aspect-video')
+  expect(result.html).toContain('bg-black')
+  expect(result.html).toContain('object-contain')
+  expect(result.html).not.toContain('object-fill')
+})

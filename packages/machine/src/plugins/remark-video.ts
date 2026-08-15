@@ -93,7 +93,7 @@ const remarkVideo = () => {
         title,
         controls: true,
         preload: 'metadata',
-        className: 'w-full aspect-video rounded-lg',
+        className: 'w-full aspect-video rounded-lg bg-black object-contain',
       }
     })
   }
