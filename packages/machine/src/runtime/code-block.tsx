@@ -142,10 +142,14 @@ export const CodeBlock: React.FC<React.PropsWithChildren<CodeBlockProps>> = ({
       <pre
         {...rest}
         className={cn(
-          'm-0 border-0 bg-transparent p-4 text-[13px] leading-6',
+          'm-0 max-w-full border-0 bg-transparent p-4 text-[13px] leading-6',
+          '[&_code]:block [&_code]:w-full [&_code]:min-w-0',
           shouldWrap
-            ? 'overflow-x-hidden whitespace-pre-wrap break-words [&_code]:whitespace-pre-wrap [&_code]:break-words'
-            : 'overflow-x-auto',
+            ? 'overflow-x-hidden wrap-break-word whitespace-pre-wrap [&_code]:wrap-break-word [&_code]:whitespace-pre-wrap'
+            : cn(
+                'overflow-x-hidden wrap-break-word whitespace-pre-wrap [&_code]:wrap-break-word [&_code]:whitespace-pre-wrap',
+                'sm:overflow-x-auto sm:whitespace-pre sm:[&_code]:w-max sm:[&_code]:min-w-full sm:[&_code]:break-normal sm:[&_code]:whitespace-pre',
+              ),
           'rounded-none',
           className,
         )}
