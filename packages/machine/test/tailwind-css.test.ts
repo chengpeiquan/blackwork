@@ -10,6 +10,9 @@ describe('@blackwork/machine Tailwind CSS entry', () => {
     expect(existsSync(sourcePath)).toBe(true)
 
     const content = readFileSync(sourcePath, 'utf8')
-    expect(content).toBe("@source './';\n")
+    expect(content).toContain("@source './';")
+    expect(content).toContain('.dark :where(.shiki)')
+    expect(content).toContain('var(--shiki-dark)')
+    expect(content).toContain('var(--shiki-dark-bg)')
   })
 })
