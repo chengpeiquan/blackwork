@@ -32,7 +32,7 @@ These are optional and only need to be installed if the corresponding subpath is
 
 ```bash
 # For `blackwork/form`
-pnpm add @hookform/resolvers react-hook-form
+pnpm add @tanstack/react-form
 ```
 
 ## Usage
@@ -130,8 +130,31 @@ import {
 // Icons
 import { Moon, Sun } from 'blackwork/icons'
 
-// Form
-import { Form } from 'blackwork/form'
+// Form (TanStack Form + Field)
+import { FieldGroup, Form, useAppForm } from 'blackwork/form'
+
+export function ExampleForm() {
+  const form = useAppForm({
+    defaultValues: { email: '' },
+    onSubmit: async ({ value }) => {
+      console.log(value)
+    },
+  })
+
+  return (
+    <Form form={form}>
+      <FieldGroup>
+        <form.AppField
+          name="email"
+          children={(field) => <field.TextField label="Email" type="email" />}
+        />
+      </FieldGroup>
+      <form.AppForm>
+        <form.SubmitButton>Save</form.SubmitButton>
+      </form.AppForm>
+    </Form>
+  )
+}
 ```
 
 ## Documentation

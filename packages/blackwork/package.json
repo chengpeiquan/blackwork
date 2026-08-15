@@ -106,7 +106,7 @@
     "diff": "npx shadcn-ui diff",
     "lint": "pnpm -C ../.. exec eslint --config eslint.config.js packages/blackwork/src",
     "prepack": "pnpm build",
-    "test": "node --test test/*.test.mjs",
+    "test": "node --test test/*.test.mjs && vitest run",
     "format": "oxfmt ."
   },
   "repository": {
@@ -122,19 +122,15 @@
   },
   "peerDependencies": {
     "@bassist/utils": ">=0.17.0",
-    "@hookform/resolvers": ">=3.0.0",
+    "@tanstack/react-form": ">=1.0.0",
     "clsx": ">=2.1.1",
     "react": ">=19.0.0",
-    "react-hook-form": ">=7.0.0",
     "tailwind-merge": ">=2.5.2",
     "tailwindcss": ">=3.4.4",
     "tailwindcss-animate": ">=1.0.7"
   },
   "peerDependenciesMeta": {
-    "@hookform/resolvers": {
-      "optional": true
-    },
-    "react-hook-form": {
+    "@tanstack/react-form": {
       "optional": true
     }
   },
@@ -146,7 +142,7 @@
     "@bassist/release": "^0.3.1",
     "@bassist/tsconfig": "^0.1.1",
     "@bassist/utils": "^0.17.0",
-    "@hookform/resolvers": "^3.10.0",
+    "@tanstack/react-form": "^1.33.5",
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.18",
     "clsx": "^2.1.1",
@@ -154,12 +150,12 @@
     "eslint": "^10.8.1",
     "npm-run-all2": "^8.0.4",
     "react": "^19.2.8",
-    "react-hook-form": "^7.85.0",
     "tailwind-merge": "^3.6.0",
     "tailwindcss": "^4.3.3",
     "tailwindcss-animate": "^1.0.7",
     "tsdown": "^0.21.10",
     "tsx": "^4.23.12",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.10"
   }
 }
