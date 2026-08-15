@@ -65,7 +65,7 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
   options: customOptions,
   mode = 'button',
 }) => {
-  const { isDark, theme, setTheme } = useTheme()
+  const { isDark, setTheme } = useTheme()
 
   const options = React.useMemo(() => {
     if (isArray(customOptions)) return customOptions
@@ -116,7 +116,6 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
             <DropdownMenuItem
               key={i.value}
               className="gap-2"
-              defaultChecked={i.value === theme}
               onClick={() => setTheme(i.value)}
             >
               {i.icon}

@@ -1,6 +1,6 @@
-import { Slot } from '@radix-ui/react-slot'
 import React from 'react'
 import { cn } from '@/utils'
+import { Slot } from '@/utils/slot'
 import { layoutCls } from './shared'
 
 export interface LayoutMainProps {

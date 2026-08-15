@@ -1,6 +1,5 @@
 'use client'
 
-import * as LabelPrimitive from '@radix-ui/react-label'
 import { type VariantProps, cva } from 'class-variance-authority'
 import * as React from 'react'
 
@@ -11,16 +10,18 @@ const labelVariants = cva(
 )
 
 const Label = React.forwardRef<
-  React.ComponentRef<typeof LabelPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> &
-    VariantProps<typeof labelVariants>
+  HTMLLabelElement,
+  React.ComponentPropsWithoutRef<'label'> & VariantProps<typeof labelVariants>
 >(({ className, ...props }, ref) => (
-  <LabelPrimitive.Root
+  // Consumers associate this primitive via `htmlFor` or nested controls.
+  // oxlint-disable-next-line eslint-plugin-jsx-a11y/label-has-associated-control
+  <label
     ref={ref}
+    data-slot="label"
     className={cn(labelVariants(), className)}
     {...props}
   />
 ))
-Label.displayName = LabelPrimitive.Root.displayName
+Label.displayName = 'Label'
 
 export { Label }

@@ -1,7 +1,6 @@
 'use client'
 
 import { isBrowser, isFunction } from '@bassist/utils'
-import * as VisuallyHidden from '@radix-ui/react-visually-hidden'
 import * as React from 'react'
 
 import { Search } from '@/icons'
@@ -55,7 +54,7 @@ const QuickSearchTrigger = ({
 
       <kbd
         className={cn(
-          'pointer-events-none absolute right-[0.3rem] top-[0.3rem] hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-black opacity-100 shadow-sm sm:flex dark:bg-black dark:text-white',
+          'pointer-events-none absolute right-[0.3rem] top-[0.3rem] hidden h-5 select-none items-center gap-1 rounded-sm border bg-muted px-1.5 font-mono text-[10px] font-medium text-black opacity-100 shadow-sm sm:flex dark:bg-black dark:text-white',
           kbdClassName,
         )}
         style={{ fontFamily: 'inherit' }}
@@ -88,15 +87,13 @@ const QuickSearchDialog = ({
       <DialogContent
         className={cn(
           'max-w-xl overflow-hidden p-0 shadow-lg',
-          'data-[state=closed]:!animate-none data-[state=open]:!animate-none',
+          'data-closed:animate-none! data-open:animate-none!',
           className,
         )}
         {...rest}
       >
-        <VisuallyHidden.Root>
-          <DialogTitle>{ariaLabel}</DialogTitle>
-        </VisuallyHidden.Root>
-        <QuickSearch>{children}</QuickSearch>
+        <DialogTitle className="sr-only">{ariaLabel}</DialogTitle>
+        <QuickSearch>{children as React.ReactNode}</QuickSearch>
       </DialogContent>
     </Dialog>
   )
