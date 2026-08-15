@@ -1,1 +1,8 @@
 @source './';
+
+@layer components {
+  :where(video) {
+    background-color: #000;
+    object-fit: contain;
+  }
+}
