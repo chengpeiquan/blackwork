@@ -111,7 +111,15 @@ export const createRehypePlugins = ({
         tagNames: [...toArray(defaultSchema.tagNames), 'video'],
         attributes: {
           ...(defaultSchema.attributes ?? {}),
-          video: ['src', 'poster', 'controls', 'preload', 'className', 'title'],
+          video: [
+            'src',
+            'poster',
+            'controls',
+            'preload',
+            'className',
+            'title',
+            'style',
+          ],
         },
       },
     ])
