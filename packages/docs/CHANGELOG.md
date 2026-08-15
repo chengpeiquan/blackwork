@@ -1,3 +1,13 @@
+## [0.4.2](https://github.com/chengpeiquan/blackwork/compare/docs@0.4.1...docs@0.4.2) (2026-08-15)
+
+### Bug Fixes
+
+- **video:** style raw video elements with a black letterbox ([0411cae](https://github.com/chengpeiquan/blackwork/commit/0411cae0303d2547569002e95013020463d663ea))
+
+### Features
+
+- **code-block:** share shiki dual-theme styles ([8ee828c](https://github.com/chengpeiquan/blackwork/commit/8ee828cfe76cd34c19ce0f3b37681715813dae67))
+
 ## [0.4.1](https://github.com/chengpeiquan/blackwork/compare/docs@0.4.0...docs@0.4.1) (2026-05-03)
 
 ### Bug Fixes
