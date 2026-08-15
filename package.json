@@ -1,7 +1,7 @@
 {
   "name": "blackwork-workspace",
   "private": true,
-  "packageManager": "pnpm@10.15.1",
+  "packageManager": "pnpm@10.34.5",
   "type": "module",
   "scripts": {
     "docs-starter:dev": "turbo run dev --filter @blackwork/docs-starter",
@@ -28,17 +28,17 @@
     "@bassist/changelog": "^0.3.0",
     "@bassist/commit": "^0.1.1",
     "@bassist/oxc-integration": "^0.2.0",
-    "@eslint/compat": "^2.0.5",
-    "@tsdown/css": "^0.21.9",
-    "eslint": "^10.2.1",
+    "@eslint/compat": "^2.1.0",
+    "@tsdown/css": "^0.21.10",
+    "eslint": "^10.8.1",
     "husky": "^9.1.7",
-    "lint-staged": "^16.2.7",
+    "lint-staged": "^16.4.0",
     "npm-run-all2": "^8.0.4",
-    "oxfmt": "^0.46.0",
-    "oxlint": "^1.62.0",
-    "prettier": "^3.8.3",
-    "tailwindcss": "^4.2.4",
-    "turbo": "^2.9.6"
+    "oxfmt": "^0.63.0",
+    "oxlint": "^1.78.0",
+    "prettier": "^3.9.6",
+    "tailwindcss": "^4.3.3",
+    "turbo": "^2.10.10"
   },
   "lint-staged": {
     "*": [
