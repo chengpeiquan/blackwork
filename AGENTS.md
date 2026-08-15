@@ -11,7 +11,7 @@
 
 - Keep package-level tests under that package's `test/` directory.
 - Do not place new `*.test.*` or `*.spec.*` files in `scripts/`, `src/`, or package roots unless an existing package-specific convention requires it.
-- Root-level script tests may stay under the root `scripts/` directory when they test root repository scripts.
+- Root-level script tests live under `scripts/test/`, not next to the script source.
 
 ## Commit Organization
 

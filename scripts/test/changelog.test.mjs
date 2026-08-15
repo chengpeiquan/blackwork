@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 
 test('creates changelog args with the package tag prefix by default', async () => {
   const { createChangelogArgs, createChangelogPlan } =
-    await import('./changelog.mjs')
+    await import('../changelog.mjs')
 
   assert.deepEqual(createChangelogArgs(createChangelogPlan(['docs'])), [
     'exec',
@@ -15,7 +15,7 @@ test('creates changelog args with the package tag prefix by default', async () =
 
 test('preserves explicit changelog args after the package tag prefix', async () => {
   const { createChangelogArgs, createChangelogPlan } =
-    await import('./changelog.mjs')
+    await import('../changelog.mjs')
 
   assert.deepEqual(
     createChangelogArgs(
@@ -27,7 +27,7 @@ test('preserves explicit changelog args after the package tag prefix', async () 
 
 test('formats the generated changelog file after changelog generation', async () => {
   const calls = []
-  const { run } = await import('./changelog.mjs')
+  const { run } = await import('../changelog.mjs')
 
   run(['docs'], (args, options) => {
     calls.push({ args, cwd: options.cwd })

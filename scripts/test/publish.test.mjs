@@ -2,7 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 
 test('creates a publish plan with public access for scoped packages', async () => {
-  const { createPublishPlan } = await import('./publish.mjs')
+  const { createPublishPlan } = await import('../publish.mjs')
 
   assert.deepEqual(
     createPublishPlan([
@@ -31,7 +31,7 @@ test('creates a publish plan with public access for scoped packages', async () =
 })
 
 test('creates a publish plan without forcing access for unscoped packages', async () => {
-  const { createPublishPlan } = await import('./publish.mjs')
+  const { createPublishPlan } = await import('../publish.mjs')
 
   assert.deepEqual(createPublishPlan(['ui']), {
     target: {
@@ -50,7 +50,8 @@ test('creates a publish plan without forcing access for unscoped packages', asyn
 })
 
 test('creates publish args that skip pnpm git checks', async () => {
-  const { createPublishArgs, createPublishPlan } = await import('./publish.mjs')
+  const { createPublishArgs, createPublishPlan } =
+    await import('../publish.mjs')
 
   assert.deepEqual(createPublishArgs(createPublishPlan(['docs'])), [
     'publish',

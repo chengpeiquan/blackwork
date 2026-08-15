@@ -2,7 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 
 test('resolves package aliases and package names', async () => {
-  const { resolvePackageTarget } = await import('./package-registry.mjs')
+  const { resolvePackageTarget } = await import('../package-registry.mjs')
 
   assert.deepEqual(resolvePackageTarget('ui'), {
     alias: 'ui',
@@ -34,7 +34,7 @@ test('resolves package aliases and package names', async () => {
 })
 
 test('throws with a helpful error for unknown packages', async () => {
-  const { resolvePackageTarget } = await import('./package-registry.mjs')
+  const { resolvePackageTarget } = await import('../package-registry.mjs')
 
   assert.throws(() => resolvePackageTarget('unknown'), {
     message: /Unknown package target/,

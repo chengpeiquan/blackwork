@@ -4,7 +4,7 @@ import { getKnownTargets, resolvePackageTarget } from './package-registry.mjs'
 import { runPnpmCommand, workspaceDir } from './utils.mjs'
 
 const usage = `Usage:
-  pnpm publish:pkg <target> [--tag <tag>] [--otp <otp>] [--access <access>] [--dry-run] [--skip-build]
+  pnpm publish <target> [--tag <tag>] [--otp <otp>] [--access <access>] [--dry-run] [--skip-build]
 
 Targets:
 ${getKnownTargets()}`

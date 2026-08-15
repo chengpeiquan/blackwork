@@ -39,6 +39,7 @@ pnpm install
 pnpm lint
 pnpm test
 pnpm build
+pnpm build machine
 ```
 
 The original `blackwork` package source now lives in `packages/blackwork`.
