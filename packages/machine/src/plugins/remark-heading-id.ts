@@ -48,7 +48,7 @@ const extractText = (children: any): string => {
 }
 
 const formatDefaultId = (value: string) => {
-  return kebabCase(value.replace(/\s+/g, ' ').trim())
+  return kebabCase(value.replace(/\s+/gu, ' ').trim())
 }
 
 const getDefaultId = (children: PhrasingContent[]) => {
@@ -76,8 +76,8 @@ const remarkHeadingId = (
     visit(tree, 'heading', (headingNode: Heading) => {
       const lastChild = headingNode.children[headingNode.children.length - 1]
       if (lastChild && lastChild.type === 'text') {
-        let string = lastChild.value.replace(/ +$/, '')
-        const matched = string.match(/ {#([^]+?)}$/)
+        let string = lastChild.value.replace(/ +$/u, '')
+        const matched = string.match(/ \{#([\s\S]+?)\}$/u)
 
         if (matched) {
           const id = matched[1]

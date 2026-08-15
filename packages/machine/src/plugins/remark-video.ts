@@ -74,7 +74,9 @@ const CUSTOM_ASPECT_VIDEO_CLASS_NAME =
 const parseAspectRatio = (value: unknown): string | undefined => {
   if (!isString(value)) return undefined
 
-  const match = value.trim().match(/^(\d+(?:\.\d+)?)\s*[:/]\s*(\d+(?:\.\d+)?)$/)
+  const match = value
+    .trim()
+    .match(/^(\d+(?:\.\d+)?)\s*[:/]\s*(\d+(?:\.\d+)?)$/u)
   if (!match?.[1] || !match[2] || match[1] === '0' || match[2] === '0') {
     return undefined
   }
@@ -95,7 +97,7 @@ const remarkVideo = () => {
         .map((value) => {
           if (isLinkNode(value)) return value
           if (isTextNode(value)) {
-            value.value = value.value.replace(/\n/g, '').trim()
+            value.value = value.value.replace(/\n/gu, '').trim()
             if (value.value) return value
           }
 

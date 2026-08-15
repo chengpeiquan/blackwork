@@ -170,7 +170,7 @@ export const createSearchClient = (
         try {
           await activeInitialization
         } catch {
-          return
+          // The next search will reinitialize if this attempt failed.
         }
       }
     },

@@ -202,7 +202,7 @@ test('DefaultDocsShell renders the default header footer and docs scaffolding', 
   )
   const sidebarMarkup = extractMarkup(
     html,
-    /<aside data-docs-region="sidebar"[\s\S]*?<\/aside>/,
+    /<aside data-docs-region="sidebar"[\s\S]*?<\/aside>/u,
   )
 
   expect(html).toContain('data-docs-region="header"')
@@ -275,11 +275,11 @@ test('DefaultContentShell omits the docs sidebar rail while keeping shared chrom
   )
   const contentShellMarkup = extractMarkup(
     html,
-    /<main data-docs-region="content-shell"[\s\S]*?<\/main>/,
+    /<main data-docs-region="content-shell"[\s\S]*?<\/main>/u,
   )
   const tocMarkup = extractMarkup(
     html,
-    /<aside data-docs-region="toc"[\s\S]*?<\/aside>/,
+    /<aside data-docs-region="toc"[\s\S]*?<\/aside>/u,
   )
 
   expect(html).toContain('data-docs-region="content-shell"')
@@ -320,7 +320,7 @@ test('DefaultContentShell omits the docs sidebar rail while keeping shared chrom
   expect(contentShellMarkup).not.toContain('max-w-3xl text-muted-foreground')
   expect(
     contentShellMarkup.match(
-      /aria-hidden="true" class="hidden w-64 shrink-0 xl:block"/g,
+      /aria-hidden="true" class="hidden w-64 shrink-0 xl:block"/gu,
     )?.length,
   ).toBe(2)
   expect(contentShellMarkup).toContain('flex min-w-0 flex-1 justify-center')
@@ -421,11 +421,11 @@ test('DefaultDocsToc keeps a single entry control when collapsed', async () => {
   )
   const tocMarkup = extractMarkup(
     leftHtml,
-    /<aside data-docs-region="toc"[\s\S]*?<\/aside>/,
+    /<aside data-docs-region="toc"[\s\S]*?<\/aside>/u,
   )
   const toggleMarkup = extractMarkup(
     tocMarkup,
-    /<button[\s\S]*?data-docs-toc-toggle="true"[\s\S]*?<\/button>/,
+    /<button[\s\S]*?data-docs-toc-toggle="true"[\s\S]*?<\/button>/u,
   )
 
   expect(tocMarkup).toContain('data-docs-toc-collapsed="true"')
@@ -677,7 +677,7 @@ test('DefaultDocsShell renders manual groups and uses manual pager order', async
   )
   const sidebarMarkup = extractMarkup(
     html,
-    /<aside data-docs-region="sidebar"[\s\S]*?<\/aside>/,
+    /<aside data-docs-region="sidebar"[\s\S]*?<\/aside>/u,
   )
 
   expect(sidebarMarkup).toContain('Foundations')
@@ -813,7 +813,7 @@ test('DefaultHomeShell renders configured highlights after the hero', async () =
 
   expect(html).toContain('data-docs-region="home-highlights"')
   expect(html).toMatch(
-    /class="(?=[^"]*\brounded-lg\b)(?=[^"]*\bborder\b)(?=[^"]*\bbg-card\b)(?=[^"]*\btext-card-foreground\b)(?=[^"]*\bshadow-sm\b)[^"]*"/,
+    /class="(?=[^"]*\brounded-lg\b)(?=[^"]*\bborder\b)(?=[^"]*\bbg-card\b)(?=[^"]*\btext-card-foreground\b)(?=[^"]*\bshadow-sm\b)[^"]*"/u,
   )
   expect(html).toContain('Guides')
 })

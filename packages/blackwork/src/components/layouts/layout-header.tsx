@@ -62,7 +62,7 @@ export const LayoutHeader: React.FC<LayoutHeaderProps> = ({
   const cls = cn(
     'sticky top-0 z-10 bg-background/80',
     'shadow-[inset_0_-1px_0_0_#f2f2f2] dark:shadow-[inset_0_-1px_0_0_#333]',
-    'backdrop-blur backdrop-saturate-150',
+    'backdrop-blur-sm backdrop-saturate-150',
     'box-border flex h-16 w-screen shrink-0 justify-center',
     className,
   )

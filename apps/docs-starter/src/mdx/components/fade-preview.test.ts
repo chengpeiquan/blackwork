@@ -11,7 +11,7 @@ describe('DocsFadePreview', () => {
     expect(html).toContain('data-docs-region="docs-rail-fade-top"')
     expect(html).toContain('data-docs-region="docs-rail-fade-bottom"')
     expect(html).toMatch(
-      /class="(?=[^"]*\brounded-lg\b)(?=[^"]*\bborder\b)(?=[^"]*\bbg-card\b)(?=[^"]*\btext-card-foreground\b)(?=[^"]*\bshadow-sm\b)[^"]*"/,
+      /class="(?=[^"]*\brounded-lg\b)(?=[^"]*\bborder\b)(?=[^"]*\bbg-card\b)(?=[^"]*\btext-card-foreground\b)(?=[^"]*\bshadow-sm\b)[^"]*"/u,
     )
     expect(html).toContain('Scroll fade preview')
     expect(html).toContain('Skills')
