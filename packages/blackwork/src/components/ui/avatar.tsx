@@ -1,43 +1,45 @@
 'use client'
 
-import * as AvatarPrimitive from '@radix-ui/react-avatar'
+import { Avatar as AvatarPrimitive } from '@base-ui/react/avatar'
 import * as React from 'react'
 
 import { cn } from '@/utils'
 
-const Avatar = React.forwardRef<
-  React.ComponentRef<typeof AvatarPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>
->(({ className, ...props }, ref) => (
-  <AvatarPrimitive.Root
-    ref={ref}
-    className={cn(
-      'relative flex size-10 shrink-0 overflow-hidden rounded-full',
-      className,
-    )}
-    {...props}
-  />
-))
-Avatar.displayName = AvatarPrimitive.Root.displayName
+const Avatar = React.forwardRef<HTMLSpanElement, AvatarPrimitive.Root.Props>(
+  ({ className, ...props }, ref) => (
+    <AvatarPrimitive.Root
+      ref={ref}
+      data-slot="avatar"
+      className={cn(
+        'relative flex size-10 shrink-0 overflow-hidden rounded-full',
+        className,
+      )}
+      {...props}
+    />
+  ),
+)
+Avatar.displayName = 'Avatar'
 
 const AvatarImage = React.forwardRef<
-  React.ComponentRef<typeof AvatarPrimitive.Image>,
-  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>
+  HTMLImageElement,
+  AvatarPrimitive.Image.Props
 >(({ className, ...props }, ref) => (
   <AvatarPrimitive.Image
     ref={ref}
+    data-slot="avatar-image"
     className={cn('aspect-square size-full', className)}
     {...props}
   />
 ))
-AvatarImage.displayName = AvatarPrimitive.Image.displayName
+AvatarImage.displayName = 'AvatarImage'
 
 const AvatarFallback = React.forwardRef<
-  React.ComponentRef<typeof AvatarPrimitive.Fallback>,
-  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>
+  HTMLSpanElement,
+  AvatarPrimitive.Fallback.Props
 >(({ className, ...props }, ref) => (
   <AvatarPrimitive.Fallback
     ref={ref}
+    data-slot="avatar-fallback"
     className={cn(
       'flex size-full items-center justify-center rounded-full bg-muted',
       className,
@@ -45,6 +47,6 @@ const AvatarFallback = React.forwardRef<
     {...props}
   />
 ))
-AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName
+AvatarFallback.displayName = 'AvatarFallback'
 
 export { Avatar, AvatarImage, AvatarFallback }

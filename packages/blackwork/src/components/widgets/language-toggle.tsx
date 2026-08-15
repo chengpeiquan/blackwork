@@ -83,7 +83,6 @@ export const LanguageToggle: React.FC<LanguageToggleProps> = ({
             <DropdownMenuItem
               key={i.value}
               className="gap-2"
-              defaultChecked={i.value === defaultValue}
               onClick={() => i.onClick?.(i.value)}
             >
               {i.label}
