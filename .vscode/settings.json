@@ -26,11 +26,48 @@
   ],
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "oxc.oxc-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[mdx]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
   "oxc.fmt.configPath": "oxfmt.config.ts",
+  "oxc.typeAware": true,
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "eslint.useFlatConfig": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "json",
+    "jsonc"
+  ],
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "always"
+    "source.fixAll.eslint": "always",
+    "source.fixAll.oxc": "always"
   }
 }
