@@ -6,7 +6,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from 'blackwork'
-import { Menu } from 'blackwork/icons'
+import { Menu } from 'lucide-react'
 import React from 'react'
 import { defineConfig } from '../../config/define-config'
 import { buildLocaleLinks } from '../../navigation/build-locale-links'

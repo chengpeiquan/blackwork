@@ -11,19 +11,13 @@ export default defineConfig({
         ),
       },
       {
-        find: 'blackwork/icons',
-        replacement: fileURLToPath(
-          new URL('../blackwork/dist/icons.mjs', import.meta.url),
-        ),
-      },
-      {
         find: 'blackwork/rsc',
         replacement: fileURLToPath(
           new URL('../blackwork/dist/rsc.mjs', import.meta.url),
         ),
       },
       {
-        find: 'blackwork',
+        find: /^blackwork$/u,
         replacement: fileURLToPath(
           new URL('../blackwork/dist/index.mjs', import.meta.url),
         ),
