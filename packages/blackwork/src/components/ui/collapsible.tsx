@@ -1,11 +1,11 @@
 'use client'
 
 import { Collapsible as CollapsiblePrimitive } from '@base-ui/react/collapsible'
-import * as React from 'react'
 import {
   ChevronsDown as CollapsibleClosed,
   ChevronsUp as CollapsibleOpened,
-} from '@/icons'
+} from 'lucide-react'
+import * as React from 'react'
 import { splitAsChild, type AsChildProps } from '@/utils/as-child'
 
 const Collapsible = CollapsiblePrimitive.Root

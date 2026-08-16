@@ -1,9 +1,9 @@
 'use client'
 
 import { isBrowser, isFunction } from '@bassist/utils'
+import { Search } from 'lucide-react'
 import * as React from 'react'
 
-import { Search } from '@/icons'
 import { cn } from '@/utils'
 import { Button } from './button'
 import { Dialog, DialogContent, DialogTitle } from './dialog'

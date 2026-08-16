@@ -1,8 +1,8 @@
 import { type VariantProps, cva } from 'class-variance-authority'
+import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react'
 import * as React from 'react'
 
 import { type ButtonProps, buttonVariants } from '@/components/ui/button'
-import { ChevronLeft, ChevronRight, MoreHorizontal } from '@/icons'
 import { cn } from '@/utils'
 
 const Pagination = ({ className, ...props }: React.ComponentProps<'nav'>) => (

@@ -1,7 +1,15 @@
+import { Rss } from 'lucide-react'
 import React from 'react'
+
 import { Button } from '@/components/ui'
-import { Github, Instagram, Rss, Twitter, X, ZhiHu } from '@/icons'
 import { ExternalLink } from './external-link'
+import {
+  GithubIcon,
+  InstagramIcon,
+  TwitterIcon,
+  XIcon,
+  ZhihuIcon,
+} from './social-icons'
 
 export type SocialLinkIconType =
   | 'github'
@@ -28,35 +36,35 @@ export const SocialLink: React.FC<SocialLinkProps> = ({
     switch (type) {
       case 'github': {
         return {
-          SocialIcon: Github,
+          SocialIcon: GithubIcon,
           label: defaultLabel ?? 'GitHub',
         }
       }
 
       case 'x': {
         return {
-          SocialIcon: X,
+          SocialIcon: XIcon,
           label: defaultLabel ?? 'X',
         }
       }
 
       case 'twitter': {
         return {
-          SocialIcon: Twitter,
+          SocialIcon: TwitterIcon,
           label: defaultLabel ?? 'Twitter',
         }
       }
 
       case 'instagram': {
         return {
-          SocialIcon: Instagram,
+          SocialIcon: InstagramIcon,
           label: defaultLabel ?? 'Instagram',
         }
       }
 
       case 'zhihu': {
         return {
-          SocialIcon: ZhiHu,
+          SocialIcon: ZhihuIcon,
           label: defaultLabel ?? 'ZhiHu',
         }
       }

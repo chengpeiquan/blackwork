@@ -1,9 +1,9 @@
 'use client'
 
 import { Checkbox as CheckboxPrimitive } from '@base-ui/react/checkbox'
+import { Check } from 'lucide-react'
 import * as React from 'react'
 
-import { Check } from '@/icons'
 import { cn } from '@/utils'
 
 const Checkbox = React.forwardRef<

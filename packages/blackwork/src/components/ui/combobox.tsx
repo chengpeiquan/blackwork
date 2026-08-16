@@ -1,6 +1,7 @@
 'use client'
 
 import { Combobox as ComboboxPrimitive } from '@base-ui/react/combobox'
+import { Check, ChevronDown, X } from 'lucide-react'
 import * as React from 'react'
 
 import { Button } from '@/components/ui/button'
@@ -10,7 +11,6 @@ import {
   InputGroupButton,
   InputGroupInput,
 } from '@/components/ui/input-group'
-import { Check, ChevronDown, Close } from '@/icons'
 import { cn } from '@/utils'
 
 const Combobox = ComboboxPrimitive.Root
@@ -49,7 +49,7 @@ const ComboboxClear = React.forwardRef<
     className={className}
     {...props}
   >
-    <Close className="size-4 opacity-50" />
+    <X className="size-4 opacity-50" />
     <span className="sr-only">Clear</span>
   </ComboboxPrimitive.Clear>
 ))
@@ -260,7 +260,7 @@ const ComboboxChip = React.forwardRef<
         className="size-4 p-0"
         data-slot="combobox-chip-remove"
       >
-        <Close className="size-3" />
+        <X className="size-3" />
         <span className="sr-only">Remove</span>
       </ComboboxPrimitive.ChipRemove>
     ) : null}

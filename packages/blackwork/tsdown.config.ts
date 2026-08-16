@@ -6,7 +6,6 @@ const baseConfig = createBaseConfig({
   pkg,
   entry: {
     index: 'src/index.ts',
-    icons: 'src/icons/index.ts',
     form: 'src/form/index.ts',
     rsc: 'src/rsc.ts',
     'tailwind-config': 'src/tailwind-config.ts',

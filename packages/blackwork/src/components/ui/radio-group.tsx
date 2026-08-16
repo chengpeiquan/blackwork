@@ -2,9 +2,9 @@
 
 import { Radio } from '@base-ui/react/radio'
 import { RadioGroup as RadioGroupPrimitive } from '@base-ui/react/radio-group'
+import { Circle } from 'lucide-react'
 import * as React from 'react'
 
-import { Circle } from '@/icons'
 import { cn } from '@/utils'
 
 const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupPrimitive.Props>(

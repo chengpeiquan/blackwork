@@ -1,4 +1,5 @@
 import { capitalize, isArray } from '@bassist/utils'
+import { Moon, Sun } from 'lucide-react'
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import {
@@ -7,7 +8,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Moon, Sun } from '@/icons'
 import { useTheme } from './theme-provider'
 import { type Theme } from './types'
 

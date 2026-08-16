@@ -2,8 +2,8 @@
 
 import { NavigationMenu as NavigationMenuPrimitive } from '@base-ui/react/navigation-menu'
 import { cva } from 'class-variance-authority'
+import { ChevronDown } from 'lucide-react'
 import * as React from 'react'
-import { ChevronDown } from '@/icons'
 
 import { cn } from '@/utils'
 import { splitAsChild, type AsChildProps } from '@/utils/as-child'

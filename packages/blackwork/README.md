@@ -127,8 +127,7 @@ import {
   useKeyword,
 } from 'blackwork'
 
-// Icons
-import { Moon, Sun } from 'blackwork/icons'
+// Icons: import from `lucide-react`. `blackwork/icons` has been removed.
 
 // Form (TanStack Form + Field)
 import { FieldGroup, Form, useAppForm } from 'blackwork/form'
@@ -156,6 +155,16 @@ export function ExampleForm() {
   )
 }
 ```
+
+## Icons
+
+`blackwork/icons` is removed. Import generic icons from [`lucide-react`](https://lucide.dev) in your app:
+
+```tsx
+import { Moon, Search, Sun } from 'lucide-react'
+```
+
+Lucide 1.x no longer ships brand logos. Keep GitHub, X, Zhihu, npm, and similar marks next to the feature that needs them.
 
 ## Documentation
 
