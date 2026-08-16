@@ -1,9 +1,9 @@
 'use client'
 
 import { Menu as MenuPrimitive } from '@base-ui/react/menu'
+import { Check, ChevronRight, Circle } from 'lucide-react'
 import * as React from 'react'
 
-import { Check, ChevronRight, Circle } from '@/icons'
 import { cn } from '@/utils'
 import { splitAsChild, type AsChildProps } from '@/utils/as-child'
 

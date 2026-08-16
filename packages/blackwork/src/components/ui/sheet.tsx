@@ -2,9 +2,9 @@
 
 import { Dialog as SheetPrimitive } from '@base-ui/react/dialog'
 import { type VariantProps, cva } from 'class-variance-authority'
+import { X } from 'lucide-react'
 import * as React from 'react'
 
-import { Close } from '@/icons'
 import { cn } from '@/utils'
 import { splitAsChild, type AsChildProps } from '@/utils/as-child'
 
@@ -101,7 +101,7 @@ const SheetContent = React.forwardRef<HTMLDivElement, SheetContentProps>(
 
           {closeButtonVisible ? (
             <SheetPrimitive.Close className="data-open:bg-secondary absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none">
-              <Close className="size-4" />
+              <X className="size-4" />
               <span className="sr-only">Close</span>
             </SheetPrimitive.Close>
           ) : null}

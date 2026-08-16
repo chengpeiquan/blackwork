@@ -1,7 +1,7 @@
 import { isBrowser } from '@bassist/utils'
+import { ArrowUpFromLine } from 'lucide-react'
 import React from 'react'
 import { Button, type ButtonProps } from '@/components/ui'
-import { ArrowUpFromLine } from '@/icons'
 import { cn } from '@/utils'
 
 export interface ScrollToTopProps {

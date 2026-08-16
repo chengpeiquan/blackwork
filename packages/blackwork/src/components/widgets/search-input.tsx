@@ -1,6 +1,6 @@
+import { Search } from 'lucide-react'
 import React from 'react'
 import { Input, type InputProps } from '@/components/ui'
-import { Search } from '@/icons'
 import { cn } from '@/utils'
 
 export interface SearchInputProps extends Omit<InputProps, 'type'> {

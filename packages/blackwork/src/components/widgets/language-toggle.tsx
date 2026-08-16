@@ -1,5 +1,7 @@
 import { isObject, isUndefined } from '@bassist/utils'
+import { Languages } from 'lucide-react'
 import React from 'react'
+
 import {
   Button,
   DropdownMenu,
@@ -7,7 +9,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui'
-import { Language } from '@/icons'
 
 export interface LanguageToggleOption {
   value: string
@@ -26,7 +27,7 @@ export interface LanguageToggleProps {
 const isSingle = (v: unknown): v is LanguageToggleOption => isObject(v)
 
 const DefaultIcon: React.FC = () => (
-  <Language className="size-5 rotate-0 scale-100 transition-all" />
+  <Languages className="size-5 rotate-0 scale-100 transition-all" />
 )
 
 export const LanguageToggle: React.FC<LanguageToggleProps> = ({

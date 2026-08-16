@@ -2,6 +2,7 @@
 
 import { Menu as MenuPrimitive } from '@base-ui/react/menu'
 import { Menubar as MenubarPrimitive } from '@base-ui/react/menubar'
+import { Check, Circle } from 'lucide-react'
 import * as React from 'react'
 
 import {
@@ -19,7 +20,6 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Check, Circle } from '@/icons'
 import { cn } from '@/utils'
 
 const Menubar = React.forwardRef<HTMLDivElement, MenubarPrimitive.Props>(
