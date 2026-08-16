@@ -6,7 +6,7 @@ import {
   QuickSearchTrigger,
   useQuickSearchState,
 } from 'blackwork'
-import { Search } from 'blackwork/icons'
+import { Search } from 'lucide-react'
 import Link from 'next/link'
 import * as React from 'react'
 import { cn } from '@/utils/class-name'
