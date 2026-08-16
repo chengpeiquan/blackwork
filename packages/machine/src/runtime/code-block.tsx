@@ -2,7 +2,7 @@
 
 import { clipboard } from '@bassist/utils'
 import { Button, cn } from 'blackwork'
-import { Check, type IconProps } from 'blackwork/icons'
+import { Check, Copy } from 'lucide-react'
 import React from 'react'
 
 const LANGUAGE_LABELS: Record<string, string> = {
@@ -34,24 +34,6 @@ const WRAPPED_LANGUAGES = new Set([
   'plaintext',
   'txt',
 ])
-
-const CopyIcon: React.FC<IconProps> = (props) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="1em"
-    height="1em"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    {...props}
-  >
-    <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-  </svg>
-)
 
 export interface CodeBlockProps extends React.HTMLAttributes<HTMLPreElement> {
   fileName?: string
@@ -104,7 +86,7 @@ export const CodeBlock: React.FC<React.PropsWithChildren<CodeBlockProps>> = ({
   const languageLabel =
     (LANGUAGE_LABELS[normalizedLanguage] ?? language) || 'Text'
   const label = copied ? copiedLabel : copyLabel
-  const Icon = copied ? Check : CopyIcon
+  const Icon = copied ? Check : Copy
 
   return (
     <div className="not-prose my-6 overflow-hidden rounded-xl border border-border bg-card shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
