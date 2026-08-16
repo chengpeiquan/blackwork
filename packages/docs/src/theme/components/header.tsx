@@ -7,7 +7,7 @@ import {
   LayoutHeader,
   ThemeToggle,
 } from 'blackwork'
-import { Check, Language } from 'blackwork/icons'
+import { Check, Languages } from 'lucide-react'
 import React from 'react'
 import { DefaultDocsLink } from './link'
 import type {
@@ -57,7 +57,7 @@ const DefaultLocaleToggle: React.FC<DefaultLocaleToggleProps> = ({
           data-current-locale={currentLocale ? 'true' : undefined}
           className="focus-visible:ring-0 focus-visible:ring-offset-0"
         >
-          <Language className="size-5" aria-hidden="true" />
+          <Languages className="size-5" aria-hidden="true" />
           <span className="sr-only">{title}</span>
         </Button>
       </DropdownMenuTrigger>

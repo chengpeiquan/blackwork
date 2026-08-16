@@ -310,7 +310,7 @@ test('DefaultContentShell omits the docs sidebar rail while keeping shared chrom
   expect(tocMarkup).toContain('xl:fixed')
   expect(tocMarkup).toContain('xl:right-8')
   expect(tocMarkup).toContain('xl:top-24')
-  expect(tocMarkup).toContain('M16 12H3m13 6H3M16 6H3')
+  expect(tocMarkup).toContain('lucide-table-of-contents')
   expect(contentShellMarkup).toContain('max-w-screen-2xl')
   expect(contentShellMarkup).not.toContain('data-docs-region="toc"')
   expect(contentShellMarkup).toContain('flex flex-col gap-5')

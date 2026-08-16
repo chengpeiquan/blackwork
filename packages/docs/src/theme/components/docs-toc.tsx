@@ -9,7 +9,7 @@ import {
   SheetTrigger,
   cn,
 } from 'blackwork'
-import { Toc } from 'blackwork/icons'
+import { TableOfContents } from 'lucide-react'
 import React, {
   useEffect,
   useId,
@@ -794,7 +794,7 @@ export const DefaultDocsToc: React.FC<DefaultDocsTocProps> = ({
               setCollapsed((current) => !current)
             }}
           >
-            <Toc className="size-4" aria-hidden="true" />
+            <TableOfContents className="size-4" aria-hidden="true" />
             <span className="sr-only">{toggleLabel}</span>
           </Button>
         ) : null}
@@ -831,7 +831,7 @@ export const MobileDocsToc: React.FC<MobileDocsTocProps> = ({
             className="fixed border border-input bg-background shadow-sm"
             style={getDocsFloatingActionStyle(1)}
           >
-            <Toc className="size-4" aria-hidden="true" />
+            <TableOfContents className="size-4" aria-hidden="true" />
             <span className="sr-only">{openLabel}</span>
           </Button>
         </SheetTrigger>

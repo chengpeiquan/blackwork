@@ -1,5 +1,5 @@
 import { Button } from 'blackwork'
-import { ArrowUpFromLine } from 'blackwork/icons'
+import { ArrowUpFromLine } from 'lucide-react'
 import React from 'react'
 import { getDocsFloatingActionStyle } from './floating-actions'
 
