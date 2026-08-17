@@ -161,6 +161,52 @@ test('defineConfig normalizes content sections for docs and content layouts', as
   })
 })
 
+test('defineConfig keeps theme.nav and section labels for header navigation', async () => {
+  const { defineConfig } = await import('@blackwork/docs')
+  const typedDefineConfig: DefineConfig = defineConfig
+
+  const config = typedDefineConfig({
+    content: {
+      sections: {
+        guide: {
+          layout: 'docs',
+          label: {
+            en: 'Guide',
+            zh: '指南',
+          },
+        },
+      },
+    },
+    theme: {
+      nav: [
+        {
+          href: '/guide',
+          label: {
+            en: 'Guide',
+            zh: '指南',
+          },
+        },
+      ],
+    },
+  })
+
+  expect(config.content.sections?.guide).toMatchObject({
+    label: {
+      en: 'Guide',
+      zh: '指南',
+    },
+  })
+  expect(config.theme.nav).toEqual([
+    {
+      href: '/guide',
+      label: {
+        en: 'Guide',
+        zh: '指南',
+      },
+    },
+  ])
+})
+
 test('defineConfig accepts manual sidebar trees for docs sections', async () => {
   const { defineConfig } = await import('@blackwork/docs')
   const typedDefineConfig: DefineConfig = defineConfig

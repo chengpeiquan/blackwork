@@ -1,8 +1,8 @@
 import { Badge, Button, Card, CardContent, Separator } from 'blackwork'
 import React from 'react'
 import { defineConfig } from '../../config/define-config'
+import { buildHeaderNavigation } from '../../navigation/build-header-nav'
 import { buildLocaleLinks } from '../../navigation/build-locale-links'
-import { buildSidebar } from '../../navigation/build-sidebar'
 import { createHomeData } from '../create-home-data'
 import { resolveThemeSlots } from '../slots'
 import { DocsScrollToTop } from './docs-scroll-to-top'
@@ -10,8 +10,8 @@ import { DefaultDocsHeader } from './header'
 import { DefaultDocsLink } from './link'
 import { getPagefindFilterEntries, getPagefindFilters } from './shell-shared'
 import type { DocsConfig, NormalizedDocsConfig } from '../../config/types'
-import type { DocEntry, DocsSource } from '../../source/types'
-import type { DocsThemeLocaleLink, DocsThemeNavItem } from '../types'
+import type { DocsSource } from '../../source/types'
+import type { DocsThemeLocaleLink } from '../types'
 
 export interface DefaultHomeShellProps {
   config?: DocsConfig | NormalizedDocsConfig
@@ -52,39 +52,23 @@ const getLocaleLinks = (
   })
 }
 
-const toNavigation = (
-  currentEntry: DocEntry | null,
-  items: ReturnType<typeof buildSidebar>,
-): DocsThemeNavItem[] => {
-  return items
-    .filter((item) => item.depth === 0)
-    .map((item) => ({
-      href: item.href,
-      label: item.title,
-      current: currentEntry?.href === item.href,
-    }))
-}
-
 export const DefaultHomeShell: React.FC<DefaultHomeShellProps> = ({
   config,
   locale,
   source,
 }) => {
   const normalizedConfig = defineConfig(config)
-  const entries = source.getEntries(locale)
-  const homeEntry = source.getEntry(locale, [])
   const home = createHomeData({
     config: normalizedConfig,
     locale,
     source,
   })
-  const navigation = toNavigation(
-    homeEntry,
-    buildSidebar({
-      entries,
-      currentHref: home.homeHref,
-    }),
-  )
+  const navigation = buildHeaderNavigation({
+    config: normalizedConfig,
+    currentHref: home.homeHref,
+    locale,
+    source,
+  })
   const localeLinks = getLocaleLinks(normalizedConfig, locale, source)
   const slots = resolveThemeSlots(normalizedConfig.slots)
   const HeaderActions = slots.headerActions

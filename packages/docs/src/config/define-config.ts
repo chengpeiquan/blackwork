@@ -17,6 +17,7 @@ const normalizeSectionConfig = (
   return {
     layout,
     sidebar: section.sidebar ?? (layout === 'content' ? false : 'auto'),
+    ...(section.label !== undefined ? { label: section.label } : {}),
   }
 }
 

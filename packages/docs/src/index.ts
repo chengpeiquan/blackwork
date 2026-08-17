@@ -2,6 +2,7 @@ export { defineConfig } from './config/define-config'
 export { defineDocsConfig } from './config/define-docs-config'
 export { processExportedDocs } from './export/process-exported-docs'
 export { createDocMetadata } from './metadata/create-doc-metadata'
+export { buildHeaderNavigation } from './navigation/build-header-nav'
 export { buildLocaleLinks } from './navigation/build-locale-links'
 export { buildPager } from './navigation/build-pager'
 export { buildSidebar } from './navigation/build-sidebar'
@@ -23,6 +24,7 @@ export type {
 export type { GenerateMetadataOptions } from './next/metadata'
 export type { DocsPageProps, GenerateStaticParamsOptions } from './next/page'
 export type { DocsRootLayoutProps } from './next/root-layout'
+export type { BuildHeaderNavOptions } from './navigation/build-header-nav'
 export type {
   BuildLocaleLinksOptions,
   DocsLocaleLink,
@@ -64,6 +66,8 @@ export type {
   DocsSiteConfig,
   DocsSlotsConfig,
   DocsThemeConfig,
+  DocsThemeNavConfig,
+  DocsThemeNavItemConfig,
   NormalizedDocsContentConfig,
   NormalizedDocsContentSectionConfig,
   NormalizedDocsConfig,

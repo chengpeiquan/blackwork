@@ -9,11 +9,10 @@ import {
 import { Menu } from 'lucide-react'
 import React from 'react'
 import { defineConfig } from '../../config/define-config'
+import { buildHeaderNavigation } from '../../navigation/build-header-nav'
 import { buildLocaleLinks } from '../../navigation/build-locale-links'
 import { buildPager } from '../../navigation/build-pager'
-import { buildSidebar } from '../../navigation/build-sidebar'
 import {
-  flattenResolvedSidebarItems,
   resolveSidebar,
   type DocsResolvedSidebarItem,
   type DocsResolvedSidebarNode,
@@ -35,7 +34,6 @@ import {
   getSiteTitle,
   getTocHeadings,
   getTocLabels,
-  toNavigation,
 } from './shell-shared'
 import type { DocsConfig, NormalizedDocsConfig } from '../../config/types'
 import type { DocEntry, DocsSource } from '../../source/types'
@@ -208,15 +206,12 @@ export const DefaultDocsShell: React.FC<DefaultDocsShellProps> = ({
     currentHref: entry.href,
     ...(usesManualSidebar ? { sidebar: resolvedSidebar } : {}),
   })
-  const navigation = toNavigation(
-    entry,
-    usesManualSidebar
-      ? flattenResolvedSidebarItems(resolvedSidebar)
-      : buildSidebar({
-          entries,
-          currentHref: entry.href,
-        }),
-  )
+  const navigation = buildHeaderNavigation({
+    config: normalizedConfig,
+    currentHref: entry.href,
+    locale: entry.locale,
+    source,
+  })
   const localeLinks = buildLocaleLinks({
     config: normalizedConfig,
     entry,

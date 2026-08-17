@@ -471,7 +471,7 @@ test('DefaultDocsToc gives the scroll list a flex parent', async () => {
   )
 })
 
-test('DefaultDocsHeader keeps the top navigation compact', async () => {
+test('DefaultDocsHeader renders configured top navigation', async () => {
   const { DefaultDocsHeader } = await import('@blackwork/docs/theme')
   const html = renderToStaticMarkup(
     React.createElement(DefaultDocsHeader, {
@@ -494,8 +494,13 @@ test('DefaultDocsHeader keeps the top navigation compact', async () => {
       ],
       navigation: [
         {
-          href: '/guide/getting-started',
-          label: 'Getting Started',
+          href: '/guide',
+          label: 'Guide',
+          current: true,
+        },
+        {
+          href: '/components',
+          label: 'Components',
           current: false,
         },
       ],
@@ -506,14 +511,38 @@ test('DefaultDocsHeader keeps the top navigation compact', async () => {
 
   expect(html).toContain('data-docs-region="header"')
   expect(html).toContain('data-docs-region="header-brand"')
+  expect(html).toContain('data-docs-region="header-nav"')
   expect(html).toContain('Project Docs')
+  expect(html).toContain('Guide')
+  expect(html).toContain('Components')
   expect(html).toContain('sticky top-0')
   expect(html).toContain('h-16')
   expect(html).toContain('aria-label="Change language"')
+  expect(html).toContain('aria-label="Primary navigation"')
+  expect(html).toContain('aria-label="Open site navigation"')
   expect(html).toContain('data-current-locale="true"')
   expect(html).not.toContain('Reference docs for the project.')
   expect(html).not.toContain('aria-label="Locales"')
-  expect(html).not.toContain('aria-label="Primary navigation"')
+})
+
+test('DefaultDocsFooter renders copyright without navigation', async () => {
+  const { DefaultDocsFooter } = await import('@blackwork/docs/theme')
+  const html = renderToStaticMarkup(
+    React.createElement(DefaultDocsFooter, {
+      description: 'Should not appear in the footer',
+      homeHref: '/',
+      navigation: [{ href: '/guide', label: 'Guide', current: false }],
+      siteTitle: 'Blackwork',
+    }),
+  )
+
+  expect(html).toContain('data-docs-region="footer"')
+  expect(html).toContain('©')
+  expect(html).toContain(String(new Date().getFullYear()))
+  expect(html).toContain('Blackwork')
+  expect(html).not.toContain('Guide')
+  expect(html).not.toContain('Should not appear in the footer')
+  expect(html).not.toContain('<nav')
 })
 
 test('DefaultDocsShell lets a footer slot replace the default footer', async () => {
