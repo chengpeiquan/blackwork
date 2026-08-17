@@ -1,3 +1,5 @@
+@import '@blackwork/machine/tailwind.css';
+
 @source './';
 
 @layer components {

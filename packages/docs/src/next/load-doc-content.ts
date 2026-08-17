@@ -21,6 +21,8 @@ export const loadDocContent = async ({
 
   return compile(source, {
     format: getCompileFormat(entry),
+    // Client MDX islands such as CodeBlock cannot be invoked during compile.
+    includeHtml: false,
     components: mergeDocsComponents(config.mdx.components),
   })
 }
