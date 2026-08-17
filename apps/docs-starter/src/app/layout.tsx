@@ -5,8 +5,7 @@ import './globals.css'
 export default function RootLayout({
   children,
   params,
-}: Readonly<{
-  children: React.ReactNode
+}: React.PropsWithChildren<{
   params: Promise<{ slug?: string[] }>
 }>) {
   return (

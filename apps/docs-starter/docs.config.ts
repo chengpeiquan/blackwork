@@ -1,6 +1,5 @@
 import { defineDocsConfig } from '@blackwork/docs'
 import { Callout } from './src/mdx/components/callout'
-import { DocsCodeBlock } from './src/mdx/components/code-block'
 import { DocsFadePreview } from './src/mdx/components/fade-preview'
 import { DocsHeaderSearchAction } from './src/search/docs-search'
 
@@ -30,8 +29,25 @@ export const docsConfig = defineDocsConfig({
     components: {
       Callout,
       FadePreview: DocsFadePreview,
-      pre: DocsCodeBlock,
     },
+  },
+  theme: {
+    nav: [
+      {
+        href: '/guide',
+        label: {
+          en: 'Guide',
+          zh: '指南',
+        },
+      },
+      {
+        href: '/reference',
+        label: {
+          en: 'Reference',
+          zh: '参考',
+        },
+      },
+    ],
   },
   slots: {
     headerActions: DocsHeaderSearchAction,

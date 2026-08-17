@@ -56,7 +56,6 @@ src/
   mdx/
     components/
       callout.tsx
-      code-block.tsx
       fade-preview.tsx
 ```
 
@@ -72,6 +71,7 @@ Edit `content.config.ts` to control:
 Edit `docs.config.ts` to control:
 
 - site title and description
+- top navigation via `theme.nav`
 - MDX component overrides
 
 `next.config.ts` auto-discovers `content.config.ts` through

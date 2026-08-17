@@ -195,6 +195,24 @@ describe('docs starter integration', () => {
         },
         highlights: false,
       },
+      theme: {
+        nav: [
+          {
+            href: '/guide',
+            label: {
+              en: 'Guide',
+              zh: '指南',
+            },
+          },
+          {
+            href: '/reference',
+            label: {
+              en: 'Reference',
+              zh: '参考',
+            },
+          },
+        ],
+      },
     })
     expect(docsConfig.mdx.components).toMatchObject({
       Callout,
