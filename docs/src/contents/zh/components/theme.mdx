@@ -1,0 +1,42 @@
+---
+title: 主题
+description: 用 ThemeProvider 和 ThemeToggle 切换浅色和深色。
+order: 4
+---
+
+# 主题
+
+## 适用场景
+
+- 需要记住浅色 / 深色的应用
+- 页头上的主题切换
+
+用 `ThemeProvider` 包一层。把 `ThemeToggle` 放到用户找得到的位置。
+
+## 用法
+
+```tsx title="src/app/layout.tsx"
+import { ThemeProvider } from 'blackwork'
+
+const RootLayout = ({ children }: React.PropsWithChildren) => {
+  return <ThemeProvider>{children}</ThemeProvider>
+}
+
+export default RootLayout
+```
+
+<ThemeBasicExample />
+
+## 示例
+
+### 下拉
+
+<ThemeDropdownExample />
+
+<ThemePropsTable />
+
+## 说明
+
+- 默认主题是 `dark`。
+- 偏好存在 `localStorage` 的 `blackwork-theme`。
+- 本站已经在根布局里挂了 `ThemeProvider`。

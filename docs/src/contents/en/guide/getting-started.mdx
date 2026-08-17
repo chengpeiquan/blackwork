@@ -1,0 +1,81 @@
+---
+title: Getting Started
+description: Install Blackwork and import Tailwind v4 styles in a React app.
+order: 2
+---
+
+# Getting Started
+
+Blackwork is a React design system for blogs, documentation sites, and other
+content-driven products. Install it as an npm package and you can use the same
+UI components as this site. My blog
+[chengpeiquan.com](https://chengpeiquan.com/) uses it too.
+
+If the app already has React and Tailwind, install this one package.
+
+<Callout title="Requirements">Use React 19+ and Tailwind CSS v4.</Callout>
+
+## Installation
+
+```bash
+pnpm add blackwork
+```
+
+Add this only when you use `blackwork/form`:
+
+```bash
+pnpm add @tanstack/react-form
+```
+
+## Import styles
+
+Import Tailwind and the Blackwork entry in your app stylesheet:
+
+```css title="src/app/globals.css"
+@import 'tailwindcss';
+@import 'blackwork/tailwind.css';
+```
+
+Set `--blackwork-font-sans` if you want to override the default sans font:
+
+```css title="src/app/globals.css"
+:root {
+  --blackwork-font-sans: 'Your Font', sans-serif;
+}
+```
+
+If you only need theme tokens and globals without scanning Blackwork component classes:
+
+```css
+@import 'blackwork/theme.css';
+@import 'blackwork/ui-globals.css';
+```
+
+## First component
+
+```tsx title="src/app/page.tsx"
+import { Button } from 'blackwork'
+
+const Page = () => {
+  return <Button>Get started</Button>
+}
+
+export default Page
+```
+
+<Callout title="Server components">
+  Button, overlays, and most interactive components come from blackwork. Layouts
+  that can render on the server come from blackwork/rsc.
+</Callout>
+
+```tsx title="src/app/layout.tsx"
+import { LayoutMain } from 'blackwork/rsc'
+
+const RootLayout = ({ children }: React.PropsWithChildren) => {
+  return <LayoutMain>{children}</LayoutMain>
+}
+
+export default RootLayout
+```
+
+Next, compose [Layouts](/components/layouts) for the page chrome, then [Theme](/components/theme) and [Widgets](/components/widgets). Most other primitives follow [shadcn/ui](https://ui.shadcn.com/docs/components). See [Components](/components) for the split.

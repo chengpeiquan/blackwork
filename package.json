@@ -4,6 +4,10 @@
   "packageManager": "pnpm@10.34.5",
   "type": "module",
   "scripts": {
+    "dev": "turbo run dev --filter @blackwork/docs-site",
+    "docs:build": "turbo run build --filter @blackwork/docs-site",
+    "docs:preview": "pnpm run docs:build && turbo run start:static --filter @blackwork/docs-site",
+    "docs:test": "turbo run test --filter @blackwork/docs-site",
     "docs-starter:dev": "turbo run dev --filter @blackwork/docs-starter",
     "docs-starter:build": "turbo run build --filter @blackwork/docs-starter",
     "docs-starter:build:static": "turbo run build:static --filter @blackwork/docs-starter",

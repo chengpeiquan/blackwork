@@ -1,0 +1,102 @@
+---
+title: Layouts
+description: Header, main, footer, and holy-grail columns for content sites.
+order: 2
+---
+
+# Layouts
+
+These pieces are the Blackwork page chrome. Compose a sticky header, a content gutter, and a short footer. Add holy-grail columns when a page needs a sidebar or a table of contents.
+
+<Callout title="Note">
+  Do not use RootLayout inside a Next.js App Router tree. That component renders
+  its own html and body. In Next.js, put ThemeScript in head, wrap the tree with
+  ThemeProvider, then compose the chrome below.
+</Callout>
+
+## When to use
+
+- A blog, docs site, or other content page that should share one gutter
+- A sticky header with brand on the left and site actions on the right
+- An article with a nav column and a table of contents
+
+See [Theme](/components/theme) for `ThemeProvider` and `ThemeToggle`. See [Widgets](/components/widgets) for `LanguageToggle` and `SocialLinks`.
+
+## Next.js shell
+
+<Callout title="Server components">
+  LayoutMain and LayoutFooter can render on the server from blackwork/rsc.
+  LayoutHeader comes from blackwork because it hosts client actions.
+</Callout>
+
+```tsx title="src/app/layout.tsx"
+import {
+  LayoutHeader,
+  ThemeProvider,
+  ThemeScript,
+  ThemeToggle,
+} from 'blackwork'
+import { LayoutFooter, LayoutMain } from 'blackwork/rsc'
+
+const RootLayout = ({ children }: React.PropsWithChildren) => {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+      </head>
+      <body className="flex min-h-dvh flex-col">
+        <ThemeProvider>
+          <LayoutHeader themeToggle={<ThemeToggle />}>Blackwork</LayoutHeader>
+          <LayoutMain>{children}</LayoutMain>
+          <LayoutFooter>© Blackwork</LayoutFooter>
+        </ThemeProvider>
+      </body>
+    </html>
+  )
+}
+
+export default RootLayout
+```
+
+## Header
+
+Pass brand and nav as `children`. Social links, a language toggle, and the theme toggle sit on the right.
+
+<LayoutHeaderExample />
+
+<LayoutShellPropsTable />
+
+## Main
+
+<LayoutMainExample />
+
+<LayoutMainPropsTable />
+
+## Footer
+
+<LayoutFooterExample />
+
+## Holy grail
+
+There is no wrapper component. Place `HolyGrailAside` and `HolyGrailContent` in a flex row. Asides stay hidden below the `lg` breakpoint.
+
+<LayoutHolyGrailExample />
+
+<LayoutHolyGrailPropsTable />
+
+## RootLayout
+
+RootLayout is a full document shell: html, head with ThemeScript, and body with ThemeProvider.
+
+<Callout title="Note">
+  Use it only when you own the entire document, not inside an existing App
+  Router layout.
+</Callout>
+
+<LayoutRootPropsTable />
+
+## Notes
+
+- `LayoutHeader` is sticky. Override with `className` if you need it in a nested preview or a non-sticky bar.
+- `LayoutMain fullscreen` drops the shared gutter. Use it for a landing page that paints edge to edge.
+- `HolyGrailAside smaller` is the narrow nav column. The default width fits a table of contents.

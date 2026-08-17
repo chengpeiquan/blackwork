@@ -19,10 +19,14 @@ const scopeConfigs = (configs, files) => {
 const workspaceFiles = [
   'packages/**/*.{js,jsx,ts,tsx}',
   'apps/**/*.{js,jsx,ts,tsx}',
+  'docs/**/*.{js,jsx,ts,tsx}',
 ]
 const blackworkFiles = ['packages/blackwork/src/**/*.{js,jsx,ts,tsx}']
 const machineTestFiles = ['packages/machine/test/**/*.{js,jsx,ts,tsx}']
-const docsStarterFiles = ['apps/docs-starter/**/*.{js,jsx,ts,tsx}']
+const docsStarterFiles = [
+  'apps/docs-starter/**/*.{js,jsx,ts,tsx}',
+  'docs/**/*.{js,jsx,ts,tsx}',
+]
 const reactConfigs = eslintPresets
   .react()
   .filter((config) => config.name !== 'bassist/imports')
@@ -39,6 +43,7 @@ export default defineEslintConfig(
   ...scopeConfigs(eslintPresets.vitest(), machineTestFiles),
   ...scopeConfigs(eslintPresets.vitest(), [
     'apps/docs-starter/src/**/*.test.ts',
+    'docs/src/**/*.test.ts',
   ]),
 
   {

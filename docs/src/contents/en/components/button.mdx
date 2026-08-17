@@ -1,0 +1,49 @@
+---
+title: Button
+description: Triggers an action. Use it for primary work, secondary actions, and icon-only chrome.
+order: 5
+---
+
+# Button
+
+## When to use
+
+- Submit a form, confirm a dialog, or start a task
+- Icon-only actions in a toolbar (`size="icon"`)
+- A link that should look like a button (`asChild`)
+
+Do not use `Button` for navigation that should stay a plain text link. Use `variant="link"` only when the control is still an action.
+
+## Usage
+
+<ButtonBasicExample />
+
+## Examples
+
+### Variants
+
+<ButtonVariantsExample />
+
+### Sizes
+
+<ButtonSizesExample />
+
+### Loading
+
+`loading` disables the button and shows a spinner. Do not combine it with `asChild`.
+
+<ButtonLoadingExample />
+
+### asChild
+
+Merge button styles onto a real child such as `Link`. The child must accept button props.
+
+<ButtonAsChildExample />
+
+<ButtonPropsTable />
+
+## Notes
+
+- Prefer `variant` over custom colors.
+- `size="icon"` is square. Put an accessible name on it.
+- `type` defaults to `button` only if you set it. In forms, set `type="submit"` explicitly on the submit control.

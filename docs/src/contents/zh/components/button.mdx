@@ -1,0 +1,49 @@
+---
+title: Button
+description: 触发操作。用于主操作、次要操作和图标按钮。
+order: 5
+---
+
+# Button
+
+## 适用场景
+
+- 提交表单、确认对话框、开始一项任务
+- 工具栏里的图标按钮（`size="icon"`）
+- 看起来像按钮的链接（`asChild`）
+
+不要用 `Button` 去做普通文字导航。只有控件本身仍是操作时，才用 `variant="link"`。
+
+## 用法
+
+<ButtonBasicExample />
+
+## 示例
+
+### 变体
+
+<ButtonVariantsExample />
+
+### 尺寸
+
+<ButtonSizesExample />
+
+### 加载
+
+`loading` 会禁用按钮并显示旋转图标。不要和 `asChild` 一起用。
+
+<ButtonLoadingExample />
+
+### asChild
+
+把按钮样式合并到真正的子节点上，例如 `Link`。子节点必须能接收 button 的 props。
+
+<ButtonAsChildExample />
+
+<ButtonPropsTable />
+
+## 说明
+
+- 优先用 `variant`，不要自己改颜色。
+- `size="icon"` 是正方形，必须带无障碍名称。
+- 表单里的提交按钮请显式写 `type="submit"`。

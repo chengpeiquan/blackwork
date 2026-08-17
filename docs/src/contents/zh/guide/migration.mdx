@@ -1,0 +1,40 @@
+---
+title: 迁移指南
+description: 已有 Blackwork 应用的升级说明。
+order: 4
+---
+
+# 迁移指南
+
+这篇给已经在用旧版 Blackwork 的项目。新项目直接看 [快速开始](/zh/guide/getting-started) 即可。
+
+## 组合 API
+
+`DialogTrigger`、`SheetTrigger` 等触发器仍然支持 `asChild`。子节点请传真正的 `<button>` 或 `Button`，不要为了样式再包一层非 button 元素。
+
+`Button` 仍然支持 `loading`。`SheetContent` 仍然支持 `closeButtonVisible`。
+
+## 表单
+
+`blackwork/form` 基于 TanStack Form。
+
+1. 安装 `@tanstack/react-form`。
+2. 如果只是通过 Blackwork 使用 `react-hook-form`，可以卸掉它。
+3. 按 [Form](/zh/components/form) 使用 `useAppForm`、`Form` 和 `FieldGroup`。
+
+字段布局（`Field`、`FieldLabel`、`FieldGroup`）不依赖任何表单库，可以单独使用。
+
+## 图标
+
+`blackwork/icons` 子路径已移除。通用图标从 `lucide-react` 引入。名称对照见 [图标](/zh/guide/icons)。
+
+## 样式
+
+Tailwind CSS v4 项目这样引入：
+
+```css
+@import 'tailwindcss';
+@import 'blackwork/tailwind.css';
+```
+
+只有仍在用 Tailwind v3 时，才需要 `blackwork/tailwind-config`。
