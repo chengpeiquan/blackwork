@@ -1,0 +1,31 @@
+---
+title: Sheet
+description: A sliding panel for navigation, filters, or an inspector.
+order: 9
+---
+
+# Sheet
+
+## When to use
+
+- Mobile navigation
+- Filters that should stay on screen
+- Inspect or edit an item while the list stays visible
+
+Use [Dialog](/components/dialog) for a short confirmation in the center of the page.
+
+## Usage
+
+<SheetBasicExample />
+
+## Sides
+
+<SheetSidesExample />
+
+<SheetPropsTable />
+
+## Notes
+
+- Default `side` is `right`.
+- Set `closeButtonVisible={false}` only when you render your own close control.
+- Same `asChild` rule as Dialog: the trigger child must be a button.

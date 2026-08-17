@@ -1,0 +1,43 @@
+---
+title: Icons
+description: Use lucide-react for generic icons in Blackwork apps.
+order: 3
+---
+
+# Icons
+
+Blackwork does not ship its own icon set. Import generic icons from [`lucide-react`](https://lucide.dev).
+
+```tsx
+import { Moon, Search, Sun } from 'lucide-react'
+
+export const SearchMark = () => {
+  return <Search className="size-4" />
+}
+```
+
+Install it with the UI package if you have not already:
+
+```bash
+pnpm add lucide-react
+```
+
+<Callout title="Brand marks">
+  Lucide 1.x does not include trademark logos. Keep GitHub, X, Zhihu, npm, and
+  similar marks as local SVGs next to the feature that needs them. Blackwork
+  does this internally for `SocialLink` only. See
+  [Widgets](/components/widgets).
+</Callout>
+
+## Common names
+
+If you previously imported icons from `blackwork/icons`, use these Lucide names instead:
+
+| Previous name | Lucide            |
+| ------------- | ----------------- |
+| `Close`       | `X`               |
+| `Language`    | `Languages`       |
+| `Toc`         | `TableOfContents` |
+| `Loader`      | `Loader2`         |
+
+See the [migration guide](/guide/migration) if you are upgrading an existing app.

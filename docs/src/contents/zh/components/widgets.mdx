@@ -1,0 +1,77 @@
+---
+title: 小工具
+description: 语言切换、搜索、社交链接和排版等小工具。
+order: 3
+---
+
+# 小工具
+
+这些是给内容站用的小工具，不是 shadcn 那套基础组件。
+
+`LanguageToggle` 和 `SocialLinks` 适合放进 [LayoutHeader](/zh/components/layouts)。本站已经挂了 `ScrollToTop`。
+
+## 适用场景
+
+- 页头切换语言
+- 搜索框或命令面板入口
+- GitHub、X、RSS 等品牌图标
+- 和字号阶梯对齐的标题和正文
+
+通用图标仍从 `lucide-react` 引入，见 [图标](/zh/guide/icons)。品牌图标只放在 `SocialLink` 里。
+
+## 语言切换
+
+单个 option 渲染按钮，数组渲染下拉。路由由你自己处理：在每个 option 上传 `onClick`。
+
+<WidgetLanguageExample />
+
+<WidgetLanguagePropsTable />
+
+## 搜索输入
+
+带前置图标的搜索样式输入框。它本身不会执行查询。
+
+<WidgetSearchExample />
+
+<WidgetSearchPropsTable />
+
+## 社交链接
+
+<WidgetSocialExample />
+
+<WidgetSocialPropsTable />
+
+## 回到顶部
+
+固定在视口右下角。图标按钮必须有无障碍名称。
+
+<WidgetScrollExample />
+
+<WidgetScrollPropsTable />
+
+## 排版
+
+`Heading` 的 `level` 对应 `h1`–`h4`。`Paragraph` 是配套的正文样式。
+
+<WidgetTypographyExample />
+
+<WidgetTypographyPropsTable />
+
+## 外链
+
+在新标签打开，并带上 `rel="nofollow noopener noreferrer"`。
+
+<WidgetExternalExample />
+
+## 快捷搜索
+
+命令面板对话框用的组件。`useQuickSearchState` 会监听 `⌘K` / `Ctrl+K`。下面的预览用本地 state，避免抢走本站快捷键。
+
+<WidgetQuickSearchExample />
+
+## 说明
+
+- `SocialLink` 只认识 `github`、`x`、`twitter`、`instagram`、`zhihu`、`rss`。
+- `ScrollToTop` 是 `position: fixed`。装箱预览时用 `className` 覆盖。
+- `SearchInput` 只负责外观，提交或过滤要自己接。
+- 本站页头搜索是 `QuickSearchDialog` 的消费者，不是另一套组件。

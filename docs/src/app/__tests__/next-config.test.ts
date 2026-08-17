@@ -1,0 +1,37 @@
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
+import { describe, expect, test } from 'vitest'
+
+describe('docs site next config', () => {
+  test('keeps the Next config free of manual content wiring', () => {
+    const nextConfigSource = readFileSync(
+      join(process.cwd(), 'next.config.ts'),
+      'utf8',
+    )
+
+    expect(nextConfigSource).not.toContain("from './content.config'")
+  })
+
+  test('wraps the app config with the shared docs Next integration', async () => {
+    const nextConfigModule = (await import('../../../next.config')) as {
+      default: Record<string, unknown>
+    }
+
+    expect(nextConfigModule.default.basePath).toBeUndefined()
+    expect(nextConfigModule.default.turbopack).toMatchObject({
+      resolveAlias: {
+        'private-blackwork-docs-root/*': './*',
+      },
+    })
+  })
+
+  test('exports statically when NEXT_OUTPUT=export', () => {
+    const nextConfigSource = readFileSync(
+      join(process.cwd(), 'next.config.ts'),
+      'utf8',
+    )
+
+    expect(nextConfigSource).toContain("NEXT_OUTPUT === 'export'")
+    expect(nextConfigSource).toContain("output: isStaticExport ? 'export'")
+  })
+})

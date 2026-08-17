@@ -1,0 +1,49 @@
+---
+title: Form
+description: 把 TanStack Form 接到 Blackwork 字段上。
+order: 8
+---
+
+# Form
+
+blackwork/form 把 [TanStack Form](https://tanstack.com/form) 接到 Field 上。
+
+<Callout title="注意">它不是表单引擎，只负责接到 Blackwork 的 Field。</Callout>
+
+先安装对等依赖：
+
+```bash
+pnpm add @tanstack/react-form
+```
+
+## 适用场景
+
+- 真正要提交、要有值和校验的流程
+- 复用 `TextField`、`TextareaField`、`CheckboxField`
+
+如果只是一个带标签的输入，用 [Field](/zh/components/field)。
+
+## 用法
+
+<FormBasicExample />
+
+## 示例
+
+### 内置字段
+
+<FormFieldsExample />
+
+### 自定义字段
+
+Select、Combobox 等没有预绑定。在 `form.AppField` 里用 `Field` 自己组合。
+
+<FormCustomExample />
+
+<FormPropsTable />
+
+## 说明
+
+- `Form` 会帮你调用 `form.handleSubmit()`。
+- `SubmitButton` 跟随 `isSubmitting`，并使用 `Button` 的 `loading`。
+
+<Callout title="注意">useAppForm 必须在客户端组件里调用。</Callout>

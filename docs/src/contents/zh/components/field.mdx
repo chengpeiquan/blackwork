@@ -1,0 +1,42 @@
+---
+title: Field
+description: 单个控件的标签、说明和布局。不依赖表单库。
+order: 7
+---
+
+# Field
+
+## 适用场景
+
+- 任何带标签的输入，即使不用表单库
+- 横向的设置行
+- 在控件旁边展示说明或校验信息
+
+需要 TanStack Form 的状态和提交时，用 [Form](/zh/components/form)。
+
+## 用法
+
+<FieldBasicExample />
+
+## 示例
+
+### 横向
+
+<FieldHorizontalExample />
+
+### 校验
+
+`data-invalid` 放在 `Field` 上，`aria-invalid` 放在控件上。
+
+<FieldInvalidExample />
+
+<FieldPropsTable />
+
+## 说明
+
+- `Field` 只负责布局，不管值和提交。
+- `FieldLabel` 的 `htmlFor` 要和控件 `id` 对应。
+
+<Callout title="服务端组件">
+  Field、FieldLabel、FieldGroup 也可以从 blackwork/rsc 引入。
+</Callout>

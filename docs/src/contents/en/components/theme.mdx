@@ -1,0 +1,42 @@
+---
+title: Theme
+description: Light and dark mode with ThemeProvider and ThemeToggle.
+order: 4
+---
+
+# Theme
+
+## When to use
+
+- Any app that should remember light or dark
+- A header action that switches the current theme
+
+Wrap the tree once with `ThemeProvider`. Put `ThemeToggle` where the user expects theme chrome.
+
+## Usage
+
+```tsx title="src/app/layout.tsx"
+import { ThemeProvider } from 'blackwork'
+
+const RootLayout = ({ children }: React.PropsWithChildren) => {
+  return <ThemeProvider>{children}</ThemeProvider>
+}
+
+export default RootLayout
+```
+
+<ThemeBasicExample />
+
+## Examples
+
+### Dropdown
+
+<ThemeDropdownExample />
+
+<ThemePropsTable />
+
+## Notes
+
+- Default theme is `dark`.
+- The preference is stored in `localStorage` under `blackwork-theme`.
+- This docs site already mounts `ThemeProvider` in the root layout.

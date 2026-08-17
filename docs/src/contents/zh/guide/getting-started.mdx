@@ -1,0 +1,78 @@
+---
+title: 快速开始
+description: 安装 Blackwork，并在 React 应用里接入 Tailwind v4。
+order: 2
+---
+
+# 快速开始
+
+Blackwork 是一套面向博客、文档站和其他内容型产品的 React 设计系统。以 npm 包的方式安装，即可使用和本站相同的 UI 组件。我自己的博客 [chengpeiquan.com](https://chengpeiquan.com/) 也在用。
+
+项目里已经有 React 和 Tailwind 时，装这一个包即可。
+
+<Callout title="环境要求">需要 React 19+ 和 Tailwind CSS v4。</Callout>
+
+## 安装
+
+```bash
+pnpm add blackwork
+```
+
+只有使用 `blackwork/form` 时才需要再装：
+
+```bash
+pnpm add @tanstack/react-form
+```
+
+## 引入样式
+
+在应用样式表里引入 Tailwind 和 Blackwork：
+
+```css title="src/app/globals.css"
+@import 'tailwindcss';
+@import 'blackwork/tailwind.css';
+```
+
+如果要覆盖默认无衬线字体，设置 `--blackwork-font-sans`：
+
+```css title="src/app/globals.css"
+:root {
+  --blackwork-font-sans: 'Your Font', sans-serif;
+}
+```
+
+如果只需要主题变量和全局样式、不需要扫描 Blackwork 组件 class：
+
+```css
+@import 'blackwork/theme.css';
+@import 'blackwork/ui-globals.css';
+```
+
+## 第一个组件
+
+```tsx title="src/app/page.tsx"
+import { Button } from 'blackwork'
+
+const Page = () => {
+  return <Button>开始使用</Button>
+}
+
+export default Page
+```
+
+<Callout title="服务端组件">
+  Button、浮层和大部分交互组件从 blackwork 引入。可以在服务端渲染的布局从
+  blackwork/rsc 引入。
+</Callout>
+
+```tsx title="src/app/layout.tsx"
+import { LayoutMain } from 'blackwork/rsc'
+
+const RootLayout = ({ children }: React.PropsWithChildren) => {
+  return <LayoutMain>{children}</LayoutMain>
+}
+
+export default RootLayout
+```
+
+接下来用 [布局](/zh/components/layouts) 搭页面框架，再加上 [主题](/zh/components/theme) 和 [小工具](/zh/components/widgets)。其余组件跟 [shadcn/ui](https://ui.shadcn.com/docs/components)。分层见 [组件](/zh/components)。

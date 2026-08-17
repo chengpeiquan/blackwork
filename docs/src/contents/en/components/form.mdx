@@ -1,0 +1,51 @@
+---
+title: Form
+description: Bind TanStack Form to Blackwork fields.
+order: 8
+---
+
+# Form
+
+blackwork/form connects [TanStack Form](https://tanstack.com/form) to Field.
+
+<Callout title="Note">
+  It is not a form engine. It only binds TanStack Form to Blackwork fields.
+</Callout>
+
+Install the peer first:
+
+```bash
+pnpm add @tanstack/react-form
+```
+
+## When to use
+
+- A real submit flow with values and validation
+- Reuse `TextField`, `TextareaField`, or `CheckboxField`
+
+If you only need a labeled input, use [Field](/components/field).
+
+## Usage
+
+<FormBasicExample />
+
+## Examples
+
+### Built-in fields
+
+<FormFieldsExample />
+
+### Custom field
+
+Select, Combobox, and other controls are not pre-bound. Compose them with `Field` inside `form.AppField`.
+
+<FormCustomExample />
+
+<FormPropsTable />
+
+## Notes
+
+- `Form` calls `form.handleSubmit()` for you.
+- `SubmitButton` follows `isSubmitting` and uses `Button` `loading`.
+
+<Callout title="Note">useAppForm must run in a client component.</Callout>

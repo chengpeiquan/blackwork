@@ -20,6 +20,18 @@ This repository is now a pnpm workspace for the Blackwork ecosystem.
 If you are building a documentation site, start with `@blackwork/docs`.
 Use `@blackwork/machine` directly only when you want Markdown or MDX rendering without the docs-site runtime.
 
+## Documentation
+
+`docs` is the official Blackwork documentation site, sibling to `apps`.
+It deploys as a static export to GitHub Pages at
+https://ui.chengpeiquan.com.
+
+```bash
+pnpm dev
+pnpm docs:build
+pnpm docs:preview
+```
+
 ## Starter
 
 `apps/docs-starter` is the reference template for the current `@blackwork/docs` package.

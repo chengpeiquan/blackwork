@@ -1,0 +1,101 @@
+---
+title: 布局
+description: 给内容站用的页头、主栏、页脚和圣杯分栏。
+order: 2
+---
+
+# 布局
+
+这些是 Blackwork 的页面框架：粘性页头、统一的内容边距、短页脚。文章需要侧栏或目录时，再加上圣杯分栏。
+
+<Callout title="注意">
+  不要在 Next.js App Router 树里使用 RootLayout。它会自己渲染 html 和 body。在
+  Next.js 里，把 ThemeScript 放到 head，用 ThemeProvider
+  包一层，再组合下面的框架组件。
+</Callout>
+
+## 适用场景
+
+- 博客、文档站或其他需要统一边距的内容页
+- 左侧品牌、右侧站点操作的粘性页头
+- 左侧导航、右侧目录的文章页
+
+主题见 [主题](/zh/components/theme)。语言切换和社交链接见 [小工具](/zh/components/widgets)。
+
+## Next.js 骨架
+
+<Callout title="服务端组件">
+  LayoutMain 和 LayoutFooter 可以从 blackwork/rsc 在服务端渲染。LayoutHeader
+  要从 blackwork 引入，因为它承载客户端操作。
+</Callout>
+
+```tsx title="src/app/layout.tsx"
+import {
+  LayoutHeader,
+  ThemeProvider,
+  ThemeScript,
+  ThemeToggle,
+} from 'blackwork'
+import { LayoutFooter, LayoutMain } from 'blackwork/rsc'
+
+const RootLayout = ({ children }: React.PropsWithChildren) => {
+  return (
+    <html lang="zh-CN" suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+      </head>
+      <body className="flex min-h-dvh flex-col">
+        <ThemeProvider>
+          <LayoutHeader themeToggle={<ThemeToggle />}>Blackwork</LayoutHeader>
+          <LayoutMain>{children}</LayoutMain>
+          <LayoutFooter>© Blackwork</LayoutFooter>
+        </ThemeProvider>
+      </body>
+    </html>
+  )
+}
+
+export default RootLayout
+```
+
+## 页头
+
+`children` 放品牌和主导航。社交链接、语言切换和主题切换在右侧。
+
+<LayoutHeaderExample />
+
+<LayoutShellPropsTable />
+
+## 主栏
+
+<LayoutMainExample />
+
+<LayoutMainPropsTable />
+
+## 页脚
+
+<LayoutFooterExample />
+
+## 圣杯分栏
+
+没有总包裹组件。把 `HolyGrailAside` 和 `HolyGrailContent` 放进一行 flex。侧栏在 `lg` 以下会隐藏。
+
+<LayoutHolyGrailExample />
+
+<LayoutHolyGrailPropsTable />
+
+## RootLayout
+
+RootLayout 是完整文档壳：html、带 ThemeScript 的 head、带 ThemeProvider 的 body。
+
+<Callout title="注意">
+  只有你拥有整份文档时才用，不要嵌进已有的 App Router 布局。
+</Callout>
+
+<LayoutRootPropsTable />
+
+## 说明
+
+- `LayoutHeader` 默认粘性。嵌套预览或不需要吸顶时，用 `className` 覆盖。
+- `LayoutMain fullscreen` 会去掉统一边距，适合铺满屏幕的落地页。
+- `HolyGrailAside smaller` 是较窄的导航栏，默认宽度适合目录。

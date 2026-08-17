@@ -1,0 +1,77 @@
+---
+title: Widgets
+description: Content-site chrome such as language, search, social links, and typography.
+order: 3
+---
+
+# Widgets
+
+Widgets are small Blackwork pieces for a content site. They are not shadcn primitives.
+
+Put `LanguageToggle` and `SocialLinks` in [LayoutHeader](/components/layouts). `ScrollToTop` is already mounted on this docs site.
+
+## When to use
+
+- Locale switching in the header
+- A search field or command-palette entry
+- Brand marks for GitHub, X, RSS, and similar
+- Headings and body copy that match the type scale
+
+Generic icons still come from `lucide-react`. See [Icons](/guide/icons). Brand marks stay inside `SocialLink`.
+
+## Language toggle
+
+One option renders a button. An array renders a dropdown. Routing is your job: pass `onClick` on each option.
+
+<WidgetLanguageExample />
+
+<WidgetLanguagePropsTable />
+
+## Search input
+
+A search-styled input with a leading icon. It does not run a query.
+
+<WidgetSearchExample />
+
+<WidgetSearchPropsTable />
+
+## Social links
+
+<WidgetSocialExample />
+
+<WidgetSocialPropsTable />
+
+## Scroll to top
+
+Fixed to the bottom-right of the viewport. Give the icon-only button a name.
+
+<WidgetScrollExample />
+
+<WidgetScrollPropsTable />
+
+## Typography
+
+`Heading` maps `level` to `h1`–`h4`. `Paragraph` is the matching body style.
+
+<WidgetTypographyExample />
+
+<WidgetTypographyPropsTable />
+
+## External link
+
+Opens in a new tab with `rel="nofollow noopener noreferrer"`.
+
+<WidgetExternalExample />
+
+## Quick search
+
+Building blocks for a command-palette dialog. `useQuickSearchState` toggles on `⌘K` / `Ctrl+K`. The preview below uses local state so it does not steal this site's shortcut.
+
+<WidgetQuickSearchExample />
+
+## Notes
+
+- `SocialLink` only knows `github`, `x`, `twitter`, `instagram`, `zhihu`, and `rss`.
+- `ScrollToTop` is `position: fixed`. Override `className` if you need it in a boxed preview.
+- `SearchInput` is presentation. Pair it with your own submit or filter logic.
+- This site's header search is a consumer of `QuickSearchDialog`, not a different component family.

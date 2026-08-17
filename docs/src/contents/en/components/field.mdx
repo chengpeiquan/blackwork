@@ -1,0 +1,42 @@
+---
+title: Field
+description: Label, description, and layout for a single control. No form library required.
+order: 7
+---
+
+# Field
+
+## When to use
+
+- Any labeled input, even outside a form library
+- Horizontal settings rows
+- Showing a description or a validation message next to the control
+
+Use [Form](/components/form) when the field needs TanStack Form state and submit.
+
+## Usage
+
+<FieldBasicExample />
+
+## Examples
+
+### Horizontal
+
+<FieldHorizontalExample />
+
+### Validation
+
+Put `data-invalid` on `Field` and `aria-invalid` on the control.
+
+<FieldInvalidExample />
+
+<FieldPropsTable />
+
+## Notes
+
+- `Field` is layout only. It does not own value or submit.
+- Pair `FieldLabel htmlFor` with the control `id`.
+
+<Callout title="Server components">
+  Field, FieldLabel, and FieldGroup are also available from blackwork/rsc.
+</Callout>

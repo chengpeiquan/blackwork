@@ -3,7 +3,13 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next-build/**", ".blackwork/**"]
+      "env": ["NEXT_DIST_DIR", "NEXT_OUTPUT"],
+      "outputs": [
+        "dist/**",
+        ".next-build/**",
+        ".next-static/**",
+        ".blackwork/**"
+      ]
     },
     "build:static": {
       "dependsOn": ["^build"],

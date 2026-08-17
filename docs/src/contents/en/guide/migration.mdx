@@ -1,0 +1,40 @@
+---
+title: Migration
+description: Upgrade notes for existing Blackwork apps.
+order: 4
+---
+
+# Migration
+
+This page is for apps that already depend on an older Blackwork release. New projects can skip it and start from [Getting Started](/guide/getting-started).
+
+## Composition
+
+Triggers such as `DialogTrigger` and `SheetTrigger` still accept `asChild`. Pass a real `<button>` or `Button` as the child. Do not wrap the trigger in a non-button element just for styling.
+
+`Button` still supports `loading`. `SheetContent` still supports `closeButtonVisible`.
+
+## Forms
+
+`blackwork/form` is built on TanStack Form.
+
+1. Install `@tanstack/react-form`.
+2. Remove `react-hook-form` if you only used it through Blackwork.
+3. Use `useAppForm`, `Form`, and `FieldGroup` as shown in [Form](/components/form).
+
+Field layout (`Field`, `FieldLabel`, `FieldGroup`) can still be used without any form library.
+
+## Icons
+
+The `blackwork/icons` subpath is removed. Import generic icons from `lucide-react`. See [Icons](/guide/icons) for the name mapping.
+
+## Styles
+
+Tailwind CSS v4 apps should import:
+
+```css
+@import 'tailwindcss';
+@import 'blackwork/tailwind.css';
+```
+
+You do not need `blackwork/tailwind-config` unless you are still on Tailwind v3.

@@ -1,0 +1,41 @@
+---
+title: Dialog
+description: A modal for a short task that should block the rest of the page.
+order: 6
+---
+
+# Dialog
+
+## When to use
+
+- Confirm a destructive action
+- Edit a small set of fields without leaving the page
+- Show required information the user must acknowledge
+
+Use [Sheet](/components/sheet) if the content should stay attached to one edge, or if the user may need the page behind it as reference.
+
+## Usage
+
+The trigger should be a real button. Prefer `asChild` on `DialogTrigger`.
+
+<DialogBasicExample />
+
+## Structure
+
+| Part                                                 | Role                       |
+| ---------------------------------------------------- | -------------------------- |
+| `Dialog`                                             | Open state                 |
+| `DialogTrigger`                                      | Opens the dialog           |
+| `DialogContent`                                      | Portal, overlay, and panel |
+| `DialogHeader` / `DialogTitle` / `DialogDescription` | Accessible heading         |
+| `DialogFooter`                                       | Actions                    |
+| `DialogClose`                                        | Explicit close             |
+
+`DialogTitle` is required for accessibility. `DialogContent` already renders a corner close button.
+
+<DialogPropsTable />
+
+## Notes
+
+- The `asChild` child must be a button. Do not wrap `Button` in a `div`.
+- Keep dialog copy short. Long forms belong in a page or a sheet.

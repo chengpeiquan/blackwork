@@ -4,6 +4,10 @@
 dist/
 packages/*/dist/
 **/.next/
+**/.next-build/
+**/.next-static/
+**/.blackwork/
+**/*.tsbuildinfo
 **/out/
 **/.turbo/
 .turbo/
