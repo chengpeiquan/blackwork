@@ -3,6 +3,7 @@
 @import 'blackwork/tailwind.css';
 @import '@blackwork/docs/tailwind.css';
 @plugin '@tailwindcss/typography';
+@custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
   :root {

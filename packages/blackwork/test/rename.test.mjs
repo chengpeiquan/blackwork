@@ -27,6 +27,7 @@ test('normalizes CSS entries without changing the stable globals entry', async (
       [
         "@import './theme.css';",
         "@import './ui-globals.css';",
+        '@custom-variant dark (&:where(.dark, .dark *));',
         "@source './';",
         '',
       ].join('\n'),
