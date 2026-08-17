@@ -16,23 +16,23 @@ Blackwork Tattoo style React UI layout for blogs, documentation sites, and other
 
 ## Install
 
-With `pnpm` (or `npm` or `yarn`):
+If the app already has React 19+ and Tailwind CSS, install this package:
 
 ```bash
-pnpm add blackwork @bassist/utils clsx react tailwindcss tailwind-merge tailwindcss-animate
+pnpm add blackwork
 ```
 
-If you use the Tailwind example below, install the typography plugin as well:
+Add this only when you use `blackwork/form`:
 
 ```bash
-pnpm add -D @tailwindcss/typography
-```
-
-These are optional and only need to be installed if the corresponding subpath is used:
-
-```bash
-# For `blackwork/form`
 pnpm add @tanstack/react-form
+```
+
+Tailwind CSS v3 setups that use `blackwork/tailwind-config` also need
+`tailwindcss-animate`. The typography plugin is optional:
+
+```bash
+pnpm add -D tailwindcss-animate @tailwindcss/typography
 ```
 
 ## Usage
@@ -168,6 +168,6 @@ Lucide 1.x no longer ships brand logos. Keep GitHub, X, Zhihu, npm, and similar 
 
 ## Documentation
 
-There is no dedicated documentation site yet. Most primitive component usage follows [shadcn/ui](https://ui.shadcn.com/docs/components) patterns.
+See the [documentation site](https://ui.chengpeiquan.com) for layouts, widgets, forms, theme, and the few primitives that add behavior on top of shadcn.
 
-For the package-specific APIs, refer to the props and examples in the [source code](https://github.com/chengpeiquan/blackwork/tree/main/packages/blackwork/src).
+Most other primitive usage follows [shadcn/ui](https://ui.shadcn.com/docs/components) patterns.
