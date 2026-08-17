@@ -35,9 +35,9 @@ export const loadDocsContentConfig = ({
     return undefined
   }
 
-  const moduleExports = jiti(import.meta.url)(resolvedPath) as
-    | Record<string, unknown>
-    | undefined
+  const moduleExports = jiti(import.meta.url, { requireCache: false })(
+    resolvedPath,
+  ) as Record<string, unknown> | undefined
   const contentConfig =
     moduleExports?.docsContentConfig ?? moduleExports?.default
 
