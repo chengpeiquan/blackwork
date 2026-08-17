@@ -46,10 +46,9 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
 
   React.useEffect(() => {
     const root = window.document.documentElement
-    if (!root.classList.contains(theme)) {
-      root.classList.remove('light', 'dark')
-      root.classList.add(theme)
-    }
+    root.classList.remove('light', 'dark')
+    root.classList.add(theme)
+    root.style.colorScheme = theme
   }, [theme])
 
   const setThemeAndStorage = React.useCallback(
