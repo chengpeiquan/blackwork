@@ -8,6 +8,7 @@ test('docs Tailwind CSS entry exposes package sources and fixed video letterbox 
     'utf8',
   )
 
+  expect(source).toContain("@import '@blackwork/machine/tailwind.css';")
   expect(source).toContain("@source './';")
   expect(source).toContain(':where(video)')
   expect(source).not.toContain('figure :where(video)')

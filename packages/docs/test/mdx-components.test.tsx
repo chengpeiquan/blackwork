@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
-import React from 'react'
+import React, { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { expect, test } from 'vitest'
 
@@ -176,6 +176,73 @@ test('mergeDocsComponents lets a user table override win over the default docs t
 
   expect(html).toContain('data-table="custom"')
   expect(html).not.toContain('overflow-x-auto')
+})
+
+test('defaultDocsComponents.pre renders the machine CodeBlock copy control', async () => {
+  const runtime = await importDocsRuntime()
+  const html = renderToStaticMarkup(
+    createElement(
+      runtime.defaultDocsComponents.pre as React.ElementType,
+      {
+        node: {
+          type: 'element',
+          tagName: 'pre',
+          properties: { 'data-title': 'src/demo.ts' },
+          children: [
+            {
+              type: 'element',
+              tagName: 'code',
+              properties: { class: ['language-ts'] },
+              children: [{ type: 'text', value: 'const foo = 1' }],
+            },
+          ],
+        },
+      },
+      createElement('code', { className: 'language-ts' }, 'const foo = 1'),
+    ),
+  )
+
+  expect(html).toContain('src/demo.ts')
+  expect(html).toContain('TypeScript')
+  expect(html).toContain('aria-label="Copy"')
+  expect(html).not.toContain('disabled="')
+})
+
+test('defaultDocsComponents.pre falls back to React children when the hast node is missing', async () => {
+  const runtime = await importDocsRuntime()
+  const html = renderToStaticMarkup(
+    createElement(
+      runtime.defaultDocsComponents.pre as React.ElementType,
+      { 'data-title': 'src/demo.ts' },
+      createElement(
+        'code',
+        { className: 'language-bash' },
+        'pnpm add blackwork',
+      ),
+    ),
+  )
+
+  expect(html).toContain('src/demo.ts')
+  expect(html).toContain('Bash')
+  expect(html).toContain('aria-label="Copy"')
+  expect(html).not.toContain('disabled="')
+})
+
+test('docs markdown code fences compile through the machine CodeBlock', async () => {
+  const { compile } = await import('@blackwork/machine/server')
+  const runtime = await importDocsRuntime()
+  const result = await compile(
+    '```ts title="src/demo.ts"\nconst foo = 1\n```\n',
+    {
+      format: 'markdown',
+      components: runtime.mergeDocsComponents(),
+    },
+  )
+  const html = renderToStaticMarkup(result.jsxElement as React.ReactElement)
+
+  expect(html).toContain('src/demo.ts')
+  expect(html).toContain('TypeScript')
+  expect(html).toContain('aria-label="Copy"')
 })
 
 test('mergeDocsComponents composes with next-adapter overrides', async () => {
