@@ -1,3 +1,4 @@
 @import './theme.css';
 @import './ui-globals.css';
+@custom-variant dark (&:where(.dark, .dark *));
 @source './';

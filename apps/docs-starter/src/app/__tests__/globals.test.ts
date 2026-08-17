@@ -14,6 +14,9 @@ describe('docs globals css', () => {
     expect(globalsCss).toContain("@import 'blackwork/tailwind.css';")
     expect(globalsCss).toContain("@import '@blackwork/docs/tailwind.css';")
     expect(globalsCss).toContain("@plugin '@tailwindcss/typography';")
+    expect(globalsCss).toContain(
+      '@custom-variant dark (&:where(.dark, .dark *));',
+    )
     expect(globalsCss).not.toContain('node_modules')
   })
 
