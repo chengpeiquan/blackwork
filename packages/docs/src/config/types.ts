@@ -38,9 +38,17 @@ export type DocsSidebarConfigNode =
 
 export type DocsSidebarMode = 'auto' | false | DocsSidebarConfigNode[]
 
+export interface DocsThemeNavItemConfig {
+  href: string
+  label?: DocsSidebarLabel
+}
+
+export type DocsThemeNavConfig = DocsThemeNavItemConfig[] | false
+
 export interface DocsContentSectionConfig {
   layout?: DocsSectionLayout
   sidebar?: DocsSidebarMode
+  label?: DocsSidebarLabel
 }
 
 export interface DocsContentConfig {
@@ -62,6 +70,7 @@ export interface DocsThemeTocConfig {
 
 export interface DocsThemeConfig {
   [key: string]: unknown
+  nav?: DocsThemeNavConfig
   toc?: DocsThemeTocConfig
 }
 
@@ -96,6 +105,7 @@ export interface NormalizedDocsContentConfig {
 export interface NormalizedDocsContentSectionConfig {
   layout: DocsSectionLayout
   sidebar: DocsSidebarMode
+  label?: DocsSidebarLabel
 }
 
 export interface NormalizedDocsConfig {
