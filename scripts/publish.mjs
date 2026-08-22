@@ -4,7 +4,7 @@ import { getKnownTargets, resolvePackageTarget } from './package-registry.mjs'
 import { runPnpmCommand, workspaceDir } from './utils.mjs'
 
 const usage = `Usage:
-  pnpm publish <target> [--tag <tag>] [--otp <otp>] [--access <access>] [--dry-run] [--skip-build]
+  pnpm run publish <target> [--tag <tag>] [--otp <otp>] [--access <access>] [--dry-run] [--skip-build]
 
 Targets:
 ${getKnownTargets()}`
@@ -129,4 +129,4 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   }
 }
 
-export { createPublishArgs, createPublishPlan, run }
+export { createPublishArgs, createPublishPlan, run, usage }
