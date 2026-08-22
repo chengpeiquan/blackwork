@@ -140,6 +140,48 @@ describe('indexRecords', () => {
     })
   })
 
+  test('omits nullish metadata and sort values', async () => {
+    await indexRecords({
+      records: [
+        {
+          content: 'A record with optional values.',
+          id: 'optional-values',
+          language: 'en',
+          metadata: {
+            category: 'guide',
+            nullable: null,
+            optional: undefined,
+          },
+          sort: {
+            nullable: null,
+            optional: undefined,
+            priority: 1,
+          },
+          title: 'Optional Values',
+          url: '/guides/optional-values',
+        },
+      ],
+    })
+
+    expect(addCustomRecord).toHaveBeenCalledWith({
+      content: 'A record with optional values.',
+      filters: {
+        language: ['en'],
+      },
+      language: 'en',
+      meta: {
+        category: 'guide',
+        id: 'optional-values',
+        language: 'en',
+        title: 'Optional Values',
+      },
+      sort: {
+        priority: '1',
+      },
+      url: '/guides/optional-values',
+    })
+  })
+
   test('derives region from the locale tail when a script subtag is present', async () => {
     await indexRecords({
       records: [

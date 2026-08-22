@@ -1,5 +1,5 @@
-type SearchMetadataValue = boolean | number | string | null
-type SearchSortValue = boolean | number | string
+type SearchMetadataValue = boolean | number | string | null | undefined
+type SearchSortValue = boolean | number | string | null | undefined
 
 export interface SearchFilters {
   [key: string]: string | undefined
