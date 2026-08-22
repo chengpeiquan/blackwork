@@ -1,6 +1,12 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
+test('documents the package script entrypoint instead of the pnpm builtin', async () => {
+  const { usage } = await import('../publish.mjs')
+
+  assert.match(usage, /pnpm run publish <target>/u)
+})
+
 test('creates a publish plan with public access for scoped packages', async () => {
   const { createPublishPlan } = await import('../publish.mjs')
 
