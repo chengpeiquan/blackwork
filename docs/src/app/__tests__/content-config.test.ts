@@ -6,7 +6,7 @@ describe('docs site content config', () => {
   test('publishes the first-slice sections', () => {
     expect(docsContentConfig.sections.guide?.layout).toBe('docs')
     expect(docsContentConfig.sections.components?.layout).toBe('docs')
-    expect(docsContentConfig.sections.packages).toBeUndefined()
+    expect('packages' in docsContentConfig.sections).toBe(false)
   })
 
   test('documents site chrome before shadcn primitives', () => {

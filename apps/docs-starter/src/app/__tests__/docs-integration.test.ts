@@ -9,12 +9,25 @@ const getGuideSidebarHrefs = (sidebar: unknown): string[] => {
     return []
   }
 
-  return sidebar.flatMap((group) => {
-    if (group?.type === 'group' && Array.isArray(group.items)) {
-      return group.items.map((item) => item.href)
+  return sidebar.flatMap((group: unknown) => {
+    if (!group || typeof group !== 'object') {
+      return []
     }
 
-    return typeof group?.href === 'string' ? [group.href] : []
+    const { href, items, type } = group as Record<string, unknown>
+
+    if (type === 'group' && Array.isArray(items)) {
+      return items.flatMap((item: unknown) => {
+        if (!item || typeof item !== 'object') {
+          return []
+        }
+
+        const itemHref = (item as Record<string, unknown>).href
+        return typeof itemHref === 'string' ? [itemHref] : []
+      })
+    }
+
+    return typeof href === 'string' ? [href] : []
   })
 }
 
