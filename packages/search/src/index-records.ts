@@ -166,7 +166,9 @@ const applyRecordDefaults = (
 })
 
 const toStringRecord = (
-  values: Record<string, boolean | number | string | null> | undefined,
+  values:
+    | Record<string, boolean | number | string | null | undefined>
+    | undefined,
 ): Record<string, string> | undefined => {
   if (!values) {
     return undefined
@@ -174,7 +176,7 @@ const toStringRecord = (
 
   const serialized = Object.entries(values).reduce<Record<string, string>>(
     (result, [key, value]) => {
-      if (value === null) {
+      if (value === null || value === undefined) {
         return result
       }
 
