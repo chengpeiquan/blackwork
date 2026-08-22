@@ -22,12 +22,9 @@ export const Example = () => {
   return (
     <Form form={form} className="flex w-full max-w-md flex-col gap-4">
       <FieldGroup>
-        <form.AppField
-          name="email"
-          children={(field) => (
-            <field.TextField label="Email" type="email" />
-          )}
-        />
+        <form.AppField name="email">
+          {(field) => <field.TextField label="Email" type="email" />}
+        </form.AppField>
       </FieldGroup>
       <form.AppForm>
         <form.SubmitButton>Save</form.SubmitButton>
@@ -54,21 +51,19 @@ export const Example = () => {
   return (
     <Form form={form} className="flex w-full max-w-md flex-col gap-4">
       <FieldGroup>
-        <form.AppField
-          name="bio"
-          children={(field) => (
+        <form.AppField name="bio">
+          {(field) => (
             <field.TextareaField
               label="Bio"
               description="Optional. Shown on your public profile."
             />
           )}
-        />
-        <form.AppField
-          name="subscribe"
-          children={(field) => (
+        </form.AppField>
+        <form.AppField name="subscribe">
+          {(field) => (
             <field.CheckboxField label="Subscribe to product updates" />
           )}
-        />
+        </form.AppField>
       </FieldGroup>
       <form.AppForm>
         <form.SubmitButton>Save</form.SubmitButton>
@@ -93,9 +88,8 @@ export const Example = () => {
   return (
     <Form form={form}>
       <FieldGroup>
-        <form.AppField
-          name="website"
-          children={(field) => (
+        <form.AppField name="website">
+          {(field) => (
             <Field>
               <FieldLabel htmlFor={field.name}>Website</FieldLabel>
               <Input
@@ -106,7 +100,7 @@ export const Example = () => {
               />
             </Field>
           )}
-        />
+        </form.AppField>
       </FieldGroup>
     </Form>
   )
@@ -130,10 +124,9 @@ export const FormBasicExample = () => {
     >
       <Form form={form} className="flex w-full flex-col gap-4">
         <FieldGroup>
-          <form.AppField
-            name="email"
-            children={(field) => <field.TextField label="Email" type="email" />}
-          />
+          <form.AppField name="email">
+            {(field) => <field.TextField label="Email" type="email" />}
+          </form.AppField>
         </FieldGroup>
         <form.AppForm>
           <form.SubmitButton>Save</form.SubmitButton>
@@ -162,21 +155,19 @@ export const FormFieldsExample = () => {
     >
       <Form form={form} className="flex w-full flex-col gap-4">
         <FieldGroup>
-          <form.AppField
-            name="bio"
-            children={(field) => (
+          <form.AppField name="bio">
+            {(field) => (
               <field.TextareaField
                 label="Bio"
                 description="Optional. Shown on your public profile."
               />
             )}
-          />
-          <form.AppField
-            name="subscribe"
-            children={(field) => (
+          </form.AppField>
+          <form.AppField name="subscribe">
+            {(field) => (
               <field.CheckboxField label="Subscribe to product updates" />
             )}
-          />
+          </form.AppField>
         </FieldGroup>
         <form.AppForm>
           <form.SubmitButton>Save</form.SubmitButton>
@@ -204,9 +195,8 @@ export const FormCustomExample = () => {
     >
       <Form form={form} className="flex w-full flex-col gap-4">
         <FieldGroup>
-          <form.AppField
-            name="website"
-            children={(field) => (
+          <form.AppField name="website">
+            {(field) => (
               <Field>
                 <FieldLabel htmlFor={field.name}>Website</FieldLabel>
                 <Input
@@ -217,7 +207,7 @@ export const FormCustomExample = () => {
                 />
               </Field>
             )}
-          />
+          </form.AppField>
         </FieldGroup>
         <form.AppForm>
           <form.SubmitButton>Save</form.SubmitButton>
