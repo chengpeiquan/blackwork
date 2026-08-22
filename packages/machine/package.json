@@ -1,6 +1,6 @@
 {
   "name": "@blackwork/machine",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "@blackwork/machine is a tattoo-machine-inspired Markdown and MDX engine designed specifically for the Blackwork React UI ecosystem. It is built to power Blackwork-based blogs and documentation sites, rather than to serve as a fully generic content framework.",
   "author": "chengpeiquan <chengpeiquan@chengpeiquan.com>",
   "homepage": "https://chengpeiquan.com",

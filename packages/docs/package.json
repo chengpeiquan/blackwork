@@ -1,6 +1,6 @@
 {
   "name": "@blackwork/docs",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "Next-first documentation framework for Blackwork projects.",
   "author": "chengpeiquan <chengpeiquan@chengpeiquan.com>",
   "homepage": "https://chengpeiquan.com",
@@ -65,7 +65,7 @@
     "lucide-react": "^1.31.0"
   },
   "peerDependencies": {
-    "blackwork": ">=0.11.0",
+    "blackwork": ">=0.12.0",
     "next": ">=16.0.0",
     "react": ">=19.0.0",
     "react-dom": ">=19.0.0"
