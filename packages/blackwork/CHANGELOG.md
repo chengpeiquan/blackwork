@@ -1,3 +1,22 @@
+# [0.12.0](https://github.com/chengpeiquan/blackwork/compare/blackwork@0.11.0...blackwork@0.12.0) (2026-08-22)
+
+### ⚠ BREAKING CHANGES
+
+- **form:** replace the React Hook Form integration with TanStack Form; install `@tanstack/react-form` and migrate to `useAppForm`, `Form`, and the built-in field components ([986b5fe](https://github.com/chengpeiquan/blackwork/commit/986b5fe))
+- **icons:** remove the `blackwork/icons` entrypoint; import generic icons from `lucide-react` instead ([a939d57](https://github.com/chengpeiquan/blackwork/commit/a939d57))
+- **ui:** migrate interactive primitives from Radix UI to Base UI; review custom selectors and wrappers that depend on primitive-specific DOM or state attributes ([5d7ef37](https://github.com/chengpeiquan/blackwork/commit/5d7ef37))
+
+### Bug Fixes
+
+- **styles:** register the Tailwind CSS v4 dark variant for class-based themes ([6438874](https://github.com/chengpeiquan/blackwork/commit/6438874))
+- **theme:** synchronize the document color scheme when switching themes ([9317927](https://github.com/chengpeiquan/blackwork/commit/9317927))
+
+### Features
+
+- **as-child:** add a shared Slot helper for Base UI composition ([21879b0](https://github.com/chengpeiquan/blackwork/commit/21879b0))
+- **rsc:** export Field and Input from the server-renderable entrypoint ([aed20cf](https://github.com/chengpeiquan/blackwork/commit/aed20cf))
+- **ui:** add Button Group, Checkbox, Combobox, Field, Input Group, and Textarea components ([4df13c1](https://github.com/chengpeiquan/blackwork/commit/4df13c1))
+
 # 0.11.0 (2026-05-01)
 
 ### Bug Fixes

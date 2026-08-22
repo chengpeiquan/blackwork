@@ -1,3 +1,14 @@
+# [0.5.0](https://github.com/chengpeiquan/blackwork/compare/docs@0.4.2...docs@0.5.0) (2026-08-22)
+
+### Bug Fixes
+
+- **content-config:** reload content configuration without retaining stale Jiti require cache entries ([6a11f15](https://github.com/chengpeiquan/blackwork/commit/6a11f15))
+
+### Features
+
+- **header-nav:** add configurable and locale-aware header navigation ([25c6402](https://github.com/chengpeiquan/blackwork/commit/25c6402))
+- **mdx:** render fenced code blocks with the default shared CodeBlock component ([28b6518](https://github.com/chengpeiquan/blackwork/commit/28b6518))
+
 ## [0.4.2](https://github.com/chengpeiquan/blackwork/compare/docs@0.4.1...docs@0.4.2) (2026-08-15)
 
 ### Bug Fixes

@@ -1,3 +1,9 @@
+## [0.2.2](https://github.com/chengpeiquan/blackwork/compare/machine@0.2.1...machine@0.2.2) (2026-08-22)
+
+### Bug Fixes
+
+- **code-block:** keep copy controls compatible with Blackwork 0.12 by using Lucide icons directly ([02b5747](https://github.com/chengpeiquan/blackwork/commit/02b5747))
+
 ## [0.2.1](https://github.com/chengpeiquan/blackwork/compare/machine@0.2.0...machine@0.2.1) (2026-08-15)
 
 ### Bug Fixes

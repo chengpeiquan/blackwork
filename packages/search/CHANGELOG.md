@@ -1,3 +1,9 @@
+## [0.1.1](https://github.com/chengpeiquan/blackwork/compare/search@0.1.0...search@0.1.1) (2026-08-22)
+
+### Bug Fixes
+
+- **records:** omit null and undefined metadata or sort values instead of serializing empty optional fields
+
 # [0.1.0](https://github.com/chengpeiquan/blackwork/compare/v0.9.0...v0.1.0) (2026-04-27)
 
 ### Features
