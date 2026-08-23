@@ -53,7 +53,8 @@ export const themeScript = (storageKey, defaultTheme) => {
  *   // your `layout.tsx`
  *
  *   import React from 'react'
- *   import { type Theme, ThemeProvider, ThemeScript } from 'blackwork'
+ *   import { ThemeProvider } from 'blackwork'
+ *   import { ThemeScript } from 'blackwork/rsc'
  *   import 'blackwork/ui-globals.css'
  *   import '@/styles/globals.css'
  *

@@ -1,4 +1,4 @@
-export { Button } from './components/ui/button'
+export { Button, buttonVariants } from './components/ui/button'
 export {
   Field,
   FieldDescription,
@@ -26,3 +26,4 @@ export {
 } from './components/ui/card'
 export { LayoutFooter } from './components/layouts/layout-footer'
 export { LayoutMain } from './components/layouts/layout-main'
+export { ThemeScript } from './components/theme/theme-script'
