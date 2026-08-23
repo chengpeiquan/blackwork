@@ -56,8 +56,8 @@ export interface ThemeToggleProps {
 /**
  * Provides theme toggle based on dropdown menu
  *
- * If the icon change does not take effect, please check if the `darkMode`
- * option value is `selector` in `tailwind.config.ts`
+ * If the icon change does not take effect, make sure the stylesheet defines a
+ * class-based `dark` custom variant.
  */
 export const ThemeToggle: React.FC<ThemeToggleProps> = ({
   title,
@@ -76,6 +76,7 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
     const Icon = isDark ? Sun : Moon
     return <Icon className="size-5" />
   }, [isDark])
+  const accessibleLabel = ariaLabel || title || 'Toggle theme'
 
   if (mode === 'button') {
     return (
@@ -83,14 +84,14 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
         variant="ghost"
         size="icon"
         title={title}
-        aria-label={ariaLabel || title}
+        aria-label={accessibleLabel}
         onClick={() => {
           const nextTheme = isDark ? 'light' : 'dark'
           setTheme(nextTheme)
         }}
       >
         {buttonIcon}
-        <span className="sr-only">Toggle Language</span>
+        <span className="sr-only">{accessibleLabel}</span>
       </Button>
     )
   }
@@ -102,11 +103,11 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
           variant="ghost"
           size="icon"
           title={title}
-          aria-label={ariaLabel || title}
+          aria-label={accessibleLabel}
         >
           <Sun className="size-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
           <Moon className="absolute size-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-          <span className="sr-only">Toggle theme</span>
+          <span className="sr-only">{accessibleLabel}</span>
         </Button>
       </DropdownMenuTrigger>
 
