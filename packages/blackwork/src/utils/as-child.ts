@@ -41,30 +41,6 @@ export const splitAsChild = <P extends object>(
   if (asChild && React.isValidElement(children)) {
     const inferred =
       nativeButton ?? (options.nonButton ? false : inferNativeButton(children))
-    const childType = children.type
-
-    // Base UI SSR still emits a <button> when `render` targets a non-button.
-    // Flatten intrinsic non-buttons onto the trigger so server and client match.
-    if (typeof childType === 'string' && childType !== 'button') {
-      const childProps = children.props as Record<string, unknown> & {
-        className?: string
-        children?: React.ReactNode
-      }
-      const {
-        children: childChildren,
-        className: childClassName,
-        ...restChild
-      } = childProps
-      const parentClassName = (rest as { className?: string }).className
-
-      return {
-        ...(rest as P),
-        ...restChild,
-        className: [childClassName, parentClassName].filter(Boolean).join(' '),
-        children: childChildren,
-      } as P
-    }
-
     return {
       ...(rest as P),
       render: (props: Record<string, unknown>) => {
