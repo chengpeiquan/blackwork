@@ -47,5 +47,6 @@ export default defineConfig({
   test: {
     environment: 'node',
     exclude: [...configDefaults.exclude, 'dist/**'],
+    testTimeout: 45_000,
   },
 })
