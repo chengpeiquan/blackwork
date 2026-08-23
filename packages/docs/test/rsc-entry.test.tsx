@@ -4,6 +4,7 @@ import {
   AlertTitle,
   Button,
   LayoutMain,
+  ThemeScript,
 } from 'blackwork/rsc'
 import React from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
@@ -25,4 +26,6 @@ test('rsc entry exposes server-renderable blackwork primitives', () => {
   expect(html).toContain('Rendered from the RSC entry.')
   expect(html).toContain('Continue')
   expect(html).toContain('<main')
+  const scriptHtml = renderToStaticMarkup(<ThemeScript />)
+  expect(scriptHtml).toContain('blackwork-theme')
 })

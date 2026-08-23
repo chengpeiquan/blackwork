@@ -2,6 +2,7 @@ import { defineConfig } from '../config/define-config'
 import type {
   DocsHomeConfig,
   DocsThemeHomeAction,
+  DocsThemeHomeBadgeImage,
   DocsThemeHomeData,
 } from './types'
 import type { DocsConfig, NormalizedDocsConfig } from '../config/types'
@@ -32,12 +33,47 @@ const getString = (value: unknown) => {
   return normalizedValue ? normalizedValue : undefined
 }
 
-const getOptionalString = (value: unknown) => {
+const getLocalizedString = (value: unknown, locale: string) => {
+  if (isRecord(value)) {
+    return getString(value[locale])
+  }
+
+  return getString(value)
+}
+
+const getOptionalString = (value: unknown, locale: string) => {
   if (value === false) {
     return undefined
   }
 
-  return getString(value)
+  return getLocalizedString(value, locale)
+}
+
+const getBadge = (
+  value: unknown,
+  locale: string,
+): DocsThemeHomeData['badge'] => {
+  if (value === false) {
+    return undefined
+  }
+
+  if (isRecord(value) && 'src' in value) {
+    const alt = getLocalizedString(value.alt, locale)
+    const href = getString(value.href)
+    const src = getString(value.src)
+
+    if (!alt || !src) {
+      return undefined
+    }
+
+    return {
+      alt,
+      ...(href ? { href } : {}),
+      src,
+    } satisfies DocsThemeHomeBadgeImage
+  }
+
+  return getLocalizedString(value, locale)
 }
 
 const parseHref = (href: string): ParsedHref => {
@@ -107,7 +143,7 @@ const getAction = (
   }
 
   const href = getString(value.href)
-  const label = getString(value.label)
+  const label = getLocalizedString(value.label, locale)
 
   if (!href || !label) {
     return undefined
@@ -138,8 +174,8 @@ const getConfiguredHighlights = (
     }
 
     const href = getString(item.href)
-    const title = getString(item.title)
-    const description = getString(item.description)
+    const title = getLocalizedString(item.title, locale)
+    const description = getLocalizedString(item.description, locale)
 
     return href && title && description
       ? [
@@ -222,11 +258,13 @@ export function createHomeData({
   return {
     ...auto,
     mode: 'configured',
-    badge: getOptionalString(normalizedConfig.home.badge),
-    eyebrow: getOptionalString(normalizedConfig.home.eyebrow),
-    title: getString(normalizedConfig.home.title) || auto.title,
+    badge: getBadge(normalizedConfig.home.badge, locale),
+    eyebrow: getOptionalString(normalizedConfig.home.eyebrow, locale),
+    title:
+      getLocalizedString(normalizedConfig.home.title, locale) || auto.title,
     description:
-      getString(normalizedConfig.home.description) || auto.description,
+      getLocalizedString(normalizedConfig.home.description, locale) ||
+      auto.description,
     primaryAction:
       getAction(normalizedConfig.home.primaryAction, locale, source) ||
       auto.primaryAction,

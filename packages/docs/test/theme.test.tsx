@@ -504,6 +504,14 @@ test('DefaultDocsHeader renders configured top navigation', async () => {
           current: false,
         },
       ],
+      socialLinks: [
+        {
+          type: 'github',
+          link: 'https://github.com/example/docs',
+          label: 'GitHub',
+          ariaLabel: 'Source code on GitHub',
+        },
+      ],
       siteDescription: 'Reference docs for the project.',
       siteTitle: 'Project Docs',
     }),
@@ -520,6 +528,9 @@ test('DefaultDocsHeader renders configured top navigation', async () => {
   expect(html).toContain('aria-label="Change language"')
   expect(html).toContain('aria-label="Primary navigation"')
   expect(html).toContain('aria-label="Open site navigation"')
+  expect(html).toContain('href="https://github.com/example/docs"')
+  expect(html).toContain('aria-label="Source code on GitHub"')
+  expect(html).toContain('mx-2 h-5')
   expect(html).toContain('data-current-locale="true"')
   expect(html).not.toContain('Reference docs for the project.')
   expect(html).not.toContain('aria-label="Locales"')
@@ -788,18 +799,44 @@ test('DefaultHomeShell renders configured landing content when home config is pr
   expect(html).not.toContain('data-docs-region="home-highlights"')
 })
 
+test('DefaultHomeShell renders a localized linked badge image', async () => {
+  const { DefaultHomeShell } = await import('@blackwork/docs/theme')
+  const { config, source } = createThemeContext({
+    home: {
+      badge: {
+        alt: { en: 'Latest version', zh: '最新版本' },
+        href: 'https://www.npmjs.com/package/example',
+        src: 'https://img.shields.io/npm/v/example?label=npm',
+      },
+    },
+  })
+  const html = renderToStaticMarkup(
+    React.createElement(DefaultHomeShell, {
+      config,
+      locale: 'zh',
+      source,
+    }),
+  )
+
+  expect(html).toContain('alt="最新版本"')
+  expect(html).toContain('src="https://img.shields.io/npm/v/example?label=npm"')
+  expect(html).toContain('href="https://www.npmjs.com/package/example"')
+  expect(html).toContain('target="_blank"')
+})
+
 test('createHomeData localizes configured home actions for non-default locales', async () => {
   const { createHomeData } = await import('@blackwork/docs/theme')
   const { config, source } = createThemeContext({
     home: {
       primaryAction: {
         href: '/guide/getting-started',
-        label: 'Start reading',
+        label: { en: 'Start reading', zh: '开始阅读' },
       },
       secondaryAction: {
         href: '/guide/getting-started',
-        label: 'Read more',
+        label: { en: 'Read more', zh: '继续阅读' },
       },
+      description: { en: 'English description.', zh: '中文说明。' },
     },
   })
 
@@ -811,11 +848,32 @@ test('createHomeData localizes configured home actions for non-default locales',
 
   expect(home.primaryAction).toEqual({
     href: '/zh/guide/getting-started',
-    label: 'Start reading',
+    label: '开始阅读',
   })
   expect(home.secondaryAction).toEqual({
     href: '/zh/guide/getting-started',
-    label: 'Read more',
+    label: '继续阅读',
+  })
+  expect(home.description).toBe('中文说明。')
+})
+
+test('theme chrome resolves configured labels for the current locale', async () => {
+  const { getThemeLabels } =
+    await import('../src/theme/components/shell-shared')
+  const { config } = createThemeContext({
+    theme: {
+      labels: {
+        next: { en: 'Next', zh: '下一页' },
+        scrollToTop: { en: 'Scroll to top', zh: '回到顶部' },
+        sections: { en: 'Sections', zh: '章节' },
+      },
+    },
+  })
+
+  expect(getThemeLabels(config, 'zh')).toMatchObject({
+    next: '下一页',
+    scrollToTop: '回到顶部',
+    sections: '章节',
   })
 })
 

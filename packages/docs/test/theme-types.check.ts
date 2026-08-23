@@ -17,10 +17,28 @@ const link = (_props: DocsThemeLinkProps) => null
 
 const validConfig = {
   home: {
-    title: 'Typed home config',
+    badge: {
+      alt: { en: 'Latest version', zh: '最新版本' },
+      href: 'https://www.npmjs.com/package/example',
+      src: 'https://img.shields.io/npm/v/example?label=npm',
+    },
+    title: { en: 'Typed home config', zh: '有类型的首页配置' },
     primaryAction: {
       href: '/guide/getting-started',
-      label: 'Read docs',
+      label: { en: 'Read docs', zh: '阅读文档' },
+    },
+  },
+  theme: {
+    socialLinks: [
+      {
+        type: 'github',
+        link: 'https://github.com/example/docs',
+        label: { en: 'GitHub', zh: 'GitHub' },
+        ariaLabel: { en: 'Source code on GitHub', zh: '在 GitHub 查看源码' },
+      },
+    ],
+    labels: {
+      next: { en: 'Next', zh: '下一页' },
     },
   },
   slots: {

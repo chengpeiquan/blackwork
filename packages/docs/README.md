@@ -204,6 +204,61 @@ export const docsConfig = defineDocsConfig({
 })
 ```
 
+Home content and shared shell labels accept either one string or a locale map:
+
+```ts
+export const docsConfig = defineDocsConfig({
+  home: {
+    badge: {
+      alt: {
+        en: 'Latest package version',
+        zh: '最新包版本',
+      },
+      href: 'https://www.npmjs.com/package/example',
+      src: 'https://img.shields.io/npm/v/example?label=npm',
+    },
+    description: {
+      en: 'Documentation for the project.',
+      zh: '项目文档。',
+    },
+    primaryAction: {
+      href: '/guide/getting-started',
+      label: { en: 'Getting Started', zh: '快速开始' },
+    },
+  },
+  theme: {
+    socialLinks: [
+      {
+        type: 'github',
+        link: 'https://github.com/example/project',
+        label: 'GitHub',
+        ariaLabel: {
+          en: 'Source code on GitHub',
+          zh: '在 GitHub 查看源码',
+        },
+      },
+    ],
+    labels: {
+      next: { en: 'Next', zh: '下一页' },
+      previous: { en: 'Previous', zh: '上一页' },
+      scrollToTop: { en: 'Scroll to top', zh: '回到顶部' },
+    },
+    toc: {
+      title: { en: 'On This Page', zh: '本页内容' },
+    },
+  },
+})
+```
+
+The home badge can be localized text or a badge image with localized alt text
+and an optional link. Internal home action and highlight links are localized to
+the matching document route automatically. Add every configured locale to each
+text map so the shell does not need to fall back to English.
+
+`theme.socialLinks` controls the shared header social icons. The default theme
+renders these links before the language and theme controls, with the same
+separator and spacing used by the shared `LayoutHeader` component.
+
 ## Next.js Entry Files
 
 `next.config.ts`
@@ -302,31 +357,6 @@ export default function DocsRoutePage({
 ```
 
 ## Tailwind Setup
-
-### Tailwind CSS v3
-
-If your app uses Tailwind CSS, include both `blackwork` and `@blackwork/docs` build output in the content scan:
-
-```ts
-import typography from '@tailwindcss/typography'
-import { theme } from 'blackwork/tailwind-config'
-import animate from 'tailwindcss-animate'
-import type { Config } from 'tailwindcss'
-
-export default {
-  darkMode: 'selector',
-  content: [
-    './src/**/*.{js,mjs,cjs,ts,jsx,tsx,mdx}',
-    './contents/**/*.{md,mdx}',
-    './node_modules/blackwork/dist/**/*.{js,mjs,cjs}',
-    './node_modules/@blackwork/docs/dist/**/*.{js,mjs,cjs}',
-  ],
-  theme,
-  plugins: [typography, animate],
-} satisfies Config
-```
-
-### Tailwind CSS v4
 
 Import the Blackwork and docs package Tailwind entries explicitly:
 

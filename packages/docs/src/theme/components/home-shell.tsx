@@ -8,10 +8,15 @@ import { resolveThemeSlots } from '../slots'
 import { DocsScrollToTop } from './docs-scroll-to-top'
 import { DefaultDocsHeader } from './header'
 import { DefaultDocsLink } from './link'
-import { getPagefindFilterEntries, getPagefindFilters } from './shell-shared'
+import {
+  getPagefindFilterEntries,
+  getPagefindFilters,
+  getThemeLabels,
+  getThemeSocialLinks,
+} from './shell-shared'
 import type { DocsConfig, NormalizedDocsConfig } from '../../config/types'
 import type { DocsSource } from '../../source/types'
-import type { DocsThemeLocaleLink } from '../types'
+import type { DocsThemeHomeBadgeImage, DocsThemeLocaleLink } from '../types'
 
 export interface DefaultHomeShellProps {
   config?: DocsConfig | NormalizedDocsConfig
@@ -21,6 +26,30 @@ export interface DefaultHomeShellProps {
 
 const getSiteTitle = (config: NormalizedDocsConfig) =>
   config.site.title || 'Documentation'
+
+const HomeBadgeImage: React.FC<{ badge: DocsThemeHomeBadgeImage }> = ({
+  badge,
+}) => {
+  const image = (
+    <img src={badge.src} alt={badge.alt} className="block h-5 max-w-full" />
+  )
+
+  if (!badge.href) {
+    return image
+  }
+
+  const external = /^https?:\/\//u.test(badge.href)
+
+  return (
+    <a
+      href={badge.href}
+      className="inline-flex rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}
+    >
+      {image}
+    </a>
+  )
+}
 
 const getLocaleLinks = (
   config: NormalizedDocsConfig,
@@ -70,6 +99,8 @@ export const DefaultHomeShell: React.FC<DefaultHomeShellProps> = ({
     source,
   })
   const localeLinks = getLocaleLinks(normalizedConfig, locale, source)
+  const themeLabels = getThemeLabels(normalizedConfig, locale)
+  const socialLinks = getThemeSocialLinks(normalizedConfig, locale)
   const slots = resolveThemeSlots(normalizedConfig.slots)
   const HeaderActions = slots.headerActions
   const LinkComponent = slots.link ?? DefaultDocsLink
@@ -95,12 +126,14 @@ export const DefaultHomeShell: React.FC<DefaultHomeShellProps> = ({
         homeHref={home.homeHref}
         LinkComponent={LinkComponent}
         localeLinks={localeLinks}
+        labels={themeLabels}
         navigation={navigation}
+        socialLinks={socialLinks}
         siteDescription={normalizedConfig.site.description}
         siteTitle={getSiteTitle(normalizedConfig)}
       />
 
-      <DocsScrollToTop />
+      <DocsScrollToTop label={themeLabels.scrollToTop} />
 
       <main
         data-docs-region="home-shell"
@@ -118,7 +151,23 @@ export const DefaultHomeShell: React.FC<DefaultHomeShellProps> = ({
             ))}
           </div>
 
-          {home.badge || home.eyebrow ? (
+          {typeof home.badge === 'object' ? (
+            <div className="flex max-w-full items-center gap-2">
+              <HomeBadgeImage badge={home.badge} />
+              {home.eyebrow ? (
+                <>
+                  <Separator
+                    orientation="vertical"
+                    aria-hidden="true"
+                    className="h-4 bg-border"
+                  />
+                  <span className="truncate text-sm font-medium text-muted-foreground">
+                    {home.eyebrow}
+                  </span>
+                </>
+              ) : null}
+            </div>
+          ) : home.badge || home.eyebrow ? (
             <Badge
               variant="secondary"
               className="max-w-full gap-2 px-4 py-2 text-sm font-medium"

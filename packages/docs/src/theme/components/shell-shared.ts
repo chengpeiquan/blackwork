@@ -9,6 +9,7 @@ import type { DocsSidebarItem } from '../../navigation/build-sidebar'
 import type { DocEntry } from '../../source/types'
 import type { DocsThemeNavItem } from '../types'
 import type { HeadingItem } from '@blackwork/machine'
+import type { SocialLinkProps } from 'blackwork'
 
 const DEFAULT_SECTION_CONFIG: NormalizedDocsContentSectionConfig = {
   layout: 'docs',
@@ -56,6 +57,107 @@ export const getTocLabels = (config: NormalizedDocsConfig, locale: string) => ({
   ),
   title: getLocalizedLabel(config.theme.toc?.title, locale, 'On This Page'),
 })
+
+export const getThemeLabels = (
+  config: NormalizedDocsConfig,
+  locale: string,
+) => ({
+  changeLanguage: getLocalizedLabel(
+    config.theme.labels?.changeLanguage,
+    locale,
+    'Change language',
+  ),
+  documentationPages: getLocalizedLabel(
+    config.theme.labels?.documentationPages,
+    locale,
+    'Documentation pages',
+  ),
+  documentPager: getLocalizedLabel(
+    config.theme.labels?.documentPager,
+    locale,
+    'Document pager',
+  ),
+  next: getLocalizedLabel(config.theme.labels?.next, locale, 'Next'),
+  openSectionNavigation: getLocalizedLabel(
+    config.theme.labels?.openSectionNavigation,
+    locale,
+    'Open section navigation',
+  ),
+  openSiteNavigation: getLocalizedLabel(
+    config.theme.labels?.openSiteNavigation,
+    locale,
+    'Open site navigation',
+  ),
+  previous: getLocalizedLabel(
+    config.theme.labels?.previous,
+    locale,
+    'Previous',
+  ),
+  primaryNavigation: getLocalizedLabel(
+    config.theme.labels?.primaryNavigation,
+    locale,
+    'Primary navigation',
+  ),
+  scrollToTop: getLocalizedLabel(
+    config.theme.labels?.scrollToTop,
+    locale,
+    'Scroll to top',
+  ),
+  sections: getLocalizedLabel(
+    config.theme.labels?.sections,
+    locale,
+    'Sections',
+  ),
+  toggleTheme: getLocalizedLabel(
+    config.theme.labels?.toggleTheme,
+    locale,
+    'Toggle theme',
+  ),
+})
+
+const SOCIAL_LINK_TYPES = new Set<SocialLinkProps['type']>([
+  'github',
+  'x',
+  'twitter',
+  'instagram',
+  'zhihu',
+  'rss',
+])
+
+export const getThemeSocialLinks = (
+  config: NormalizedDocsConfig,
+  locale: string,
+): SocialLinkProps[] => {
+  if (!Array.isArray(config.theme.socialLinks)) {
+    return []
+  }
+
+  return config.theme.socialLinks.flatMap((item) => {
+    if (
+      !item ||
+      typeof item.link !== 'string' ||
+      item.link.length === 0 ||
+      !SOCIAL_LINK_TYPES.has(item.type)
+    ) {
+      return []
+    }
+
+    return [
+      {
+        type: item.type,
+        link: item.link,
+        ...(item.label
+          ? { label: getLocalizedLabel(item.label, locale, '') }
+          : {}),
+        ...(item.ariaLabel
+          ? { ariaLabel: getLocalizedLabel(item.ariaLabel, locale, '') }
+          : {}),
+      },
+    ]
+  })
+}
+
+export type DocsThemeLabels = ReturnType<typeof getThemeLabels>
 
 const matchesNavigation = (
   entry: DocEntry,

@@ -1,5 +1,4 @@
 import {
-  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -7,6 +6,7 @@ import {
   LayoutHeader,
   ThemeToggle,
 } from 'blackwork'
+import { buttonVariants } from 'blackwork/rsc'
 import { Check, Languages, Menu } from 'lucide-react'
 import React from 'react'
 import { DefaultDocsLink } from './link'
@@ -15,6 +15,8 @@ import type {
   DocsThemeLocaleLink,
   DocsThemeNavItem,
 } from '../types'
+import type { DocsThemeLabels } from './shell-shared'
+import type { SocialLinkProps } from 'blackwork'
 
 export interface DefaultDocsHeaderProps {
   headerActions?: React.ReactNode
@@ -22,6 +24,14 @@ export interface DefaultDocsHeaderProps {
   LinkComponent?: DocsThemeLinkComponent
   localeLinks?: DocsThemeLocaleLink[]
   navigation: DocsThemeNavItem[]
+  socialLinks?: SocialLinkProps[]
+  labels?: Pick<
+    DocsThemeLabels,
+    | 'changeLanguage'
+    | 'openSiteNavigation'
+    | 'primaryNavigation'
+    | 'toggleTheme'
+  >
   siteDescription?: string
   siteTitle: string
 }
@@ -29,11 +39,13 @@ export interface DefaultDocsHeaderProps {
 const getLocaleLabel = (link: DocsThemeLocaleLink) => link.label || link.locale
 
 interface DefaultLocaleToggleProps {
+  changeLanguageLabel: string
   LinkComponent: DocsThemeLinkComponent
   localeLinks: DocsThemeLocaleLink[]
 }
 
 const DefaultLocaleToggle: React.FC<DefaultLocaleToggleProps> = ({
+  changeLanguageLabel,
   LinkComponent,
   localeLinks,
 }) => {
@@ -43,23 +55,23 @@ const DefaultLocaleToggle: React.FC<DefaultLocaleToggleProps> = ({
 
   const currentLocale = localeLinks.find((item) => item.current)
   const title = currentLocale
-    ? `Change language: ${getLocaleLabel(currentLocale)}`
-    : 'Change language'
+    ? `${changeLanguageLabel}: ${getLocaleLabel(currentLocale)}`
+    : changeLanguageLabel
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="ghost"
-          size="icon"
-          title={title}
-          aria-label="Change language"
-          data-current-locale={currentLocale ? 'true' : undefined}
-          className="focus-visible:ring-0 focus-visible:ring-offset-0"
-        >
-          <Languages className="size-5" aria-hidden="true" />
-          <span className="sr-only">{title}</span>
-        </Button>
+      <DropdownMenuTrigger
+        title={title}
+        aria-label={changeLanguageLabel}
+        data-current-locale={currentLocale ? 'true' : undefined}
+        className={buttonVariants({
+          variant: 'ghost',
+          size: 'icon',
+          className: 'focus-visible:ring-0 focus-visible:ring-offset-0',
+        })}
+      >
+        <Languages className="size-5" aria-hidden="true" />
+        <span className="sr-only">{title}</span>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" className="border-border">
@@ -105,24 +117,30 @@ export const DefaultDocsHeader: React.FC<DefaultDocsHeaderProps> = ({
   homeHref,
   LinkComponent = DefaultDocsLink,
   localeLinks = [],
+  labels,
   navigation = [],
+  socialLinks = [],
   siteTitle,
 }) => {
   return (
     <LayoutHeader
       data-docs-region="header"
-      socialLinksVisible={false}
+      socialLinks={socialLinks}
       wrapperClassName="mx-auto w-full max-w-screen-2xl px-6 sm:px-8 md:px-10 lg:px-12 xl:px-14"
       contentClassName="min-w-0 gap-3 md:gap-6"
       className="border-b border-border/60"
       languageToggle={
         <DefaultLocaleToggle
+          changeLanguageLabel={labels?.changeLanguage ?? 'Change language'}
           LinkComponent={LinkComponent}
           localeLinks={localeLinks}
         />
       }
       themeToggle={
-        <ThemeToggle title="Toggle theme" ariaLabel="Toggle theme" />
+        <ThemeToggle
+          title={labels?.toggleTheme ?? 'Toggle theme'}
+          ariaLabel={labels?.toggleTheme ?? 'Toggle theme'}
+        />
       }
     >
       <LinkComponent
@@ -136,16 +154,18 @@ export const DefaultDocsHeader: React.FC<DefaultDocsHeaderProps> = ({
       {navigation.length > 0 ? (
         <>
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="md:hidden"
-                aria-label="Open site navigation"
-              >
-                <Menu className="size-5" aria-hidden="true" />
-                <span className="sr-only">Open site navigation</span>
-              </Button>
+            <DropdownMenuTrigger
+              className={buttonVariants({
+                variant: 'ghost',
+                size: 'icon',
+                className: 'md:hidden',
+              })}
+              aria-label={labels?.openSiteNavigation ?? 'Open site navigation'}
+            >
+              <Menu className="size-5" aria-hidden="true" />
+              <span className="sr-only">
+                {labels?.openSiteNavigation ?? 'Open site navigation'}
+              </span>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" className="border-border">
               {navigation.map((item) => (
@@ -163,7 +183,7 @@ export const DefaultDocsHeader: React.FC<DefaultDocsHeaderProps> = ({
           </DropdownMenu>
 
           <nav
-            aria-label="Primary navigation"
+            aria-label={labels?.primaryNavigation ?? 'Primary navigation'}
             data-docs-region="header-nav"
             className="hidden min-w-0 items-center gap-1 md:flex"
           >
@@ -184,7 +204,7 @@ export const DefaultDocsHeader: React.FC<DefaultDocsHeaderProps> = ({
       {headerActions ? (
         <div
           data-docs-region="header-actions"
-          className="ml-auto hidden items-center pl-4 md:flex"
+          className="ml-auto flex items-center pl-2 md:pl-4"
         >
           {headerActions}
         </div>

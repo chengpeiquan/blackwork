@@ -1,8 +1,10 @@
 import type {
   DocsHomeConfig as ThemeDocsHomeConfig,
+  DocsThemeLocalizedText,
   DocsSlotsConfig as ThemeDocsSlotsConfig,
 } from '../theme/types'
 import type { ComponentMap } from '@blackwork/machine'
+import type { SocialLinkIconType } from 'blackwork'
 
 export interface DocsLocaleDefinition {
   code: string
@@ -59,7 +61,21 @@ export interface DocsContentConfig {
   sections?: Record<string, DocsContentSectionConfig>
 }
 
-export type DocsThemeLocalizedLabel = string | Record<string, string>
+export type DocsThemeLocalizedLabel = DocsThemeLocalizedText
+
+export interface DocsThemeLabelsConfig {
+  changeLanguage?: DocsThemeLocalizedLabel
+  documentationPages?: DocsThemeLocalizedLabel
+  documentPager?: DocsThemeLocalizedLabel
+  next?: DocsThemeLocalizedLabel
+  openSectionNavigation?: DocsThemeLocalizedLabel
+  openSiteNavigation?: DocsThemeLocalizedLabel
+  previous?: DocsThemeLocalizedLabel
+  primaryNavigation?: DocsThemeLocalizedLabel
+  scrollToTop?: DocsThemeLocalizedLabel
+  sections?: DocsThemeLocalizedLabel
+  toggleTheme?: DocsThemeLocalizedLabel
+}
 
 export interface DocsThemeTocConfig {
   collapseLabel?: DocsThemeLocalizedLabel
@@ -68,9 +84,18 @@ export interface DocsThemeTocConfig {
   title?: DocsThemeLocalizedLabel
 }
 
+export interface DocsThemeSocialLinkConfig {
+  type: SocialLinkIconType
+  link: string
+  label?: DocsThemeLocalizedLabel
+  ariaLabel?: DocsThemeLocalizedLabel
+}
+
 export interface DocsThemeConfig {
   [key: string]: unknown
+  labels?: DocsThemeLabelsConfig
   nav?: DocsThemeNavConfig
+  socialLinks?: DocsThemeSocialLinkConfig[] | false
   toc?: DocsThemeTocConfig
 }
 

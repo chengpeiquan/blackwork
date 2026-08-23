@@ -60,8 +60,14 @@ export interface DocsThemeHomeHighlight {
   description: string
 }
 
+export interface DocsThemeHomeBadgeImage {
+  alt: string
+  href?: string
+  src: string
+}
+
 export interface DocsThemeHomeData {
-  badge?: string
+  badge?: string | DocsThemeHomeBadgeImage
   description: string
   eyebrow?: string
   highlights: DocsThemeHomeHighlight[]
@@ -72,14 +78,33 @@ export interface DocsThemeHomeData {
   title: string
 }
 
+export type DocsThemeLocalizedText = string | Record<string, string>
+
+export interface DocsHomeBadgeImageConfig {
+  alt: DocsThemeLocalizedText
+  href?: string
+  src: string
+}
+
+export interface DocsHomeActionConfig {
+  href: string
+  label: DocsThemeLocalizedText
+}
+
+export interface DocsHomeHighlightConfig {
+  href: string
+  title: DocsThemeLocalizedText
+  description: DocsThemeLocalizedText
+}
+
 export interface DocsHomeConfig {
-  badge?: string | false
-  eyebrow?: string | false
-  title?: string
-  description?: string
-  primaryAction?: DocsThemeHomeAction
-  secondaryAction?: DocsThemeHomeAction
-  highlights?: DocsThemeHomeHighlight[] | false
+  badge?: DocsHomeBadgeImageConfig | DocsThemeLocalizedText | false
+  eyebrow?: DocsThemeLocalizedText | false
+  title?: DocsThemeLocalizedText
+  description?: DocsThemeLocalizedText
+  primaryAction?: DocsHomeActionConfig
+  secondaryAction?: DocsHomeActionConfig
+  highlights?: DocsHomeHighlightConfig[] | false
 }
 
 export type DocsSlotsConfig = DocsThemeSlots

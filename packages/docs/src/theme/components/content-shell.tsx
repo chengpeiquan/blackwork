@@ -19,6 +19,8 @@ import {
   getPagefindFilters,
   getSectionEntries,
   getSiteTitle,
+  getThemeLabels,
+  getThemeSocialLinks,
   getTocLabels,
   getTocHeadings,
 } from './shell-shared'
@@ -74,6 +76,8 @@ export const DefaultContentShell: React.FC<DefaultContentShellProps> = ({
   const tocHeadings = getTocHeadings(headings)
   const contentTocVisible = tocHeadings.length >= 2
   const tocLabels = getTocLabels(normalizedConfig, entry.locale)
+  const themeLabels = getThemeLabels(normalizedConfig, entry.locale)
+  const socialLinks = getThemeSocialLinks(normalizedConfig, entry.locale)
   const homeHref = source.getCanonicalHref(entry.locale, [])
   const slots = resolveThemeSlots(normalizedConfig.slots)
   const ContentHeaderMeta = slots.contentHeaderMeta
@@ -117,12 +121,14 @@ export const DefaultContentShell: React.FC<DefaultContentShellProps> = ({
         homeHref={homeHref}
         LinkComponent={LinkComponent}
         localeLinks={localeLinks}
+        labels={themeLabels}
         navigation={navigation}
+        socialLinks={socialLinks}
         siteDescription={normalizedConfig.site.description}
         siteTitle={getSiteTitle(normalizedConfig)}
       />
 
-      <DocsScrollToTop />
+      <DocsScrollToTop label={themeLabels.scrollToTop} />
 
       {mobileToc}
       {contentToc}
@@ -131,7 +137,7 @@ export const DefaultContentShell: React.FC<DefaultContentShellProps> = ({
         footer={
           <nav
             data-docs-region="pager"
-            aria-label="Document pager"
+            aria-label={themeLabels.documentPager}
             className="flex flex-wrap items-center justify-between gap-3 border-t border-border/60 pt-6 text-sm"
           >
             {pager.previous ? (
@@ -139,7 +145,7 @@ export const DefaultContentShell: React.FC<DefaultContentShellProps> = ({
                 href={pager.previous.href}
                 className="text-muted-foreground"
               >
-                Previous: {pager.previous.title}
+                {themeLabels.previous}: {pager.previous.title}
               </LinkComponent>
             ) : (
               <span />
@@ -150,7 +156,7 @@ export const DefaultContentShell: React.FC<DefaultContentShellProps> = ({
                 href={pager.next.href}
                 className="text-muted-foreground"
               >
-                Next: {pager.next.title}
+                {themeLabels.next}: {pager.next.title}
               </LinkComponent>
             ) : null}
           </nav>
