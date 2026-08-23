@@ -79,7 +79,7 @@ export const docsConfig = defineDocsConfig({
         zh: 'blackwork npm 最新版本',
       },
       href: 'https://www.npmjs.com/package/blackwork',
-      src: 'https://img.shields.io/npm/v/blackwork?label=npm&labelColor=171717&color=f43f5e',
+      src: 'https://img.shields.io/npm/v/blackwork?label=npm&labelColor=171717&color=cb3837',
     },
     eyebrow: false,
     title: 'Blackwork',
