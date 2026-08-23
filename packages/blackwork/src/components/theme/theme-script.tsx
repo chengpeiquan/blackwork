@@ -94,6 +94,7 @@ export const ThemeScript = React.memo(
     return (
       <script
         suppressHydrationWarning
+        type={isBrowser ? 'text/plain' : 'text/javascript'}
         nonce={!isBrowser ? nonce : ''}
         dangerouslySetInnerHTML={{
           __html: `(${themeScript.toString()})(${scriptArgs})`,

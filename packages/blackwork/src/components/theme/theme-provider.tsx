@@ -1,5 +1,6 @@
 import { isBrowser, isUndefined, noop } from '@bassist/utils'
 import React from 'react'
+import { useIsomorphicLayoutEffect } from '@/hooks/use-isomorphic-layout-effect'
 import {
   type Theme,
   type ThemeProviderProps,
@@ -32,29 +33,37 @@ const setLocalThemeValue = (storageKey: string, themeValue: Theme) => {
   localStorage.setItem(storageKey, themeValue)
 }
 
+const updateDocumentTheme = (theme: Theme) => {
+  if (!isBrowser) return
+
+  const root = window.document.documentElement
+  root.classList.remove('light', 'dark')
+  root.classList.add(theme)
+  root.style.colorScheme = theme
+}
+
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   children,
   storageKey = defaultStorageKey,
   defaultTheme = defaultThemeValue,
   ...props
 }) => {
-  const [theme, setTheme] = React.useState<Theme>(
-    getLocalThemeValue(storageKey, defaultTheme),
-  )
+  const [theme, setTheme] = React.useState<Theme>(defaultTheme)
 
   const isDark = React.useMemo(() => theme === 'dark', [theme])
 
-  React.useEffect(() => {
-    const root = window.document.documentElement
-    root.classList.remove('light', 'dark')
-    root.classList.add(theme)
-    root.style.colorScheme = theme
-  }, [theme])
+  useIsomorphicLayoutEffect(() => {
+    const storedTheme = getLocalThemeValue(storageKey, defaultTheme)
+
+    setTheme(storedTheme)
+    updateDocumentTheme(storedTheme)
+  }, [defaultTheme, storageKey])
 
   const setThemeAndStorage = React.useCallback(
     (theme: Theme) => {
       setTheme(theme)
       setLocalThemeValue(storageKey, theme)
+      updateDocumentTheme(theme)
     },
     [storageKey],
   )
