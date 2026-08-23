@@ -120,6 +120,7 @@ export const FormBasicExample = () => {
     <Example
       className="w-full max-w-md flex-col items-stretch"
       title="Usage"
+      titleZh="用法"
       code={basicCode}
     >
       <Form form={form} className="flex w-full flex-col gap-4">
@@ -151,6 +152,7 @@ export const FormFieldsExample = () => {
     <Example
       className="w-full max-w-md flex-col items-stretch"
       title="Built-in fields"
+      titleZh="内置字段"
       code={fieldsCode}
     >
       <Form form={form} className="flex w-full flex-col gap-4">
@@ -191,6 +193,7 @@ export const FormCustomExample = () => {
     <Example
       className="w-full max-w-md flex-col items-stretch"
       title="Custom field"
+      titleZh="自定义字段"
       code={customCode}
     >
       <Form form={form} className="flex w-full flex-col gap-4">
@@ -225,6 +228,7 @@ export const FormPropsTable = () => (
         type: '{ handleSubmit: () => unknown }',
         required: true,
         description: 'Form instance from useAppForm. Required on Form.',
+        descriptionZh: 'useAppForm 返回的表单实例，Form 必填。',
       },
       {
         name: 'label',
@@ -232,11 +236,13 @@ export const FormPropsTable = () => (
         required: true,
         description:
           'Visible label on TextField, TextareaField, and CheckboxField.',
+        descriptionZh: 'TextField、TextareaField 和 CheckboxField 的可见标签。',
       },
       {
         name: 'description',
         type: 'ReactNode',
         description: 'Help text rendered under the control.',
+        descriptionZh: '显示在控件下方的帮助文字。',
       },
     ]}
   />

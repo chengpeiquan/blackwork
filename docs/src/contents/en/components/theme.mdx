@@ -11,15 +11,25 @@ order: 4
 - Any app that should remember light or dark
 - A header action that switches the current theme
 
-Wrap the tree once with `ThemeProvider`. Put `ThemeToggle` where the user expects theme chrome.
+Wrap the tree once with `ThemeProvider` and put `ThemeScript` in `head` to prevent the wrong theme from flashing during page load. Put `ThemeToggle` where users expect theme controls.
 
 ## Usage
 
 ```tsx title="src/app/layout.tsx"
 import { ThemeProvider } from 'blackwork'
+import { ThemeScript } from 'blackwork/rsc'
 
 const RootLayout = ({ children }: React.PropsWithChildren) => {
-  return <ThemeProvider>{children}</ThemeProvider>
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+      </head>
+      <body>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
+    </html>
+  )
 }
 
 export default RootLayout
@@ -39,4 +49,5 @@ export default RootLayout
 
 - Default theme is `dark`.
 - The preference is stored in `localStorage` under `blackwork-theme`.
+- Keep `storageKey` and `defaultTheme` identical on `ThemeScript` and `ThemeProvider`.
 - This docs site already mounts `ThemeProvider` in the root layout.

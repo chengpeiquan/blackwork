@@ -71,6 +71,7 @@ export const FieldHorizontalExample = () => (
   <Example
     className="w-full max-w-md flex-col items-stretch"
     title="Horizontal"
+    titleZh="水平布局"
     code={horizontalCode}
   >
     <Field orientation="horizontal">
@@ -84,6 +85,7 @@ export const FieldInvalidExample = () => (
   <Example
     className="w-full max-w-md flex-col items-stretch"
     title="Validation"
+    titleZh="校验"
     code={invalidCode}
   >
     <Field data-invalid>
@@ -103,17 +105,20 @@ export const FieldPropsTable = () => (
         type: '"vertical" | "horizontal" | "responsive"',
         defaultValue: '"vertical"',
         description: 'Layout of the label and control. Set on Field.',
+        descriptionZh: '标签和控件的布局方式，设置在 Field 上。',
       },
       {
         name: 'htmlFor',
         type: 'string',
         description: 'Associates FieldLabel with the control id.',
+        descriptionZh: '将 FieldLabel 与控件 id 关联。',
       },
       {
         name: 'data-invalid',
         type: 'boolean',
         description:
           'Marks the Field as invalid. Pair with aria-invalid on the control.',
+        descriptionZh: '标记 Field 为无效状态，同时在控件上设置 aria-invalid。',
       },
     ]}
   />

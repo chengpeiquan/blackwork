@@ -47,7 +47,7 @@ export const Example = () => {
 }`
 
 export const DialogBasicExample = () => (
-  <Example title="Usage" code={basicCode}>
+  <Example title="Usage" titleZh="用法" code={basicCode}>
     <Dialog>
       <DialogTrigger asChild>
         <Button>Open dialog</Button>
@@ -75,6 +75,7 @@ export const DialogBasicExample = () => (
 export const DialogPropsTable = () => (
   <PropsTable
     description="The trigger accepts asChild. DialogContent already includes a close button."
+    descriptionZh="触发器支持 asChild。DialogContent 已经包含关闭按钮。"
     rows={[
       {
         name: 'asChild',
@@ -82,21 +83,26 @@ export const DialogPropsTable = () => (
         defaultValue: 'false',
         description:
           'On DialogTrigger and DialogClose. Merge props onto a real button child.',
+        descriptionZh:
+          '用于 DialogTrigger 和 DialogClose，将 props 合并到真正的 button 子节点。',
       },
       {
         name: 'open',
         type: 'boolean',
         description: 'Controlled open state on Dialog.',
+        descriptionZh: 'Dialog 的受控打开状态。',
       },
       {
         name: 'defaultOpen',
         type: 'boolean',
         description: 'Uncontrolled initial open state on Dialog.',
+        descriptionZh: 'Dialog 非受控模式的初始打开状态。',
       },
       {
         name: 'onOpenChange',
         type: '(open: boolean) => void',
         description: 'Called when the dialog opens or closes.',
+        descriptionZh: 'Dialog 打开或关闭时调用。',
       },
     ]}
   />

@@ -6,7 +6,7 @@ order: 1
 
 # 组件
 
-本站只写 Blackwork 自己的接口：布局、小工具、主题、表单，以及少数在 shadcn 之上加了行为的组件。
+本站详细说明 Blackwork 自己的接口：布局、小工具、主题、表单，以及少数在基础组件之上加了行为的组件。
 
 有独立文档的页面都带可交互预览、对应代码和 API 表。
 
@@ -16,10 +16,73 @@ order: 1
 
 ## 其余组件
 
-其余 UI 组件跟 [shadcn/ui](https://ui.shadcn.com/docs/components)，从 blackwork 引入即可。
+其余 UI 组件沿用 [shadcn/ui](https://ui.shadcn.com/docs/components) 的组成方式和视觉基线，但 Blackwork 0.12 的交互底层是 [Base UI](https://base-ui.com/react/overview/quick-start)。组件要从 `blackwork` 引入，props 以 Blackwork 的 TypeScript 类型为准，不要假设 Radix UI 示例可以原样使用。
 
 <Callout title="服务端组件">
   Alert、Badge、Card、Empty、Field、Input 也可以从 blackwork/rsc 引入。
 </Callout>
 
 <PrimitiveCatalog />
+
+## 常用组件
+
+下面几个例子可以直接复制。更多可用部件见上面的组件列表。
+
+### Accordion
+
+```tsx
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from 'blackwork'
+
+export const Faq = () => (
+  <Accordion defaultValue={['install']}>
+    <AccordionItem value="install">
+      <AccordionTrigger>怎样安装？</AccordionTrigger>
+      <AccordionContent>运行 pnpm add blackwork。</AccordionContent>
+    </AccordionItem>
+  </Accordion>
+)
+```
+
+### Select
+
+```tsx
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from 'blackwork'
+
+export const LanguageSelect = () => (
+  <Select defaultValue="zh">
+    <SelectTrigger aria-label="语言">
+      <SelectValue />
+    </SelectTrigger>
+    <SelectContent>
+      <SelectItem value="en">English</SelectItem>
+      <SelectItem value="zh">简体中文</SelectItem>
+    </SelectContent>
+  </Select>
+)
+```
+
+### Toast
+
+`Toaster` 要放在 `ThemeProvider` 里面，调用 `toast` 时不需要额外 provider。
+
+```tsx
+import { Button, Toaster, toast } from 'blackwork'
+
+export const SaveButton = () => (
+  <>
+    <Button onClick={() => toast.success('已保存')}>保存</Button>
+    <Toaster />
+  </>
+)
+```

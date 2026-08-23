@@ -67,13 +67,13 @@ export const Example = () => {
 }`
 
 export const ButtonBasicExample = () => (
-  <Example title="Usage" code={basicCode}>
+  <Example title="Usage" titleZh="用法" code={basicCode}>
     <Button>Button</Button>
   </Example>
 )
 
 export const ButtonVariantsExample = () => (
-  <Example title="Variants" code={variantsCode}>
+  <Example title="Variants" titleZh="变体" code={variantsCode}>
     <Button>Default</Button>
     <Button variant="secondary">Secondary</Button>
     <Button variant="outline">Outline</Button>
@@ -84,7 +84,7 @@ export const ButtonVariantsExample = () => (
 )
 
 export const ButtonSizesExample = () => (
-  <Example title="Sizes" code={sizesCode}>
+  <Example title="Sizes" titleZh="尺寸" code={sizesCode}>
     <Button size="sm">Small</Button>
     <Button>Default</Button>
     <Button size="lg">Large</Button>
@@ -95,7 +95,7 @@ export const ButtonSizesExample = () => (
 )
 
 export const ButtonLoadingExample = () => (
-  <Example title="Loading" code={loadingCode}>
+  <Example title="Loading" titleZh="加载" code={loadingCode}>
     <Button loading>Saving</Button>
     <Button variant="outline" loading>
       Saving
@@ -119,6 +119,7 @@ export const ButtonPropsTable = () => (
         type: '"default" | "secondary" | "outline" | "ghost" | "destructive" | "link"',
         defaultValue: '"default"',
         description: 'Visual style of the button.',
+        descriptionZh: '按钮的视觉样式。',
       },
       {
         name: 'size',
@@ -126,17 +127,20 @@ export const ButtonPropsTable = () => (
         defaultValue: '"default"',
         description:
           'Control height and padding. Use icon for square icon-only buttons.',
+        descriptionZh: '控制高度和内边距。纯图标按钮使用 icon。',
       },
       {
         name: 'loading',
         type: 'boolean',
         defaultValue: 'false',
         description: 'Disables the button and shows a spinner.',
+        descriptionZh: '禁用按钮并显示加载图标。',
       },
       {
         name: 'loaderClassName',
         type: 'string',
         description: 'Extra classes for the spinner.',
+        descriptionZh: '加载图标的额外 class。',
       },
       {
         name: 'asChild',
@@ -144,12 +148,15 @@ export const ButtonPropsTable = () => (
         defaultValue: 'false',
         description:
           'Merge props onto the child instead of rendering a button. Do not combine with loading.',
+        descriptionZh:
+          '将 props 合并到子节点，不再渲染 button。不要和 loading 一起使用。',
       },
       {
         name: 'disabled',
         type: 'boolean',
         defaultValue: 'false',
         description: 'Native disabled state.',
+        descriptionZh: '原生禁用状态。',
       },
     ]}
   />

@@ -48,6 +48,35 @@ pnpm add @tanstack/react-form
 @import 'blackwork/ui-globals.css';
 ```
 
+## 接入 Next.js
+
+先在根布局引入样式，再用 `ThemeScript` 防止页面载入时闪烁，用 `ThemeProvider` 管理主题。下面是可直接运行的 App Router 骨架。
+
+```tsx title="src/app/layout.tsx"
+import { LayoutHeader, ThemeProvider, ThemeToggle } from 'blackwork'
+import { LayoutFooter, LayoutMain, ThemeScript } from 'blackwork/rsc'
+import './globals.css'
+
+const RootLayout = ({ children }: React.PropsWithChildren) => {
+  return (
+    <html lang="zh-CN" suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+      </head>
+      <body className="flex min-h-dvh flex-col">
+        <ThemeProvider>
+          <LayoutHeader themeToggle={<ThemeToggle />}>我的网站</LayoutHeader>
+          <LayoutMain>{children}</LayoutMain>
+          <LayoutFooter>© 我的网站</LayoutFooter>
+        </ThemeProvider>
+      </body>
+    </html>
+  )
+}
+
+export default RootLayout
+```
+
 ## 第一个组件
 
 ```tsx title="src/app/page.tsx"
@@ -61,18 +90,8 @@ export default Page
 ```
 
 <Callout title="服务端组件">
-  Button、浮层和大部分交互组件从 blackwork 引入。可以在服务端渲染的布局从
-  blackwork/rsc 引入。
+  Button、浮层和大部分交互组件从 blackwork
+  引入。可以在服务端渲染的布局和基础组件从 blackwork/rsc 引入。
 </Callout>
-
-```tsx title="src/app/layout.tsx"
-import { LayoutMain } from 'blackwork/rsc'
-
-const RootLayout = ({ children }: React.PropsWithChildren) => {
-  return <LayoutMain>{children}</LayoutMain>
-}
-
-export default RootLayout
-```
 
 接下来用 [布局](/zh/components/layouts) 搭页面框架，再加上 [主题](/zh/components/theme) 和 [小工具](/zh/components/widgets)。其余组件跟 [shadcn/ui](https://ui.shadcn.com/docs/components)。分层见 [组件](/zh/components)。

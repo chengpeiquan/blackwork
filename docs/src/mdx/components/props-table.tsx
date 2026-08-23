@@ -1,38 +1,60 @@
+'use client'
+
+import { usePathname } from 'next/navigation'
+
 export interface PropRow {
   name: string
   type: string
   defaultValue?: string
   required?: boolean
   description: string
+  descriptionZh?: string
 }
 
 export interface PropsTableProps {
   rows: PropRow[]
   title?: string
   description?: string
+  descriptionZh?: string
 }
 
 export const PropsTable = ({
   rows,
   title = 'API Reference',
   description,
+  descriptionZh,
 }: PropsTableProps) => {
+  const pathname = usePathname()
+  const isZh = pathname === '/zh' || pathname.startsWith('/zh/')
+
   return (
     <div className="not-prose my-8 overflow-hidden rounded-xl border border-border bg-card">
       <div className="border-b border-border px-4 py-3">
-        <p className="text-sm font-medium text-foreground">{title}</p>
+        <p className="text-sm font-medium text-foreground">
+          {title === 'API Reference' && isZh ? 'API 参考' : title}
+        </p>
         {description ? (
-          <p className="mt-1 text-sm text-muted-foreground">{description}</p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {isZh && descriptionZh ? descriptionZh : description}
+          </p>
         ) : null}
       </div>
       <div className="overflow-x-auto">
         <table className="w-full min-w-[36rem] text-left text-sm">
           <thead className="border-b border-border bg-muted/40 text-muted-foreground">
             <tr>
-              <th className="px-4 py-3 font-medium">Prop</th>
-              <th className="px-4 py-3 font-medium">Type</th>
-              <th className="px-4 py-3 font-medium">Default</th>
-              <th className="px-4 py-3 font-medium">Description</th>
+              <th className="px-4 py-3 font-medium">
+                {isZh ? '属性' : 'Prop'}
+              </th>
+              <th className="px-4 py-3 font-medium">
+                {isZh ? '类型' : 'Type'}
+              </th>
+              <th className="px-4 py-3 font-medium">
+                {isZh ? '默认值' : 'Default'}
+              </th>
+              <th className="px-4 py-3 font-medium">
+                {isZh ? '说明' : 'Description'}
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -47,7 +69,7 @@ export const PropsTable = ({
                   </code>
                   {row.required ? (
                     <span className="ml-2 text-xs text-amber-700 dark:text-amber-300">
-                      required
+                      {isZh ? '必填' : 'required'}
                     </span>
                   ) : null}
                 </td>
@@ -64,7 +86,9 @@ export const PropsTable = ({
                   )}
                 </td>
                 <td className="px-4 py-3 align-top text-muted-foreground">
-                  {row.description}
+                  {isZh && row.descriptionZh
+                    ? row.descriptionZh
+                    : row.description}
                 </td>
               </tr>
             ))}

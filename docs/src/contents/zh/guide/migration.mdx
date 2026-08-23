@@ -1,12 +1,24 @@
 ---
-title: 迁移指南
-description: 已有 Blackwork 应用的升级说明。
+title: 从 0.11 迁移到 0.12
+description: 将已有 Blackwork 0.11 应用升级到 0.12。
 order: 4
 ---
 
-# 迁移指南
+# 从 0.11 迁移到 0.12
 
-这篇给已经在用旧版 Blackwork 的项目。新项目直接看 [快速开始](/zh/guide/getting-started) 即可。
+这篇给正在使用 Blackwork 0.11 的项目。新项目直接看 [快速开始](/zh/guide/getting-started) 即可。
+
+先升级 Blackwork 和 Tailwind CSS：
+
+```bash
+pnpm add blackwork@^0.12 tailwindcss@^4
+```
+
+如果项目有使用 `blackwork/form`，再安装 TanStack Form：
+
+```bash
+pnpm add @tanstack/react-form
+```
 
 ## 组合 API
 
@@ -30,11 +42,9 @@ order: 4
 
 ## 样式
 
-Tailwind CSS v4 项目这样引入：
+Blackwork 0.12 只支持 Tailwind CSS v4。移除 `blackwork/tailwind-config` 和旧的 Tailwind plugin 配置，在应用样式表改用：
 
 ```css
 @import 'tailwindcss';
 @import 'blackwork/tailwind.css';
 ```
-
-只有仍在用 Tailwind v3 时，才需要 `blackwork/tailwind-config`。

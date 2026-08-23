@@ -1,12 +1,24 @@
 ---
-title: Migration
-description: Upgrade notes for existing Blackwork apps.
+title: Migrate from 0.11 to 0.12
+description: Upgrade an existing Blackwork 0.11 app to 0.12.
 order: 4
 ---
 
-# Migration
+# Migrate from 0.11 to 0.12
 
-This page is for apps that already depend on an older Blackwork release. New projects can skip it and start from [Getting Started](/guide/getting-started).
+This page is for apps using Blackwork 0.11. New projects can skip it and start from [Getting Started](/guide/getting-started).
+
+Upgrade Blackwork and Tailwind CSS first:
+
+```bash
+pnpm add blackwork@^0.12 tailwindcss@^4
+```
+
+If your app uses `blackwork/form`, also install TanStack Form:
+
+```bash
+pnpm add @tanstack/react-form
+```
 
 ## Composition
 
@@ -30,11 +42,9 @@ The `blackwork/icons` subpath is removed. Import generic icons from `lucide-reac
 
 ## Styles
 
-Tailwind CSS v4 apps should import:
+Blackwork 0.12 requires Tailwind CSS v4. Remove `blackwork/tailwind-config` and the legacy Tailwind plugin setup, then import:
 
 ```css
 @import 'tailwindcss';
 @import 'blackwork/tailwind.css';
 ```
-
-You do not need `blackwork/tailwind-config` unless you are still on Tailwind v3.
