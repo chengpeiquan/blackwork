@@ -2,6 +2,7 @@
 
 import {
   Button,
+  buttonVariants,
   Sheet,
   SheetContent,
   SheetHeader,
@@ -820,20 +821,19 @@ export const MobileDocsToc: React.FC<MobileDocsTocProps> = ({
   return (
     <div className={cn('xl:hidden', className)}>
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetTrigger asChild>
-          <Button
-            type="button"
-            variant="outline"
-            size="icon"
-            title={openLabel}
-            aria-label={openLabel}
-            data-docs-toc-mobile-trigger="true"
-            className="fixed border border-input bg-background shadow-sm"
-            style={getDocsFloatingActionStyle(1)}
-          >
-            <TableOfContents className="size-4" aria-hidden="true" />
-            <span className="sr-only">{openLabel}</span>
-          </Button>
+        <SheetTrigger
+          title={openLabel}
+          aria-label={openLabel}
+          data-docs-toc-mobile-trigger="true"
+          className={buttonVariants({
+            variant: 'outline',
+            size: 'icon',
+            className: 'fixed border border-input bg-background shadow-sm',
+          })}
+          style={getDocsFloatingActionStyle(1)}
+        >
+          <TableOfContents className="size-4" aria-hidden="true" />
+          <span className="sr-only">{openLabel}</span>
         </SheetTrigger>
 
         <SheetContent

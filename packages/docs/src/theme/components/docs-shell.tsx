@@ -1,11 +1,11 @@
 import {
-  Button,
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from 'blackwork'
+import { buttonVariants } from 'blackwork/rsc'
 import { Menu } from 'lucide-react'
 import React from 'react'
 import { defineConfig } from '../../config/define-config'
@@ -32,6 +32,8 @@ import {
   getPagefindFilters,
   getSectionEntries,
   getSiteTitle,
+  getThemeLabels,
+  getThemeSocialLinks,
   getTocHeadings,
   getTocLabels,
 } from './shell-shared'
@@ -82,15 +84,17 @@ const getRenderableSidebarNodes = (
   })
 
 interface DocsSidebarNavProps {
+  navigationLabel: string
   LinkComponent: DocsThemeLinkComponent
   nodes: DocsResolvedSidebarNode[]
 }
 
 const DocsSidebarNav: React.FC<DocsSidebarNavProps> = ({
   LinkComponent,
+  navigationLabel,
   nodes,
 }) => (
-  <nav aria-label="Documentation pages" className="flex flex-col gap-1">
+  <nav aria-label={navigationLabel} className="flex flex-col gap-1">
     {nodes.map((node) =>
       node.type === 'group' ? (
         <div key={node.title} className="flex flex-col gap-1 pt-4 first:pt-0">
@@ -133,12 +137,17 @@ const DocsSidebarNav: React.FC<DocsSidebarNavProps> = ({
 
 interface MobileDocsSidebarProps extends DocsSidebarNavProps {
   currentTitle: string
+  openLabel: string
+  sectionsLabel: string
 }
 
 const MobileDocsSidebar: React.FC<MobileDocsSidebarProps> = ({
   currentTitle,
   LinkComponent,
+  navigationLabel,
   nodes,
+  openLabel,
+  sectionsLabel,
 }) => {
   if (nodes.length === 0) {
     return null
@@ -147,21 +156,22 @@ const MobileDocsSidebar: React.FC<MobileDocsSidebarProps> = ({
   return (
     <div className="lg:hidden">
       <Sheet>
-        <SheetTrigger asChild>
-          <Button
-            type="button"
-            variant="outline"
-            aria-label="Open section navigation"
-            className="h-auto w-full justify-start gap-3 rounded-lg px-4 py-3"
-          >
-            <Menu className="size-4 shrink-0" aria-hidden="true" />
-            <span className="flex min-w-0 flex-1 flex-col items-start text-left">
-              <span className="text-xs text-muted-foreground">Sections</span>
-              <span className="truncate text-sm font-medium text-foreground">
-                {currentTitle}
-              </span>
+        <SheetTrigger
+          aria-label={openLabel}
+          className={buttonVariants({
+            variant: 'outline',
+            className: 'h-auto w-full justify-start gap-3 rounded-lg px-4 py-3',
+          })}
+        >
+          <Menu className="size-4 shrink-0" aria-hidden="true" />
+          <span className="flex min-w-0 flex-1 flex-col items-start text-left">
+            <span className="text-xs text-muted-foreground">
+              {sectionsLabel}
             </span>
-          </Button>
+            <span className="truncate text-sm font-medium text-foreground">
+              {currentTitle}
+            </span>
+          </span>
         </SheetTrigger>
 
         <SheetContent
@@ -169,11 +179,15 @@ const MobileDocsSidebar: React.FC<MobileDocsSidebarProps> = ({
           className="flex h-dvh flex-col gap-0 p-0 sm:max-w-sm"
         >
           <SheetHeader className="border-b border-border/60 px-6 pb-4 pt-[calc(env(safe-area-inset-top)+1.5rem)] text-left">
-            <SheetTitle>Sections</SheetTitle>
+            <SheetTitle>{sectionsLabel}</SheetTitle>
           </SheetHeader>
 
           <div className="min-h-0 flex-1 overflow-auto px-6 pb-[calc(env(safe-area-inset-bottom)+1.5rem)] pt-4">
-            <DocsSidebarNav LinkComponent={LinkComponent} nodes={nodes} />
+            <DocsSidebarNav
+              LinkComponent={LinkComponent}
+              navigationLabel={navigationLabel}
+              nodes={nodes}
+            />
           </div>
         </SheetContent>
       </Sheet>
@@ -219,6 +233,8 @@ export const DefaultDocsShell: React.FC<DefaultDocsShellProps> = ({
   })
   const tocHeadings = getTocHeadings(headings)
   const tocLabels = getTocLabels(normalizedConfig, entry.locale)
+  const themeLabels = getThemeLabels(normalizedConfig, entry.locale)
+  const socialLinks = getThemeSocialLinks(normalizedConfig, entry.locale)
   const homeHref = source.getCanonicalHref(entry.locale, [])
   const slots = resolveThemeSlots(normalizedConfig.slots)
   const HeaderActions = slots.headerActions
@@ -248,12 +264,14 @@ export const DefaultDocsShell: React.FC<DefaultDocsShellProps> = ({
         homeHref={homeHref}
         LinkComponent={LinkComponent}
         localeLinks={localeLinks}
+        labels={themeLabels}
         navigation={navigation}
+        socialLinks={socialLinks}
         siteDescription={normalizedConfig.site.description}
         siteTitle={getSiteTitle(normalizedConfig)}
       />
 
-      <DocsScrollToTop />
+      <DocsScrollToTop label={themeLabels.scrollToTop} />
 
       <MobileDocsToc headings={tocHeadings} {...tocLabels} />
 
@@ -264,7 +282,10 @@ export const DefaultDocsShell: React.FC<DefaultDocsShellProps> = ({
         <MobileDocsSidebar
           currentTitle={entry.title}
           LinkComponent={LinkComponent}
+          navigationLabel={themeLabels.documentationPages}
           nodes={renderableSidebarNodes}
+          openLabel={themeLabels.openSectionNavigation}
+          sectionsLabel={themeLabels.sections}
         />
 
         <aside
@@ -274,6 +295,7 @@ export const DefaultDocsShell: React.FC<DefaultDocsShellProps> = ({
           <DocsRailScroll>
             <DocsSidebarNav
               LinkComponent={LinkComponent}
+              navigationLabel={themeLabels.documentationPages}
               nodes={renderableSidebarNodes}
             />
           </DocsRailScroll>
@@ -316,7 +338,7 @@ export const DefaultDocsShell: React.FC<DefaultDocsShellProps> = ({
 
           <nav
             data-docs-region="pager"
-            aria-label="Document pager"
+            aria-label={themeLabels.documentPager}
             className="flex flex-wrap items-center justify-between gap-3 border-t border-border/60 pt-6 text-sm"
           >
             {pager.previous ? (
@@ -324,7 +346,7 @@ export const DefaultDocsShell: React.FC<DefaultDocsShellProps> = ({
                 href={pager.previous.href}
                 className="text-muted-foreground"
               >
-                Previous: {pager.previous.title}
+                {themeLabels.previous}: {pager.previous.title}
               </LinkComponent>
             ) : (
               <span />
@@ -335,7 +357,7 @@ export const DefaultDocsShell: React.FC<DefaultDocsShellProps> = ({
                 href={pager.next.href}
                 className="text-muted-foreground"
               >
-                Next: {pager.next.title}
+                {themeLabels.next}: {pager.next.title}
               </LinkComponent>
             ) : null}
           </nav>

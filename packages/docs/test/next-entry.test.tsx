@@ -370,6 +370,8 @@ describe('next root entry', () => {
     )
 
     expect(layoutHtml).toContain('<html lang="zh-CN"')
+    expect(layoutHtml).toContain('document.documentElement.lang')
+    expect(layoutHtml).toContain('"zh":"zh-CN"')
   })
 
   test('DocsRootLayout derives the document lang from the current route params', async () => {

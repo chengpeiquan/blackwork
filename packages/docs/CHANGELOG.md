@@ -3,9 +3,13 @@
 ### Bug Fixes
 
 - **content-config:** reload content configuration without retaining stale Jiti require cache entries ([6a11f15](https://github.com/chengpeiquan/blackwork/commit/6a11f15))
+- **localization:** set the route locale before hydration and keep it synchronized during navigation
 
 ### Features
 
+- **home:** support linked badge images with localized alternative text
+- **header:** render configured social links through the shared layout controls
+- **localization:** support localized home content and shared documentation chrome labels
 - **header-nav:** add configurable and locale-aware header navigation ([25c6402](https://github.com/chengpeiquan/blackwork/commit/25c6402))
 - **mdx:** render fenced code blocks with the default shared CodeBlock component ([28b6518](https://github.com/chengpeiquan/blackwork/commit/28b6518))
 
