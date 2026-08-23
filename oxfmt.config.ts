@@ -18,7 +18,7 @@ export default defineConfig(
         files: ['packages/blackwork/src/**/*.{js,jsx,ts,tsx}'],
         options: {
           sortTailwindcss: {
-            config: 'packages/blackwork/tailwind.config.ts',
+            stylesheet: 'packages/blackwork/src/styles/tailwind.css',
             functions: ['cn', 'clsx', 'cva'],
           },
         },

@@ -1,5 +1,4 @@
 @import 'tailwindcss';
-@import 'tw-animate-css';
 @import 'blackwork/tailwind.css';
 @import '@blackwork/docs/tailwind.css';
 @plugin '@tailwindcss/typography';

@@ -8,7 +8,6 @@ const baseConfig = createBaseConfig({
     index: 'src/index.ts',
     form: 'src/form/index.ts',
     rsc: 'src/rsc.ts',
-    'tailwind-config': 'src/tailwind-config.ts',
   },
   format: [BundleFormat.CJS, BundleFormat.ESM],
 })

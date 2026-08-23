@@ -16,7 +16,7 @@ Blackwork Tattoo style React UI layout for blogs, documentation sites, and other
 
 ## Install
 
-If the app already has React 19+ and Tailwind CSS, install this package:
+If the app already has React 19+ and Tailwind CSS v4, install this package:
 
 ```bash
 pnpm add blackwork
@@ -28,47 +28,9 @@ Add this only when you use `blackwork/form`:
 pnpm add @tanstack/react-form
 ```
 
-Tailwind CSS v3 setups that use `blackwork/tailwind-config` also need
-`tailwindcss-animate`. The typography plugin is optional:
-
-```bash
-pnpm add -D tailwindcss-animate @tailwindcss/typography
-```
-
 ## Usage
 
-### Tailwind CSS v3
-
-In your `tailwind.config.ts`:
-
-```ts
-import { createBlackworkTailwindConfig } from 'blackwork/tailwind-config'
-import typography from '@tailwindcss/typography'
-import animate from 'tailwindcss-animate'
-
-export default createBlackworkTailwindConfig({
-  rootDir: import.meta.url,
-  content: [
-    'src/app/**/*.{js,mjs,cjs,ts,jsx,tsx,mdx}',
-    'src/components/**/*.{js,mjs,cjs,ts,jsx,tsx,mdx}',
-    'content/**/*.{js,mjs,cjs,ts,jsx,tsx,mdx}',
-  ],
-  plugins: [typography, animate],
-})
-```
-
-If you only need the shared theme tokens and want to assemble the rest yourself, `theme` is also exported from `blackwork/tailwind-config`.
-
-In your root layout:
-
-```tsx
-// e.g. `src/app/layout.tsx`
-import 'blackwork/ui-globals.css'
-```
-
-### Tailwind CSS v4
-
-Tailwind CSS v4 users do not need `blackwork/tailwind-config`. Import Tailwind and the Blackwork v4 CSS entry from your app stylesheet:
+Import Tailwind and the Blackwork CSS entry from your app stylesheet:
 
 ```css
 @import 'tailwindcss';

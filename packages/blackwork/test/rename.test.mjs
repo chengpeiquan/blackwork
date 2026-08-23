@@ -25,6 +25,7 @@ test('normalizes CSS entries without changing the stable globals entry', async (
     assert.equal(
       await readFile(resolve(outDir, 'tailwind.css'), 'utf8'),
       [
+        "@import 'tw-animate-css';",
         "@import './theme.css';",
         "@import './ui-globals.css';",
         '@custom-variant dark (&:where(.dark, .dark *));',

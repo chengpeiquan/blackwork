@@ -131,7 +131,7 @@ const ComboboxContent = React.forwardRef<
           ref={ref}
           data-slot="combobox-content"
           className={cn(
-            'max-h-(--available-height) min-w-(--anchor-width) origin-(--transform-origin) relative z-50 overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[open]:animate-in data-[closed]:animate-out data-[closed]:fade-out-0 data-[open]:fade-in-0 data-[closed]:zoom-out-95 data-[open]:zoom-in-95',
+            'max-h-(--available-height) min-w-(--anchor-width) origin-(--transform-origin) relative z-50 overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 data-closed:zoom-out-95 data-open:zoom-in-95',
             className,
           )}
           {...props}
