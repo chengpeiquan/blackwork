@@ -114,7 +114,7 @@ export const Example = () => {
 }`
 
 export const WidgetLanguageExample = () => (
-  <Example title="Language toggle" code={languageCode}>
+  <Example title="Language toggle" titleZh="语言切换" code={languageCode}>
     <LanguageToggle
       title="Change language"
       ariaLabel="Change language"
@@ -128,13 +128,13 @@ export const WidgetLanguageExample = () => (
 )
 
 export const WidgetSearchExample = () => (
-  <Example title="Search input" code={searchCode}>
+  <Example title="Search input" titleZh="搜索框" code={searchCode}>
     <SearchInput placeholder="Search posts..." />
   </Example>
 )
 
 export const WidgetSocialExample = () => (
-  <Example title="Social links" code={socialCode}>
+  <Example title="Social links" titleZh="社交链接" code={socialCode}>
     <SocialLinks
       items={[
         { type: 'github', link: 'https://github.com/chengpeiquan/blackwork' },
@@ -146,7 +146,7 @@ export const WidgetSocialExample = () => (
 )
 
 export const WidgetScrollExample = () => (
-  <Example title="Scroll to top" code={scrollCode}>
+  <Example title="Scroll to top" titleZh="回到顶部" code={scrollCode}>
     <ScrollToTop
       className="relative right-auto bottom-auto"
       title="Back to top"
@@ -158,6 +158,7 @@ export const WidgetScrollExample = () => (
 export const WidgetTypographyExample = () => (
   <Example
     title="Typography"
+    titleZh="排版"
     className="w-full max-w-xl flex-col items-start"
     code={typographyCode}
   >
@@ -167,7 +168,7 @@ export const WidgetTypographyExample = () => (
 )
 
 export const WidgetExternalExample = () => (
-  <Example title="External link" code={externalCode}>
+  <Example title="External link" titleZh="外部链接" code={externalCode}>
     <ExternalLink href="https://ui.chengpeiquan.com">
       Blackwork docs
     </ExternalLink>
@@ -178,7 +179,7 @@ export const WidgetQuickSearchExample = () => {
   const [open, setOpen] = useState(false)
 
   return (
-    <Example title="Quick search" code={quickSearchCode}>
+    <Example title="Quick search" titleZh="快速搜索" code={quickSearchCode}>
       <QuickSearchTrigger
         label="Search docs..."
         shortLabel="Search"
@@ -205,21 +206,25 @@ export const WidgetLanguagePropsTable = () => (
         required: true,
         description:
           'One option renders a button. An array renders a dropdown.',
+        descriptionZh: '单个 option 显示按钮，数组显示下拉菜单。',
       },
       {
         name: 'defaultValue',
         type: 'string',
         description: 'Current locale. Used to pick the trigger icon.',
+        descriptionZh: '当前语言，用于选择触发器图标。',
       },
       {
         name: 'title',
         type: 'string',
         description: 'Tooltip on the trigger.',
+        descriptionZh: '触发器的 tooltip。',
       },
       {
         name: 'ariaLabel',
         type: 'string',
         description: 'Accessible name. Falls back to title.',
+        descriptionZh: '无障碍名称，默认使用 title。',
       },
     ]}
   />
@@ -234,22 +239,26 @@ export const WidgetSocialPropsTable = () => (
         type: '"github" | "x" | "twitter" | "instagram" | "zhihu" | "rss"',
         required: true,
         description: 'Built-in brand mark. Other types render nothing.',
+        descriptionZh: '内置品牌图标，其他类型不会显示内容。',
       },
       {
         name: 'link',
         type: 'string',
         required: true,
         description: 'Destination URL. Opens in a new tab.',
+        descriptionZh: '目标 URL，会在新标签页打开。',
       },
       {
         name: 'label',
         type: 'string',
         description: 'Tooltip. Defaults to the brand name.',
+        descriptionZh: 'Tooltip，默认使用品牌名称。',
       },
       {
         name: 'ariaLabel',
         type: 'string',
         description: 'Accessible name. Defaults to Visit {label} in a new tab.',
+        descriptionZh: '无障碍名称，默认是 Visit {label} in a new tab。',
       },
     ]}
   />
@@ -263,17 +272,20 @@ export const WidgetScrollPropsTable = () => (
         name: 'title',
         type: 'string',
         description: 'Tooltip on the button.',
+        descriptionZh: '按钮的 tooltip。',
       },
       {
         name: 'ariaLabel',
         type: 'string',
         description: 'Accessible name for the icon-only button.',
+        descriptionZh: '纯图标按钮的无障碍名称。',
       },
       {
         name: 'variant',
         type: 'Button variant',
         defaultValue: '"ghost"',
         description: 'Passed through to Button.',
+        descriptionZh: '原样传给 Button。',
       },
     ]}
   />
@@ -288,21 +300,25 @@ export const WidgetSearchPropsTable = () => (
         type: 'string',
         defaultValue: '"Search..."',
         description: 'Native input placeholder.',
+        descriptionZh: '原生 input placeholder。',
       },
       {
         name: 'inputRef',
         type: 'RefObject<HTMLInputElement>',
         description: 'Ref for the inner input.',
+        descriptionZh: '内部 input 的 ref。',
       },
       {
         name: 'inputClassName',
         type: 'string',
         description: 'Classes for the inner input.',
+        descriptionZh: '内部 input 的 class。',
       },
       {
         name: 'searchIconClassName',
         type: 'string',
         description: 'Classes for the search icon.',
+        descriptionZh: '搜索图标的 class。',
       },
     ]}
   />
@@ -317,6 +333,7 @@ export const WidgetTypographyPropsTable = () => (
         type: '1 | 2 | 3 | 4',
         defaultValue: '1',
         description: 'Renders h1 through h4 with the matching type scale.',
+        descriptionZh: '显示 h1 至 h4，并使用对应的字号层级。',
       },
     ]}
   />

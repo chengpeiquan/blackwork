@@ -51,6 +51,35 @@ If you only need theme tokens and globals without scanning Blackwork component c
 @import 'blackwork/ui-globals.css';
 ```
 
+## Set up Next.js
+
+Import the styles in the root layout, use `ThemeScript` to prevent a flash during page load, and mount `ThemeProvider` once. This is a complete App Router skeleton.
+
+```tsx title="src/app/layout.tsx"
+import { LayoutHeader, ThemeProvider, ThemeToggle } from 'blackwork'
+import { LayoutFooter, LayoutMain, ThemeScript } from 'blackwork/rsc'
+import './globals.css'
+
+const RootLayout = ({ children }: React.PropsWithChildren) => {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+      </head>
+      <body className="flex min-h-dvh flex-col">
+        <ThemeProvider>
+          <LayoutHeader themeToggle={<ThemeToggle />}>My site</LayoutHeader>
+          <LayoutMain>{children}</LayoutMain>
+          <LayoutFooter>© My site</LayoutFooter>
+        </ThemeProvider>
+      </body>
+    </html>
+  )
+}
+
+export default RootLayout
+```
+
 ## First component
 
 ```tsx title="src/app/page.tsx"
@@ -64,18 +93,8 @@ export default Page
 ```
 
 <Callout title="Server components">
-  Button, overlays, and most interactive components come from blackwork. Layouts
-  that can render on the server come from blackwork/rsc.
+  Button, overlays, and most interactive components come from blackwork.
+  Server-renderable layouts and primitives come from blackwork/rsc.
 </Callout>
-
-```tsx title="src/app/layout.tsx"
-import { LayoutMain } from 'blackwork/rsc'
-
-const RootLayout = ({ children }: React.PropsWithChildren) => {
-  return <LayoutMain>{children}</LayoutMain>
-}
-
-export default RootLayout
-```
 
 Next, compose [Layouts](/components/layouts) for the page chrome, then [Theme](/components/theme) and [Widgets](/components/widgets). Most other primitives follow [shadcn/ui](https://ui.shadcn.com/docs/components). See [Components](/components) for the split.

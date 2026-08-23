@@ -92,12 +92,12 @@ export const DocsHeaderSearchAction: React.FC<DocsThemeHeaderActionsProps> = ({
 
   return (
     <>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1">
         <Button
           type="button"
           variant="ghost"
           size="icon"
-          aria-label="Search docs"
+          aria-label={copy.ariaLabel}
           className="md:hidden"
           onClick={() => setOpen(true)}
         >

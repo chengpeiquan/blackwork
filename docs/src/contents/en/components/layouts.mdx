@@ -30,13 +30,8 @@ See [Theme](/components/theme) for `ThemeProvider` and `ThemeToggle`. See [Widge
 </Callout>
 
 ```tsx title="src/app/layout.tsx"
-import {
-  LayoutHeader,
-  ThemeProvider,
-  ThemeScript,
-  ThemeToggle,
-} from 'blackwork'
-import { LayoutFooter, LayoutMain } from 'blackwork/rsc'
+import { LayoutHeader, ThemeProvider, ThemeToggle } from 'blackwork'
+import { LayoutFooter, LayoutMain, ThemeScript } from 'blackwork/rsc'
 
 const RootLayout = ({ children }: React.PropsWithChildren) => {
   return (

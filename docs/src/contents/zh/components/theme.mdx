@@ -11,15 +11,25 @@ order: 4
 - 需要记住浅色 / 深色的应用
 - 页头上的主题切换
 
-用 `ThemeProvider` 包一层。把 `ThemeToggle` 放到用户找得到的位置。
+在根布局用 `ThemeProvider` 包一层，并把 `ThemeScript` 放进 `head`，避免载入页面时出现错误主题。把 `ThemeToggle` 放到用户找得到的位置。
 
 ## 用法
 
 ```tsx title="src/app/layout.tsx"
 import { ThemeProvider } from 'blackwork'
+import { ThemeScript } from 'blackwork/rsc'
 
 const RootLayout = ({ children }: React.PropsWithChildren) => {
-  return <ThemeProvider>{children}</ThemeProvider>
+  return (
+    <html lang="zh-CN" suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+      </head>
+      <body>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
+    </html>
+  )
 }
 
 export default RootLayout
@@ -39,4 +49,5 @@ export default RootLayout
 
 - 默认主题是 `dark`。
 - 偏好存在 `localStorage` 的 `blackwork-theme`。
+- `ThemeScript` 和 `ThemeProvider` 的 `storageKey`、`defaultTheme` 必须一致。
 - 本站已经在根布局里挂了 `ThemeProvider`。

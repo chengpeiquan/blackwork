@@ -6,7 +6,7 @@ order: 1
 
 # Components
 
-This site documents Blackwork-specific APIs: layouts, widgets, theme, forms, and the few components that add behavior on top of shadcn.
+This site documents Blackwork-specific APIs in detail: layouts, widgets, theme, forms, and the components that add behavior on top of the primitives.
 
 Each documented page has a live preview, the matching code, and an API table.
 
@@ -16,7 +16,7 @@ Each documented page has a live preview, the matching code, and an API table.
 
 ## Other components
 
-The rest of the UI components follow [shadcn/ui](https://ui.shadcn.com/docs/components). Import them from blackwork.
+The rest of the UI components follow the composition and visual baseline of [shadcn/ui](https://ui.shadcn.com/docs/components), but Blackwork 0.12 uses [Base UI](https://base-ui.com/react/overview/quick-start) for interactive primitives. Import components from `blackwork` and treat Blackwork's TypeScript types as the API contract. Do not assume a Radix UI example is drop-in compatible.
 
 <Callout title="Server components">
   Alert, Badge, Card, Empty, Field, and Input are also available from
@@ -24,3 +24,66 @@ The rest of the UI components follow [shadcn/ui](https://ui.shadcn.com/docs/comp
 </Callout>
 
 <PrimitiveCatalog />
+
+## Common components
+
+These examples are ready to copy. See the component list above for the other exports.
+
+### Accordion
+
+```tsx
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from 'blackwork'
+
+export const Faq = () => (
+  <Accordion defaultValue={['install']}>
+    <AccordionItem value="install">
+      <AccordionTrigger>How do I install it?</AccordionTrigger>
+      <AccordionContent>Run pnpm add blackwork.</AccordionContent>
+    </AccordionItem>
+  </Accordion>
+)
+```
+
+### Select
+
+```tsx
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from 'blackwork'
+
+export const LanguageSelect = () => (
+  <Select defaultValue="en">
+    <SelectTrigger aria-label="Language">
+      <SelectValue />
+    </SelectTrigger>
+    <SelectContent>
+      <SelectItem value="en">English</SelectItem>
+      <SelectItem value="zh">简体中文</SelectItem>
+    </SelectContent>
+  </Select>
+)
+```
+
+### Toast
+
+Mount `Toaster` inside `ThemeProvider`. Calling `toast` does not require another provider.
+
+```tsx
+import { Button, Toaster, toast } from 'blackwork'
+
+export const SaveButton = () => (
+  <>
+    <Button onClick={() => toast.success('Saved')}>Save</Button>
+    <Toaster />
+  </>
+)
+```
