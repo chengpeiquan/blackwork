@@ -92,13 +92,8 @@ export const SocialLink: React.FC<SocialLinkProps> = ({
 
   if (!SocialIcon) return null
   return (
-    <Button variant="ghost" size="icon">
-      <ExternalLink
-        className="flex size-full items-center justify-center"
-        href={link}
-        title={label}
-        aria-label={ariaLabel}
-      >
+    <Button asChild variant="ghost" size="icon">
+      <ExternalLink href={link} title={label} ariaLabel={ariaLabel}>
         <SocialIcon className="size-5" />
       </ExternalLink>
     </Button>
