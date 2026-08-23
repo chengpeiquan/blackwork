@@ -1,3 +1,9 @@
+# [0.12.2](https://github.com/chengpeiquan/blackwork/compare/blackwork@0.12.1...blackwork@0.12.2) (2026-08-23)
+
+### Bug Fixes
+
+- **as-child:** preserve intrinsic trigger elements without leaking Base UI props to the DOM
+
 # [0.12.1](https://github.com/chengpeiquan/blackwork/compare/blackwork@0.12.0...blackwork@0.12.1) (2026-08-23)
 
 ### Bug Fixes
