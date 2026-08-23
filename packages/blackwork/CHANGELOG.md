@@ -1,3 +1,10 @@
+# [0.12.1](https://github.com/chengpeiquan/blackwork/compare/blackwork@0.12.0...blackwork@0.12.1) (2026-08-23)
+
+### Bug Fixes
+
+- **theme:** keep the initial client theme deterministic during hydration and restore the stored preference before paint
+- **theme:** keep the inline theme script inert during client rendering
+
 # [0.12.0](https://github.com/chengpeiquan/blackwork/compare/blackwork@0.11.0...blackwork@0.12.0) (2026-08-22)
 
 ### ⚠ BREAKING CHANGES
