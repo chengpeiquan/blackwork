@@ -133,7 +133,7 @@ const NavigationMenuViewport = React.forwardRef<
         className={cn('absolute left-0 top-full isolate z-50', className)}
         {...props}
       >
-        <NavigationMenuPrimitive.Popup className="relative mt-1.5 origin-top overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-lg data-[open]:animate-in data-[closed]:animate-out data-[closed]:zoom-out-95 data-[open]:zoom-in-90">
+        <NavigationMenuPrimitive.Popup className="relative mt-1.5 origin-top overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-lg data-open:animate-in data-closed:animate-out data-closed:zoom-out-95 data-open:zoom-in-90">
           <NavigationMenuPrimitive.Viewport className="relative size-full overflow-hidden" />
         </NavigationMenuPrimitive.Popup>
       </NavigationMenuPrimitive.Positioner>
@@ -150,7 +150,7 @@ const NavigationMenuIndicator = React.forwardRef<
     ref={ref}
     data-slot="navigation-menu-indicator"
     className={cn(
-      'z-1 top-full flex h-1.5 items-end justify-center overflow-hidden data-[hidden]:fade-out data-[visible]:fade-in',
+      'z-1 top-full flex h-1.5 items-end justify-center overflow-hidden data-hidden:fade-out data-visible:fade-in',
       className,
     )}
     {...props}
