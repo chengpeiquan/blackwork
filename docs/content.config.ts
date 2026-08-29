@@ -29,6 +29,7 @@ export const docsContentConfig = {
           items: [
             { type: 'item', href: '/guide/getting-started' },
             { type: 'item', href: '/guide/icons' },
+            { type: 'item', href: '/guide/skills' },
             { type: 'item', href: '/guide/migration' },
           ],
         },

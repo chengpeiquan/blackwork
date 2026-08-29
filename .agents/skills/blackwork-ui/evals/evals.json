@@ -1,0 +1,46 @@
+{
+  "skill_name": "blackwork-ui",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Using the Blackwork version already installed in this Next.js project, build a bilingual project-list page with site chrome, project cards, tags, and icon-only links to the homepage and repository.",
+      "expected_output": "A restrained content composition that uses the installed Blackwork API, keeps repeated cards aligned, and exposes accessible icon actions.",
+      "files": [],
+      "expectations": [
+        "Inspects the installed Blackwork version or declarations before choosing imports",
+        "Uses one page title and compact card titles rather than repeating hero-sized headings",
+        "Uses consistent Card slots for repeated projects without nesting cards",
+        "Provides accessible names and tooltips or equivalent discoverable labels for icon-only links",
+        "Checks long translated text and wrapping at a mobile viewport",
+        "Uses semantic theme colors for page chrome"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Build a Blackwork-based poster generator with image, layout, and background settings; a live fixed-ratio preview; export-size selection; and an export action. It must work on desktop, mobile, light, and dark themes.",
+      "expected_output": "A stable workbench with grouped settings, a dominant preview, explicit mobile ordering, intentional canvas theme independence, and visual verification.",
+      "files": [],
+      "expectations": [
+        "Uses a narrower settings region and wider preview region on desktop",
+        "Defines an intentional mobile order instead of clipping the desktop grid",
+        "Constrains the preview with aspect ratio and local overflow so it cannot widen the page",
+        "Keeps exported canvas colors independent from semantic application chrome",
+        "Keeps export controls stable while preview or loading content changes",
+        "Verifies representative desktop and mobile viewports in both themes"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Review and fix a cramped Blackwork toolbar where the page title duplicates a panel title, copy/reset/download icons have no labels, gaps are inconsistent, and the light canvas looks accidental in dark mode.",
+      "expected_output": "A focused correction that restores hierarchy, groups tools, adds accessible tooltips, and deliberately frames the domain canvas without forcing it to follow the app theme.",
+      "files": [],
+      "expectations": [
+        "Removes or demotes the redundant title instead of keeping competing headings",
+        "Uses consistent square icon actions with accessible names and tooltips",
+        "Groups related actions with a small spacing rhythm and separates the primary action",
+        "Frames a deliberately light canvas clearly inside semantic dark application chrome",
+        "Does not propose a wholesale redesign when focused composition changes solve the defects"
+      ]
+    }
+  ]
+}

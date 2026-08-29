@@ -1,0 +1,56 @@
+---
+title: Skill
+description: 让 AI Agent 掌握 Blackwork 的包边界和视觉组合规范。
+order: 3
+---
+
+# Skill
+
+Blackwork Skill 会给 AI Agent 提供使用 `blackwork` 包时需要的项目上下文。它和官方 shadcn Skill 互补：shadcn Skill 负责上游组件发现和 CLI，Blackwork Skill 负责 Blackwork 的包边界、页面组合和视觉验收。
+
+## 安装
+
+使用 Skills CLI 从这个仓库安装：
+
+```bash
+pnpm dlx skills add chengpeiquan/blackwork --skill blackwork-ui
+```
+
+如果只想安装给指定 Agent，可以在命令中补充 Agent 名称。之后要更新 Skill，就在安装它的项目里使用 Skills CLI 的更新命令。
+
+## 什么时候使用
+
+当 Agent 要做以下事情时使用：
+
+- 开发或评审使用 `blackwork` 的页面
+- 组合 Blackwork 布局、页头、页脚、内容列表或文章页面
+- 使用 Blackwork 开发产品页、设置面板、Dashboard、生成器、编辑器、Toolbar 或实时预览
+- 修复标题层级、间距、响应式、深色模式、画布边界或图标操作的无障碍问题
+
+Skill 会先检查项目安装的 Blackwork 版本和实际 exports。不同 Blackwork 版本的组件、入口和图标 API 可能不同，不能直接照抄另一个项目的例子。
+
+## 它会约束什么
+
+- 优先使用已有 Blackwork 组件和 variants，减少一次性手写结构。
+- 将页面标题、面板标题和 Toolbar 操作保持在不同层级。
+- 网站 Chrome 使用 semantic theme tokens，生成内容的颜色保留在业务状态中。
+- 每个纯图标操作都要有无障碍名称，并提供 Tooltip 或其他可发现的说明。
+- 固定比例预览要有明确的宽高比和局部溢出处理。
+- 先定义桌面和手机的页面组合，再检查支持的浅色和深色主题。
+- 将 npm 安装的 Blackwork 和项目自己维护的 shadcn 源码分开，不能用 shadcn CLI 覆盖包内部文件。
+
+需要时再读取详细 reference：
+
+- `package-contract.md`：包版本、exports、样式、主题、RSC、表单和 shadcn 边界
+- `content-and-product.md`：博客、文档、列表、文章页和产品页面
+- `workbench.md`：设置型工具、Toolbar、画布、预览和响应式验收
+
+## 是否需要 MCP？
+
+通常不需要。Blackwork Skill 是指引和 reference，不需要连接服务器就可以判断间距、层级、响应式或主题。只使用已发布 `blackwork` npm 包的项目，不需要额外配置 MCP。
+
+shadcn MCP 适合搜索、查看和安装 shadcn registry 中的组件。项目自己维护 shadcn 源码，或者需要从 registry 安装 blocks 时，可以配置它；单纯消费 `blackwork` npm 包则不需要。
+
+将来如果 Blackwork 发布可安装的源码 blocks、templates 或项目规则，而且希望 Agent 可以按名称搜索和安装，再考虑提供 MCP-compatible registry。届时需要有效的 `registry.json`、准确的依赖声明和清晰的代码归属；MCP 负责发现，不负责替代视觉判断。
+
+可以参考 [shadcn MCP 文档](https://ui.shadcn.com/docs/mcp) 和 [registry MCP 指南](https://ui.shadcn.com/docs/registry/mcp)。

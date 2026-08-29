@@ -1,0 +1,4 @@
+interface:
+  display_name: 'Blackwork UI'
+  short_description: 'Build polished content and application UI with Blackwork.'
+  default_prompt: 'Use $blackwork-ui to design and implement this interface with the installed Blackwork package.'

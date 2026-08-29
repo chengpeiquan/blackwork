@@ -1,0 +1,56 @@
+---
+title: Skills
+description: Give AI agents the Blackwork package contract and visual composition rules.
+order: 3
+---
+
+# Skills
+
+The Blackwork skill gives an AI agent project-aware guidance for building and reviewing interfaces with the `blackwork` package. It complements the official shadcn skill: shadcn covers upstream component discovery and CLI workflows, while this skill covers Blackwork's package boundaries and visual composition.
+
+## Install
+
+Install the skill from this repository with the Skills CLI:
+
+```bash
+pnpm dlx skills add chengpeiquan/blackwork --skill blackwork-ui
+```
+
+To install it only for a selected agent, add that agent to the command. To update it later, use the Skills CLI update command from the project where the skill is installed.
+
+## When it applies
+
+Use the skill when an agent is asked to:
+
+- build or review a page that consumes `blackwork`
+- compose Blackwork layouts, headers, footers, content lists, or article pages
+- build product pages, settings panels, dashboards, generators, editors, toolbars, or live previews with Blackwork
+- fix hierarchy, spacing, responsive behavior, dark mode, canvas framing, or icon-action accessibility
+
+The skill first checks the installed Blackwork version and actual package exports. This matters because different Blackwork releases can expose different primitives, entry points, and icon APIs.
+
+## What it enforces
+
+- Use existing Blackwork components and variants before one-off markup.
+- Keep page titles, panel titles, and toolbar actions at distinct levels of hierarchy.
+- Use semantic theme tokens for application chrome and keep generated output colors in domain state.
+- Give icon-only actions an accessible name and a tooltip or equivalent discoverable label.
+- Give fixed-format previews explicit aspect ratios and local overflow behavior.
+- Define desktop and mobile composition deliberately, then inspect light and dark themes when supported.
+- Keep npm-installed Blackwork separate from locally owned shadcn source. Do not use the shadcn CLI to overwrite package internals.
+
+Read the detailed references only when the task needs them:
+
+- `package-contract.md` for package versions, exports, styles, themes, RSC, forms, and shadcn ownership
+- `content-and-product.md` for blogs, docs, lists, article pages, and product surfaces
+- `workbench.md` for settings-heavy tools, toolbars, canvases, previews, and responsive acceptance
+
+## MCP: do you need it?
+
+Usually, no. The Blackwork skill is instruction and reference context; it does not need a server connection to make spacing, hierarchy, responsive, or theme decisions. A project can use the skill without adding any MCP configuration.
+
+The shadcn MCP server is useful for searching, viewing, and installing components from shadcn-compatible registries. Use it when your project owns local shadcn source or consumes a registry of installable blocks. It is not required for an app that only imports the published `blackwork` npm package.
+
+Consider adding an MCP-compatible Blackwork registry later if Blackwork publishes installable source blocks, templates, or project rules that agents should search and add by name. A registry would need a valid `registry.json`, accurate dependencies, and explicit ownership rules; MCP would then provide discovery, not visual judgment.
+
+See the [shadcn MCP documentation](https://ui.shadcn.com/docs/mcp) and [registry MCP guidance](https://ui.shadcn.com/docs/registry/mcp) for that future setup.
