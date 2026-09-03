@@ -1,0 +1,56 @@
+{
+  "$schema": "https://preset.js.org/schema/preset.schema.json",
+  "version": 1,
+  "source": {
+    "repo": "https://github.com/chengpeiquan/blackwork.git",
+    "directory": "apps/docs-starter"
+  },
+  "exclude": [
+    "src/app/__tests__",
+    "src/mdx/components/callout.test.ts",
+    "src/mdx/components/fade-preview.test.ts",
+    "src/mdx/components/rail-scroll-state.test.ts",
+    "vitest.config.ts"
+  ],
+  "write": [
+    {
+      "path": "README.md",
+      "lines": [
+        "# Blackwork Docs",
+        "",
+        "A documentation site powered by Blackwork.",
+        "",
+        "## Development",
+        "",
+        "```bash",
+        "pnpm install",
+        "pnpm dev",
+        "```"
+      ]
+    }
+  ],
+  "json": [
+    {
+      "path": "package.json",
+      "value": {
+        "scripts": {
+          "dev": "next dev --port 3300",
+          "build": "NEXT_OUTPUT=export NEXT_DIST_DIR=.next-static next build && pnpm run build:search",
+          "build:search": "node ./scripts/build-search-index.mjs",
+          "start": "pnpm dlx serve .next-static --listen 4300",
+          "lint": "tsc --noEmit",
+          "build:static": null,
+          "start:static": null,
+          "test": null
+        },
+        "devDependencies": {
+          "@vitejs/plugin-react": null,
+          "vitest": null
+        }
+      }
+    }
+  ],
+  "packageJson": {
+    "resolveWorkspace": true
+  }
+}

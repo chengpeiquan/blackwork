@@ -36,6 +36,11 @@ pnpm docs:preview
 
 `apps/docs-starter` is the reference template for the current `@blackwork/docs` package.
 
+The starter is also available through Create Preset. Blackwork only maintains
+the declarative rules in `presets/docs-starter.json`; Create Preset owns the
+interactive flow, repository checkout, file operations, and dependency version
+resolution.
+
 Key template files:
 
 - `apps/docs-starter/docs.config.ts`
