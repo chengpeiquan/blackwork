@@ -36,6 +36,7 @@ export const defaultThemeToggleOptions =
   })
 
 export interface ThemeToggleProps {
+  variant?: 'ghost' | 'glass'
   title?: string
   ariaLabel?: string
 
@@ -61,6 +62,7 @@ export interface ThemeToggleProps {
  */
 export const ThemeToggle: React.FC<ThemeToggleProps> = ({
   title,
+  variant = 'ghost',
   ariaLabel,
   options: customOptions,
   mode = 'button',
@@ -81,7 +83,7 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
   if (mode === 'button') {
     return (
       <Button
-        variant="ghost"
+        variant={variant}
         size="icon"
         title={title}
         aria-label={accessibleLabel}
@@ -100,7 +102,7 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          variant="ghost"
+          variant={variant}
           size="icon"
           title={title}
           aria-label={accessibleLabel}

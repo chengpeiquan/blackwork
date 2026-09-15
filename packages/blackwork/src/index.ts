@@ -10,3 +10,5 @@ export * from './components/widgets'
 export * from './hooks'
 
 export * from './utils'
+
+export * from './components/effects'

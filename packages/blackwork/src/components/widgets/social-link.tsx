@@ -1,7 +1,7 @@
 import { Rss } from 'lucide-react'
 import React from 'react'
 
-import { Button } from '@/components/ui'
+import { Button, type ButtonProps } from '@/components/ui'
 import { ExternalLink } from './external-link'
 import {
   GithubIcon,
@@ -20,6 +20,7 @@ export type SocialLinkIconType =
   | 'rss'
 
 export interface SocialLinkProps {
+  variant?: ButtonProps['variant']
   type: SocialLinkIconType
   link: string
   label?: string
@@ -28,6 +29,7 @@ export interface SocialLinkProps {
 
 export const SocialLink: React.FC<SocialLinkProps> = ({
   type,
+  variant = 'ghost',
   link,
   label: defaultLabel,
   ariaLabel: customAriaLabel,
@@ -92,7 +94,7 @@ export const SocialLink: React.FC<SocialLinkProps> = ({
 
   if (!SocialIcon) return null
   return (
-    <Button asChild variant="ghost" size="icon">
+    <Button asChild variant={variant} size="icon">
       <ExternalLink href={link} title={label} ariaLabel={ariaLabel}>
         <SocialIcon className="size-5" />
       </ExternalLink>

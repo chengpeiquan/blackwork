@@ -5,6 +5,7 @@ import { type VariantProps, cva } from 'class-variance-authority'
 import { X } from 'lucide-react'
 import * as React from 'react'
 
+import { GlassMaterial } from '@/components/effects/glass-surface'
 import { cn } from '@/utils'
 import { splitAsChild, type AsChildProps } from '@/utils/as-child'
 
@@ -73,6 +74,7 @@ const sheetVariants = cva(
 
 interface SheetContentProps
   extends SheetPrimitive.Popup.Props, VariantProps<typeof sheetVariants> {
+  appearance?: 'default' | 'glass'
   closeButtonVisible?: boolean
 }
 
@@ -80,6 +82,7 @@ const SheetContent = React.forwardRef<HTMLDivElement, SheetContentProps>(
   (
     {
       side = 'right',
+      appearance = 'default',
       className,
       children,
       closeButtonVisible = true,
@@ -89,15 +92,28 @@ const SheetContent = React.forwardRef<HTMLDivElement, SheetContentProps>(
   ) => {
     return (
       <SheetPortal>
-        <SheetOverlay />
+        <SheetOverlay
+          className={appearance === 'glass' ? 'bw-glass-overlay' : undefined}
+        />
         <SheetPrimitive.Popup
           ref={ref}
           data-slot="sheet-content"
           data-side={side}
-          className={cn(sheetVariants({ side }), className)}
+          className={cn(
+            sheetVariants({ side }),
+            appearance === 'glass' && 'bw-glass-sheet',
+            className,
+          )}
           {...props}
         >
-          {children}
+          {appearance === 'glass' ? (
+            <>
+              <GlassMaterial material="panel" refraction={56} blur={8} />
+              <div className="bw-glass-sheet-body">{children}</div>
+            </>
+          ) : (
+            children
+          )}
 
           {closeButtonVisible ? (
             <SheetPrimitive.Close className="data-open:bg-secondary absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none">

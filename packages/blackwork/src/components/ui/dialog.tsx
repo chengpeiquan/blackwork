@@ -4,8 +4,10 @@ import { Dialog as DialogPrimitive } from '@base-ui/react/dialog'
 import { X } from 'lucide-react'
 import * as React from 'react'
 
+import { GlassMaterial } from '@/components/effects/glass-surface'
 import { cn } from '@/utils'
 import { splitAsChild, type AsChildProps } from '@/utils/as-child'
+import { Button } from './button'
 
 const Dialog = DialogPrimitive.Root
 
@@ -51,29 +53,66 @@ const DialogOverlay = React.forwardRef<
 ))
 DialogOverlay.displayName = 'DialogOverlay'
 
-const DialogContent = React.forwardRef<
-  HTMLDivElement,
-  DialogPrimitive.Popup.Props
->(({ className, children, ...props }, ref) => (
-  <DialogPortal>
-    <DialogOverlay />
-    <DialogPrimitive.Popup
-      ref={ref}
-      data-slot="dialog-content"
-      className={cn(
-        '-translate-1/2 fixed left-1/2 top-1/2 z-50 grid w-full max-w-lg gap-4 border bg-background p-6 shadow-lg duration-200 data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 data-closed:zoom-out-95 data-open:zoom-in-95 sm:rounded-lg',
-        className,
-      )}
-      {...props}
-    >
-      {children}
-      <DialogPrimitive.Close className="data-open:bg-accent data-open:text-muted-foreground absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none">
-        <X className="size-4" />
-        <span className="sr-only">Close</span>
-      </DialogPrimitive.Close>
-    </DialogPrimitive.Popup>
-  </DialogPortal>
-))
+export interface DialogContentProps extends DialogPrimitive.Popup.Props {
+  appearance?: 'default' | 'glass'
+  closeButtonVisible?: boolean
+  closeLabel?: string
+}
+
+const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
+  (
+    {
+      className,
+      children,
+      appearance = 'default',
+      closeButtonVisible = true,
+      closeLabel = 'Close',
+      ...props
+    },
+    ref,
+  ) => (
+    <DialogPortal>
+      <DialogOverlay
+        className={appearance === 'glass' ? 'bw-glass-overlay' : undefined}
+      />
+      <DialogPrimitive.Popup
+        ref={ref}
+        data-slot="dialog-content"
+        className={cn(
+          '-translate-1/2 fixed left-1/2 top-1/2 z-50 grid w-full max-w-lg gap-4 border bg-background p-6 shadow-lg duration-200 data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 data-closed:zoom-out-95 data-open:zoom-in-95 sm:rounded-lg',
+          appearance === 'glass' && 'bw-glass-dialog',
+          className,
+        )}
+        {...props}
+      >
+        {appearance === 'glass' ? (
+          <>
+            <GlassMaterial material="panel" refraction={64} blur={8} />
+            <div className="bw-glass-dialog-body">{children}</div>
+          </>
+        ) : (
+          children
+        )}
+        {closeButtonVisible &&
+          (appearance === 'glass' ? (
+            <DialogPrimitive.Close
+              render={<Button variant="glass" size="icon" />}
+              className="bw-glass-dialog-close"
+              aria-label={closeLabel}
+              title={closeLabel}
+            >
+              <X className="size-4" />
+            </DialogPrimitive.Close>
+          ) : (
+            <DialogPrimitive.Close className="data-open:bg-accent data-open:text-muted-foreground absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none">
+              <X className="size-4" />
+              <span className="sr-only">{closeLabel}</span>
+            </DialogPrimitive.Close>
+          ))}
+      </DialogPrimitive.Popup>
+    </DialogPortal>
+  ),
+)
 DialogContent.displayName = 'DialogContent'
 
 const DialogHeader = ({

@@ -2,6 +2,7 @@ import { type VariantProps, cva } from 'class-variance-authority'
 import { Loader2 } from 'lucide-react'
 import * as React from 'react'
 
+import { GlassDecoration } from '@/components/effects/glass-decoration'
 import { cn } from '@/utils'
 import { Slot } from '@/utils/slot'
 
@@ -10,6 +11,9 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
+        glass: 'bw-glass-control rounded-full text-foreground',
+        'glass-primary':
+          'bw-glass-control bw-glass-primary rounded-full text-primary-foreground',
         default: 'bg-primary text-primary-foreground hover:bg-primary/90',
         destructive:
           'bg-destructive text-destructive-foreground hover:bg-destructive/90',
@@ -63,23 +67,41 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     const Comp = asChild ? Slot : 'button'
 
-    const content = React.useMemo(() => {
-      if (asChild) return children
-      return (
-        <>
-          {loading ? (
-            <Loader2 className={cn('size-4 animate-spin', loaderClassName)} />
-          ) : null}
-
-          {children}
-        </>
-      )
-    }, [asChild, children, loaderClassName, loading])
+    const isGlass = variant === 'glass' || variant === 'glass-primary'
+    const decorate = (label: React.ReactNode) => (
+      <>
+        <GlassDecoration material="clear" />
+        <span className="bw-glass-control-content">{label}</span>
+      </>
+    )
+    const label = (
+      <>
+        {loading && !asChild ? (
+          <Loader2 className={cn('size-4 animate-spin', loaderClassName)} />
+        ) : null}
+        {children}
+      </>
+    )
+    // Decorate the slotted link itself, preserving its click/ref/accessibility contract.
+    const content =
+      isGlass &&
+      asChild &&
+      React.isValidElement<{ children?: React.ReactNode }>(children)
+        ? React.cloneElement(children, {}, decorate(children.props.children))
+        : isGlass
+          ? decorate(label)
+          : asChild
+            ? children
+            : label
 
     return (
       <Comp
         data-slot="button"
-        className={cn(buttonVariants({ variant, size, loading, className }))}
+        data-size={size ?? 'default'}
+        className={cn(
+          buttonVariants({ variant, size, loading, className }),
+          isGlass && size === 'icon' && 'bw-glass-icon',
+        )}
         disabled={loading || disabled}
         ref={ref}
         {...props}
