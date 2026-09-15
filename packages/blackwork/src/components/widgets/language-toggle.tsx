@@ -18,6 +18,7 @@ export interface LanguageToggleOption {
 }
 
 export interface LanguageToggleProps {
+  variant?: 'ghost' | 'glass'
   title?: string
   ariaLabel?: string
   defaultValue?: string
@@ -32,6 +33,7 @@ const DefaultIcon: React.FC = () => (
 
 export const LanguageToggle: React.FC<LanguageToggleProps> = ({
   title,
+  variant = 'ghost',
   ariaLabel,
   defaultValue,
   options,
@@ -52,7 +54,7 @@ export const LanguageToggle: React.FC<LanguageToggleProps> = ({
   if (isSingle(options)) {
     return (
       <Button
-        variant="ghost"
+        variant={variant}
         size="icon"
         title={title}
         aria-label={ariaLabel || title}
@@ -68,7 +70,7 @@ export const LanguageToggle: React.FC<LanguageToggleProps> = ({
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          variant="ghost"
+          variant={variant}
           size="icon"
           title={title}
           aria-label={ariaLabel || title}

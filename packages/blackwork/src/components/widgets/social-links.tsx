@@ -4,12 +4,14 @@ import { cn } from '@/utils'
 import { SocialLink, type SocialLinkProps } from './social-link'
 
 export interface SocialLinksProps {
+  variant?: SocialLinkProps['variant']
   items: SocialLinkProps[]
   className?: string
 }
 
 export const SocialLinks: React.FC<SocialLinksProps> = ({
   items,
+  variant,
   className,
 }) => {
   const cls = cn('flex shrink-0 items-center gap-1', className)
@@ -18,7 +20,7 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
   return (
     <div className={cls}>
       {items.map((i) => {
-        return <SocialLink key={i.link} {...i} />
+        return <SocialLink key={i.link} variant={variant} {...i} />
       })}
     </div>
   )
