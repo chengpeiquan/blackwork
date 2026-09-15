@@ -112,9 +112,9 @@ export const SheetPropsTable = () => (
         type: 'boolean',
         defaultValue: 'true',
         description:
-          'Corner close button on SheetContent. Set false when you provide your own.',
+          'Show the close button on SheetContent. Set to false if another close control is provided.',
         descriptionZh:
-          'SheetContent 角落的关闭按钮；自行提供关闭控件时设为 false。',
+          '是否显示 SheetContent 的关闭按钮。提供其他关闭控件时可设为 false。',
       },
       {
         name: 'asChild',

@@ -1,28 +1,29 @@
 ---
 title: Layouts
-description: Header, main, footer, and holy-grail columns for content sites.
+description: Build a blog or documentation layout with headers, main content, footers, and sidebars.
 order: 2
 ---
 
 # Layouts
 
-These pieces are the Blackwork page chrome. Compose a sticky header, a content gutter, and a short footer. Add holy-grail columns when a page needs a sidebar or a table of contents.
+Blogs and documentation sites usually share a header, main content area, and footer. Blackwork layout components give these areas consistent spacing, with a sticky header by default. Add sidebars when an article needs navigation or a table of contents.
 
 <Callout title="Note">
-  Do not use RootLayout inside a Next.js App Router tree. That component renders
-  its own html and body. In Next.js, put ThemeScript in head, wrap the tree with
-  ThemeProvider, then compose the chrome below.
+  Blackwork’s `RootLayout` renders `html` and `body`, so it cannot be nested
+  inside an existing Next.js App Router layout. Configure `ThemeScript` and
+  `ThemeProvider` in the app’s root layout, then add the header, main content,
+  and footer as shown below.
 </Callout>
 
 ## When to use
 
-- A blog, docs site, or other content page that should share one gutter
+- Blogs, documentation, or other content pages with consistent spacing
 - A sticky header with brand on the left and site actions on the right
 - An article with a nav column and a table of contents
 
 See [Theme](/components/theme) for `ThemeProvider` and `ThemeToggle`. See [Widgets](/components/widgets) for `LanguageToggle` and `SocialLinks`.
 
-## Next.js shell
+## Next.js page layout
 
 <Callout title="Server components">
   LayoutMain and LayoutFooter can render on the server from blackwork/rsc.
@@ -55,7 +56,7 @@ export default RootLayout
 
 ## Header
 
-Pass brand and nav as `children`. Social links, a language toggle, and the theme toggle sit on the right.
+Pass the brand and primary navigation as `children` to display on the left. Separate props place social links, language controls, and the theme toggle on the right.
 
 <LayoutHeaderExample />
 
@@ -73,7 +74,7 @@ Pass brand and nav as `children`. Social links, a language toggle, and the theme
 
 ## Holy grail
 
-There is no wrapper component. Place `HolyGrailAside` and `HolyGrailContent` in a flex row. Asides stay hidden below the `lg` breakpoint.
+A holy-grail layout places the main content between sidebars for navigation and a table of contents. Arrange `HolyGrailAside` and `HolyGrailContent` in a flex row. Sidebars are hidden below the `lg` breakpoint.
 
 <LayoutHolyGrailExample />
 
@@ -81,17 +82,12 @@ There is no wrapper component. Place `HolyGrailAside` and `HolyGrailContent` in 
 
 ## RootLayout
 
-RootLayout is a full document shell: html, head with ThemeScript, and body with ThemeProvider.
-
-<Callout title="Note">
-  Use it only when you own the entire document, not inside an existing App
-  Router layout.
-</Callout>
+`RootLayout` is for apps that render the entire HTML document directly. It includes `html`, a `head` with `ThemeScript`, and a `body` with `ThemeProvider`. For Next.js, use the page layout example above.
 
 <LayoutRootPropsTable />
 
 ## Notes
 
-- `LayoutHeader` is sticky. Override with `className` if you need it in a nested preview or a non-sticky bar.
-- `LayoutMain fullscreen` drops the shared gutter. Use it for a landing page that paints edge to edge.
-- `HolyGrailAside smaller` is the narrow nav column. The default width fits a table of contents.
+- `LayoutHeader` is sticky by default. Override its positioning with `className` for a nested preview or a header that scrolls with the page.
+- `LayoutMain fullscreen` removes the shared padding so content can extend to the edges of the page.
+- `HolyGrailAside smaller` uses a narrower width for navigation. The default width suits a table of contents.

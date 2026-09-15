@@ -6,7 +6,7 @@ order: 3
 
 # 图标
 
-Blackwork 不再内置图标集。通用图标请从 [`lucide-react`](https://lucide.dev) 引入。
+Blackwork 的通用图标使用 [`lucide-react`](https://lucide.dev)，例如搜索、主题切换和关闭按钮中的图标。
 
 ```tsx
 import { Moon, Search, Sun } from 'lucide-react'
@@ -16,21 +16,21 @@ export const SearchMark = () => {
 }
 ```
 
-如果还没装，和 UI 包一起安装即可：
+项目中尚未安装 `lucide-react` 时，先添加依赖：
 
 ```bash
 pnpm add lucide-react
 ```
 
 <Callout title="品牌图标">
-  Lucide 1.x 不包含商标 logo。GitHub、X、知乎、npm 等请把 SVG
-  放在对应功能旁边。Blackwork 只在 `SocialLink` 里这样做，不会再公开 `/icons`
-  子路径。见 [小工具](/zh/components/widgets)。
+  Lucide 1.x 不包含品牌标志。GitHub、X、知乎、npm 等品牌图标可以使用本地 SVG，
+  与使用图标的功能代码放在一起。Blackwork 为 `SocialLink` 内置了部分品牌图标，
+  用法见 [小工具](/zh/components/widgets)。
 </Callout>
 
 ## 常见名称对照
 
-如果以前从 `blackwork/icons` 引入图标，请改用这些 Lucide 名称：
+`blackwork/icons` 入口已移除。迁移旧代码时，以下图标需要使用对应的 Lucide 名称：
 
 | 旧名称     | Lucide            |
 | ---------- | ----------------- |

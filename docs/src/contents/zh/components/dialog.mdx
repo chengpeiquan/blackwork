@@ -1,6 +1,6 @@
 ---
 title: Dialog
-description: 需要打断当前页面、完成一件短任务时用模态对话框。
+description: 用于确认操作、编辑少量字段等需要暂时聚焦的任务。
 order: 6
 ---
 
@@ -9,14 +9,14 @@ order: 6
 ## 适用场景
 
 - 确认危险操作
-- 不离开当前页，改一组很短的字段
-- 用户必须看到的信息
+- 在当前页面编辑少量字段
+- 展示需要确认的重要信息
 
-如果内容应该贴着屏幕一边，或者用户还要对照后面的页面，用 [Sheet](/zh/components/sheet)。
+需要从屏幕边缘展开面板、保留部分页面作为参考时，可以使用 [Sheet](/zh/components/sheet)。
 
 ## 用法
 
-触发器必须是真正的 button。`DialogTrigger` 建议配合 `asChild`。
+建议在 `DialogTrigger` 上使用 `asChild`，并传入 `<button>` 或 `Button` 作为触发按钮。
 
 <DialogBasicExample />
 
@@ -31,11 +31,11 @@ order: 6
 | `DialogFooter`                                       | 操作区             |
 | `DialogClose`                                        | 显式关闭           |
 
-无障碍必须有 `DialogTitle`。`DialogContent` 右上角已经带关闭按钮。
+`DialogTitle` 为对话框提供无障碍标题，使用时需要保留。`DialogContent` 已在右上角提供关闭按钮。
 
 <DialogPropsTable />
 
 ## 说明
 
 - `asChild` 的子节点必须是 button，不要再包一层 `div`。
-- 对话框文案要短。长表单放到页面或抽屉里。
+- 对话框适合简短的说明和操作。较长的表单可以放在独立页面或抽屉中。

@@ -1,6 +1,6 @@
 ---
 title: Field
-description: Label, description, and layout for a single control. No form library required.
+description: Arrange labels, descriptions, and validation messages around an input, with or without a form library.
 order: 7
 ---
 
@@ -12,7 +12,7 @@ order: 7
 - Horizontal settings rows
 - Showing a description or a validation message next to the control
 
-Use [Form](/components/form) when the field needs TanStack Form state and submit.
+Use [Form](/components/form) to manage field values, validation, and submission with TanStack Form.
 
 ## Usage
 
@@ -26,7 +26,7 @@ Use [Form](/components/form) when the field needs TanStack Form state and submit
 
 ### Validation
 
-Put `data-invalid` on `Field` and `aria-invalid` on the control.
+When validation fails, mark the field with `data-invalid` on `Field` and set `aria-invalid` on the input so assistive technology can identify the error state.
 
 <FieldInvalidExample />
 
@@ -34,7 +34,7 @@ Put `data-invalid` on `Field` and `aria-invalid` on the control.
 
 ## Notes
 
-- `Field` is layout only. It does not own value or submit.
+- `Field` handles layout. The app or form library manages values and submission.
 - Pair `FieldLabel htmlFor` with the control `id`.
 
 <Callout title="Server components">

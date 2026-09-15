@@ -140,7 +140,7 @@ export const ButtonPropsTable = () => (
         name: 'loaderClassName',
         type: 'string',
         description: 'Extra classes for the spinner.',
-        descriptionZh: '加载图标的额外 class。',
+        descriptionZh: '加载图标的额外类名。',
       },
       {
         name: 'asChild',

@@ -6,12 +6,9 @@ order: 2
 
 # Getting Started
 
-Blackwork is a React design system for blogs, documentation sites, and other
-content-driven products. Install it as an npm package and you can use the same
-UI components as this site. My blog
-[chengpeiquan.com](https://chengpeiquan.com/) uses it too.
+Blackwork provides layouts, theme controls, and interactive components for blogs and documentation sites. This site and the blog [chengpeiquan.com](https://chengpeiquan.com/) use the same components and serve as working examples.
 
-If the app already has React and Tailwind, install this one package.
+Start with installation and styles, then use the Next.js App Router example below to build a page with a theme toggle.
 
 <Callout title="Requirements">Use React 19+ and Tailwind CSS v4.</Callout>
 
@@ -21,7 +18,7 @@ If the app already has React and Tailwind, install this one package.
 pnpm add blackwork
 ```
 
-Add this only when you use `blackwork/form`:
+For forms built with `blackwork/form`, also install TanStack Form:
 
 ```bash
 pnpm add @tanstack/react-form
@@ -29,14 +26,14 @@ pnpm add @tanstack/react-form
 
 ## Import styles
 
-Import Tailwind and the Blackwork entry in your app stylesheet:
+Import Tailwind and Blackwork in the app stylesheet:
 
 ```css title="src/app/globals.css"
 @import 'tailwindcss';
 @import 'blackwork/tailwind.css';
 ```
 
-Set `--blackwork-font-sans` if you want to override the default sans font:
+To replace the default sans-serif font, set `--blackwork-font-sans`:
 
 ```css title="src/app/globals.css"
 :root {
@@ -44,7 +41,7 @@ Set `--blackwork-font-sans` if you want to override the default sans font:
 }
 ```
 
-If you only need theme tokens and globals without scanning Blackwork component classes:
+For theme variables and global styles without Tailwind scanning Blackwork component classes, use these entries instead:
 
 ```css
 @import 'blackwork/theme.css';
@@ -53,7 +50,7 @@ If you only need theme tokens and globals without scanning Blackwork component c
 
 ## Set up Next.js
 
-Import the styles in the root layout, use `ThemeScript` to prevent a flash during page load, and mount `ThemeProvider` once. This is a complete App Router skeleton.
+Import the styles in the root layout and use `ThemeProvider` to manage the theme. Place `ThemeScript` in `head` to apply the theme before the content appears, avoiding a flash between light and dark mode. This layout includes a header, main content, footer, and theme toggle.
 
 ```tsx title="src/app/layout.tsx"
 import { LayoutHeader, ThemeProvider, ThemeToggle } from 'blackwork'
@@ -97,4 +94,4 @@ export default Page
   Server-renderable layouts and primitives come from blackwork/rsc.
 </Callout>
 
-Next, compose [Layouts](/components/layouts) for the page chrome, then [Theme](/components/theme) and [Widgets](/components/widgets). Most other primitives follow [shadcn/ui](https://ui.shadcn.com/docs/components). See [Components](/components) for the split.
+Once the page is running, explore [Layouts](/components/layouts), [Theme](/components/theme), and [Widgets](/components/widgets). The [component overview](/components) lists the remaining components and explains the API differences to check when using shadcn/ui examples.

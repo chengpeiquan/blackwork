@@ -1,6 +1,6 @@
 ---
 title: Field
-description: 单个控件的标签、说明和布局。不依赖表单库。
+description: 为输入控件组织标签、说明和校验信息，可独立于表单库使用。
 order: 7
 ---
 
@@ -8,11 +8,11 @@ order: 7
 
 ## 适用场景
 
-- 任何带标签的输入，即使不用表单库
+- 带标签的输入框
 - 横向的设置行
 - 在控件旁边展示说明或校验信息
 
-需要 TanStack Form 的状态和提交时，用 [Form](/zh/components/form)。
+需要管理字段值、校验和提交时，可以配合 [Form](/zh/components/form)。
 
 ## 用法
 
@@ -26,7 +26,7 @@ order: 7
 
 ### 校验
 
-`data-invalid` 放在 `Field` 上，`aria-invalid` 放在控件上。
+校验失败时，在 `Field` 上用 `data-invalid` 标记字段状态，同时在输入控件上设置 `aria-invalid`，让辅助技术识别错误状态。
 
 <FieldInvalidExample />
 
@@ -34,7 +34,7 @@ order: 7
 
 ## 说明
 
-- `Field` 只负责布局，不管值和提交。
+- `Field` 负责字段布局，字段值和提交逻辑由应用或表单库管理。
 - `FieldLabel` 的 `htmlFor` 要和控件 `id` 对应。
 
 <Callout title="服务端组件">

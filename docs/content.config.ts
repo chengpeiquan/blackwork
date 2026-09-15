@@ -41,7 +41,7 @@ export const docsContentConfig = {
         {
           type: 'group',
           label: {
-            en: 'Site chrome',
+            en: 'Site structure',
             zh: '站点框架',
           },
           items: [

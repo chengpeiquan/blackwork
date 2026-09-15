@@ -1,6 +1,6 @@
 ---
 title: 主题
-description: 用 ThemeProvider 和 ThemeToggle 切换浅色和深色。
+description: 配置浅色和深色主题，保存偏好并添加主题切换按钮。
 order: 4
 ---
 
@@ -8,10 +8,10 @@ order: 4
 
 ## 适用场景
 
-- 需要记住浅色 / 深色的应用
+- 需要保存浅色或深色主题偏好的应用
 - 页头上的主题切换
 
-在根布局用 `ThemeProvider` 包一层，并把 `ThemeScript` 放进 `head`，避免载入页面时出现错误主题。把 `ThemeToggle` 放到用户找得到的位置。
+在根布局中用 `ThemeProvider` 包裹页面内容，管理主题状态；将 `ThemeScript` 放进 `head`，在内容显示前应用主题。`ThemeToggle` 用于切换主题，通常放在页头。
 
 ## 用法
 
@@ -39,7 +39,7 @@ export default RootLayout
 
 ## 示例
 
-### 下拉
+### 下拉菜单
 
 <ThemeDropdownExample />
 
@@ -48,6 +48,6 @@ export default RootLayout
 ## 说明
 
 - 默认主题是 `dark`。
-- 偏好存在 `localStorage` 的 `blackwork-theme`。
+- 主题偏好保存在 `localStorage` 中，默认键名为 `blackwork-theme`。
 - `ThemeScript` 和 `ThemeProvider` 的 `storageKey`、`defaultTheme` 必须一致。
-- 本站已经在根布局里挂了 `ThemeProvider`。
+- 本站已在根布局中配置 `ThemeProvider`，上面的预览直接使用该主题状态。

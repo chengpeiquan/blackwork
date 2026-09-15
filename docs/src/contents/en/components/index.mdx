@@ -1,22 +1,24 @@
 ---
 title: Components
-description: Blackwork-specific APIs, plus the shadcn components that ship with the package.
+description: Explore Blackwork layouts, themes, forms, and basic UI components.
 order: 1
 ---
 
 # Components
 
-This site documents Blackwork-specific APIs in detail: layouts, widgets, theme, forms, and the components that add behavior on top of the primitives.
+Blackwork includes page layouts, theme controls, forms, and basic UI components. Components specific to Blackwork, along with additions such as button loading states, have dedicated guides here.
 
-Each documented page has a live preview, the matching code, and an API table.
+Each component page includes interactive previews, example code, and an API table to compare the result with the implementation.
 
-## Documented
+## Component guides
 
 <ComponentCatalog />
 
 ## Other components
 
-The rest of the UI components follow the composition and visual baseline of [shadcn/ui](https://ui.shadcn.com/docs/components), but Blackwork 0.12 uses [Base UI](https://base-ui.com/react/overview/quick-start) for interactive primitives. Import components from `blackwork` and treat Blackwork's TypeScript types as the API contract. Do not assume a Radix UI example is drop-in compatible.
+The remaining UI components follow the structure and styles of [shadcn/ui](https://ui.shadcn.com/docs/components). Import these components from `blackwork`.
+
+Blackwork 0.12 uses [Base UI](https://base-ui.com/react/overview/quick-start) for component interactions. When following shadcn/ui documentation, check props against Blackwork’s TypeScript types; examples based on Radix UI may need changes.
 
 <Callout title="Server components">
   Alert, Badge, Card, Empty, Field, and Input are also available from
@@ -27,7 +29,7 @@ The rest of the UI components follow the composition and visual baseline of [sha
 
 ## Common components
 
-These examples are ready to copy. See the component list above for the other exports.
+The examples below cover basic Accordion, Select, and Toast usage. For other components, follow the links in the list above.
 
 ### Accordion
 

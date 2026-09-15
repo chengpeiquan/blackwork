@@ -1,6 +1,6 @@
 ---
 title: Sheet
-description: 从边缘滑出的面板，适合导航、筛选和检查器。
+description: 从屏幕边缘展开的面板，适合导航、筛选和查看详情。
 order: 9
 ---
 
@@ -9,10 +9,10 @@ order: 9
 ## 适用场景
 
 - 移动端导航
-- 需要一直留在屏幕上的筛选
-- 一边看列表、一边检查或编辑某一项
+- 列表的筛选面板
+- 保留部分列表作为参考，查看或编辑某一项
 
-短确认、居中打断用 [Dialog](/zh/components/dialog)。
+简短的确认操作可以使用居中显示的 [Dialog](/zh/components/dialog)。
 
 ## 用法
 
@@ -27,5 +27,5 @@ order: 9
 ## 说明
 
 - 默认 `side` 是 `right`。
-- 只有自己提供关闭控件时，才把 `closeButtonVisible` 设为 `false`。
-- 和 Dialog 一样，`asChild` 的子节点必须是 button。
+- 设置 `closeButtonVisible={false}` 会隐藏内置关闭按钮，此时需要提供其他关闭控件。
+- 与 `Dialog` 一样，触发器使用 `asChild` 时，子节点需要是 `<button>` 或 `Button`。

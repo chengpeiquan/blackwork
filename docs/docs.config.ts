@@ -84,8 +84,8 @@ export const docsConfig = defineDocsConfig({
     eyebrow: false,
     title: 'Blackwork',
     description: {
-      en: 'A tattoo-style React design system for blogs, documentation sites, and other content-driven products.',
-      zh: '一套面向博客、文档站和其他内容型产品的刺青风格 React 设计系统。',
+      en: 'A tattoo-style React design system for blogs, documentation, and other content sites.',
+      zh: '一套刺青风格的 React 设计系统，适合搭建博客、文档站和其他以内容为主的网站。',
     },
     primaryAction: {
       href: '/guide/getting-started',
@@ -99,24 +99,24 @@ export const docsConfig = defineDocsConfig({
       {
         title: { en: 'Layouts', zh: '布局' },
         description: {
-          en: 'Header, main, footer, and holy-grail columns for content sites.',
-          zh: '为内容站准备的页头、主栏、页脚和圣杯分栏。',
+          en: 'Build pages with a header, main content, footer, and sidebars.',
+          zh: '用页头、正文、页脚和侧栏组件搭建页面。',
         },
         href: '/components/layouts',
       },
       {
         title: { en: 'Forms', zh: '表单' },
         description: {
-          en: 'Field layout plus TanStack Form helpers.',
-          zh: '字段布局与 TanStack Form 接入工具。',
+          en: 'Combine field layouts with TanStack Form for values and submission.',
+          zh: '组合字段布局，通过 TanStack Form 管理字段值和提交。',
         },
         href: '/components/form',
       },
       {
         title: { en: 'Theme', zh: '主题' },
         description: {
-          en: 'Light and dark mode with ThemeProvider and ThemeToggle.',
-          zh: '通过 ThemeProvider 和 ThemeToggle 使用浅色与深色主题。',
+          en: 'Add light and dark themes with a toggle and saved preferences.',
+          zh: '配置浅色和深色主题，切换主题并保存偏好。',
         },
         href: '/components/theme',
       },

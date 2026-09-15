@@ -1,18 +1,14 @@
 ---
 title: Form
-description: Bind TanStack Form to Blackwork fields.
+description: Manage Blackwork form values, validation, and submission with TanStack Form.
 order: 8
 ---
 
 # Form
 
-blackwork/form connects [TanStack Form](https://tanstack.com/form) to Field.
+`blackwork/form` combines [TanStack Form](https://tanstack.com/form) state management with Blackwork field components. TanStack Form handles values, validation, and submission; Blackwork provides field styles and bindings for common controls.
 
-<Callout title="Note">
-  It is not a form engine. It only binds TanStack Form to Blackwork fields.
-</Callout>
-
-Install the peer first:
+Install the required TanStack Form dependency first:
 
 ```bash
 pnpm add @tanstack/react-form
@@ -20,10 +16,10 @@ pnpm add @tanstack/react-form
 
 ## When to use
 
-- A real submit flow with values and validation
+- Forms that need values, validation, and submission
 - Reuse `TextField`, `TextareaField`, or `CheckboxField`
 
-If you only need a labeled input, use [Field](/components/field).
+For an input that only needs a label and description, use [Field](/components/field).
 
 ## Usage
 
@@ -37,7 +33,7 @@ If you only need a labeled input, use [Field](/components/field).
 
 ### Custom field
 
-Select, Combobox, and other controls are not pre-bound. Compose them with `Field` inside `form.AppField`.
+`Select`, `Combobox`, and other controls need manual field bindings. The input example below shows how to connect a control inside `form.AppField` using `Field`.
 
 <FormCustomExample />
 
@@ -45,7 +41,7 @@ Select, Combobox, and other controls are not pre-bound. Compose them with `Field
 
 ## Notes
 
-- `Form` calls `form.handleSubmit()` for you.
-- `SubmitButton` follows `isSubmitting` and uses `Button` `loading`.
+- `Form` calls `form.handleSubmit()` when submitted.
+- `SubmitButton` sets the `Button` loading state from `isSubmitting`.
 
 <Callout title="Note">useAppForm must run in a client component.</Callout>

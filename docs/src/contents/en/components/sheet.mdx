@@ -1,6 +1,6 @@
 ---
 title: Sheet
-description: A sliding panel for navigation, filters, or an inspector.
+description: A panel that opens from a screen edge for navigation, filters, or item details.
 order: 9
 ---
 
@@ -9,8 +9,8 @@ order: 9
 ## When to use
 
 - Mobile navigation
-- Filters that should stay on screen
-- Inspect or edit an item while the list stays visible
+- Filter panels for a list
+- View or edit an item with part of the list visible for reference
 
 Use [Dialog](/components/dialog) for a short confirmation in the center of the page.
 
@@ -27,5 +27,5 @@ Use [Dialog](/components/dialog) for a short confirmation in the center of the p
 ## Notes
 
 - Default `side` is `right`.
-- Set `closeButtonVisible={false}` only when you render your own close control.
-- Same `asChild` rule as Dialog: the trigger child must be a button.
+- Setting `closeButtonVisible={false}` hides the built-in close button. Provide another close control in that case.
+- As with `Dialog`, a trigger using `asChild` needs a `<button>` or `Button` child.

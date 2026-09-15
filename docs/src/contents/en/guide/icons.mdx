@@ -6,7 +6,7 @@ order: 3
 
 # Icons
 
-Blackwork does not ship its own icon set. Import generic icons from [`lucide-react`](https://lucide.dev).
+Use [`lucide-react`](https://lucide.dev) for icons such as search, theme controls, and close buttons in Blackwork apps.
 
 ```tsx
 import { Moon, Search, Sun } from 'lucide-react'
@@ -16,7 +16,7 @@ export const SearchMark = () => {
 }
 ```
 
-Install it with the UI package if you have not already:
+If `lucide-react` is not installed in the project, add it first:
 
 ```bash
 pnpm add lucide-react
@@ -31,7 +31,7 @@ pnpm add lucide-react
 
 ## Common names
 
-If you previously imported icons from `blackwork/icons`, use these Lucide names instead:
+The `blackwork/icons` entry has been removed. When updating older imports, use these Lucide names:
 
 | Previous name | Lucide            |
 | ------------- | ----------------- |
@@ -40,4 +40,4 @@ If you previously imported icons from `blackwork/icons`, use these Lucide names 
 | `Toc`         | `TableOfContents` |
 | `Loader`      | `Loader2`         |
 
-See the [migration guide](/guide/migration) if you are upgrading an existing app.
+For the other steps in upgrading an existing app, see the [migration guide](/guide/migration).

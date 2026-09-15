@@ -6,9 +6,9 @@ order: 2
 
 # 快速开始
 
-Blackwork 是一套面向博客、文档站和其他内容型产品的 React 设计系统。以 npm 包的方式安装，即可使用和本站相同的 UI 组件。我自己的博客 [chengpeiquan.com](https://chengpeiquan.com/) 也在用。
+Blackwork 提供博客和文档站常用的布局、主题和交互组件。本站和博客 [chengpeiquan.com](https://chengpeiquan.com/) 都使用这套组件，可以作为实际页面的参考。
 
-项目里已经有 React 和 Tailwind 时，装这一个包即可。
+下面从安装和样式配置开始，再以 Next.js App Router 为例搭建一个带主题切换的页面。
 
 <Callout title="环境要求">需要 React 19+ 和 Tailwind CSS v4。</Callout>
 
@@ -18,7 +18,7 @@ Blackwork 是一套面向博客、文档站和其他内容型产品的 React 设
 pnpm add blackwork
 ```
 
-只有使用 `blackwork/form` 时才需要再装：
+使用 `blackwork/form` 构建表单时，还需要安装 TanStack Form：
 
 ```bash
 pnpm add @tanstack/react-form
@@ -41,7 +41,7 @@ pnpm add @tanstack/react-form
 }
 ```
 
-如果只需要主题变量和全局样式、不需要扫描 Blackwork 组件 class：
+如果只需要主题变量和全局样式，不需要 Tailwind 扫描 Blackwork 组件的类名，可以改用以下入口：
 
 ```css
 @import 'blackwork/theme.css';
@@ -50,7 +50,7 @@ pnpm add @tanstack/react-form
 
 ## 接入 Next.js
 
-先在根布局引入样式，再用 `ThemeScript` 防止页面载入时闪烁，用 `ThemeProvider` 管理主题。下面是可直接运行的 App Router 骨架。
+在根布局引入样式，用 `ThemeProvider` 管理主题。`ThemeScript` 放在 `head` 中，让页面在显示内容前应用主题，避免浅色和深色之间的闪烁。下面的布局包含页头、正文、页脚和主题切换按钮。
 
 ```tsx title="src/app/layout.tsx"
 import { LayoutHeader, ThemeProvider, ThemeToggle } from 'blackwork'
@@ -94,4 +94,4 @@ export default Page
   引入。可以在服务端渲染的布局和基础组件从 blackwork/rsc 引入。
 </Callout>
 
-接下来用 [布局](/zh/components/layouts) 搭页面框架，再加上 [主题](/zh/components/theme) 和 [小工具](/zh/components/widgets)。其余组件跟 [shadcn/ui](https://ui.shadcn.com/docs/components)。分层见 [组件](/zh/components)。
+页面运行后，可以继续查看 [布局](/zh/components/layouts)、[主题](/zh/components/theme) 和 [小工具](/zh/components/widgets) 的用法。[组件总览](/zh/components) 列出了其他可用组件，也说明了参考 shadcn/ui 示例时需要注意的 API 差异。

@@ -6,7 +6,7 @@ order: 4
 
 # Migrate from 0.11 to 0.12
 
-This page is for apps using Blackwork 0.11. New projects can skip it and start from [Getting Started](/guide/getting-started).
+Upgrading from Blackwork 0.11 requires changes to Tailwind styles, form dependencies, and icon imports. For a new project, start with [Getting Started](/guide/getting-started).
 
 Upgrade Blackwork and Tailwind CSS first:
 
@@ -14,7 +14,7 @@ Upgrade Blackwork and Tailwind CSS first:
 pnpm add blackwork@^0.12 tailwindcss@^4
 ```
 
-If your app uses `blackwork/form`, also install TanStack Form:
+If the app uses `blackwork/form`, also install TanStack Form:
 
 ```bash
 pnpm add @tanstack/react-form
@@ -22,7 +22,7 @@ pnpm add @tanstack/react-form
 
 ## Composition
 
-Triggers such as `DialogTrigger` and `SheetTrigger` still accept `asChild`. Pass a real `<button>` or `Button` as the child. Do not wrap the trigger in a non-button element just for styling.
+Triggers such as `DialogTrigger` and `SheetTrigger` still accept `asChild`. Use a `<button>` or `Button` as the child and apply styles directly to it. Extra wrapping elements can interfere with the trigger.
 
 `Button` still supports `loading`. `SheetContent` still supports `closeButtonVisible`.
 
@@ -31,7 +31,7 @@ Triggers such as `DialogTrigger` and `SheetTrigger` still accept `asChild`. Pass
 `blackwork/form` is built on TanStack Form.
 
 1. Install `@tanstack/react-form`.
-2. Remove `react-hook-form` if you only used it through Blackwork.
+2. Remove `react-hook-form` once no other code in the project depends on it.
 3. Use `useAppForm`, `Form`, and `FieldGroup` as shown in [Form](/components/form).
 
 Field layout (`Field`, `FieldLabel`, `FieldGroup`) can still be used without any form library.

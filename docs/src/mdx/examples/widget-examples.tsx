@@ -206,7 +206,7 @@ export const WidgetLanguagePropsTable = () => (
         required: true,
         description:
           'One option renders a button. An array renders a dropdown.',
-        descriptionZh: '单个 option 显示按钮，数组显示下拉菜单。',
+        descriptionZh: '传入单个选项时显示按钮，传入数组时显示下拉菜单。',
       },
       {
         name: 'defaultValue',
@@ -218,7 +218,7 @@ export const WidgetLanguagePropsTable = () => (
         name: 'title',
         type: 'string',
         description: 'Tooltip on the trigger.',
-        descriptionZh: '触发器的 tooltip。',
+        descriptionZh: '触发按钮的提示文字。',
       },
       {
         name: 'ariaLabel',
@@ -252,7 +252,7 @@ export const WidgetSocialPropsTable = () => (
         name: 'label',
         type: 'string',
         description: 'Tooltip. Defaults to the brand name.',
-        descriptionZh: 'Tooltip，默认使用品牌名称。',
+        descriptionZh: '提示文字，默认使用品牌名称。',
       },
       {
         name: 'ariaLabel',
@@ -272,7 +272,7 @@ export const WidgetScrollPropsTable = () => (
         name: 'title',
         type: 'string',
         description: 'Tooltip on the button.',
-        descriptionZh: '按钮的 tooltip。',
+        descriptionZh: '按钮的提示文字。',
       },
       {
         name: 'ariaLabel',
@@ -300,7 +300,7 @@ export const WidgetSearchPropsTable = () => (
         type: 'string',
         defaultValue: '"Search..."',
         description: 'Native input placeholder.',
-        descriptionZh: '原生 input placeholder。',
+        descriptionZh: '输入框的占位文字。',
       },
       {
         name: 'inputRef',
@@ -312,13 +312,13 @@ export const WidgetSearchPropsTable = () => (
         name: 'inputClassName',
         type: 'string',
         description: 'Classes for the inner input.',
-        descriptionZh: '内部 input 的 class。',
+        descriptionZh: '内部 input 元素的类名。',
       },
       {
         name: 'searchIconClassName',
         type: 'string',
         description: 'Classes for the search icon.',
-        descriptionZh: '搜索图标的 class。',
+        descriptionZh: '搜索图标的类名。',
       },
     ]}
   />

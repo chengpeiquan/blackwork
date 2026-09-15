@@ -1,6 +1,6 @@
 ---
 title: Dialog
-description: A modal for a short task that should block the rest of the page.
+description: A modal for confirming an action or editing a few fields without leaving the page.
 order: 6
 ---
 
@@ -12,11 +12,11 @@ order: 6
 - Edit a small set of fields without leaving the page
 - Show required information the user must acknowledge
 
-Use [Sheet](/components/sheet) if the content should stay attached to one edge, or if the user may need the page behind it as reference.
+Use [Sheet](/components/sheet) for a panel that opens from a screen edge and leaves part of the page visible for reference.
 
 ## Usage
 
-The trigger should be a real button. Prefer `asChild` on `DialogTrigger`.
+Use `asChild` on `DialogTrigger` with a `<button>` or `Button` child.
 
 <DialogBasicExample />
 
@@ -31,11 +31,11 @@ The trigger should be a real button. Prefer `asChild` on `DialogTrigger`.
 | `DialogFooter`                                       | Actions                    |
 | `DialogClose`                                        | Explicit close             |
 
-`DialogTitle` is required for accessibility. `DialogContent` already renders a corner close button.
+`DialogTitle` provides the accessible title and is required. `DialogContent` includes a close button in the top-right corner.
 
 <DialogPropsTable />
 
 ## Notes
 
 - The `asChild` child must be a button. Do not wrap `Button` in a `div`.
-- Keep dialog copy short. Long forms belong in a page or a sheet.
+- Keep the instructions and actions brief. A separate page or sheet is a better fit for longer forms.

@@ -47,7 +47,7 @@ export const ThemePropsTable = () => (
         type: 'string',
         defaultValue: '"blackwork-theme"',
         description: 'localStorage key on ThemeProvider.',
-        descriptionZh: 'ThemeProvider 使用的 localStorage key。',
+        descriptionZh: 'ThemeProvider 保存主题偏好时使用的 localStorage 键名。',
       },
       {
         name: 'mode',

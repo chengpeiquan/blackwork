@@ -1,6 +1,6 @@
 ---
 title: Button
-description: 触发操作。用于主操作、次要操作和图标按钮。
+description: 用于提交、确认等操作，支持多种样式、尺寸和加载状态。
 order: 5
 ---
 
@@ -12,7 +12,7 @@ order: 5
 - 工具栏里的图标按钮（`size="icon"`）
 - 看起来像按钮的链接（`asChild`）
 
-不要用 `Button` 去做普通文字导航。只有控件本身仍是操作时，才用 `variant="link"`。
+普通文字导航使用链接即可。`variant="link"` 适合保留按钮行为、以文字链接样式显示的操作。
 
 ## 用法
 
@@ -30,13 +30,13 @@ order: 5
 
 ### 加载
 
-`loading` 会禁用按钮并显示旋转图标。不要和 `asChild` 一起用。
+`loading` 会禁用按钮并显示加载图标，适合保存或提交期间使用。`loading` 不能与 `asChild` 同时使用。
 
 <ButtonLoadingExample />
 
 ### asChild
 
-把按钮样式合并到真正的子节点上，例如 `Link`。子节点必须能接收 button 的 props。
+`asChild` 将按钮样式和属性传给子节点，例如 `Link`。子组件需要接收并传递这些属性。
 
 <ButtonAsChildExample />
 
@@ -44,6 +44,6 @@ order: 5
 
 ## 说明
 
-- 优先用 `variant`，不要自己改颜色。
-- `size="icon"` 是正方形，必须带无障碍名称。
+- 优先通过 `variant` 选择样式，保持按钮颜色一致。
+- `size="icon"` 渲染正方形按钮。纯图标按钮需要无障碍名称，例如 `aria-label="搜索"`。
 - 表单里的提交按钮请显式写 `type="submit"`。

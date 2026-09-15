@@ -44,7 +44,7 @@ const mainCode = `import { LayoutMain } from 'blackwork/rsc'
 export const Example = () => {
   return (
     <LayoutMain>
-      <p>Page content uses the shared content gutter.</p>
+      <p>The main content has consistent spacing on both sides.</p>
     </LayoutMain>
   )
 }`
@@ -107,7 +107,7 @@ export const LayoutMainExample = () => (
   >
     <LayoutMain className="min-h-32 justify-center">
       <p className="text-sm text-muted-foreground">
-        Page content uses the shared content gutter.
+        The main content has consistent spacing on both sides.
       </p>
     </LayoutMain>
   </Example>
@@ -162,8 +162,9 @@ export const LayoutShellPropsTable = () => (
         name: 'socialLinksVisible',
         type: 'boolean',
         defaultValue: 'true',
-        description: 'Hide social links even when the array has items.',
-        descriptionZh: '即使数组有内容也隐藏社交链接。',
+        description:
+          'Set to false to hide social links, even when the array has items.',
+        descriptionZh: '设为 false 时隐藏社交链接，即使数组中已有链接。',
       },
       {
         name: 'languageToggle',
@@ -197,15 +198,16 @@ export const LayoutMainPropsTable = () => (
         type: 'boolean',
         defaultValue: 'false',
         description:
-          'Drop the content gutter and vertical padding. Use for full-bleed pages.',
+          'Remove horizontal and vertical padding so content can fill the page.',
         descriptionZh: '移除内容边距和垂直内边距，用于铺满页面。',
       },
       {
         name: 'asChild',
         type: 'boolean',
         defaultValue: 'false',
-        description: 'Merge layout classes onto the child instead of a main.',
-        descriptionZh: '将布局 class 合并到子节点，不再渲染 main。',
+        description:
+          'Apply layout classes to the child without rendering an extra main element.',
+        descriptionZh: '将布局类名合并到子节点，不再额外渲染 main 元素。',
       },
     ]}
   />
@@ -228,7 +230,7 @@ export const LayoutHolyGrailPropsTable = () => (
         type: 'boolean',
         defaultValue: 'false',
         description: 'Merge column classes onto the child.',
-        descriptionZh: '将分栏 class 合并到子节点。',
+        descriptionZh: '将分栏类名合并到子节点。',
       },
     ]}
   />
@@ -255,7 +257,7 @@ export const LayoutRootPropsTable = () => (
         name: 'className',
         type: 'string',
         description: 'Classes for body.',
-        descriptionZh: 'body 的 class。',
+        descriptionZh: '应用于 body 的类名。',
       },
     ]}
   />

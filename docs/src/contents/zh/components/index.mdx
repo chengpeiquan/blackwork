@@ -1,22 +1,24 @@
 ---
 title: 组件
-description: Blackwork 自己的接口，以及随包提供的 shadcn 组件。
+description: 查看 Blackwork 的布局、主题、表单和基础 UI 组件。
 order: 1
 ---
 
 # 组件
 
-本站详细说明 Blackwork 自己的接口：布局、小工具、主题、表单，以及少数在基础组件之上加了行为的组件。
+Blackwork 提供页面布局、主题、表单和基础 UI 组件。本站详细介绍了布局、小工具、主题和表单，也介绍了按钮加载状态等 Blackwork 提供的功能。
 
-有独立文档的页面都带可交互预览、对应代码和 API 表。
+各组件页面提供可交互预览、示例代码和 API 表，便于对照效果查找用法。
 
-## 已有文档
+## 组件文档
 
 <ComponentCatalog locale="zh" />
 
 ## 其余组件
 
-其余 UI 组件沿用 [shadcn/ui](https://ui.shadcn.com/docs/components) 的组成方式和视觉基线，但 Blackwork 0.12 的交互底层是 [Base UI](https://base-ui.com/react/overview/quick-start)。组件要从 `blackwork` 引入，props 以 Blackwork 的 TypeScript 类型为准，不要假设 Radix UI 示例可以原样使用。
+其余 UI 组件的结构和样式参考 [shadcn/ui](https://ui.shadcn.com/docs/components)，在项目中统一从 `blackwork` 引入。
+
+Blackwork 0.12 使用 [Base UI](https://base-ui.com/react/overview/quick-start) 实现基础交互。参考 shadcn/ui 文档时，属性以 Blackwork 的 TypeScript 类型为准；基于 Radix UI 的示例可能需要调整。
 
 <Callout title="服务端组件">
   Alert、Badge、Card、Empty、Field、Input 也可以从 blackwork/rsc 引入。
@@ -26,7 +28,7 @@ order: 1
 
 ## 常用组件
 
-下面几个例子可以直接复制。更多可用部件见上面的组件列表。
+下面展示 Accordion、Select 和 Toast 的基本用法。其他组件可以从上面的列表查找。
 
 ### Accordion
 

@@ -1,6 +1,6 @@
 ---
 title: Theme
-description: Light and dark mode with ThemeProvider and ThemeToggle.
+description: Configure light and dark themes, save the preference, and add a theme toggle.
 order: 4
 ---
 
@@ -8,10 +8,10 @@ order: 4
 
 ## When to use
 
-- Any app that should remember light or dark
+- Apps that need to remember the preferred light or dark theme
 - A header action that switches the current theme
 
-Wrap the tree once with `ThemeProvider` and put `ThemeScript` in `head` to prevent the wrong theme from flashing during page load. Put `ThemeToggle` where users expect theme controls.
+Wrap the page content with `ThemeProvider` in the root layout to manage theme state. Place `ThemeScript` in `head` to apply the theme before the content appears. Add `ThemeToggle` to switch themes, usually in the header.
 
 ## Usage
 
@@ -50,4 +50,4 @@ export default RootLayout
 - Default theme is `dark`.
 - The preference is stored in `localStorage` under `blackwork-theme`.
 - Keep `storageKey` and `defaultTheme` identical on `ThemeScript` and `ThemeProvider`.
-- This docs site already mounts `ThemeProvider` in the root layout.
+- This site configures `ThemeProvider` in the root layout, so the previews above use the site’s theme state.

@@ -6,7 +6,7 @@ order: 4
 
 # 从 0.11 迁移到 0.12
 
-这篇给正在使用 Blackwork 0.11 的项目。新项目直接看 [快速开始](/zh/guide/getting-started) 即可。
+从 Blackwork 0.11 升级时，需要调整 Tailwind 样式入口、表单依赖和图标导入。新项目从 [快速开始](/zh/guide/getting-started) 开始即可。
 
 先升级 Blackwork 和 Tailwind CSS：
 
@@ -22,7 +22,7 @@ pnpm add @tanstack/react-form
 
 ## 组合 API
 
-`DialogTrigger`、`SheetTrigger` 等触发器仍然支持 `asChild`。子节点请传真正的 `<button>` 或 `Button`，不要为了样式再包一层非 button 元素。
+`DialogTrigger`、`SheetTrigger` 等触发器仍然支持 `asChild`。子节点使用 `<button>` 或 `Button`，样式直接加在按钮上，避免额外的包装元素影响触发器行为。
 
 `Button` 仍然支持 `loading`。`SheetContent` 仍然支持 `closeButtonVisible`。
 
@@ -31,7 +31,7 @@ pnpm add @tanstack/react-form
 `blackwork/form` 基于 TanStack Form。
 
 1. 安装 `@tanstack/react-form`。
-2. 如果只是通过 Blackwork 使用 `react-hook-form`，可以卸掉它。
+2. 确认项目没有其他代码依赖 `react-hook-form` 后，可以将其卸载。
 3. 按 [Form](/zh/components/form) 使用 `useAppForm`、`Form` 和 `FieldGroup`。
 
 字段布局（`Field`、`FieldLabel`、`FieldGroup`）不依赖任何表单库，可以单独使用。

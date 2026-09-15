@@ -15,7 +15,7 @@ describe('docs site content config', () => {
       {
         type: 'group',
         label: {
-          en: 'Site chrome',
+          en: 'Site structure',
           zh: '站点框架',
         },
         items: [

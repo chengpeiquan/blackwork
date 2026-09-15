@@ -1,14 +1,14 @@
 ---
 title: Widgets
-description: Content-site chrome such as language, search, social links, and typography.
+description: Language controls, search inputs, social links, and typography for content sites.
 order: 3
 ---
 
 # Widgets
 
-Widgets are small Blackwork pieces for a content site. They are not shadcn primitives.
+Language controls, search, social links, and a back-to-top button are common features of content sites. Blackwork provides separate components for these features to combine as needed.
 
-Put `LanguageToggle` and `SocialLinks` in [LayoutHeader](/components/layouts). `ScrollToTop` is already mounted on this docs site.
+For example, place `LanguageToggle` and `SocialLinks` in [LayoutHeader](/components/layouts), and add `ScrollToTop` to pages with long articles.
 
 ## When to use
 
@@ -17,11 +17,11 @@ Put `LanguageToggle` and `SocialLinks` in [LayoutHeader](/components/layouts). `
 - Brand marks for GitHub, X, RSS, and similar
 - Headings and body copy that match the type scale
 
-Generic icons still come from `lucide-react`. See [Icons](/guide/icons). Brand marks stay inside `SocialLink`.
+Use `lucide-react` for general icons, as described in [Icons](/guide/icons). Blackwork’s built-in brand icons are available through `SocialLink`.
 
 ## Language toggle
 
-One option renders a button. An array renders a dropdown. Routing is your job: pass `onClick` on each option.
+Pass a single option to `options` for a button, or an array for a dropdown. Handle the language route change in each option’s `onClick` callback.
 
 <WidgetLanguageExample />
 
@@ -29,7 +29,7 @@ One option renders a button. An array renders a dropdown. Routing is your job: p
 
 ## Search input
 
-A search-styled input with a leading icon. It does not run a query.
+`SearchInput` provides input styling with a search icon. Connect query, submission, or filtering logic in the app.
 
 <WidgetSearchExample />
 
@@ -43,7 +43,7 @@ A search-styled input with a leading icon. It does not run a query.
 
 ## Scroll to top
 
-Fixed to the bottom-right of the viewport. Give the icon-only button a name.
+`ScrollToTop` is fixed to the bottom-right of the viewport by default. Set `ariaLabel` to give the icon-only button an accessible name.
 
 <WidgetScrollExample />
 
@@ -59,19 +59,17 @@ Fixed to the bottom-right of the viewport. Give the icon-only button a name.
 
 ## External link
 
-Opens in a new tab with `rel="nofollow noopener noreferrer"`.
+`ExternalLink` opens links in a new tab with `rel="nofollow noopener noreferrer"`.
 
 <WidgetExternalExample />
 
 ## Quick search
 
-Building blocks for a command-palette dialog. `useQuickSearchState` toggles on `⌘K` / `Ctrl+K`. The preview below uses local state so it does not steal this site's shortcut.
+Use `QuickSearchDialog` and its related components to build a search dialog. `useQuickSearchState` toggles the dialog with `⌘K` / `Ctrl+K`. This site’s header search uses the same components. The preview below opens from a button to avoid conflicting with the site’s search shortcut.
 
 <WidgetQuickSearchExample />
 
 ## Notes
 
-- `SocialLink` only knows `github`, `x`, `twitter`, `instagram`, `zhihu`, and `rss`.
-- `ScrollToTop` is `position: fixed`. Override `className` if you need it in a boxed preview.
-- `SearchInput` is presentation. Pair it with your own submit or filter logic.
-- This site's header search is a consumer of `QuickSearchDialog`, not a different component family.
+- `SocialLink` supports the types `github`, `x`, `twitter`, `instagram`, `zhihu`, and `rss`.
+- `ScrollToTop` uses `position: fixed` by default. Override its positioning with `className` to display it inside a preview container.

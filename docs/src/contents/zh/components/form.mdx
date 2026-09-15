@@ -1,16 +1,14 @@
 ---
 title: Form
-description: 把 TanStack Form 接到 Blackwork 字段上。
+description: 使用 TanStack Form 管理 Blackwork 表单的字段值、校验和提交。
 order: 8
 ---
 
 # Form
 
-blackwork/form 把 [TanStack Form](https://tanstack.com/form) 接到 Field 上。
+`blackwork/form` 将 [TanStack Form](https://tanstack.com/form) 的状态管理与 Blackwork 字段组件结合起来。TanStack Form 负责字段值、校验和提交，Blackwork 提供字段样式和常用控件的绑定。
 
-<Callout title="注意">它不是表单引擎，只负责接到 Blackwork 的 Field。</Callout>
-
-先安装对等依赖：
+使用前先安装所需的 TanStack Form 依赖：
 
 ```bash
 pnpm add @tanstack/react-form
@@ -18,10 +16,10 @@ pnpm add @tanstack/react-form
 
 ## 适用场景
 
-- 真正要提交、要有值和校验的流程
+- 需要管理字段值、校验和提交的表单
 - 复用 `TextField`、`TextareaField`、`CheckboxField`
 
-如果只是一个带标签的输入，用 [Field](/zh/components/field)。
+只需要为输入控件添加标签和说明时，使用 [Field](/zh/components/field)。
 
 ## 用法
 
@@ -35,7 +33,7 @@ pnpm add @tanstack/react-form
 
 ### 自定义字段
 
-Select、Combobox 等没有预绑定。在 `form.AppField` 里用 `Field` 自己组合。
+`Select`、`Combobox` 等控件需要手动绑定字段状态。可以参考下面的输入框示例，在 `form.AppField` 中组合 `Field` 与控件。
 
 <FormCustomExample />
 
@@ -43,7 +41,7 @@ Select、Combobox 等没有预绑定。在 `form.AppField` 里用 `Field` 自己
 
 ## 说明
 
-- `Form` 会帮你调用 `form.handleSubmit()`。
-- `SubmitButton` 跟随 `isSubmitting`，并使用 `Button` 的 `loading`。
+- `Form` 在提交时调用 `form.handleSubmit()`。
+- `SubmitButton` 根据 `isSubmitting` 设置 `Button` 的 `loading` 状态。
 
 <Callout title="注意">useAppForm 必须在客户端组件里调用。</Callout>

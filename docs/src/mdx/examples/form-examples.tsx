@@ -228,7 +228,7 @@ export const FormPropsTable = () => (
         type: '{ handleSubmit: () => unknown }',
         required: true,
         description: 'Form instance from useAppForm. Required on Form.',
-        descriptionZh: 'useAppForm 返回的表单实例，Form 必填。',
+        descriptionZh: '传给 Form 的表单实例，由 useAppForm 返回。',
       },
       {
         name: 'label',
