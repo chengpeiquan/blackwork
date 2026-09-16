@@ -789,9 +789,7 @@ test('DefaultHomeShell renders configured landing content when home config is pr
   expect(html).toContain('data-home-mode="configured"')
   expect(html).toContain('Configured landing')
   expect(html).toContain('Ship a better docs experience')
-  expect(html).toContain(
-    'inline-flex items-center justify-center whitespace-nowrap text-sm font-medium',
-  )
+  expect(html).toContain('data-slot="button" data-size="lg"')
   expect(html).toContain('h-11 rounded-full px-6 shadow-sm')
   expect(html).toContain('Start reading')
   expect(html).toContain('h-11 rounded-full px-6')
