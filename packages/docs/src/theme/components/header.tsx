@@ -1,4 +1,6 @@
 import {
+  Button,
+  FluidGlass,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -6,7 +8,6 @@ import {
   LayoutHeader,
   ThemeToggle,
 } from 'blackwork'
-import { buttonVariants } from 'blackwork/rsc'
 import { Check, Languages, Menu } from 'lucide-react'
 import React from 'react'
 import { DefaultDocsLink } from './link'
@@ -19,6 +20,7 @@ import type { DocsThemeLabels } from './shell-shared'
 import type { SocialLinkProps } from 'blackwork'
 
 export interface DefaultDocsHeaderProps {
+  appearance?: 'default' | 'glass'
   headerActions?: React.ReactNode
   homeHref: string
   LinkComponent?: DocsThemeLinkComponent
@@ -39,12 +41,14 @@ export interface DefaultDocsHeaderProps {
 const getLocaleLabel = (link: DocsThemeLocaleLink) => link.label || link.locale
 
 interface DefaultLocaleToggleProps {
+  appearance: 'default' | 'glass'
   changeLanguageLabel: string
   LinkComponent: DocsThemeLinkComponent
   localeLinks: DocsThemeLocaleLink[]
 }
 
 const DefaultLocaleToggle: React.FC<DefaultLocaleToggleProps> = ({
+  appearance,
   changeLanguageLabel,
   LinkComponent,
   localeLinks,
@@ -64,14 +68,15 @@ const DefaultLocaleToggle: React.FC<DefaultLocaleToggleProps> = ({
         title={title}
         aria-label={changeLanguageLabel}
         data-current-locale={currentLocale ? 'true' : undefined}
-        className={buttonVariants({
-          variant: 'ghost',
-          size: 'icon',
-          className: 'focus-visible:ring-0 focus-visible:ring-offset-0',
-        })}
+        asChild
       >
-        <Languages className="size-5" aria-hidden="true" />
-        <span className="sr-only">{title}</span>
+        <Button
+          variant={appearance === 'glass' ? 'glass' : 'ghost'}
+          size="icon"
+        >
+          <Languages className="size-5" aria-hidden="true" />
+          <span className="sr-only">{title}</span>
+        </Button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" className="border-border">
@@ -113,6 +118,7 @@ const navItemClassName = (current: boolean) =>
     : 'text-muted-foreground hover:text-foreground'
 
 export const DefaultDocsHeader: React.FC<DefaultDocsHeaderProps> = ({
+  appearance = 'default',
   headerActions,
   homeHref,
   LinkComponent = DefaultDocsLink,
@@ -122,8 +128,21 @@ export const DefaultDocsHeader: React.FC<DefaultDocsHeaderProps> = ({
   socialLinks = [],
   siteTitle,
 }) => {
+  const navLinks = navigation.map((item) => (
+    <LinkComponent
+      key={item.href}
+      href={item.href}
+      data-fluid-glass-item={appearance === 'glass' ? '' : undefined}
+      aria-current={item.current ? 'page' : undefined}
+      className={`rounded-md px-2.5 py-1.5 text-sm transition-colors ${navItemClassName(item.current)}`}
+    >
+      {item.label}
+    </LinkComponent>
+  ))
+
   return (
     <LayoutHeader
+      appearance={appearance}
       data-docs-region="header"
       socialLinks={socialLinks}
       wrapperClassName="mx-auto w-full max-w-screen-2xl px-6 sm:px-8 md:px-10 lg:px-12 xl:px-14"
@@ -131,6 +150,7 @@ export const DefaultDocsHeader: React.FC<DefaultDocsHeaderProps> = ({
       className="border-b border-border/60"
       languageToggle={
         <DefaultLocaleToggle
+          appearance={appearance}
           changeLanguageLabel={labels?.changeLanguage ?? 'Change language'}
           LinkComponent={LinkComponent}
           localeLinks={localeLinks}
@@ -138,6 +158,7 @@ export const DefaultDocsHeader: React.FC<DefaultDocsHeaderProps> = ({
       }
       themeToggle={
         <ThemeToggle
+          variant={appearance === 'glass' ? 'glass' : 'ghost'}
           title={labels?.toggleTheme ?? 'Toggle theme'}
           ariaLabel={labels?.toggleTheme ?? 'Toggle theme'}
         />
@@ -155,17 +176,17 @@ export const DefaultDocsHeader: React.FC<DefaultDocsHeaderProps> = ({
         <>
           <DropdownMenu>
             <DropdownMenuTrigger
-              className={buttonVariants({
-                variant: 'ghost',
-                size: 'icon',
-                className: 'md:hidden',
-              })}
+              asChild
               aria-label={labels?.openSiteNavigation ?? 'Open site navigation'}
             >
-              <Menu className="size-5" aria-hidden="true" />
-              <span className="sr-only">
-                {labels?.openSiteNavigation ?? 'Open site navigation'}
-              </span>
+              <Button
+                variant={appearance === 'glass' ? 'glass' : 'ghost'}
+                size="icon"
+                className="md:hidden"
+                title={labels?.openSiteNavigation ?? 'Open site navigation'}
+              >
+                <Menu className="size-5" aria-hidden="true" />
+              </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" className="border-border">
               {navigation.map((item) => (
@@ -187,16 +208,17 @@ export const DefaultDocsHeader: React.FC<DefaultDocsHeaderProps> = ({
             data-docs-region="header-nav"
             className="hidden min-w-0 items-center gap-1 md:flex"
           >
-            {navigation.map((item) => (
-              <LinkComponent
-                key={item.href}
-                href={item.href}
-                aria-current={item.current ? 'page' : undefined}
-                className={`rounded-md px-2.5 py-1.5 text-sm transition-colors ${navItemClassName(item.current)}`}
+            {appearance === 'glass' ? (
+              <FluidGlass
+                surface={false}
+                variant="subtle"
+                className="flex items-center gap-1"
               >
-                {item.label}
-              </LinkComponent>
-            ))}
+                {navLinks}
+              </FluidGlass>
+            ) : (
+              navLinks
+            )}
           </nav>
         </>
       ) : null}

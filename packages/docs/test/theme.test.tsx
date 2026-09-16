@@ -934,3 +934,32 @@ test('createHomeData keeps zero-doc auto home empty states accurate', async () =
     label: 'Browse docs',
   })
 })
+
+test('glass is opt-in and home previews receive the active locale', async () => {
+  const { DefaultHomeShell } = await import('@blackwork/docs/theme')
+  const { config, source } = createThemeContext({
+    theme: { appearance: 'glass' },
+    slots: {
+      homePreview: ({ locale }) =>
+        React.createElement(
+          'div',
+          { 'data-preview-locale': locale },
+          'Interactive preview',
+        ),
+    },
+  })
+  const html = renderToStaticMarkup(
+    React.createElement(DefaultHomeShell, { config, source, locale: 'zh' }),
+  )
+  expect(html).toContain('bw-glass-header')
+  expect(html).toContain('bw-glass-primary')
+  expect(html).toContain('data-preview-locale="zh"')
+  expect(html).toContain('data-fluid-glass-item')
+
+  const defaults = createThemeContext()
+  const defaultHtml = renderToStaticMarkup(
+    React.createElement(DefaultHomeShell, { ...defaults, locale: 'en' }),
+  )
+  expect(defaultHtml).not.toContain('bw-glass-header')
+  expect(defaultHtml).not.toContain('data-preview-locale')
+})

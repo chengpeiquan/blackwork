@@ -92,6 +92,7 @@ export interface DocsThemeSocialLinkConfig {
 }
 
 export interface DocsThemeConfig {
+  appearance?: 'default' | 'glass'
   [key: string]: unknown
   labels?: DocsThemeLabelsConfig
   nav?: DocsThemeNavConfig

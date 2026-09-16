@@ -103,6 +103,7 @@ export const DefaultHomeShell: React.FC<DefaultHomeShellProps> = ({
   const socialLinks = getThemeSocialLinks(normalizedConfig, locale)
   const slots = resolveThemeSlots(normalizedConfig.slots)
   const HeaderActions = slots.headerActions
+  const HomePreview = slots.homePreview
   const LinkComponent = slots.link ?? DefaultDocsLink
   const pagefindFilters = getPagefindFilters({
     locale,
@@ -112,6 +113,7 @@ export const DefaultHomeShell: React.FC<DefaultHomeShellProps> = ({
   return (
     <>
       <DefaultDocsHeader
+        appearance={normalizedConfig.theme.appearance}
         headerActions={
           HeaderActions ? (
             <HeaderActions
@@ -133,7 +135,10 @@ export const DefaultHomeShell: React.FC<DefaultHomeShellProps> = ({
         siteTitle={getSiteTitle(normalizedConfig)}
       />
 
-      <DocsScrollToTop label={themeLabels.scrollToTop} />
+      <DocsScrollToTop
+        label={themeLabels.scrollToTop}
+        appearance={normalizedConfig.theme.appearance}
+      />
 
       <main
         data-docs-region="home-shell"
@@ -143,7 +148,7 @@ export const DefaultHomeShell: React.FC<DefaultHomeShellProps> = ({
           data-docs-region="home-hero"
           data-home-mode={home.mode}
           data-pagefind-body=""
-          className="mx-auto flex w-full max-w-6xl flex-1 flex-col items-center justify-center gap-8 text-center"
+          className="mx-auto flex w-full max-w-6xl flex-1 flex-col items-center justify-center gap-8 py-8 text-center"
         >
           <div hidden>
             {pagefindFilterEntries.map((filter) => (
@@ -200,7 +205,16 @@ export const DefaultHomeShell: React.FC<DefaultHomeShellProps> = ({
           </div>
 
           <div className="flex flex-col items-center gap-3 text-base font-medium sm:flex-row">
-            <Button asChild size="lg" className="rounded-full px-6 shadow-sm">
+            <Button
+              asChild
+              variant={
+                normalizedConfig.theme.appearance === 'glass'
+                  ? 'glass-primary'
+                  : 'default'
+              }
+              size="lg"
+              className="rounded-full px-6 shadow-sm"
+            >
               <LinkComponent href={home.primaryAction.href}>
                 {home.primaryAction.label}
               </LinkComponent>
@@ -209,7 +223,11 @@ export const DefaultHomeShell: React.FC<DefaultHomeShellProps> = ({
             {home.secondaryAction ? (
               <Button
                 asChild
-                variant="ghost"
+                variant={
+                  normalizedConfig.theme.appearance === 'glass'
+                    ? 'glass'
+                    : 'ghost'
+                }
                 size="lg"
                 className="rounded-full px-6"
               >
@@ -219,12 +237,13 @@ export const DefaultHomeShell: React.FC<DefaultHomeShellProps> = ({
               </Button>
             ) : null}
           </div>
+          {HomePreview ? <HomePreview locale={locale} /> : null}
         </section>
 
         {home.highlights.length > 0 ? (
           <section
             data-docs-region="home-highlights"
-            className="mx-auto grid w-full max-w-6xl gap-4 pb-16 md:grid-cols-3"
+            className={`mx-auto grid w-full max-w-6xl gap-4 pb-16 ${home.highlights.length === 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : 'md:grid-cols-3'}`}
           >
             {home.highlights.map((item) => (
               <LinkComponent

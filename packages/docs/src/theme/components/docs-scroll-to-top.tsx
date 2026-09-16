@@ -1,15 +1,32 @@
-import { buttonVariants } from 'blackwork/rsc'
+import { Button, buttonVariants } from 'blackwork/rsc'
 import { ArrowUpFromLine } from 'lucide-react'
 import React from 'react'
 import { getDocsFloatingActionStyle } from './floating-actions'
 
 export interface DocsScrollToTopProps {
+  appearance?: 'default' | 'glass'
   label?: string
 }
 
 export const DocsScrollToTop: React.FC<DocsScrollToTopProps> = ({
   label = 'Scroll to top',
+  appearance = 'default',
 }) => {
+  if (appearance === 'glass') {
+    return (
+      <Button
+        asChild
+        variant="glass"
+        size="icon"
+        className="fixed"
+        style={getDocsFloatingActionStyle(0)}
+      >
+        <a href="#" title={label} aria-label={label}>
+          <ArrowUpFromLine className="size-5" aria-hidden="true" />
+        </a>
+      </Button>
+    )
+  }
   return (
     <a
       href="#"

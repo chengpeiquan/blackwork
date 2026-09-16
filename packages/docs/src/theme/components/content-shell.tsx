@@ -107,6 +107,7 @@ export const DefaultContentShell: React.FC<DefaultContentShellProps> = ({
   return (
     <>
       <DefaultDocsHeader
+        appearance={normalizedConfig.theme.appearance}
         headerActions={
           HeaderActions ? (
             <HeaderActions
@@ -128,7 +129,10 @@ export const DefaultContentShell: React.FC<DefaultContentShellProps> = ({
         siteTitle={getSiteTitle(normalizedConfig)}
       />
 
-      <DocsScrollToTop label={themeLabels.scrollToTop} />
+      <DocsScrollToTop
+        label={themeLabels.scrollToTop}
+        appearance={normalizedConfig.theme.appearance}
+      />
 
       {mobileToc}
       {contentToc}

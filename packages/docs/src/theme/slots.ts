@@ -34,6 +34,9 @@ export function resolveThemeSlots(value: unknown): DocsThemeSlots {
   }
 
   return {
+    ...(typeof value.homePreview === 'function'
+      ? { homePreview: value.homePreview as DocsThemeSlots['homePreview'] }
+      : {}),
     ...(isContentHeaderMetaSlot(value.contentHeaderMeta)
       ? { contentHeaderMeta: value.contentHeaderMeta }
       : {}),

@@ -31,6 +31,7 @@ export type {
   DocsThemeContentHeaderMetaProps,
   DocsThemeFooterSlotProps,
   DocsThemeHeaderActionsProps,
+  DocsThemeHomePreviewProps,
   DocsThemeLinkComponent,
   DocsThemeLinkProps,
   DocsThemeLocaleLink,

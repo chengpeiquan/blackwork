@@ -42,7 +42,12 @@ export interface DocsThemeContentHeaderMetaProps {
   entry: DocEntry
 }
 
+export interface DocsThemeHomePreviewProps {
+  locale: string
+}
+
 export interface DocsThemeSlots {
+  homePreview?: ComponentType<DocsThemeHomePreviewProps>
   contentHeaderMeta?: ComponentType<DocsThemeContentHeaderMetaProps>
   footer?: ComponentType<DocsThemeFooterSlotProps>
   headerActions?: ComponentType<DocsThemeHeaderActionsProps>

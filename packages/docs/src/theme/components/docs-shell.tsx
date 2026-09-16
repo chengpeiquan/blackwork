@@ -250,6 +250,7 @@ export const DefaultDocsShell: React.FC<DefaultDocsShellProps> = ({
   return (
     <>
       <DefaultDocsHeader
+        appearance={normalizedConfig.theme.appearance}
         headerActions={
           HeaderActions ? (
             <HeaderActions
@@ -271,7 +272,10 @@ export const DefaultDocsShell: React.FC<DefaultDocsShellProps> = ({
         siteTitle={getSiteTitle(normalizedConfig)}
       />
 
-      <DocsScrollToTop label={themeLabels.scrollToTop} />
+      <DocsScrollToTop
+        label={themeLabels.scrollToTop}
+        appearance={normalizedConfig.theme.appearance}
+      />
 
       <MobileDocsToc headings={tocHeadings} {...tocLabels} />
 
