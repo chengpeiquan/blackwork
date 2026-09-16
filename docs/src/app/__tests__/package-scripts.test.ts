@@ -10,7 +10,7 @@ const packageJson = JSON.parse(
 
 describe('docs site package scripts', () => {
   test('runs the preview server on the documented port', () => {
-    expect(packageJson.scripts?.dev).toContain('--port 3300')
+    expect(packageJson.scripts?.dev).toContain('--port 5945')
   })
 
   test('treats the production build as a static export', () => {

@@ -14,6 +14,6 @@ pnpm docs:build
 pnpm docs:preview
 ```
 
-`pnpm dev` starts the Next.js preview server on port 3300.
+`pnpm dev` starts the Next.js preview server on port 5945.
 `pnpm docs:build` writes a static site to `docs/.next-static`.
 `pnpm docs:preview` serves that static output on port 4300.
