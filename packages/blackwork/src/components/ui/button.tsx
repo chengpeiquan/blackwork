@@ -7,7 +7,7 @@ import { cn } from '@/utils'
 import { Slot } from '@/utils/slot'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
@@ -28,10 +28,7 @@ const buttonVariants = cva(
         default: 'h-10 px-4 py-2',
         sm: 'h-9 rounded-md px-3',
         lg: 'h-11 rounded-md px-8',
-        icon: 'h-8 w-8',
-      },
-      loading: {
-        true: 'gap-2',
+        icon: 'h-8 w-8 gap-0',
       },
     },
     defaultVariants: {
@@ -99,7 +96,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         data-slot="button"
         data-size={size ?? 'default'}
         className={cn(
-          buttonVariants({ variant, size, loading, className }),
+          buttonVariants({ variant, size, className }),
           isGlass && size === 'icon' && 'bw-glass-icon',
         )}
         disabled={loading || disabled}
