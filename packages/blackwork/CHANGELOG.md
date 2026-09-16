@@ -1,3 +1,14 @@
+# [0.13.0](https://github.com/chengpeiquan/blackwork/compare/blackwork@0.12.2...blackwork@0.13.0) (2026-09-17)
+
+### Bug Fixes
+
+- **button:** space icons and labels by default ([a9a2f73](https://github.com/chengpeiquan/blackwork/commit/a9a2f731dde10cb84fc733da1dc53c1de3d16ecf))
+- **dialog:** preserve glass exit transparency ([10cfb97](https://github.com/chengpeiquan/blackwork/commit/10cfb97ccb7ce9b50c4b655079029429fd16f116))
+
+### Features
+
+- **glass:** add fluid hover and adaptive glass materials ([aaea7a2](https://github.com/chengpeiquan/blackwork/commit/aaea7a2db4986e1aaeee3008c2a3f5ac93c32a26))
+
 # [0.12.2](https://github.com/chengpeiquan/blackwork/compare/blackwork@0.12.1...blackwork@0.12.2) (2026-08-23)
 
 ### Bug Fixes

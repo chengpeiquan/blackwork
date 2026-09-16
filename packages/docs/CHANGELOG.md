@@ -1,3 +1,9 @@
+# [0.6.0](https://github.com/chengpeiquan/blackwork/compare/docs@0.5.0...docs@0.6.0) (2026-09-17)
+
+### Features
+
+- **docs-theme:** support glass appearance and home previews ([c58a009](https://github.com/chengpeiquan/blackwork/commit/c58a00982f21a7be0cfeb2332f95fa6256cd3fec))
+
 # [0.5.0](https://github.com/chengpeiquan/blackwork/compare/docs@0.4.2...docs@0.5.0) (2026-08-22)
 
 ### Bug Fixes
