@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
 const CATALOG = [
+  { href: '/components/glass', label: { en: 'Liquid glass', zh: '液态玻璃' } },
   {
     href: '/components/layouts',
     label: { en: 'Layouts', zh: '布局' },

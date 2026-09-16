@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev --port 3300",
+    "dev": "next dev --port 5945",
     "build": "NEXT_OUTPUT=export NEXT_DIST_DIR=.next-static next build && pnpm run build:search",
     "build:search": "node ./scripts/build-search-index.mjs",
     "build:static": "pnpm run build",
@@ -23,6 +23,7 @@
     "next": "^16.3.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "shiki": "^4.4.3",
     "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {

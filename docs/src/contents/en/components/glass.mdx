@@ -1,0 +1,149 @@
+---
+title: Liquid glass
+description: Start with a glass button, then add translucent navigation, floating panels, and a shared hover highlight.
+order: 4.5
+---
+
+# Liquid glass
+
+Navigation over a photograph needs to remain readable without hiding the image. A search dialog has a similar job: bring the controls forward while keeping the page visible behind them. Glass adds a translucent surface, backdrop blur, and edge highlights to these areas.
+
+Start with the glass appearance on an existing control. For a group of navigation links, add `FluidGlass` to move one highlight between items. The material and moving highlight can also be used separately.
+
+| API             | Use it for                                                                                                            |
+| --------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `GlassSurface`  | A new glass container. It creates the material layer and a separate foreground for children.                          |
+| `GlassMaterial` | An existing container that already owns its layout. Add the material behind content positioned in the same container. |
+| `FluidGlass`    | A group of links or controls that shares one moving highlight across its marked items.                                |
+
+Choose `GlassSurface` for the common custom-panel case. Use `GlassMaterial` when replacing the container would disturb an existing layout, and use `FluidGlass` for interaction between several items rather than for a single surface.
+
+<Callout title="Version availability">
+  This page previews new APIs on main. They are not included in blackwork 0.12.2
+  on npm. A local build and package link can be used for evaluation; check that
+  the installed release includes these APIs before adopting them.
+</Callout>
+
+<GlassPlayground />
+
+The dialog in this example shows why the layers matter: the backdrop softens while text and controls stay outside the blur.
+
+## Start with a control
+
+After [installing the package and styles](/guide/getting-started), set `variant="glass"` on `Button` or `appearance="glass"` on `Input`. Use `variant="glass-primary"` for the main action when several controls appear together.
+
+<GlassControlsExample />
+
+The example keeps its saved state in React and exposes it through `aria-pressed`. Glass changes the appearance; `disabled` and `loading` retain their existing behavior. For navigation, use `asChild` with a real link, as in the [Button examples](/components/button).
+
+## Connect navigation highlights
+
+Wrap related links in `FluidGlass` and add `data-fluid-glass-item` to each item. The highlight moves between the marked links. Set `aria-current="page"` on the current page's link to give the highlight a resting position.
+
+<GlassNavigationExample />
+
+Inside an existing glass header, use `surface={false}` to avoid adding another glass background. Pair it with `variant="subtle"` for a lighter highlight, as above. A standalone group can keep the defaults, `surface={true}` and `variant="glass"`, for a glass background and a refracting highlight.
+
+Tab focus also moves the highlight. When the pointer leaves, the highlight follows a focused item first, then the current page. The application still sets the current page and handles navigation. `FluidGlass` does not add the arrow-key behavior required by tabs.
+
+## Headers and floating panels
+
+Use `appearance="glass"` on `LayoutHeader`, `DialogContent`, or `SheetContent` to apply the material to a larger area. `LayoutHeader` also updates its built-in social links. Set `variant="glass"` separately on controls passed into the header, such as `ThemeToggle` and `LanguageToggle`.
+
+```tsx
+import {
+  Button,
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from 'blackwork'
+
+export const GlassDialog = () => (
+  <Dialog>
+    <DialogTrigger asChild>
+      <Button variant="glass">Open preview</Button>
+    </DialogTrigger>
+    <DialogContent appearance="glass" closeLabel="Close">
+      <DialogHeader>
+        <DialogTitle>Page preview</DialogTitle>
+        <DialogDescription>
+          The backdrop softens while controls stay clear.
+        </DialogDescription>
+      </DialogHeader>
+      <DialogFooter>
+        <DialogClose asChild>
+          <Button variant="glass">Back</Button>
+        </DialogClose>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>
+)
+```
+
+For search, set `appearance="glass"` on both `QuickSearchTrigger` and `QuickSearchDialog`. Inside the dialog, `QuickSearchInput` inherits the appearance and includes a close button. Give that button a localized accessible name through `QuickSearchDialog`'s `closeLabel`. Query handling and result rendering remain in the application, as in this site's header search.
+
+## Compose a glass panel
+
+For a player or custom tool panel, start with `GlassSurface`. It provides the glass layer and a separate foreground for text and controls, so the backdrop can blur and refract without distorting the content.
+
+```tsx
+import { Button, GlassSurface } from 'blackwork'
+
+export const PlayerControls = () => (
+  <GlassSurface
+    material="regular"
+    blur={4}
+    refraction={56}
+    className="w-full max-w-md rounded-3xl p-6"
+  >
+    <p className="mb-4 text-lg font-medium">Now playing</p>
+    <Button variant="glass" asChild>
+      <a href="/music">Open music library</a>
+    </Button>
+  </GlassSurface>
+)
+```
+
+Use `className` for the outer dimensions, spacing, and corner radius. Put flex or grid layouts on a child element: `GlassSurface` wraps children in a foreground layer, so layout classes on the outer container do not act directly on them.
+
+If an existing container needs to stay in place, add `GlassMaterial` inside it. The container needs positioning and a corner radius; the foreground content needs `position: relative` and a higher stacking order to sit above the material.
+
+| Property     | Default   | Purpose                                                                                                          |
+| ------------ | --------- | ---------------------------------------------------------------------------------------------------------------- |
+| `material`   | `regular` | `clear` for light controls, `regular` for navigation and tool panels, `panel` for more readable floating content |
+| `blur`       | `4`       | Backdrop blur radius in CSS pixels                                                                               |
+| `refraction` | `56`      | Edge refraction strength in supported browsers; `0` keeps blur and highlights while disabling refraction         |
+| `className`  | —         | Container dimensions, spacing, and radius                                                                        |
+
+Keep additional `backdrop-blur`, `filter`, and opaque backgrounds off the glass container. An extra filter can change which backdrop the material samples, and an opaque background hides the content needed for the glass effect.
+
+## Enable the documentation theme
+
+For a site built with `@blackwork/docs`, set `theme.appearance` to `glass` to enable the shared glass header. Omitting the option keeps the `default` appearance.
+
+```tsx
+import { defineDocsConfig } from '@blackwork/docs'
+
+export const docsConfig = defineDocsConfig({
+  theme: { appearance: 'glass' },
+})
+```
+
+This setting covers headers on home, documentation, and content pages, along with home page action buttons and the back-to-top button. Custom slots, including search, need their own glass configuration.
+
+For a home page demo like this site's, pass a component accepting `{ locale: string }` to `slots.homePreview`.
+
+## Backdrops and browser differences
+
+If the glass effect is hard to see, check the backdrop first. A flat black background leaves little to blur or refract, so edge highlights and hover changes become more prominent. A photograph, texture, or low-contrast graphic gives the material more detail to work with. Keep that detail behind the demo area so it does not compete with the article.
+
+`GlassSurface` and `GlassMaterial` enable SVG edge refraction when the implementation detects Chromium. Safari and Firefox use a frosted fallback with theme tint and edge highlights: at least `16px` of blur for `clear` and `regular`, and `20px` for `panel`. The fallback retains translucency and pointer highlights without SVG edge refraction.
+
+Ordinary glass buttons use a lighter CSS material without generating a refraction map for each control. Choose `GlassSurface` or `GlassMaterial` when the container needs edge refraction, and import them from `blackwork`.
+
+With reduced motion enabled, the highlight moves without spring animation and controls stop scaling on press. Where the browser supports reduced transparency preferences, the material becomes opaque. After integration, check pointer and Tab interaction in both themes and target browsers, paying particular attention to text contrast over bright backdrops.

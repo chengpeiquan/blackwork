@@ -30,6 +30,11 @@ import {
   FormPropsTable,
 } from './src/mdx/examples/form-examples'
 import {
+  GlassControlsExample,
+  GlassNavigationExample,
+  GlassPlayground,
+} from './src/mdx/examples/glass-examples'
+import {
   LayoutFooterExample,
   LayoutHeaderExample,
   LayoutHolyGrailExample,
@@ -64,28 +69,22 @@ import {
   WidgetTypographyPropsTable,
 } from './src/mdx/examples/widget-examples'
 import { DocsHeaderSearchAction } from './src/search/docs-search'
+import { HomeShowcasePreview } from './src/showcase/home-showcase-preview'
 
 export const docsConfig = defineDocsConfig({
   site: {
     title: 'Blackwork',
     description:
-      'A tattoo-style React design system for blogs, docs, and content sites.',
+      'React UI inspired by Blackwork tattoos, for blogs, docs, and personal sites.',
     url: 'https://ui.chengpeiquan.com',
   },
   home: {
-    badge: {
-      alt: {
-        en: 'Latest blackwork version on npm',
-        zh: 'blackwork npm 最新版本',
-      },
-      href: 'https://www.npmjs.com/package/blackwork',
-      src: 'https://img.shields.io/npm/v/blackwork?label=npm&labelColor=171717&color=cb3837',
-    },
-    eyebrow: false,
+    badge: false,
+    eyebrow: 'REACT COMPONENTS',
     title: 'Blackwork',
     description: {
-      en: 'A tattoo-style React design system for blogs, documentation, and other content sites.',
-      zh: '一套刺青风格的 React 设计系统，适合搭建博客、文档站和其他以内容为主的网站。',
+      en: 'Tattoo-inspired React components for blogs, docs, and personal sites.',
+      zh: 'Blackwork 纹身风格的 React 组件，适合博客、文档与个人网站。',
     },
     primaryAction: {
       href: '/guide/getting-started',
@@ -93,37 +92,15 @@ export const docsConfig = defineDocsConfig({
     },
     secondaryAction: {
       href: '/components',
-      label: { en: 'Components', zh: '组件' },
+      label: { en: 'View components', zh: '浏览组件' },
     },
-    highlights: [
-      {
-        title: { en: 'Layouts', zh: '布局' },
-        description: {
-          en: 'Build pages with a header, main content, footer, and sidebars.',
-          zh: '用页头、正文、页脚和侧栏组件搭建页面。',
-        },
-        href: '/components/layouts',
-      },
-      {
-        title: { en: 'Forms', zh: '表单' },
-        description: {
-          en: 'Combine field layouts with TanStack Form for values and submission.',
-          zh: '组合字段布局，通过 TanStack Form 管理字段值和提交。',
-        },
-        href: '/components/form',
-      },
-      {
-        title: { en: 'Theme', zh: '主题' },
-        description: {
-          en: 'Add light and dark themes with a toggle and saved preferences.',
-          zh: '配置浅色和深色主题，切换主题并保存偏好。',
-        },
-        href: '/components/theme',
-      },
-    ],
+    highlights: false,
   },
   mdx: {
     components: {
+      GlassControlsExample,
+      GlassNavigationExample,
+      GlassPlayground,
       ButtonAsChildExample,
       ButtonBasicExample,
       ButtonLoadingExample,
@@ -173,6 +150,7 @@ export const docsConfig = defineDocsConfig({
     },
   },
   theme: {
+    appearance: 'glass',
     socialLinks: [
       {
         type: 'github',
@@ -201,6 +179,7 @@ export const docsConfig = defineDocsConfig({
       toggleTheme: { en: 'Toggle theme', zh: '切换主题' },
     },
     nav: [
+      { href: '/components/glass', label: { en: 'Glass', zh: '液态玻璃' } },
       {
         href: '/guide/getting-started',
         label: {
@@ -224,6 +203,7 @@ export const docsConfig = defineDocsConfig({
     },
   },
   slots: {
+    homePreview: HomeShowcasePreview,
     headerActions: DocsHeaderSearchAction,
   },
 })

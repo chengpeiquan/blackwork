@@ -40,6 +40,14 @@ describe('docs site content config', () => {
       {
         type: 'group',
         label: {
+          en: 'Effects',
+          zh: '效果',
+        },
+        items: [{ type: 'item', href: '/components/glass' }],
+      },
+      {
+        type: 'group',
+        label: {
           en: 'Components',
           zh: '组件',
         },

@@ -1,0 +1,152 @@
+---
+title: 液态玻璃
+description: 为控件和容器添加玻璃外观，支持导航高光、背景模糊和边缘折射。
+order: 4.5
+---
+
+# 液态玻璃
+
+为控件和容器添加玻璃外观，通过 `FluidGlass` 为一组链接添加移动高光。
+
+| API             | 用途                                                                     |
+| --------------- | ------------------------------------------------------------------------ |
+| `GlassSurface`  | 新建玻璃容器，同时生成材质层和独立的内容前景层。                         |
+| `GlassMaterial` | 保留已有容器和布局，只在容器内部加入位于内容后方的玻璃材质层。           |
+| `FluidGlass`    | 为一组链接或控件提供共用的移动高光，在各个标记项之间跟随指针或键盘焦点。 |
+
+自定义面板通常从 `GlassSurface` 开始；替换容器会破坏现有布局时使用 `GlassMaterial`；需要多个项目共用移动高光时使用 `FluidGlass`，而不是把它当作单一容器材质。
+
+<Callout title="版本">自 `blackwork@0.13.0` 起提供。</Callout>
+
+## 基本用法
+
+完成 [安装与样式接入](/guide/getting-started) 后，为 `Button` 设置 `variant="glass"`，为 `Input` 设置 `appearance="glass"`。主要操作可使用 `variant="glass-primary"`。
+
+<GlassControlsExample />
+
+链接用法见 [Button 的 asChild 示例](/components/button)。
+
+## 常见用法
+
+### 导航高光
+
+将链接放入 `FluidGlass`，为每项添加 `data-fluid-glass-item`，为当前页面的链接设置 `aria-current="page"`。
+
+<GlassNavigationExample />
+
+已有玻璃顶栏中使用 `surface={false}`，避免叠加背景；轻量高光使用 `variant="subtle"`。独立导航可保留默认值。
+
+高光跟随键盘焦点；鼠标移出后，优先停在焦点项，其次是当前项。当前项标记和跳转由应用处理，`FluidGlass` 不提供 Tabs 的方向键切换行为。
+
+### 顶栏与浮层
+
+`LayoutHeader`、`DialogContent` 和 `SheetContent` 使用 `appearance="glass"`。`LayoutHeader` 的内置社交链接会同步外观；传入的 `ThemeToggle`、`LanguageToggle` 需各自设置 `variant="glass"`。
+
+```tsx
+import {
+  Button,
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from 'blackwork'
+
+export const GlassDialog = () => (
+  <Dialog>
+    <DialogTrigger asChild>
+      <Button variant="glass">打开预览</Button>
+    </DialogTrigger>
+    <DialogContent appearance="glass" closeLabel="关闭">
+      <DialogHeader>
+        <DialogTitle>预览页面</DialogTitle>
+        <DialogDescription>背景柔化后，操作和说明仍然清晰。</DialogDescription>
+      </DialogHeader>
+      <DialogFooter>
+        <DialogClose asChild>
+          <Button variant="glass">返回</Button>
+        </DialogClose>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>
+)
+```
+
+`QuickSearchTrigger` 和 `QuickSearchDialog` 需分别设置 `appearance="glass"`。弹窗内的 `QuickSearchInput` 继承外观并显示关闭按钮；通过 `QuickSearchDialog.closeLabel` 设置该按钮的无障碍名称。
+
+<GlassPlayground />
+
+### 自定义容器
+
+使用 `GlassSurface` 包裹内容。
+
+```tsx
+import { Button, GlassSurface } from 'blackwork'
+
+export const PlayerControls = () => (
+  <GlassSurface
+    material="regular"
+    blur={4}
+    refraction={56}
+    className="w-full max-w-md rounded-3xl p-6"
+  >
+    <p className="mb-4 text-lg font-medium">正在播放</p>
+    <Button variant="glass" asChild>
+      <a href="/music">打开音乐库</a>
+    </Button>
+  </GlassSurface>
+)
+```
+
+`className` 设置外层尺寸、间距和圆角。Flex 或 Grid 布局应放在子元素上：内容有独立的前景容器，外层布局类不会直接作用于传入的子元素。
+
+保留已有容器时，可从 `blackwork` 导入 `GlassMaterial` 放入其中。容器需设置定位和圆角，前景内容需设置 `position: relative` 和更高的层级。
+
+### 文档主题
+
+`@blackwork/docs` 通过 `theme.appearance` 启用玻璃外观，默认值为 `default`。
+
+```tsx
+import { defineDocsConfig } from '@blackwork/docs'
+
+export const docsConfig = defineDocsConfig({
+  theme: { appearance: 'glass' },
+})
+```
+
+配置覆盖首页、文档页和内容页的顶栏、首页操作按钮及回到顶部按钮。搜索等自定义插槽需单独配置。
+
+首页预览通过 `slots.homePreview` 传入接收 `{ locale: string }` 的组件。
+
+## API
+
+### GlassSurface / GlassMaterial
+
+| 属性         | 默认值    | 说明                                                        |
+| ------------ | --------- | ----------------------------------------------------------- |
+| `material`   | `regular` | `clear`：轻量控件；`regular`：导航和工具面板；`panel`：浮层 |
+| `blur`       | `4`       | 背景模糊半径，单位为 CSS 像素                               |
+| `refraction` | `56`      | 边缘折射强度；`0` 关闭折射，保留模糊和高光                  |
+| `className`  | —         | `GlassSurface` 的外层类名或 `GlassMaterial` 的材质层类名    |
+
+`GlassSurface` 还支持 `div` 的 HTML 属性。
+
+### FluidGlass
+
+| 属性      | 默认值  | 说明                                  |
+| --------- | ------- | ------------------------------------- |
+| `surface` | `true`  | 是否显示玻璃背景                      |
+| `variant` | `glass` | `glass`：折射高光；`subtle`：轻量高光 |
+
+支持 `div` 的 HTML 属性。子项使用 `data-fluid-glass-item` 标记，当前项使用 `aria-current="page"` 或 `aria-selected="true"` 标记。
+
+## 限制与兼容性
+
+- 避免在玻璃容器上叠加 `backdrop-blur`、`filter` 或不透明背景，以免改变背景采样或遮住后方内容。
+- 纯色背景缺少模糊和折射细节；使用图片等背景时，需检查浅深色主题下的文字对比度。
+- 普通玻璃按钮仅使用 CSS 材质。边缘折射需使用 `GlassSurface` 或 `GlassMaterial`。
+- `GlassSurface` 和 `GlassMaterial` 检测到 Chromium 时启用 SVG 边缘折射。Safari 和 Firefox 使用磨砂回退，不启用折射；`clear`、`regular` 的模糊半径至少为 `16px`，`panel` 至少为 `20px`。
+- 开启减少动态效果后，禁用高光弹簧动画和控件按压缩放。浏览器支持减少透明度偏好时，材质改用实色。
