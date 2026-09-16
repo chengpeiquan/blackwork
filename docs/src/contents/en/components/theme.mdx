@@ -6,6 +6,8 @@ order: 4
 
 # Theme
 
+Set up the theme in the root layout so every page reads the same preference before rendering. `ThemeToggle` only changes that shared state; it does not replace `ThemeProvider` or `ThemeScript`.
+
 ## When to use
 
 - Apps that need to remember the preferred light or dark theme
@@ -51,3 +53,4 @@ export default RootLayout
 - The preference is stored in `localStorage` under `blackwork-theme`.
 - Keep `storageKey` and `defaultTheme` identical on `ThemeScript` and `ThemeProvider`.
 - This site configures `ThemeProvider` in the root layout, so the previews above use the site’s theme state.
+- If the application follows the system theme, include `system` in the toggle values and keep the default explicit.

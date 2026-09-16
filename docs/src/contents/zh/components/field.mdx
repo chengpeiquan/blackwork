@@ -6,6 +6,8 @@ order: 7
 
 # Field
 
+`Field` 将控件、标签、辅助说明和校验信息组织成一个无障碍布局，但不负责保存值或提交表单。
+
 ## 适用场景
 
 - 带标签的输入框
@@ -26,7 +28,7 @@ order: 7
 
 ### 校验
 
-校验失败时，在 `Field` 上用 `data-invalid` 标记字段状态，同时在输入控件上设置 `aria-invalid`，让辅助技术识别错误状态。
+校验失败时，在 `Field` 上用 `data-invalid` 标记字段状态，同时在输入控件上设置 `aria-invalid`。通过字段组件关联错误信息，让辅助技术获得一致的错误上下文。
 
 <FieldInvalidExample />
 

@@ -6,6 +6,8 @@ order: 2
 
 # 布局
 
+单栏内容页从 `LayoutHeader`、`LayoutMain` 和 `LayoutFooter` 开始；只有导航或目录需要独立列时，才加入圣杯分栏。
+
 博客和文档站通常需要页头、正文和页脚。Blackwork 的布局组件为这些区域提供统一的边距，页头默认支持吸顶。文章页需要导航和目录时，可以再加入左右侧栏。
 
 <Callout title="注意">
@@ -90,3 +92,7 @@ export default RootLayout
 - `LayoutHeader` 默认吸顶。在嵌套预览中使用或不需要吸顶时，可通过 `className` 覆盖定位样式。
 - `LayoutMain fullscreen` 会去掉统一边距，适合铺满屏幕的落地页。
 - `HolyGrailAside smaller` 是较窄的导航栏，默认宽度适合目录。
+
+## 玻璃外观
+
+页头需要覆盖在页面背景上时，为 `LayoutHeader` 设置 `appearance="glass"`。共享主题配置见 [液态玻璃](/zh/components/glass)。

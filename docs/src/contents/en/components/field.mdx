@@ -6,6 +6,8 @@ order: 7
 
 # Field
 
+Use `Field` to keep a control, its label, supporting text, and validation message in one accessible layout. It does not store values or submit forms.
+
 ## When to use
 
 - Any labeled input, even outside a form library
@@ -26,7 +28,7 @@ Use [Form](/components/form) to manage field values, validation, and submission 
 
 ### Validation
 
-When validation fails, mark the field with `data-invalid` on `Field` and set `aria-invalid` on the input so assistive technology can identify the error state.
+When validation fails, mark the field with `data-invalid` on `Field` and set `aria-invalid` on the input. Connect the message through the field components so assistive technology receives the same error context.
 
 <FieldInvalidExample />
 

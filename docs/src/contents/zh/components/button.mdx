@@ -6,6 +6,8 @@ order: 5
 
 # Button
 
+`Button` 用于触发操作。普通页面跳转保留为链接；只有链接需要按钮外观时才使用 `asChild`。
+
 ## 适用场景
 
 - 提交表单、确认对话框、开始一项任务
@@ -22,6 +24,8 @@ order: 5
 
 ### 变体
 
+一组操作中的主要操作使用 `default`，辅助操作使用 `secondary` 或 `outline`，具有破坏性后果的操作使用 `destructive`。紧凑工具栏可使用 `ghost`，避免持续显示边框。
+
 <ButtonVariantsExample />
 
 ### 尺寸
@@ -30,7 +34,7 @@ order: 5
 
 ### 加载
 
-`loading` 会禁用按钮并显示加载图标，适合保存或提交期间使用。`loading` 不能与 `asChild` 同时使用。
+`loading` 会禁用按钮并显示加载图标，适合保存或提交期间使用。保持按钮文案不变，避免宽度和操作名称在提交时改变。`loading` 不能与 `asChild` 同时使用。
 
 <ButtonLoadingExample />
 
@@ -45,5 +49,10 @@ order: 5
 ## 说明
 
 - 优先通过 `variant` 选择样式，保持按钮颜色一致。
+- 图标和文案之间默认使用 `gap-2`；纯图标按钮会自动取消间距。
 - `size="icon"` 渲染正方形按钮。纯图标按钮需要无障碍名称，例如 `aria-label="搜索"`。
 - 表单里的提交按钮请显式写 `type="submit"`。
+
+## 玻璃外观
+
+控件位于图片或半透明表面上时使用 `glass`，同组的主要操作使用 `glass-primary`。接入方式和对比度要求见 [液态玻璃](/zh/components/glass)。

@@ -6,6 +6,8 @@ order: 4
 
 # Migrate from 0.11 to 0.12
 
+Follow the changes in this order: upgrade the packages, update the style entry, move form state to TanStack Form, then replace removed icon imports. Run the app after each group so a styling issue is not confused with an API change.
+
 Upgrading from Blackwork 0.11 requires changes to Tailwind styles, form dependencies, and icon imports. For a new project, start with [Getting Started](/guide/getting-started).
 
 Upgrade Blackwork and Tailwind CSS first:
@@ -48,3 +50,5 @@ Blackwork 0.12 requires Tailwind CSS v4. Remove `blackwork/tailwind-config` and 
 @import 'tailwindcss';
 @import 'blackwork/tailwind.css';
 ```
+
+After the migration, check the root layout in both themes and verify any `asChild` trigger still passes props to a real button or link.

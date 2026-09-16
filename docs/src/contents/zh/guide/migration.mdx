@@ -6,6 +6,8 @@ order: 4
 
 # 从 0.11 迁移到 0.12
 
+按以下顺序迁移：先升级依赖，再更新样式入口，将表单状态迁移到 TanStack Form，最后替换已移除的图标导入。每组修改后运行一次应用，避免把样式问题和 API 变化混在一起排查。
+
 从 Blackwork 0.11 升级时，需要调整 Tailwind 样式入口、表单依赖和图标导入。新项目从 [快速开始](/zh/guide/getting-started) 开始即可。
 
 先升级 Blackwork 和 Tailwind CSS：
@@ -48,3 +50,5 @@ Blackwork 0.12 只支持 Tailwind CSS v4。移除 `blackwork/tailwind-config` �
 @import 'tailwindcss';
 @import 'blackwork/tailwind.css';
 ```
+
+迁移完成后，在浅色和深色主题下检查根布局，并确认所有 `asChild` 触发器仍把属性传给真实的按钮或链接。

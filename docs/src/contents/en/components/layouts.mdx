@@ -6,6 +6,8 @@ order: 2
 
 # Layouts
 
+Start with `LayoutHeader`, `LayoutMain`, and `LayoutFooter` for a single content column. Add the holy-grail layout only when navigation or a table of contents needs its own column.
+
 Blogs and documentation sites usually share a header, main content area, and footer. Blackwork layout components give these areas consistent spacing, with a sticky header by default. Add sidebars when an article needs navigation or a table of contents.
 
 <Callout title="Note">
@@ -91,3 +93,7 @@ A holy-grail layout places the main content between sidebars for navigation and 
 - `LayoutHeader` is sticky by default. Override its positioning with `className` for a nested preview or a header that scrolls with the page.
 - `LayoutMain fullscreen` removes the shared padding so content can extend to the edges of the page.
 - `HolyGrailAside smaller` uses a narrower width for navigation. The default width suits a table of contents.
+
+## Glass appearance
+
+Set `appearance="glass"` on `LayoutHeader` when the header should sit over the page background. See [Liquid glass](/components/glass) for the shared theme configuration.

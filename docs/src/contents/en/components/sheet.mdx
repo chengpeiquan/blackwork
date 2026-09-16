@@ -6,6 +6,8 @@ order: 9
 
 # Sheet
 
+Use `Sheet` when the current page still provides useful context while a secondary task is open. Choose the side from the surrounding layout rather than from the task type alone.
+
 ## When to use
 
 - Mobile navigation
@@ -20,6 +22,8 @@ Use [Dialog](/components/dialog) for a short confirmation in the center of the p
 
 ## Sides
 
+Use `right` for item details and filters in left-to-right layouts. Use `left` when the sheet replaces left-side navigation. Reserve `top` and `bottom` for compact content that does not need the full viewport height.
+
 <SheetSidesExample />
 
 <SheetPropsTable />
@@ -29,3 +33,7 @@ Use [Dialog](/components/dialog) for a short confirmation in the center of the p
 - Default `side` is `right`.
 - Setting `closeButtonVisible={false}` hides the built-in close button. Provide another close control in that case.
 - As with `Dialog`, a trigger using `asChild` needs a `<button>` or `Button` child.
+
+## Glass appearance
+
+Set `appearance="glass"` on `SheetContent` when the underlying page should remain visible. See [Liquid glass](/components/glass) for setup and browser fallbacks.

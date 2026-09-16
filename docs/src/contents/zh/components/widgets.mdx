@@ -6,6 +6,8 @@ order: 3
 
 # 小工具
 
+按职责组合小工具：语言和主题控件放在页头，搜索组件负责输入查询，`ScrollToTop` 放在长内容页。路由跳转和搜索索引逻辑仍由应用接入。
+
 语言切换、搜索入口、社交链接和回到顶部是内容站常用的功能。Blackwork 将这些功能做成独立组件，可以按页面需要组合。
 
 例如，`LanguageToggle` 和 `SocialLinks` 可以放进 [LayoutHeader](/zh/components/layouts)，`ScrollToTop` 则放在页面中供长文阅读时使用。
@@ -73,3 +75,7 @@ order: 3
 
 - `SocialLink` 支持的 `type` 为 `github`、`x`、`twitter`、`instagram`、`zhihu`、`rss`。
 - `ScrollToTop` 默认使用 `position: fixed`。需要将其展示在局部预览容器中时，可通过 `className` 覆盖定位样式。
+
+## 玻璃外观
+
+玻璃页头中的控件设置 `variant="glass"`；页头材质和快捷搜索弹窗的用法见 [液态玻璃](/zh/components/glass)。

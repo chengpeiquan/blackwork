@@ -6,6 +6,8 @@ order: 6
 
 # Dialog
 
+Use `Dialog` for a short task that must interrupt the current page without replacing it. The title should name that task, and the footer should contain only the actions needed to finish or leave it.
+
 ## When to use
 
 - Confirm a destructive action
@@ -39,3 +41,8 @@ Use `asChild` on `DialogTrigger` with a `<button>` or `Button` child.
 
 - The `asChild` child must be a button. Do not wrap `Button` in a `div`.
 - Keep the instructions and actions brief. A separate page or sheet is a better fit for longer forms.
+- Keep the trigger mounted while the dialog is open so focus can return to it after closing.
+
+## Glass appearance
+
+Set `appearance="glass"` on `DialogContent` when the page should remain visible through the panel. Check text contrast against the actual backdrop; see [Liquid glass](/components/glass) for the complete example.

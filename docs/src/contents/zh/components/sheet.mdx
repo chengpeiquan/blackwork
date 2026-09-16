@@ -6,6 +6,8 @@ order: 9
 
 # Sheet
 
+`Sheet` 适合在保留当前页面作为参照的同时处理次要任务。展开方向应配合页面布局，不应只按任务类型决定。
+
 ## 适用场景
 
 - 移动端导航
@@ -20,6 +22,8 @@ order: 9
 
 ## 方向
 
+从左到右的布局中，详情和筛选通常从右侧展开；抽屉代替左侧导航时使用 `left`。`top` 和 `bottom` 更适合不需要占满视口高度的简短内容。
+
 <SheetSidesExample />
 
 <SheetPropsTable />
@@ -29,3 +33,7 @@ order: 9
 - 默认 `side` 是 `right`。
 - 设置 `closeButtonVisible={false}` 会隐藏内置关闭按钮，此时需要提供其他关闭控件。
 - 与 `Dialog` 一样，触发器使用 `asChild` 时，子节点需要是 `<button>` 或 `Button`。
+
+## 玻璃外观
+
+需要保留下层页面的可见度时，为 `SheetContent` 设置 `appearance="glass"`。接入方式和浏览器回退见 [液态玻璃](/zh/components/glass)。

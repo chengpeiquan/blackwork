@@ -6,6 +6,8 @@ order: 8
 
 # Form
 
+Use `blackwork/form` when a form needs managed values, validation, and submission. Use [Field](/components/field) alone when the application already owns that state.
+
 `blackwork/form` combines [TanStack Form](https://tanstack.com/form) state management with Blackwork field components. TanStack Form handles values, validation, and submission; Blackwork provides field styles and bindings for common controls.
 
 Install the required TanStack Form dependency first:
@@ -43,5 +45,6 @@ For an input that only needs a label and description, use [Field](/components/fi
 
 - `Form` calls `form.handleSubmit()` when submitted.
 - `SubmitButton` sets the `Button` loading state from `isSubmitting`.
+- Keep validation close to the field that owns it; use form-level validation for rules that depend on multiple values.
 
 <Callout title="Note">useAppForm must run in a client component.</Callout>

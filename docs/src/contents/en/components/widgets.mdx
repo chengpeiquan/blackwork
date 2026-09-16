@@ -6,6 +6,8 @@ order: 3
 
 # Widgets
 
+Add widgets by responsibility: language and theme controls belong in the header, search owns query entry, and `ScrollToTop` belongs on long content pages. The components do not provide routing or search-index logic.
+
 Language controls, search, social links, and a back-to-top button are common features of content sites. Blackwork provides separate components for these features to combine as needed.
 
 For example, place `LanguageToggle` and `SocialLinks` in [LayoutHeader](/components/layouts), and add `ScrollToTop` to pages with long articles.
@@ -73,3 +75,7 @@ Use `QuickSearchDialog` and its related components to build a search dialog. `us
 
 - `SocialLink` supports the types `github`, `x`, `twitter`, `instagram`, `zhihu`, and `rss`.
 - `ScrollToTop` uses `position: fixed` by default. Override its positioning with `className` to display it inside a preview container.
+
+## Glass appearance
+
+Set `variant="glass"` on controls placed in a glass header. For the header surface and quick-search dialog, see [Liquid glass](/components/glass).

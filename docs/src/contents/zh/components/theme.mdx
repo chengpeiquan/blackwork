@@ -6,6 +6,8 @@ order: 4
 
 # 主题
 
+在根布局统一配置主题，让每个页面在渲染前读取同一份偏好。`ThemeToggle` 只负责修改共享状态，不能代替 `ThemeProvider` 或 `ThemeScript`。
+
 ## 适用场景
 
 - 需要保存浅色或深色主题偏好的应用
@@ -51,3 +53,4 @@ export default RootLayout
 - 主题偏好保存在 `localStorage` 中，默认键名为 `blackwork-theme`。
 - `ThemeScript` 和 `ThemeProvider` 的 `storageKey`、`defaultTheme` 必须一致。
 - 本站已在根布局中配置 `ThemeProvider`，上面的预览直接使用该主题状态。
+- 需要跟随系统主题时，将 `system` 加入切换选项，并明确设置默认值。

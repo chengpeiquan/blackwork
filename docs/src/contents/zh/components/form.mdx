@@ -6,6 +6,8 @@ order: 8
 
 # Form
 
+表单需要统一管理字段值、校验和提交时使用 `blackwork/form`；如果状态已经由应用管理，只需要标签和说明时使用 [Field](/zh/components/field)。
+
 `blackwork/form` 将 [TanStack Form](https://tanstack.com/form) 的状态管理与 Blackwork 字段组件结合起来。TanStack Form 负责字段值、校验和提交，Blackwork 提供字段样式和常用控件的绑定。
 
 使用前先安装所需的 TanStack Form 依赖：
@@ -43,5 +45,6 @@ pnpm add @tanstack/react-form
 
 - `Form` 在提交时调用 `form.handleSubmit()`。
 - `SubmitButton` 根据 `isSubmitting` 设置 `Button` 的 `loading` 状态。
+- 单字段规则放在对应字段附近；需要同时比较多个值的规则再放到表单级校验。
 
 <Callout title="注意">useAppForm 必须在客户端组件里调用。</Callout>

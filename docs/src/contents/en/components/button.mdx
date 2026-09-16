@@ -6,6 +6,8 @@ order: 5
 
 # Button
 
+Use `Button` for an action. Keep ordinary navigation as a link; use `asChild` only when a link needs button styling.
+
 ## When to use
 
 - Submit a form, confirm a dialog, or start a task
@@ -22,6 +24,8 @@ Use a plain link for text navigation. `variant="link"` gives an action the appea
 
 ### Variants
 
+Use `default` for the main action in a group, `secondary` or `outline` for supporting actions, and `destructive` for an action with destructive consequences. `ghost` suits compact toolbars where a persistent border would add noise.
+
 <ButtonVariantsExample />
 
 ### Sizes
@@ -30,7 +34,7 @@ Use a plain link for text navigation. `variant="link"` gives an action the appea
 
 ### Loading
 
-`loading` disables the button and shows a spinner while an action such as saving or submitting is in progress. It cannot be combined with `asChild`.
+`loading` disables the button and shows a spinner while an action such as saving or submitting is in progress. Keep the label stable so the button width and action name do not change. `loading` cannot be combined with `asChild`.
 
 <ButtonLoadingExample />
 
@@ -45,5 +49,10 @@ Use a plain link for text navigation. `variant="link"` gives an action the appea
 ## Notes
 
 - Prefer `variant` over custom colors.
+- Buttons use `gap-2` between an icon and label. Icon-only buttons reset the gap automatically.
 - `size="icon"` renders a square button. Give icon-only buttons an accessible name, such as `aria-label="Search"`.
 - In forms, set `type="submit"` explicitly on the submit button.
+
+## Glass appearance
+
+Use `glass` for controls placed over an image or translucent surface, and `glass-primary` for the main action in that group. See [Liquid glass](/components/glass) for setup and contrast requirements.
