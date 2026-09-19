@@ -4,13 +4,13 @@ import {
   Button,
   QuickSearchDialog,
   QuickSearchInput,
+  QuickSearchItem,
   QuickSearchTrigger,
   useQuickSearchState,
 } from 'blackwork'
 import { Search } from 'lucide-react'
 import Link from 'next/link'
 import * as React from 'react'
-import { cn } from '@/utils/class-name'
 import { useDocsSearch } from './use-docs-search'
 import type { DocsThemeHeaderActionsProps } from '@blackwork/docs/theme'
 
@@ -149,28 +149,22 @@ export const DocsHeaderSearchAction: React.FC<DocsThemeHeaderActionsProps> = ({
             <ul className="space-y-2">
               {items.map((item) => (
                 <li key={item.id}>
-                  <Link
-                    href={item.url}
-                    className={cn(
-                      'block rounded-xl px-4 py-3 transition-colors',
-                      'hover:border-border hover:bg-accent/50',
-                      'focus-visible:border-ring focus-visible:bg-accent/60 focus-visible:outline-none',
-                    )}
-                    onClick={() => setOpen(false)}
-                  >
-                    <div className="flex flex-col gap-2">
-                      <div className="flex flex-col gap-1">
-                        <span className="text-sm font-semibold text-foreground">
-                          {item.title ?? item.url}
-                        </span>
-                        <span className="truncate text-xs text-muted-foreground">
-                          {item.url}
-                        </span>
-                      </div>
+                  <QuickSearchItem asChild className="px-4">
+                    <Link href={item.url} onClick={() => setOpen(false)}>
+                      <div className="flex min-w-0 flex-col gap-2">
+                        <div className="flex flex-col gap-1">
+                          <span className="text-sm font-semibold text-foreground">
+                            {item.title ?? item.url}
+                          </span>
+                          <span className="truncate text-xs text-muted-foreground">
+                            {item.url}
+                          </span>
+                        </div>
 
-                      <ResultExcerpt excerpt={item.excerpt} />
-                    </div>
-                  </Link>
+                        <ResultExcerpt excerpt={item.excerpt} />
+                      </div>
+                    </Link>
+                  </QuickSearchItem>
                 </li>
               ))}
             </ul>

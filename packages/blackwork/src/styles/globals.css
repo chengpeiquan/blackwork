@@ -106,15 +106,12 @@ input[type='search']::-webkit-search-cancel-button {
   --bw-glass-fill: hsl(0 0% 4% / 0.42);
   --bw-glass-shade: hsl(0 0% 0% / 0.4);
 }
-.dark .bw-glass-material[data-material='panel'] {
-  --bw-glass-fill: hsl(0 0% 4% / 0.5);
-  --bw-glass-shade: hsl(0 0% 0% / 0.44);
-}
 .bw-glass-material[data-material='panel'] {
-  --bw-glass-fill: hsl(var(--background) / 0.58);
+  --bw-glass-fill: hsl(var(--background) / 0.82);
 }
 .dark .bw-glass-material[data-material='panel'] {
-  --bw-glass-fill: hsl(0 0% 10% / 0.44);
+  --bw-glass-fill: hsl(0 0% 10% / 0.58);
+  --bw-glass-shade: hsl(0 0% 0% / 0.44);
 }
 .bw-glass-optics,
 .bw-glass-rim {
@@ -130,7 +127,7 @@ input[type='search']::-webkit-search-cancel-button {
   --bw-glass-fill: hsl(0 0% 4% / 0.5);
 }
 .bw-glass-material.bw-glass-frosted[data-material='panel'] {
-  --bw-glass-fill: hsl(var(--background) / 0.62);
+  --bw-glass-fill: hsl(var(--background) / 0.82);
 }
 .dark .bw-glass-material.bw-glass-frosted[data-material='panel'] {
   --bw-glass-fill: hsl(0 0% 4% / 0.56);
@@ -270,14 +267,42 @@ input[type='search']::-webkit-search-cancel-button {
   box-shadow: inset 0 1px 2px hsl(0 0% 0% / 0.04);
 }
 .bw-glass-overlay {
-  background: hsl(0 0% 0% / 0.22);
+  background: hsl(0 0% 0% / 0.16);
 }
 .bw-glass-dialog {
+  --muted-foreground: 0 0% 30%;
   border: 0;
   border-radius: 28px;
   background: transparent;
   box-shadow: 0 24px 80px hsl(0 0% 0% / 0.2);
   max-height: calc(100dvh - 32px);
+}
+.dark .bw-glass-dialog {
+  --muted-foreground: 0 0% 70%;
+}
+/* Opacity animations create a backdrop root, even after a forwards fill.
+   Animate scale only so the material can continue sampling the page. */
+.bw-glass-dialog[data-open] {
+  animation-name: bw-glass-dialog-enter;
+}
+.bw-glass-dialog[data-closed] {
+  animation-name: bw-glass-dialog-exit;
+}
+@keyframes bw-glass-dialog-enter {
+  from {
+    scale: 0.96;
+  }
+  to {
+    scale: 1;
+  }
+}
+@keyframes bw-glass-dialog-exit {
+  from {
+    scale: 1;
+  }
+  to {
+    scale: 0.96;
+  }
 }
 .bw-glass-player {
   overflow: hidden;
@@ -435,6 +460,10 @@ input[type='search']::-webkit-search-cancel-button {
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  .bw-glass-dialog[data-open],
+  .bw-glass-dialog[data-closed] {
+    animation: none;
+  }
   .bw-fluid-lens,
   .bw-glass-control {
     transition: none;

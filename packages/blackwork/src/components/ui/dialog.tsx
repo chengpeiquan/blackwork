@@ -89,7 +89,7 @@ const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
       >
         {appearance === 'glass' ? (
           <>
-            <GlassMaterial material="panel" refraction={64} blur={8} />
+            <GlassMaterial material="panel" refraction={48} blur={24} />
             <div className="bw-glass-dialog-body">{children}</div>
           </>
         ) : (

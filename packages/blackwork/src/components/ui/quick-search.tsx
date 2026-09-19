@@ -5,6 +5,7 @@ import { Search, X } from 'lucide-react'
 import * as React from 'react'
 
 import { cn } from '@/utils'
+import { Slot } from '@/utils/slot'
 import { Button } from './button'
 import { Dialog, DialogClose, DialogContent, DialogTitle } from './dialog'
 import { ScrollArea } from './scroll-area'
@@ -187,7 +188,7 @@ const QuickSearchList = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      'flex h-[480px] w-full flex-col overflow-y-auto overflow-x-hidden',
+      'flex h-[480px] max-h-[calc(100dvh-112px)] w-full flex-col overflow-y-auto overflow-x-hidden',
       className,
     )}
     {...props}
@@ -218,17 +219,25 @@ QuickSearchEmpty.displayName = 'QuickSearchEmpty'
 
 const QuickSearchItem = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      'relative flex cursor-default select-none items-center rounded-sm p-3 text-sm outline-none hover:bg-accent hover:text-accent-foreground',
-      className,
-    )}
-    {...props}
-  />
-))
+  React.HTMLAttributes<HTMLDivElement> & { asChild?: boolean }
+>(({ className, asChild = false, ...props }, ref) => {
+  const { glass } = React.useContext(QuickSearchAppearance)
+  const Comp = asChild ? Slot : 'div'
+
+  return (
+    <Comp
+      ref={ref}
+      className={cn(
+        'relative flex cursor-default select-none items-center p-3 text-sm outline-none',
+        glass
+          ? 'rounded-xl transition-colors duration-150 hover:bg-foreground/8 hover:text-foreground focus-within:bg-foreground/8 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring motion-reduce:transition-none'
+          : 'rounded-sm hover:bg-accent hover:text-accent-foreground',
+        className,
+      )}
+      {...props}
+    />
+  )
+})
 
 QuickSearchItem.displayName = 'QuickSearchItem'
 
