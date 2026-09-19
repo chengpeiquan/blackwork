@@ -1,3 +1,10 @@
+# [0.13.1](https://github.com/chengpeiquan/blackwork/compare/blackwork@0.13.0...blackwork@0.13.1) (2026-09-17)
+
+### Bug Fixes
+
+- **dialog:** preserve backdrop sampling during glass animations and improve frosted panel contrast in both themes
+- **quick-search:** use subtle translucent hover and focus highlights, support linked result rows, and keep the list within short viewports
+
 # [0.13.0](https://github.com/chengpeiquan/blackwork/compare/blackwork@0.12.2...blackwork@0.13.0) (2026-09-17)
 
 ### Bug Fixes

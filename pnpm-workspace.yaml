@@ -2,3 +2,6 @@ packages:
   - apps/*
   - docs
   - packages/*
+allowBuilds:
+  esbuild: true
+  unrs-resolver: true

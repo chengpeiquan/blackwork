@@ -7,8 +7,11 @@ const workspaceDir = resolve(__dirname, '..')
 
 const runPnpmCommand = (args, options = {}) => {
   const npmExecPath = process.env.npm_execpath
-  const command = npmExecPath ? process.execPath : 'pnpm'
-  const commandArgs = npmExecPath ? [npmExecPath, ...args] : args
+  // Standalone pnpm distributions set npm_execpath to a native executable.
+  // Only JavaScript CLI entrypoints should be launched through Node.
+  const isJavaScriptCli = npmExecPath && /\.[cm]?js$/iu.test(npmExecPath)
+  const command = isJavaScriptCli ? process.execPath : npmExecPath || 'pnpm'
+  const commandArgs = isJavaScriptCli ? [npmExecPath, ...args] : args
 
   const result = spawnSync(command, commandArgs, {
     cwd: workspaceDir,
