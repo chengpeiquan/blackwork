@@ -1,3 +1,9 @@
+# [0.14.0](https://github.com/chengpeiquan/blackwork/compare/blackwork@0.13.1...blackwork@0.14.0) (2026-09-23)
+
+### Features
+
+- **top-progress:** add a state-controlled page loading indicator with delayed display, automatic advance, completion fade, and subtle theme colors; support reduced motion and forced colors ([7624cf5](https://github.com/chengpeiquan/blackwork/commit/7624cf551eff4b0d861621c52d106b253b9c047c))
+
 # [0.13.1](https://github.com/chengpeiquan/blackwork/compare/blackwork@0.13.0...blackwork@0.13.1) (2026-09-17)
 
 ### Bug Fixes
