@@ -503,3 +503,39 @@ input[type='search']::-webkit-search-cancel-button {
     outline: 2px solid Highlight;
   }
 }
+
+/* Simulated task feedback: transform avoids layout work while the page stays usable. */
+.bw-top-progress {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 1000;
+  height: 2px;
+  pointer-events: none;
+  transition: opacity 200ms ease;
+}
+.bw-top-progress[data-state='fading'] {
+  opacity: 0;
+}
+.bw-top-progress-indicator {
+  width: 100%;
+  height: 100%;
+  transform-origin: left;
+  background: hsl(var(--primary) / 0.6);
+  transition: transform 200ms ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bw-top-progress,
+  .bw-top-progress-indicator {
+    transition: none;
+  }
+  .bw-top-progress[data-state='running'] .bw-top-progress-indicator {
+    transform: scaleX(0.35) !important;
+  }
+}
+@media (forced-colors: active) {
+  .bw-top-progress-indicator {
+    background: Highlight;
+    forced-color-adjust: none;
+  }
+}
