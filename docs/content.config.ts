@@ -119,6 +119,11 @@ export const docsContentConfig = {
               href: '/components/sheet',
               label: { en: 'Sheet', zh: '侧边面板' },
             },
+            {
+              type: 'item',
+              href: '/components/top-progress',
+              label: { en: 'Top progress', zh: '顶部进度条' },
+            },
           ],
         },
       ],

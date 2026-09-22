@@ -1,0 +1,48 @@
+---
+title: Top progress
+description: A slim page-level loading indicator controlled by React state.
+order: 10
+---
+
+# Top progress
+
+`TopProgress` shows a 2px bar at the top of the page while a task is pending. It keeps the existing content visible and interactive. The `pending` prop controls its visibility, and its color follows the Blackwork theme.
+
+<TopProgressExample />
+
+## Usage
+
+```tsx
+import { TopProgress } from 'blackwork'
+
+export const PageFeedback = ({ pending }: { pending: boolean }) => (
+  <TopProgress pending={pending} label="Loading page" />
+)
+```
+
+Keep one instance mounted in a persistent layout, near the application root and outside transformed or clipped containers. Set `pending` back to `false` when work succeeds, fails, or is cancelled. If several tasks share the indicator, aggregate their pending states first.
+
+## Behavior
+
+- Waits 150ms before appearing; faster tasks produce no flash.
+- Advances visually while pending, stopping below completion. This is activity feedback, not a measured percentage.
+- Fills and fades out when pending clears. Completion means the task has ended, not necessarily succeeded; show errors separately.
+- Cancels stale completion timers if new work starts during fade-out.
+- Uses the primary theme color, does not block pointer input, and respects reduced motion and forced colors.
+
+## Props
+
+| Prop        | Type      | Default     | Purpose                                                                |
+| ----------- | --------- | ----------- | ---------------------------------------------------------------------- |
+| `pending`   | `boolean` | Required    | Whether work is in progress.                                           |
+| `delay`     | `number`  | `150`       | Initial display delay in milliseconds. Use `0` for immediate feedback. |
+| `label`     | `string`  | `"Loading"` | Accessible name; localize it in the application.                       |
+| `className` | `string`  | —           | Placement, stacking, or height adjustments.                            |
+
+The active bar exposes an indeterminate `progressbar` without a fabricated `aria-valuenow`. Add `aria-busy` to the affected region or a localized status announcement when the application needs one.
+
+## Router integration
+
+Pass the navigation pending state from the application to the `pending` prop. For Next App Router links, [`useLinkStatus`](https://nextjs.org/docs/app/api-reference/functions/use-link-status) can feed pending state into a shared layout indicator through a small application adapter. It must run under a `Link` and does not cover programmatic navigation. Clear each pending contribution on unmount as well as completion to avoid stuck bars.
+
+Use the existing `Progress` component for known values such as upload percentage or playback position. `TopProgress` is for work whose duration is unknown.

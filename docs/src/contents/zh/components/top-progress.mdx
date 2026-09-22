@@ -1,0 +1,48 @@
+---
+title: 顶部进度条
+description: 由 React 状态控制的轻量页面加载提示。
+order: 10
+---
+
+# 顶部进度条
+
+`TopProgress` 在任务进行期间，于页面顶部显示一条 2px 进度条，保留当前内容和交互。显示状态由 `pending` 控制，颜色跟随 Blackwork 主题。
+
+<TopProgressExample />
+
+## 用法
+
+```tsx
+import { TopProgress } from 'blackwork'
+
+export const PageFeedback = ({ pending }: { pending: boolean }) => (
+  <TopProgress pending={pending} label="正在加载页面" />
+)
+```
+
+在持久化布局中保持一个实例挂载，靠近应用根节点，避开带有 transform 或裁剪的容器。任务成功、失败或取消时，都需要把 `pending` 设回 `false`。多个任务共用进度条时，先在应用层汇总它们的等待状态。
+
+## 行为
+
+- 等待 150ms 后才出现，快速任务不会闪一下进度条。
+- 等待期间缓慢推进，但不会自行到达终点。这是活动反馈，不代表实际完成百分比。
+- 等待结束后填满并淡出。填满表示任务已结束，不代表一定成功；错误需要单独呈现。
+- 淡出期间开始新任务，会取消旧任务的收尾计时器。
+- 使用主题主色，不阻挡鼠标操作，适配减少动态效果与强制颜色模式。
+
+## 属性
+
+| 属性        | 类型      | 默认值      | 用途                                            |
+| ----------- | --------- | ----------- | ----------------------------------------------- |
+| `pending`   | `boolean` | 必填        | 任务是否正在进行。                              |
+| `delay`     | `number`  | `150`       | 首次显示的延迟，单位毫秒。设为 `0` 可立即反馈。 |
+| `label`     | `string`  | `"Loading"` | 无障碍名称，由应用提供对应语言。                |
+| `className` | `string`  | —           | 调整位置、层级或高度。                          |
+
+活动状态使用不确定进度的 `progressbar` 语义，不通过 `aria-valuenow` 宣称虚构的百分比。应用可按需在受影响的内容区域设置 `aria-busy`，或提供本地化状态播报。
+
+## 接入路由
+
+由应用将导航的等待状态传给 `pending`。Next App Router 的链接可通过 [`useLinkStatus`](https://nextjs.org/docs/app/api-reference/functions/use-link-status)，配合应用内的小型适配层，把等待状态传给布局中的共享进度条。这个 Hook 必须位于 `Link` 内部，也不覆盖程序式导航。适配层需要在完成和卸载时清理各自的等待状态，避免进度条卡住。
+
+上传百分比、播放位置等已知数值继续使用现有的 `Progress`。`TopProgress` 用于时长未知的任务。

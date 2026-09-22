@@ -54,6 +54,7 @@ import {
   ThemeDropdownExample,
   ThemePropsTable,
 } from './src/mdx/examples/theme-examples'
+import { TopProgressExample } from './src/mdx/examples/top-progress-examples'
 import {
   WidgetExternalExample,
   WidgetLanguageExample,
@@ -98,6 +99,7 @@ export const docsConfig = defineDocsConfig({
   },
   mdx: {
     components: {
+      TopProgressExample,
       GlassControlsExample,
       GlassNavigationExample,
       GlassPlayground,

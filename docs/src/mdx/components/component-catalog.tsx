@@ -14,6 +14,10 @@ const CATALOG = [
     href: '/components/theme',
     label: { en: 'Theme', zh: '主题' },
   },
+  {
+    href: '/components/top-progress',
+    label: { en: 'Top progress', zh: '顶部进度条' },
+  },
   { href: '/components/button', label: { en: 'Button', zh: '按钮' } },
   { href: '/components/dialog', label: { en: 'Dialog', zh: '对话框' } },
   { href: '/components/field', label: { en: 'Field', zh: '字段' } },
