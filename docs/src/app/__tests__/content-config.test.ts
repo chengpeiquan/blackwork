@@ -52,11 +52,31 @@ describe('docs site content config', () => {
           zh: '组件',
         },
         items: [
-          { type: 'item', href: '/components/button' },
-          { type: 'item', href: '/components/dialog' },
-          { type: 'item', href: '/components/field' },
-          { type: 'item', href: '/components/form' },
-          { type: 'item', href: '/components/sheet' },
+          {
+            type: 'item',
+            href: '/components/button',
+            label: { en: 'Button', zh: '按钮' },
+          },
+          {
+            type: 'item',
+            href: '/components/dialog',
+            label: { en: 'Dialog', zh: '对话框' },
+          },
+          {
+            type: 'item',
+            href: '/components/field',
+            label: { en: 'Field', zh: '字段' },
+          },
+          {
+            type: 'item',
+            href: '/components/form',
+            label: { en: 'Form', zh: '表单' },
+          },
+          {
+            type: 'item',
+            href: '/components/sheet',
+            label: { en: 'Sheet', zh: '侧边面板' },
+          },
         ],
       },
     ])

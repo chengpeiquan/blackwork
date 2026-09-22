@@ -14,11 +14,11 @@ const CATALOG = [
     href: '/components/theme',
     label: { en: 'Theme', zh: '主题' },
   },
-  { href: '/components/button', label: { en: 'Button', zh: 'Button' } },
-  { href: '/components/dialog', label: { en: 'Dialog', zh: 'Dialog' } },
-  { href: '/components/field', label: { en: 'Field', zh: 'Field' } },
-  { href: '/components/form', label: { en: 'Form', zh: 'Form' } },
-  { href: '/components/sheet', label: { en: 'Sheet', zh: 'Sheet' } },
+  { href: '/components/button', label: { en: 'Button', zh: '按钮' } },
+  { href: '/components/dialog', label: { en: 'Dialog', zh: '对话框' } },
+  { href: '/components/field', label: { en: 'Field', zh: '字段' } },
+  { href: '/components/form', label: { en: 'Form', zh: '表单' } },
+  { href: '/components/sheet', label: { en: 'Sheet', zh: '侧边面板' } },
 ] as const
 
 const PRIMITIVES = [

@@ -27,10 +27,26 @@ export const docsContentConfig = {
             zh: '从这里开始',
           },
           items: [
-            { type: 'item', href: '/guide/getting-started' },
-            { type: 'item', href: '/guide/icons' },
-            { type: 'item', href: '/guide/skills' },
-            { type: 'item', href: '/guide/migration' },
+            {
+              type: 'item',
+              href: '/guide/getting-started',
+              label: { en: 'Getting started', zh: '快速开始' },
+            },
+            {
+              type: 'item',
+              href: '/guide/icons',
+              label: { en: 'Icons', zh: '图标' },
+            },
+            {
+              type: 'item',
+              href: '/guide/skills',
+              label: { en: 'Skills', zh: 'Skill' },
+            },
+            {
+              type: 'item',
+              href: '/guide/migration',
+              label: { en: 'Migration', zh: '迁移指南' },
+            },
           ],
         },
       ],
@@ -78,11 +94,31 @@ export const docsContentConfig = {
             zh: '组件',
           },
           items: [
-            { type: 'item', href: '/components/button' },
-            { type: 'item', href: '/components/dialog' },
-            { type: 'item', href: '/components/field' },
-            { type: 'item', href: '/components/form' },
-            { type: 'item', href: '/components/sheet' },
+            {
+              type: 'item',
+              href: '/components/button',
+              label: { en: 'Button', zh: '按钮' },
+            },
+            {
+              type: 'item',
+              href: '/components/dialog',
+              label: { en: 'Dialog', zh: '对话框' },
+            },
+            {
+              type: 'item',
+              href: '/components/field',
+              label: { en: 'Field', zh: '字段' },
+            },
+            {
+              type: 'item',
+              href: '/components/form',
+              label: { en: 'Form', zh: '表单' },
+            },
+            {
+              type: 'item',
+              href: '/components/sheet',
+              label: { en: 'Sheet', zh: '侧边面板' },
+            },
           ],
         },
       ],
