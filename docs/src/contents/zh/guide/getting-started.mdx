@@ -14,6 +14,37 @@ Blackwork 提供博客和文档站常用的布局、主题和交互组件。本�
 
 <Callout title="环境要求">需要 React 19+ 和 Tailwind CSS v4。</Callout>
 
+## 创建文档站
+
+新建文档站可以通过 [Create Preset](https://preset.js.org/zh/)
+使用 Blackwork Docs Starter。模板包含 Next.js、Markdown 和 MDX、
+中英文内容、主题切换和静态搜索。
+
+安装 Node.js、Git 和 pnpm 后运行：
+
+```bash
+pnpm dlx create-preset init my-docs --from https://raw.githubusercontent.com/chengpeiquan/blackwork/main/presets/docs-starter.json
+cd my-docs
+pnpm install
+pnpm dev
+```
+
+打开 [localhost:3300](http://localhost:3300)。CLI 会复制仓库中维护的模板，
+并将 workspace 依赖替换为已发布的 npm 版本。
+[Preset 配置](https://github.com/chengpeiquan/blackwork/blob/main/presets/docs-starter.json)
+由 Blackwork 仓库维护。
+
+构建静态站点和搜索索引，再预览产物：
+
+```bash
+pnpm build
+pnpm start
+```
+
+构建产物位于 `.next-static`，预览地址是 [localhost:4300](http://localhost:4300)。
+搜索资源在构建时生成，请在此预览中检查搜索。
+如果要在现有 React 项目中接入 Blackwork，继续参考下面的安装步骤。
+
 ## 安装
 
 ```bash
