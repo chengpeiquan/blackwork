@@ -1,0 +1,22 @@
+1:"$Sreact.fragment"
+2:I[90743,["/_next/static/chunks/3c5-a3avi47-j.js","/_next/static/chunks/0zwdsu6y5vzjv.js","/_next/static/chunks/2lo22o_42vuud.js"],"LayoutMain"]
+3:I[90743,["/_next/static/chunks/3c5-a3avi47-j.js","/_next/static/chunks/0zwdsu6y5vzjv.js","/_next/static/chunks/2lo22o_42vuud.js"],"Button"]
+4:I[73785,["/_next/static/chunks/3c5-a3avi47-j.js","/_next/static/chunks/0zwdsu6y5vzjv.js","/_next/static/chunks/2lo22o_42vuud.js"],""]
+5:I[33506,["/_next/static/chunks/3c5-a3avi47-j.js","/_next/static/chunks/0zwdsu6y5vzjv.js","/_next/static/chunks/2lo22o_42vuud.js"],"OutletBoundary"]
+6:"$Sreact.suspense"
+a:I[33506,["/_next/static/chunks/3c5-a3avi47-j.js","/_next/static/chunks/0zwdsu6y5vzjv.js","/_next/static/chunks/2lo22o_42vuud.js"],"ViewportBoundary"]
+b:I[33506,["/_next/static/chunks/3c5-a3avi47-j.js","/_next/static/chunks/0zwdsu6y5vzjv.js","/_next/static/chunks/2lo22o_42vuud.js"],"MetadataBoundary"]
+d:I[92864,["/_next/static/chunks/3c5-a3avi47-j.js","/_next/static/chunks/0zwdsu6y5vzjv.js","/_next/static/chunks/2lo22o_42vuud.js"],"default"]
+e:I[75617,["/_next/static/chunks/3c5-a3avi47-j.js","/_next/static/chunks/0zwdsu6y5vzjv.js","/_next/static/chunks/2lo22o_42vuud.js"],"default"]
+9:X
+10:X
+10:C
+0:{"buildId":"iwEaSql_k6woMIKxAw146","data":[{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"className":"items-center justify-center py-20","children":[["$","meta",null,{"httpEquiv":"refresh","content":"0;url=/guide/getting-started"}],["$","div",null,{"className":"mx-auto flex max-w-xl flex-col items-center gap-4 text-center","children":[["$","h1",null,{"className":"text-balance text-3xl font-semibold text-foreground","children":"Redirecting to the canonical URL"}],["$","p",null,{"className":"text-pretty text-muted-foreground","children":"The default locale no longer appears in the public path. You will be sent to the canonical page automatically."}],["$","$L3",null,{"asChild":true,"children":["$","$L4",null,{"href":"/guide/getting-started","children":"Continue now"}]}]]}]]}],null,["$","$L5",null,{"children":["$","$6",null,{"name":"Next.MetadataOutlet","children":"$@7"}]}]]}],"isPartial":"$@8","staleTime":"$9","varyParams":null},{"rsc":["$","$1","h",{"children":[null,["$","$La",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$Lb",null,{"children":["$","$6",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Getting Started | Blackwork"}],["$","meta","1",{"name":"description","content":"Install Blackwork and import Tailwind v4 styles in a React app."}],["$","meta","2",{"name":"robots","content":"noindex, follow"}],["$","link","3",{"rel":"canonical","href":"https://ui.chengpeiquan.com/guide/getting-started/"}],["$","link","4",{"rel":"alternate","hrefLang":"en-US","href":"https://ui.chengpeiquan.com/guide/getting-started/"}],["$","link","5",{"rel":"alternate","hrefLang":"zh-CN","href":"https://ui.chengpeiquan.com/zh/guide/getting-started/"}]]}]}]}],null]}],"isPartial":"$@c","staleTime":"$9","varyParams":null},{"rsc":["$","$1","c",{"children":[null,["$","$Ld",null,{"parallelRouterKey":"children","template":["$","$Le",null,{}]}]]}],"isPartial":"$@f","staleTime":"$9","varyParams":"$10"}],"isUpgradeableISRFallback":false,"a":"$@11","rootVaryParams":null,"needsRuntimeRequest":"$@12"}
+7:null
+12:true
+9:300
+9:C
+11:0
+c:"$undefined"
+f:"$undefined"
+8:"$undefined"
