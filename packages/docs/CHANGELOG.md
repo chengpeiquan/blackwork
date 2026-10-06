@@ -1,3 +1,9 @@
+## [0.6.1](https://github.com/chengpeiquan/blackwork/compare/docs@0.6.0...docs@0.6.1) (2026-10-06)
+
+### Bug Fixes
+
+- **header-navigation:** select only the most specific active header route when multiple navigation links share a section, preserving locale-aware section fallback ([1e60862](https://github.com/chengpeiquan/blackwork/commit/1e6086251f2a0e1f2e4b1f5a4618abb90eb994fe))
+
 # [0.6.0](https://github.com/chengpeiquan/blackwork/compare/docs@0.5.0...docs@0.6.0) (2026-09-17)
 
 ### Features
