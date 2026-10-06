@@ -1,0 +1,57 @@
+---
+title: 文档站
+description: 用 Blackwork Docs Starter 创建产品文档、使用指南和开发者文档站点。
+---
+
+Blackwork Docs Starter 是一个开箱即用的文档站模板，适合整理产品使用指南、
+开源项目说明、组件和 API 参考，让读者通过导航、目录和搜索找到需要的内容。
+写好 Markdown 或 MDX 页面，就可以构建成静态网站并部署。
+
+## 模板包含什么
+
+- **内容与导航**：Markdown 和 MDX 页面、侧边栏、页面目录，以及适合独立文章的内容布局。
+- **多语言与主题**：中英文示例内容、语言切换，以及浅色和深色主题。
+- **静态搜索与部署**：构建时生成搜索索引，导出可部署到静态托管服务的网站。
+
+模板基于 Next.js 和 `@blackwork/docs`，界面使用 Blackwork 组件。
+Blackwork 官网也使用同一套文档框架；创建后得到的是独立模板，
+包含快速开始、配置参考和 MDX 示例页面，方便替换成自己的内容。
+
+## 创建文档站
+
+安装 Node.js、Git 和 pnpm 后，通过 [Create Preset](https://preset.js.org/zh/) 创建项目：
+
+```bash
+pnpm create preset init my-docs --from https://raw.githubusercontent.com/chengpeiquan/blackwork/main/presets/docs-starter.json
+cd my-docs
+pnpm install
+pnpm dev
+```
+
+打开 `http://localhost:3300`，即可预览模板。Create Preset 会复制仓库中维护的模板，
+并将 workspace 依赖替换为已发布的 npm 版本。
+你也可以查看仓库中的 [Preset 配置](https://github.com/chengpeiquan/blackwork/blob/main/presets/docs-starter.json)。
+
+## 换成自己的内容
+
+| 文件或目录                             | 用途                                 |
+| -------------------------------------- | ------------------------------------ |
+| `docs.config.ts`                       | 修改站点名称、描述、导航和主题配置   |
+| `content.config.ts`                    | 配置语言、内容分区、页面布局和侧边栏 |
+| `src/contents/en/`、`src/contents/zh/` | 编写 Markdown 和 MDX 页面            |
+| `src/mdx/components/`                  | 添加在 MDX 页面中使用的 React 组件   |
+
+可以从修改站点名称和替换快速开始页面开始，再按内容规模添加分区。
+生成项目内的「配置 Sections」和「MDX 组件演示」页面提供了现成示例。
+如果要在现有 React 应用里使用 Blackwork 组件，请参考[快速开始](/zh/guide/getting-started)。
+
+## 构建与部署
+
+```bash
+pnpm build
+pnpm start
+```
+
+`pnpm build` 会导出静态网站并生成搜索索引，产物位于 `.next-static`。
+`pnpm start` 在 `http://localhost:4300` 预览构建结果；搜索资源在构建时生成，
+请在此预览中检查搜索。将 `.next-static` 的内容部署到 GitHub Pages 等静态托管服务即可上线。

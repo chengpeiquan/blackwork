@@ -1,0 +1,61 @@
+---
+title: Documentation site
+description: Create product documentation, usage guides, and developer documentation with Blackwork Docs Starter.
+---
+
+Blackwork Docs Starter is a ready-to-use template for product guides,
+open-source project documentation, and component or API references.
+Navigation, page outlines, and search help readers find what they need.
+Write Markdown or MDX pages, then build and deploy a static website.
+
+## What's included
+
+- **Content and navigation**: Markdown and MDX pages, sidebars, page outlines, and a content layout for standalone articles.
+- **Languages and themes**: English and Chinese example content, language switching, and light and dark themes.
+- **Static search and deployment**: A search index generated at build time and a website export for static hosting.
+
+The template uses Next.js and `@blackwork/docs`, with Blackwork UI components.
+The Blackwork website uses the same documentation framework. Your generated
+project is a standalone starter with quickstart, configuration reference, and
+MDX example pages that you can replace with your own content.
+
+## Create a documentation site
+
+With Node.js, Git, and pnpm installed, create a project through [Create Preset](https://preset.js.org):
+
+```bash
+pnpm create preset init my-docs --from https://raw.githubusercontent.com/chengpeiquan/blackwork/main/presets/docs-starter.json
+cd my-docs
+pnpm install
+pnpm dev
+```
+
+Open `http://localhost:3300` to preview the starter. Create Preset copies the
+maintained template and replaces workspace dependencies with published npm versions.
+You can also inspect the [preset config](https://github.com/chengpeiquan/blackwork/blob/main/presets/docs-starter.json) in the repository.
+
+## Add your own content
+
+| File or directory                      | Purpose                                                   |
+| -------------------------------------- | --------------------------------------------------------- |
+| `docs.config.ts`                       | Set the site name, description, navigation, and theme     |
+| `content.config.ts`                    | Configure languages, sections, page layouts, and sidebars |
+| `src/contents/en/`, `src/contents/zh/` | Write Markdown and MDX pages                              |
+| `src/mdx/components/`                  | Add React components for MDX pages                        |
+
+Start by changing the site name and replacing the quickstart page, then add
+sections as your content grows. The generated project includes Configuring
+Sections and MDX Playground pages with working examples.
+To use Blackwork components in an existing React app, follow the [getting started guide](/guide/getting-started).
+
+## Build and deploy
+
+```bash
+pnpm build
+pnpm start
+```
+
+`pnpm build` exports the static website and generates its search index in `.next-static`.
+`pnpm start` previews the result at `http://localhost:4300`. Search assets are
+generated during the build; use this preview to check search. Deploy the contents
+of `.next-static` to a static host such as GitHub Pages to publish your site.

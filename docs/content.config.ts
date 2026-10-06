@@ -17,6 +17,9 @@ export const docsContentConfig = {
     },
   },
   sections: {
+    'docs-starter': {
+      layout: 'content',
+    },
     guide: {
       layout: 'docs',
       sidebar: [

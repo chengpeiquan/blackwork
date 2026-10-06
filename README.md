@@ -45,7 +45,7 @@ Create a standalone documentation site with the published CLI (Node.js, Git,
 and pnpm are required):
 
 ```bash
-pnpm dlx create-preset init my-docs --from https://raw.githubusercontent.com/chengpeiquan/blackwork/main/presets/docs-starter.json
+pnpm create preset init my-docs --from https://raw.githubusercontent.com/chengpeiquan/blackwork/main/presets/docs-starter.json
 cd my-docs
 pnpm install
 pnpm dev
@@ -54,7 +54,9 @@ pnpm dev
 The generated project uses published npm dependencies. Run `pnpm build` to
 export the site and generate its search index in `.next-static`, then
 `pnpm start` to preview it at http://localhost:4300.
-See [Create Preset](https://preset.js.org) for the preset configuration contract.
+See the [documentation site guide](https://ui.chengpeiquan.com/docs-starter/)
+for template features and setup, and [Create Preset](https://preset.js.org)
+for the preset configuration contract.
 
 Key template files:
 

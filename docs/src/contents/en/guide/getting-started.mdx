@@ -14,36 +14,8 @@ Start with installation and styles, then use the Next.js App Router example belo
 
 <Callout title="Requirements">Use React 19+ and Tailwind CSS v4.</Callout>
 
-## Create a documentation site
-
-For a new documentation site, use the Blackwork Docs Starter with
-[Create Preset](https://preset.js.org). It includes Next.js, Markdown and MDX,
-English and Chinese content, theme controls, and static search.
-
-With Node.js, Git, and pnpm installed, run:
-
-```bash
-pnpm dlx create-preset init my-docs --from https://raw.githubusercontent.com/chengpeiquan/blackwork/main/presets/docs-starter.json
-cd my-docs
-pnpm install
-pnpm dev
-```
-
-Open `http://localhost:3300`. The CLI copies the maintained starter and replaces
-workspace dependencies with published npm versions. The
-[preset config](https://github.com/chengpeiquan/blackwork/blob/main/presets/docs-starter.json)
-is maintained in the Blackwork repository.
-
-Build the static site and its search index, then preview the result:
-
-```bash
-pnpm build
-pnpm start
-```
-
-The output is in `.next-static`, and the preview runs at `http://localhost:4300`.
-Search assets are generated during the build; use this preview to check search.
-To add Blackwork to an existing React project, follow the installation steps below.
+For a new documentation site, follow the [Docs Starter guide](/docs-starter)
+for the template overview, creation command, and deployment steps.
 
 ## Installation
 

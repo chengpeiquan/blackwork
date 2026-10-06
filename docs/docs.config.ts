@@ -181,7 +181,6 @@ export const docsConfig = defineDocsConfig({
       toggleTheme: { en: 'Toggle theme', zh: '切换主题' },
     },
     nav: [
-      { href: '/components/glass', label: { en: 'Glass', zh: '液态玻璃' } },
       {
         href: '/guide/getting-started',
         label: {
@@ -196,6 +195,8 @@ export const docsConfig = defineDocsConfig({
           zh: '组件',
         },
       },
+      { href: '/components/glass', label: { en: 'Glass', zh: '液态玻璃' } },
+      { href: '/docs-starter', label: { en: 'Docs site', zh: '文档站' } },
     ],
     toc: {
       collapseLabel: { en: 'Collapse outline', zh: '收起页面目录' },
