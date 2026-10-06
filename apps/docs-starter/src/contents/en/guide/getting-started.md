@@ -18,7 +18,7 @@ pnpm install
 ## Run the starter
 
 ```bash title="pnpm"
-pnpm --filter @blackwork/docs-starter dev
+pnpm dev
 ```
 
 ## Know the config split

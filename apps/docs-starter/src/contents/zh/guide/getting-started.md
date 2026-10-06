@@ -18,7 +18,7 @@ pnpm install
 ## 启动站点
 
 ```bash title="pnpm"
-pnpm --filter @blackwork/docs-starter dev
+pnpm dev
 ```
 
 ## 先理解配置分工
