@@ -223,3 +223,74 @@ test('buildHeaderNavigation can disable the header nav', () => {
     }),
   ).toEqual([])
 })
+
+test.each([
+  { path: '/components', active: ['/components'] },
+  { path: '/components/button', active: ['/components'] },
+  { path: '/components/glass', active: ['/components/glass'] },
+  { path: '/components/glass/examples', active: ['/components/glass'] },
+  { path: '/components/glassware', active: ['/components'] },
+  { path: '/guide/preset-configs', active: ['/guide/preset-configs'] },
+  { path: '/guide/icons', active: ['/guide/getting-started'] },
+  { path: '/', active: ['/'] },
+  { path: '/unknown', active: [] },
+])(
+  'selects only the most specific header route for $path in either locale',
+  ({ path, active }) => {
+    const rootDir = createFixture()
+
+    for (const { locale, prefix } of [
+      { locale: 'en', prefix: '' },
+      { locale: 'zh', prefix: '/zh' },
+    ]) {
+      for (const componentHrefs of [
+        ['/components/glass', '/components'],
+        ['/components', '/components/glass'],
+      ]) {
+        const config = defineConfig({
+          content: {
+            defaultLocale: 'en',
+            locales: { en: { code: 'en' }, zh: { code: 'zh' } },
+          },
+          theme: {
+            nav: [
+              { href: '/', label: 'Home' },
+              { href: '/guide/getting-started', label: 'Guide' },
+              { href: '/guide/preset-configs', label: 'Preset configs' },
+              ...componentHrefs.map((href) => ({ href, label: href })),
+              { href: 'https://example.com/components', label: 'External' },
+            ],
+          },
+        })
+        const source = createDocsSource({ rootDir, config })
+        const navigation = buildHeaderNavigation({
+          config,
+          currentHref: `${prefix}${path}`,
+          locale,
+          source,
+        })
+
+        expect(
+          navigation.filter((item) => item.current).map((item) => item.href),
+        ).toEqual(
+          active.map((href) =>
+            source.getCanonicalHref(locale, href.split('/').filter(Boolean)),
+          ),
+        )
+      }
+    }
+  },
+)
+
+test('does not select a header item when the current route is missing', () => {
+  const rootDir = createFixture()
+  const config = defineConfig({
+    content: { defaultLocale: 'en' },
+    theme: { nav: [{ href: '/guide', label: 'Guide' }] },
+  })
+  const source = createDocsSource({ rootDir, config })
+
+  expect(buildHeaderNavigation({ config, locale: 'en', source })).toEqual([
+    { href: '/guide', label: 'Guide', current: false },
+  ])
+})

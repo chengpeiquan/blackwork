@@ -52,41 +52,60 @@ const resolveNavHref = (href: string, locale: string, source: DocsSource) => {
   )
 }
 
-const isCurrentHref = (
-  itemHref: string,
+const getCurrentNavIndex = (
+  items: DocsThemeNavItem[],
   currentHref: string | undefined,
   localeCodes: string[],
 ) => {
-  if (!currentHref || isExternalHref(itemHref)) {
-    return false
+  if (!currentHref) {
+    return -1
   }
 
-  if (itemHref === currentHref) {
-    return true
-  }
+  const currentSegments = toSlugSegments(currentHref, localeCodes)
+  let currentIndex = -1
+  let longestMatch = -1
+  let sectionFallback = -1
 
-  if (itemHref === '/') {
-    return false
-  }
+  items.forEach((item, index) => {
+    if (isExternalHref(item.href)) {
+      return
+    }
 
-  if (currentHref.startsWith(`${itemHref}/`)) {
-    return true
-  }
+    const segments = toSlugSegments(item.href, localeCodes)
+    if (
+      sectionFallback === -1 &&
+      segments[0] &&
+      segments[0] === currentSegments[0]
+    ) {
+      sectionFallback = index
+    }
 
-  const itemSection = toSlugSegments(itemHref, localeCodes)[0]
-  const currentSection = toSlugSegments(currentHref, localeCodes)[0]
+    const matches =
+      segments.length === 0
+        ? currentSegments.length === 0
+        : segments.length <= currentSegments.length &&
+          segments.every(
+            (segment, segmentIndex) =>
+              segment === currentSegments[segmentIndex],
+          )
 
-  return Boolean(itemSection && itemSection === currentSection)
+    if (matches && segments.length > longestMatch) {
+      currentIndex = index
+      longestMatch = segments.length
+    }
+  })
+
+  // Overlapping section links must share one active item, with the deepest route winning.
+  // A section without a matching route keeps its first navigation entry active.
+  return currentIndex === -1 ? sectionFallback : currentIndex
 }
 
 const toNavItem = ({
-  currentHref,
   href,
   label,
   locale,
   source,
 }: {
-  currentHref?: string
   href: string
   label: string
   locale: string
@@ -97,7 +116,7 @@ const toNavItem = ({
   return {
     href: resolvedHref,
     label,
-    current: isCurrentHref(resolvedHref, currentHref, source.getLocaleCodes()),
+    current: false,
   }
 }
 
@@ -126,13 +145,22 @@ export const buildHeaderNavigation = ({
     ? config.theme.nav
     : buildAutoNavItems(config)
 
-  return items.map((item) =>
+  const navigation = items.map((item) =>
     toNavItem({
-      currentHref,
       href: item.href,
       label: localizeLabel(item.label, locale, item.href),
       locale,
       source,
     }),
   )
+  const currentIndex = getCurrentNavIndex(
+    navigation,
+    currentHref,
+    source.getLocaleCodes(),
+  )
+
+  return navigation.map((item, index) => ({
+    ...item,
+    current: index === currentIndex,
+  }))
 }
