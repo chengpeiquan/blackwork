@@ -1,3 +1,17 @@
+# [0.7.0](https://github.com/chengpeiquan/blackwork/compare/docs@0.6.1...docs@0.7.0) (2026-11-15)
+
+### Features
+
+- **table-of-contents:** support shared Button variants, including glass, through `MobileDocsToc.triggerVariant` ([7aeec25](https://github.com/chengpeiquan/blackwork/commit/7aeec25))
+
+### Bug Fixes
+
+- **markdown-tables:** fill the content width and keep long cells on one line inside the shared horizontal ScrollArea, with keyboard scrolling and consistent scrollbar styling ([c516d8f](https://github.com/chengpeiquan/blackwork/commit/c516d8f))
+
+### Dependencies
+
+- Require `blackwork >=0.15.0` for horizontal ScrollArea support.
+
 ## [0.6.1](https://github.com/chengpeiquan/blackwork/compare/docs@0.6.0...docs@0.6.1) (2026-10-06)
 
 ### Bug Fixes
