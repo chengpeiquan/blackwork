@@ -5,26 +5,30 @@ import * as React from 'react'
 
 import { cn } from '@/utils'
 
-const ScrollArea = React.forwardRef<
-  HTMLDivElement,
-  ScrollAreaPrimitive.Root.Props
->(({ className, children, ...props }, ref) => (
-  <ScrollAreaPrimitive.Root
-    ref={ref}
-    data-slot="scroll-area"
-    className={cn('relative overflow-hidden', className)}
-    {...props}
-  >
-    <ScrollAreaPrimitive.Viewport
-      data-slot="scroll-area-viewport"
-      className="size-full rounded-[inherit]"
+interface ScrollAreaProps extends ScrollAreaPrimitive.Root.Props {
+  orientation?: 'vertical' | 'horizontal' | 'both'
+}
+
+const ScrollArea = React.forwardRef<HTMLDivElement, ScrollAreaProps>(
+  ({ className, children, orientation = 'vertical', ...props }, ref) => (
+    <ScrollAreaPrimitive.Root
+      ref={ref}
+      data-slot="scroll-area"
+      className={cn('relative overflow-hidden', className)}
+      {...props}
     >
-      {children}
-    </ScrollAreaPrimitive.Viewport>
-    <ScrollBar />
-    <ScrollAreaPrimitive.Corner />
-  </ScrollAreaPrimitive.Root>
-))
+      <ScrollAreaPrimitive.Viewport
+        data-slot="scroll-area-viewport"
+        className="size-full rounded-[inherit]"
+      >
+        {children}
+      </ScrollAreaPrimitive.Viewport>
+      {orientation !== 'horizontal' && <ScrollBar />}
+      {orientation !== 'vertical' && <ScrollBar orientation="horizontal" />}
+      <ScrollAreaPrimitive.Corner />
+    </ScrollAreaPrimitive.Root>
+  ),
+)
 ScrollArea.displayName = 'ScrollArea'
 
 const ScrollBar = React.forwardRef<
