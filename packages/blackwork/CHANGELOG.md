@@ -1,3 +1,9 @@
+# [0.15.0](https://github.com/chengpeiquan/blackwork/compare/blackwork@0.14.0...blackwork@0.15.0) (2026-11-15)
+
+### Features
+
+- **scroll-area:** support horizontal and bidirectional scrollbars through the `orientation` prop, preserving vertical scrolling by default ([9be023a](https://github.com/chengpeiquan/blackwork/commit/9be023a))
+
 # [0.14.0](https://github.com/chengpeiquan/blackwork/compare/blackwork@0.13.1...blackwork@0.14.0) (2026-09-23)
 
 ### Features
