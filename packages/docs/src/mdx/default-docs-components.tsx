@@ -4,6 +4,7 @@ import {
   type ComponentMap,
 } from '@blackwork/machine'
 import { CodeBlock } from '@blackwork/machine/runtime'
+import { ScrollArea } from 'blackwork'
 import {
   createElement,
   isValidElement,
@@ -165,11 +166,25 @@ const getReactLanguage = (value: ReactNode): string => {
   return getReactLanguage(value.props.children)
 }
 
-const table: FC<DocsTableProps> = ({ children, node: _node, ...props }) => {
+const table: FC<DocsTableProps> = ({
+  children,
+  className,
+  node: _node,
+  ...props
+}) => {
   return createElement(
-    'div',
-    { className: 'my-6 w-full overflow-x-auto' },
-    createElement('table', props, children),
+    ScrollArea,
+    { className: 'my-6 w-full min-w-0', orientation: 'horizontal' },
+    createElement(
+      'table',
+      {
+        ...props,
+        className: ['my-0 w-full whitespace-nowrap', className]
+          .filter(Boolean)
+          .join(' '),
+      },
+      children,
+    ),
   )
 }
 

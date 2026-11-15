@@ -165,6 +165,28 @@ test('defaultDocsComponents.table strips the mdx node prop before rendering the 
 
   expect(html).toContain('data-table-id="demo"')
   expect(html).not.toContain('node=')
+  expect(html).toContain('data-slot="scroll-area"')
+  expect(html).toContain('data-slot="scroll-area-viewport"')
+  expect(html).toContain('scrollbar-width:none')
+  expect(html).toContain('class="my-0 w-full whitespace-nowrap"')
+})
+
+test('defaultDocsComponents.table allows explicit wrapping and preserves table attributes', async () => {
+  const runtime = await importDocsRuntime()
+  const html = renderTable(
+    runtime.defaultDocsComponents.table as React.ElementType,
+    {
+      className: 'comparison-table',
+      style: { whiteSpace: 'normal' },
+      'aria-label': 'Comparison',
+    },
+  )
+
+  expect(html).toContain(
+    'class="my-0 w-full whitespace-nowrap comparison-table"',
+  )
+  expect(html).toContain('style="white-space:normal"')
+  expect(html).toContain('aria-label="Comparison"')
 })
 
 test('mergeDocsComponents lets a user table override win over the default docs table', async () => {
