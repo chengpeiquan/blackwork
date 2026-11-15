@@ -2,13 +2,13 @@
 
 import {
   Button,
-  buttonVariants,
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
   cn,
+  type ButtonProps,
 } from 'blackwork'
 import { TableOfContents } from 'lucide-react'
 import React, {
@@ -56,6 +56,7 @@ export interface MobileDocsTocProps {
   minHeadings?: number
   openLabel?: string
   title?: string
+  triggerVariant?: ButtonProps['variant']
 }
 
 interface HeadingState {
@@ -810,6 +811,7 @@ export const MobileDocsToc: React.FC<MobileDocsTocProps> = ({
   minHeadings = 1,
   openLabel = 'Open outline',
   title = TOC_TITLE,
+  triggerVariant = 'outline',
 }) => {
   const tocState = useDocsTocState(headings)
   const [open, setOpen] = useState(false)
@@ -821,19 +823,19 @@ export const MobileDocsToc: React.FC<MobileDocsTocProps> = ({
   return (
     <div className={cn('xl:hidden', className)}>
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetTrigger
-          title={openLabel}
-          aria-label={openLabel}
-          data-docs-toc-mobile-trigger="true"
-          className={buttonVariants({
-            variant: 'outline',
-            size: 'icon',
-            className: 'fixed border border-input bg-background shadow-sm',
-          })}
-          style={getDocsFloatingActionStyle(1)}
-        >
-          <TableOfContents className="size-4" aria-hidden="true" />
-          <span className="sr-only">{openLabel}</span>
+        <SheetTrigger asChild>
+          <Button
+            title={openLabel}
+            aria-label={openLabel}
+            data-docs-toc-mobile-trigger="true"
+            variant={triggerVariant}
+            size="icon"
+            className={cn('fixed', triggerVariant === 'outline' && 'shadow-sm')}
+            style={getDocsFloatingActionStyle(1)}
+          >
+            <TableOfContents className="size-4" aria-hidden="true" />
+            <span className="sr-only">{openLabel}</span>
+          </Button>
         </SheetTrigger>
 
         <SheetContent
