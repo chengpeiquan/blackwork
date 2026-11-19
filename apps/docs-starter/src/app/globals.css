@@ -106,12 +106,6 @@
     white-space: pre;
   }
 
-  article :where(table):not(:where(.not-prose, .not-prose *)) {
-    display: block;
-    width: 100%;
-    overflow-x: auto;
-  }
-
   article :where(tbody td, tfoot td):not(:where(.not-prose, .not-prose *)) {
     min-width: 80px;
   }

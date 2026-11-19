@@ -35,4 +35,10 @@ describe('docs globals css', () => {
     )
     expect(globalsCss).toContain('@apply break-all whitespace-normal')
   })
+
+  test('keeps native Markdown table layout and leaves scrolling to the wrapper', () => {
+    expect(globalsCss).not.toMatch(
+      /:where\(table\)[^{]*\{[^}]*(?:display:\s*block|overflow-x:\s*auto)/,
+    )
+  })
 })
